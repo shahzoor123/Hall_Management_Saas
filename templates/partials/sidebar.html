@@ -1,0 +1,239 @@
+{% load static %}
+{% block sidebar %}
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+        <div data-simplebar class="h-100">
+            <div class="user-sidebar text-center" >
+                <div class="dropdown">
+                    <div class="user-img">
+                        <img src="{% static 'images/users/avatar-7.jpg' %}" alt="" class="rounded-circle">
+                        <span class="avatar-online bg-success"></span>
+                    </div>
+                    <div class="user-info">
+                        <h5 class="mt-3 font-size-16 text-white">{{ user.username }}</h5>
+                        <span class="font-size-13 text-white-50">Administrator</span>
+                    </div>
+                </div>
+            </div>
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                <!-- Left Menu Start -->
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title" key="t-menu">Menu</li>
+                    <li>
+                        <a href="{% url 'index' %}" class="waves-effect">
+                            <i class="dripicons-home"></i><span class="badge rounded-pill bg-info float-end">3</span>
+                            <span key="t-dashboard">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'calendar' %}" class=" waves-effect">
+                            <i class="dripicons-calendar"></i>
+                            <span key="t-calendar">Calendar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'chat' %}" class=" waves-effect">
+                            <i class="dripicons-message"></i>
+                            <span key="t-chat">Chat</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-cart"></i>
+                            <span key="t-ecommerce">Ecommerce</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'ecommerce_product' %} " key="t-products">Products</a></li>
+                            <li><a href="{% url 'ecommerce_product_detail' %} " key="t-product-detail">Product Detail</a></li>
+                            <li><a href="{% url 'ecommerce_orders' %} " key="t-orders">Orders</a></li>
+                            <li><a href="{% url 'ecommerce_customers' %} " key="t-customers">Customers</a></li>
+                            <li><a href="{% url 'ecommerce_cart' %} " key="t-cart">Cart</a></li>
+                            <li><a href="{% url 'ecommerce_checkout' %} " key="t-checkout">Checkout</a></li>
+                            <li><a href="{% url 'ecommerce_shops' %} " key="t-shops">Shops</a></li>
+                            <li><a href="{% url 'ecommerce_add_product' %} " key="t-add-product">Add Product</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-mail"></i>
+                            <span key="t-email">Email</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'email_inbox' %}" key="t-inbox">Inbox</a></li>
+                            <li><a href="{% url 'email_read' %}" key="t-read-email">Email Read</a></li>
+                            <li><a href="{% url 'email_compose' %}" key="t-email-compose">Email Compose</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-title" key="t-components">Components</li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-suitcase"></i>
+                            <span key="t-ui-elements">UI Elements</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'ui_alerts' %}" key="t-alerts">Alerts</a></li>
+                            <li><a href="{% url 'ui_buttons' %}" key="t-buttons">Buttons</a></li>
+                            <li><a href="{% url 'ui_cards' %}" key="t-cards">Cards</a></li>
+                            <li><a href="{% url 'ui_carousel' %}" key="t-carousel">Carousel</a></li>
+                            <li><a href="{% url 'ui_dropdowns' %}" key="t-dropdowns">Dropdowns</a></li>
+                            <li><a href="{% url 'ui_grid' %}" key="t-grid">Grid</a></li>
+                            <li><a href="{% url 'ui_images' %}" key="t-images">Images</a></li>
+                            <li><a href="{% url 'ui_lightbox' %}" key="t-lightbox">Lightbox</a></li>
+                            <li><a href="{% url 'ui_modals' %}" key="t-modals">Modals</a></li>
+                            <li><a href="{% url 'ui_rangeslider' %}" key="t-range-slider">Range Slider</a></li>
+                            <li><a href="{% url 'ui_session_timeout' %}" key="t-session-timeout">Session Timeout</a></li>
+                            <li><a href="{% url 'ui_progressbars' %}" key="t-progress-bars">Progress Bars</a></li>
+                            <li><a href="{% url 'ui_sweet_alert' %}" key="t-sweet-alert">Sweet-Alert</a></li>
+                            <li><a href="{% url 'ui_tabs_accordions' %}" key="t-accordions">Accordions</a></li>
+                            <li><a href="{% url 'ui_typography' %}" key="t-typography">Typography</a></li>
+                            <li><a href="{% url 'ui_video' %}" key="t-video">Video</a></li>
+                            <li><a href="{% url 'ui_generals' %}" key="t-general">General</a></li>
+                            <li><a href="{% url 'ui_colors' %}" key="t-colors">Colors</a></li>
+                            <li><a href="{% url 'ui_rating' %}" key="t-rating">Rating</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="waves-effect">
+                            <i class="dripicons-to-do"></i>
+                            <span class="badge rounded-pill bg-danger float-end">8</span>
+                            <span key="t-forms">Forms</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'form_elements' %}" key="t-form-elements">Form Elements</a></li>
+                            <li><a href="{% url 'form_validation' %}" key="t-form-validation">Form Validation</a></li>
+                            <li><a href="{% url 'form_advanced' %}" key="t-form-advanced">Form Advanced</a></li>
+                            <li><a href="{% url 'form_editors' %}" key="t-form-editors">Form Editors</a></li>
+                            <li><a href="{% url 'form_upload' %}" key="t-form-upload">Form Upload</a></li>
+                            <li><a href="{% url 'form_xeditable' %}" key="t-form-xeditable">Form Xeditable</a></li>
+                            <li><a href="{% url 'form_wizard' %}" key="t-form-wizard">Form Wizard</a></li>
+                            <li><a href="{% url 'form_mask' %}" key="t-form-mask">Form Mask</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-graph-pie"></i>
+                            <span key="t-charts">Charts</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'chart_apex' %}" key="t-apex-charts">Apex Charts</a></li>
+                            <li><a href="{% url 'chart_chartist' %}" key="t-chartist">Chartists</a></li>
+                            <li><a href="{% url 'chart_chartjs' %}" key="t-chartjs-chart">Chartjs Charts</a></li>
+                            <li><a href="{% url 'chart_flot' %}" key="t-flot-chart">Flot Charts</a></li>
+                            <li><a href="{% url 'chart_knob' %}" key="t-knob-chart">Knob Charts</a></li>
+                            <li><a href="{% url 'chart_sparkline' %}" key="t-sparkline-chart">Sparkline Charts</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-toggles"></i>
+                            <span key="t-tables">Tables</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'tables_basic' %}" key="t-basic-tables">Basic Tables</a></li>
+                            <li><a href="{% url 'tables_datatable' %}" key="t-data-tables">Data Tables</a></li>
+                            <li><a href="{% url 'tables_responsive' %}" key="t-responsive-table">Responsive Table</a></li>
+                            <li><a href="{% url 'tables_editable' %}" key="t-editable-table">Editable Table</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-basket"></i>
+                            <span key="t-icons">Icons</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'icons_materialdesign' %}" key="t-material-design">Material Design</a></li>
+                            <li><a href="{% url 'icons_dripicons' %}" key="t-dripicons">Dripicons</a></li>
+                            <li><a href="{% url 'icons_fontawesome' %}" key="t-font-awesome">Font Awesome</a></li>
+                            <li><a href="{% url 'icons_themify' %}" key="t-themify-icons">Themify Icons</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-map"></i>
+                            <span key="t-maps">Maps</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'maps_google' %}" key="t-google-maps">Google Maps</a></li>
+                            <li><a href="{% url 'maps_vector' %}" key="t-vector-maps">Vector Maps</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-title" key="t-extras">Extras</li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-device-desktop"></i>
+                            <span key="t-layouts">Layouts</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow" key="t-vertical">Vertical</a>
+                                <ul class="sub-menu" aria-expanded="true">
+                                    <li><a href="{% url 'layout_darksidebar' %}" key="t-dark-sidebar">Dark Sidebar</a></li>
+                                    <li><a href="{% url 'layout_compactsidebar' %}" key="t-compact-sidebar">Compact Sidebar</a></li>
+                                    <li><a href="{% url 'layout_iconsidebar' %}" key="t-icon-sidebar">Icon Sidebar</a></li>
+                                    <li><a href="{% url 'layout_boxed' %}" key="t-boxed-layout">Boxed Layout</a></li>
+                                    <li><a href="{% url 'layout_preloader' %}" key="t-preloader">Preloader</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow" key="t-horizontal">Horizontal</a>
+                                <ul class="sub-menu" aria-expanded="true">
+                                    <li><a href="{% url 'layout_horizontal' %}" key="t-horizontal">Horizontal</a></li>
+                                    <li><a href="{% url 'layout_topbarlight' %}" key="t-topbar-light">Topbar Light</a></li>
+                                    <li><a href="{% url 'layout_boxedwidth' %}" key="t-boxed-width">Boxed Width</a></li>
+                                    <li><a href="{% url 'layout_horipreloader' %}" key="t-preloader">Preloader</a></li>
+                                    <li><a href="{% url 'layout_coloredHeader' %}" key="t-colored-header">Colored Header</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-user-group"></i>
+                            <span key="t-authentication">Authentication</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'login' %}" key="t-login">Login</a></li>
+                            <li><a href="{% url 'register' %}" key="t-register">Register</a></li>
+                            <li><a href="{% url 'lockscreen' %}" key="t-lock-screen">Lock Screen</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-copy"></i>
+                            <span key="t-pages">Pages</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'pages_timeline' %}" key="t-timeline">Timeline</a></li>
+                            <li><a href="{% url 'pages_invoice' %}" key="t-invoice">Invoice</a></li>
+                            <li><a href="{% url 'pages_blank' %}" key="t-blank-page">Blank Page</a></li>
+                            <li><a href="{% url 'pages_error404' %}" key="t-error-404">Error 404</a></li>
+                            <li><a href="{% url 'pages_error500' %}" key="t-error-500">Error 500</a></li>
+                            <li><a href="{% url 'pages_pricing' %}" key="t-pricing">Pricing</a></li>
+                            <li><a href="{% url 'pages_maintenance' %}" key="t-maintenance">Maintenance</a></li>
+                            <li><a href="{% url 'pages_comingsoon' %}" key="t-coming-soon">Coming Soon</a></li>
+                            <li><a href="{% url 'pages_faqs' %}" key="t-faqs">FAQs</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-checklist"></i>
+                            <span key="t-multi-level">Multi Level</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li><a href="javascript: void(0);" key="t-level-1-1">Level 1.1</a></li>
+                            <li><a href="javascript: void(0);" class="has-arrow" key="t-level-1-2">Level 1.2</a>
+                                <ul class="sub-menu" aria-expanded="true">
+                                    <li><a href="javascript: void(0);" key="t-level-2-1">Level 2.1</a></li>
+                                    <li><a href="javascript: void(0);" key="t-level-2-2">Level 2.2</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+{% endblock sidebar %}

@@ -1,0 +1,107 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Chartjs Charts{% endblock title %}
+
+{% block content %}
+        <div class="main-content">
+            <div class="page-content">
+                <!-- start page title -->
+                <div class="page-title-box">
+                    <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <div class="page-title">
+                                <h4>Chartjs Charts</h4>
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Morvin</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Charts</a></li>
+                                        <li class="breadcrumb-item active">Chartjs Charts</li>
+                                    </ol>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="float-end d-none d-sm-block">
+                                <a href="" class="btn btn-success">Add Widget</a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- end page title -->    
+                <div class="container-fluid">
+                    <div class="page-content-wrapper">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Bar Chart</h4>
+                                        <p class="card-title-desc">Example of bar chart chart js.</p>
+                                        <canvas id="barChart"></canvas>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Line Chart</h4>
+                                        <p class="card-title-desc">Example of line chart chart js.</p>
+                                        <canvas id="lineChart"></canvas>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row-->
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Pie Chart</h4>
+                                        <p class="card-title-desc">Example of line pie chart js.</p>
+                                        <canvas id="pieChart"></canvas>
+                        
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Area Chart</h4>
+                                        <p class="card-title-desc">Example of line area chart js.</p>
+                                        <canvas id="areaChart"></canvas>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row-->
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Donut Chart</h4>
+                                        <p class="card-title-desc">Example of donut chart js.</p>
+                                        <canvas id="donut-chart"></canvas>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Radar Chart</h4>
+                                        <p class="card-title-desc">Example of radar chart js.</p>
+                                        <canvas id="radar-chart"></canvas>
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row-->
+                    </div>
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+{% endblock content %}
+{% block extra_javascript %}
+    <!-- Chart JS -->
+    <script src="{% static 'libs/chart.js/dist/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'js/pages/chartjs.init.js' %}"></script>
+{% endblock extra_javascript %}

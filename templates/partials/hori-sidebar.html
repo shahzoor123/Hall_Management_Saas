@@ -1,0 +1,244 @@
+{% load static %}
+{% block sidebar %}
+        <div class="topnav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+                    <div class="collapse navbar-collapse" id="topnav-menu-content">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'index' %}" key="t-dashboard">
+                                    <i class="dripicons-home me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button"
+                                key="t-ui-elements">
+                                    <i class="dripicons-suitcase me-2"></i> UI Elements <div class="arrow-down"></div>
+                                </a>
+                                <div class="dropdown-menu mega-dropdown-menu px-2 dropdown-mega-menu-xl"
+                                    aria-labelledby="topnav-uielement">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <a href="{% url 'ui_alerts' %}" class="dropdown-item" key="t-alerts">Alerts</a>
+                                                <a href="{% url 'ui_buttons' %}" class="dropdown-item" key="t-buttons">Buttons</a>
+                                                <a href="{% url 'ui_cards' %}" class="dropdown-item" key="t-cards">Cards</a>
+                                                <a href="{% url 'ui_carousel' %}" class="dropdown-item" key="t-carousel">Carousel</a>
+                                                <a href="{% url 'ui_dropdowns' %}" class="dropdown-item" key="t-dropdowns">Dropdowns</a>
+                                                <a href="{% url 'ui_grid' %}" class="dropdown-item" key="t-grid">Grid</a>
+                                                <a href="{% url 'ui_images' %}" class="dropdown-item" key="t-images">Images</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div>
+
+                                                <a href="{% url 'ui_lightbox' %}" class="dropdown-item" key="t-lightbox">Lightbox</a>
+                                                <a href="{% url 'ui_modals' %}" class="dropdown-item" key="t-modals">Modals</a>
+                                                <a href="{% url 'ui_rangeslider' %}" class="dropdown-item" key="t-range-slider">Range Slider</a>
+                                                <a href="{% url 'ui_session_timeout' %}" class="dropdown-item" key="t-session-timeout">Session Timeout</a>
+                                                <a href="{% url 'ui_progressbars' %}" class="dropdown-item" key="t-progress-bars">Progress Bars</a>
+                                                <a href="{% url 'ui_sweet_alert' %}" class="dropdown-item" key="t-sweet-alert">Sweet-Alert</a>
+                                                <a href="{% url 'ui_tabs_accordions' %}" class="dropdown-item" key="t-accordions">Accordions</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                            <a href="{% url 'ui_typography' %}" class="dropdown-item" key="t-typography">Typography</a>
+                                            <a href="{% url 'ui_video' %}" class="dropdown-item" key="t-video">Video</a>
+                                            <a href="{% url 'ui_generals' %}" class="dropdown-item" key="t-general">General</a>
+                                            <a href="{% url 'ui_colors' %}" class="dropdown-item" key="t-colors">Colors</a>
+                                            <a href="{% url 'ui_rating' %}" class="dropdown-item" key="t-rating">Rating</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-apps" role="button"
+                                >
+                                    <i class="dripicons-archive me-2"></i> Apps <div class="arrow-down"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-apps">
+
+                                    <a href="{% url 'calendar' %}" class="dropdown-item" key="t-calendar">Calendar</a>
+
+                                    <a href="{% url 'chat' %}" class="dropdown-item" key="t-chat">Chat</a>
+
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-ecommerce"
+                                            role="button" key="t-ecommerce">
+                                            Ecommerce <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-ecommerce">
+                                            <a href="{% url 'ecommerce_product' %}" class="dropdown-item" key="t-products">Products</a>
+                                            <a href="{% url 'ecommerce_product_detail' %}" class="dropdown-item" key="t-product-detail">Product Detail</a>
+                                            <a href="{% url 'ecommerce_orders' %}" class="dropdown-item" key="t-orders">Orders</a>
+                                            <a href="{% url 'ecommerce_customers' %}" class="dropdown-item" key="t-customers">Customers</a>
+                                            <a href="{% url 'ecommerce_cart' %}" class="dropdown-item" key="t-cart">Cart</a>
+                                            <a href="{% url 'ecommerce_checkout' %}" class="dropdown-item" key="t-checkout">Checkout</a>
+                                            <a href="{% url 'ecommerce_shops' %}" class="dropdown-item" key="t-shops">Shops</a>
+                                            <a href="{% url 'ecommerce_add_product' %}" class="dropdown-item" key="t-add-product">Add Product</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-email"
+                                            role="button" key="t-email">
+                                            Email <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-email">
+                                            <a href="{% url 'email_inbox' %}" class="dropdown-item" key="t-inbox">Inbox</a>
+                                            <a href="{% url 'email_read' %}" class="dropdown-item" key="t-read-email">Email Read</a>
+                                            <a href="{% url 'email_compose' %}" class="dropdown-item" key="t-email-compose">Email Compose</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-form" role="button"
+                                key="t-components">
+                                    <i class="dripicons-inbox me-2"></i> Components <div class="arrow-down"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-form">
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-form"
+                                            role="button" key="t-forms">
+                                            Forms <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-form">
+                                            <a href="{% url 'form_elements' %}" class="dropdown-item" key="t-form-elements">Form Elements</a>
+                                            <a href="{% url 'form_validation' %}" class="dropdown-item" key="t-form-validation">Form Validation</a>
+                                            <a href="{% url 'form_advanced' %}" class="dropdown-item" key="t-form-advanced">Form Advanced</a>
+                                            <a href="{% url 'form_editors' %}" class="dropdown-item" key="t-form-editors">Form Editors</a>
+                                            <a href="{% url 'form_upload' %}" class="dropdown-item" key="t-form-upload">Form Upload</a>
+                                            <a href="{% url 'form_xeditable' %}" class="dropdown-item" key="t-form-xeditable">Form Xeditable</a>
+                                            <a href="{% url 'form_wizard' %}" class="dropdown-item" key="t-form-wizard">Form Wizard</a>
+                                            <a href="{% url 'form_mask' %}" class="dropdown-item" key="t-form-mask">Form Mask</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-chart"
+                                            role="button" key="t-charts">
+                                            Charts <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-chart">
+                                        <a href="{% url 'chart_apex' %}" class="dropdown-item" key="t-apex-charts">Apex Charts</a>
+                                        <a href="{% url 'chart_chartist' %}" class="dropdown-item" key="t-chartist">Chartists</a>
+                                        <a href="{% url 'chart_chartjs' %}" class="dropdown-item" key="t-chartjs-chart">Chartjs Charts</a>
+                                        <a href="{% url 'chart_flot' %}" class="dropdown-item" key="t-flot-chart">Flot Charts</a>
+                                        <a href="{% url 'chart_knob' %}" class="dropdown-item" key="t-knob-chart">Knob Charts</a>
+                                        <a href="{% url 'chart_sparkline' %}" class="dropdown-item" key="t-sparkline-chart">Sparkline Charts</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-table"
+                                            role="button" key="t-tables">
+                                            Tables <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-table">
+                                            <a href="{% url 'tables_basic' %}" class="dropdown-item" key="t-basic-tables">Data Tables</a>
+                                            <a href="{% url 'tables_datatable' %}" class="dropdown-item" key="t-data-tables">Basic Tables</a>
+                                            <a href="{% url 'tables_responsive' %}" class="dropdown-item" key="t-responsive-table">Responsive Table</a>
+                                            <a href="{% url 'tables_editable' %}" class="dropdown-item" key="t-editable-table">Editable Table</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-icons"
+                                            role="button" key="t-icons">
+                                            Icons <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-icons">
+                                            <a href="{% url 'icons_materialdesign' %}" class="dropdown-item" key="t-material-design">Material Design</a>
+                                            <a href="{% url 'icons_dripicons' %}" class="dropdown-item" key="t-dripicons">Dripicons</a>
+                                            <a href="{% url 'icons_fontawesome' %}" class="dropdown-item" key="t-font-awesome">Font Awesome</a>
+                                            <a href="{% url 'icons_themify' %}" class="dropdown-item" key="t-themify-icons">Themify Icons</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-map"
+                                            role="button" key="t-maps">
+                                            Maps <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-map">
+                                            <a href="{% url 'maps_google' %}" class="dropdown-item" key="t-google-maps">Google Maps</a>
+                                            <a href="{% url 'maps_vector' %}" class="dropdown-item" key="t-vector-maps">Vector Maps</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button"
+                                key="t-extras">
+                                    <i class="dripicons-copy me-2"></i> Extras<div class="arrow-down"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-more">
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-auth"
+                                            role="button" key="t-authentication">
+                                            Authentication <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-auth">
+                                            <a href="{% url 'login' %}" class="dropdown-item" key="t-login">Login</a>
+                                            <a href="{% url 'register' %}" class="dropdown-item" key="t-register">Register</a>
+                                            <a href="{% url 'lockscreen' %}" class="dropdown-item" key="t-lock-screen">Lock Screen</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-utility"
+                                            role="button" key="t-pages">
+                                            Pages <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-utility">
+                                        <a href="{% url 'pages_timeline' %}" class="dropdown-item" key="t-timeline">Timeline</a>
+                                        <a href="{% url 'pages_invoice' %}" class="dropdown-item" key="t-invoice">Invoice</a>
+                                        <a href="{% url 'pages_blank' %}" class="dropdown-item" key="t-blank-page">Blank Page</a>
+                                        <a href="{% url 'pages_error404' %}" class="dropdown-item" key="t-error-404">Error 404</a>
+                                        <a href="{% url 'pages_error500' %}" class="dropdown-item" key="t-error-500">Error 500</a>
+                                        <a href="{% url 'pages_pricing' %}" class="dropdown-item" key="t-pricing">Pricing</a>
+                                        <a href="{% url 'pages_maintenance' %}" class="dropdown-item" key="t-maintenance">Maintenance</a>
+                                        <a href="{% url 'pages_comingsoon' %}" class="dropdown-item"  key="t-coming-soon">Coming Soon</a>
+                                        <a href="{% url 'pages_faqs' %}" class="dropdown-item" key="t-faqs">FAQs</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-layout" role="button"
+                                key="t-layouts">
+                                    <i class="dripicons-device-desktop me-2"></i> Layouts  <div class="arrow-down"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-layout">
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-verti"
+                                            role="button" key="t-vertical">
+                                            Vertical <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-verti">
+                                            <a href="{% url 'layout_darksidebar' %}" class="dropdown-item" key="t-dark-sidebar">Dark Sidebar</a>
+                                            <a href="{% url 'layout_compactsidebar' %}" class="dropdown-item" key="t-compact-sidebar">Compact Sidebar</a>
+                                            <a href="{% url 'layout_iconsidebar' %}" class="dropdown-item" key="t-icon-sidebar">Icon Sidebar</a>
+                                            <a href="{% url 'layout_boxed' %}" class="dropdown-item" key="t-boxed-layout">Boxed Layout</a>
+                                            <a href="{% url 'layout_preloader' %}" class="dropdown-item" key="t-preloader">Preloader</a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-hori"
+                                            role="button" key="t-horizontal">
+                                            Horizontal <div class="arrow-down"></div>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="topnav-hori"> 
+                                            <a href="{% url 'layout_horizontal' %}" class="dropdown-item" key="t-horizontal">Horizontal</a>
+                                            <a href="{% url 'layout_topbarlight' %}" class="dropdown-item" key="t-topbar-light">Topbar Light</a>
+                                            <a href="{% url 'layout_boxedwidth' %}" class="dropdown-item" key="t-boxed-width">Boxed width</a>
+                                            <a href="{% url 'layout_horipreloader' %}" class="dropdown-item" key="t-preloader">Preloader</a>
+                                            <a href="{% url 'layout_coloredHeader' %}" class="dropdown-item" key="t-colored-header">Colored Header</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>        
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+{% endblock sidebar %}
