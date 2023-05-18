@@ -197,7 +197,6 @@ ACCOUNT_FORMS = {
     'reset_password_from_key': 'extras.forms.PasswordResetKeyForm'
 }
 ACCOUNT_LOGOUT_ON_GET = True
-\
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_UNIQUE_EMAIL = True
