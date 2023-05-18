@@ -1,3 +1,4 @@
+antiorm==1.2.1
 asgiref==3.6.0
 beautifulsoup4==4.12.2
 certifi==2023.5.7
@@ -6,6 +7,8 @@ charset-normalizer==3.1.0
 colorama==0.4.6
 crispy-bootstrap4==2022.1
 cryptography==40.0.2
+db==0.1.1
+db-sqlite3==0.0.1
 defusedxml==0.7.1
 Django==4.2.1
 django-allauth==0.54.0
@@ -20,7 +23,8 @@ django-session-timeout==0.1.0
 Django-Verify-Email==2.0.3
 idna==3.4
 oauthlib==3.2.2
-psycopg2-binary
+psycopg==3.1.9
+psycopg2==2.9.6
 pycparser==2.21
 PyJWT==2.7.0
 pypng==0.20220715.0
