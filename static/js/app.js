@@ -39,6 +39,15 @@ function checkAll(e) {
           });
       }));
   }
+
+
+
+
+
+
+
+
+
   function c() {
     for (
       var e = document
@@ -72,6 +81,7 @@ function checkAll(e) {
           "href",
           "../../static/css/bootstrap-dark.min.css"
         ),
+
         n("#app-style").attr("href", "../../static/css/app-dark.min.css"),
         sessionStorage.setItem("is_visited", "dark-mode-switch"))
       : 1 == n("#rtl-mode-switch").prop("checked") &&
@@ -82,10 +92,25 @@ function checkAll(e) {
           "href",
           "../../static/css/bootstrap-rtl.min.css"
         ),
+        
         n("#app-style").attr("href", "../../static/css/app-rtl.min.css"),
         n("html").attr("dir", "rtl"),
         sessionStorage.setItem("is_visited", "rtl-mode-switch"));
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   function r() {
     document.webkitIsFullScreen ||
       document.mozFullScreen ||
