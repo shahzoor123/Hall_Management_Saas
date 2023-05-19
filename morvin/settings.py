@@ -98,12 +98,12 @@ WSGI_APPLICATION = 'morvin.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('PGDATABASE'),
-        'USER': os.getenv('PGUSER'),
-        'PASSWORD': os.getenv('PGPASSWORD'),
-        'HOST': os.getenv('PGHOST'),
-        'PORT': os.getenv('PGPORT'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': "db.vvmxvtvmocwshytaqfsw.supabase.co",
+        'NAME': "postgres",
+        'USER': "postgres",
+        'PASSWORD': "saas12345!@#$%",
+        'PORT': "5432",
     }
 }
 
