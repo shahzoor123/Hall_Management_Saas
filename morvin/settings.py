@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+import dj_database_url
+from decouple import config
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-()(=*r-un(n3kppp*h-)o(z8c2j9)73sfm7v-=7o75f*sj$!i2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
@@ -87,13 +89,26 @@ WSGI_APPLICATION = 'morvin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'your_database_name',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'your_database_name',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': "db.vvmxvtvmocwshytaqfsw.supabase.co",
+        'NAME': "postgres",
+        'USER': "postgres",
+        'PASSWORD': "saas12345!@#$%",
+        'PORT': "5432",
     }
 }
 
+
+# DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
@@ -133,7 +148,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'staticfiles')]
 STATIC_ROOT = os.path.join(BASE_DIR,'assets')
 
 # Default primary key field type
@@ -204,3 +219,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_SIGNUP_REDIRECT_URL = "account_logout"
 
 LOGIN_URL="account/login"
+
+
+
+STATICFILES_DIRS = os.path.join(BASE_DIR,'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')

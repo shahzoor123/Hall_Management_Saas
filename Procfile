@@ -1,1 +1,0 @@
-web: gunicorn morvin.wsgi --log-file -
