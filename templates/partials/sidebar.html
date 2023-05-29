@@ -40,7 +40,7 @@
                     </li>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="dripicons-graph-line"></i>
+                            <i class="fas fa-dollar-sign"></i>
                             <span key="t-ecommerce">Finance</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
@@ -96,6 +96,17 @@
                             <li><a href="{% url 'email_inbox' %}" key="t-inbox">Inbox</a></li>
                             <li><a href="{% url 'email_read' %}" key="t-read-email">Email Read</a></li>
                             <li><a href="{% url 'email_compose' %}" key="t-email-compose">Email Compose</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-cart"></i>
+                            <span key="t-email">Items</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'email_inbox' %}" key="t-inbox">Kitchen Items</a></li>
+                            <li><a href="{% url 'email_read' %}" key="t-read-email">Electricity Items</a></li>
+                            <li><a href="{% url 'email_compose' %}" key="t-email-compose">Hall Items</a></li>
                         </ul>
                     </li>
                     <li class="menu-title" key="t-components">Components</li>
