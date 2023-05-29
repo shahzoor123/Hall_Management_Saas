@@ -13,7 +13,8 @@ class Category(models.Model):
         return self.name
 
 
-class Products(models.Model):
+class MyProducts(models.Model):
+    
     code = models.CharField(max_length=100, blank=True)
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)

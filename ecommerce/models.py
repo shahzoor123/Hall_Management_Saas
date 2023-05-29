@@ -1,5 +1,5 @@
 from django.db import models
-from items.models import Products
+from items.models import MyProducts
 
 class EventSale(models.Model):
     confirm = 'Confirm'
