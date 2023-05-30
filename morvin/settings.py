@@ -12,10 +12,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+# Build paths 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-import dj_database_url
-from decouple import config
+# import dj_database_url
+# from decouple import config
 
 
 # Quick-start development settings - unsuitable for production
@@ -43,7 +44,7 @@ INSTALLED_APPS = [
     'e_mail',
     'components',
     'layouts',
-    
+    'items',
     'extras',
     'crispy_forms',
     'crispy_bootstrap4',
@@ -63,14 +64,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ]
+]
 
 ROOT_URLCONF = 'morvin.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,"templates")],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,27 +86,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'morvin.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'your_database_name',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'HOST': "db.vvmxvtvmocwshytaqfsw.supabase.co",
-#         'NAME': "postgres",
-#         'USER': "postgres",
-#         'PASSWORD': "saas12345!@#$%",
-#         'PORT': "5432",
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'your_database_name',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': "db.vvmxvtvmocwshytaqfsw.supabase.co",
+        'NAME': "postgres",
+        'USER': "postgres",
+        'PASSWORD': "saas12345!@#$%",
+        'PORT': "5432",
+    }
+}
 
 
 # DATABASES['default'] = dj_database_url.config()
@@ -129,7 +129,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -143,19 +142,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'staticfiles')]
-STATIC_ROOT = os.path.join(BASE_DIR,'assets')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # SMTP Configure
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -166,10 +163,8 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = ''
 
-
 # LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/'
-
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     # Required by allauth template tags
@@ -196,11 +191,11 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     },
     'facebook':
-       {'METHOD': 'oauth2',
-        'SCOPE': ['email','public_profile', 'user_friends'],
-        'AUTH_PARAMS':{
-        'access_type': 'online',
-        }  }
+        {'METHOD': 'oauth2',
+         'SCOPE': ['email', 'public_profile', 'user_friends'],
+         'AUTH_PARAMS': {
+             'access_type': 'online',
+         }}
 }
 
 ACCOUNT_FORMS = {
@@ -212,16 +207,12 @@ ACCOUNT_FORMS = {
     'reset_password_from_key': 'extras.forms.PasswordResetKeyForm'
 }
 ACCOUNT_LOGOUT_ON_GET = True
-\
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_SIGNUP_REDIRECT_URL = "account_logout"
 
-LOGIN_URL="account/login"
+LOGIN_URL = "account/login"
 
-
-
-STATICFILES_DIRS = os.path.join(BASE_DIR,'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),

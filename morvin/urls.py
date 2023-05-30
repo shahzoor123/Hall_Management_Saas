@@ -16,6 +16,7 @@ Including another URLconf
 from layouts import urls
 import components
 import e_mail
+import items
 from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls import include
@@ -34,6 +35,8 @@ urlpatterns = [
     path('chat/', views.Chat.as_view(),name='chat'),
     # Ecommerce
     path('ecommerce/', include('ecommerce.urls')),
+    #Items
+    path('menu/', include('items.urls')),
     # Email
     path('email/',include('e_mail.urls')),
     # Components
