@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from items.models import MyProducts
+from items.models import MyProducts, Deals
 import json
 
 # Create your views here.
@@ -34,4 +34,11 @@ class Calculate(LoginRequiredMixin,TemplateView):
         context['page_title'] = "Point of Sale"
         context['products'] = products
         context['product_json'] = json.dumps(product_json)
+
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        deal = Deals.objects.first()  # Retrieve the first deal object
+        menu_items = deal.menu_items.all() # Retrieve all the menu items associated with the deal
+
+        for item in menu_items:
+            print(item.name)
         return context
