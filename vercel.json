@@ -22,13 +22,6 @@
     {
       "src": "/(.*)",
       "dest": "morvin/wsgi.py"
-    },
-    {
-      "functions": {
-        "pages/**/*": {
-          "excludeFiles": "public/**"
-        }
-      }
     }
   ]
 }
