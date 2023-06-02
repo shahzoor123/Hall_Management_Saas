@@ -4,10 +4,7 @@
     {
       "src": "morvin/wsgi.py",
       "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.9"
-      }
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     },
     {
       "src": "build_files.sh",
@@ -20,12 +17,11 @@
   "routes": [
     {
       "src": "/static/(.*)",
-      "dest": "/staticfiles_build/$1"
+      "dest": "/static/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/morvin/wsgi.py"
+      "dest": "morvin/wsgi.py"
     }
   ]
 }
-
