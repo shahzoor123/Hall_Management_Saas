@@ -2,4 +2,3 @@ node_modules/
 venv/
 test/
 static/
-src/
