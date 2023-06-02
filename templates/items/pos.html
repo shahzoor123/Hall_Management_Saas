@@ -3,6 +3,8 @@
 
 {% block title %}Add Product{% endblock title %}
 
+
+
 {% block extra_css %}
     <!-- twitter-bootstrap-wizard css -->
     <link rel="stylesheet" href="{% static  'libs/twitter-bootstrap-wizard/prettify.css' %}">
@@ -16,22 +18,43 @@
 {% endblock extra_css %}
     
 {% block content %}
-<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
-    <div class="mdc-card py-2">
-        <div class="d-flex justify-content-between align-items-center">
-            <h4 class="card-title mb-0">Menu Calculation</h4>
+<div class="main-content">
+    <div class="page-content">
+        <!-- start page title -->
+        <div class="page-title-box">
+            <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-sm-6">
+                    <div class="page-title">
+                        <h4>Calculator</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Hall</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Calculator</li>
+                            </ol>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="float-end d-none d-sm-block">
+                        <a href="" class="btn btn-success">Add Widget</a>
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
-    </div>
-</div>
+        <!-- end page title -->    
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12" >
+   
 <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
-    <div class="mdc-card">
-        <form action="POST" id="pos-form">
+    <div class="mdc-card" >
+        
+        <form action="POST" id="pos-form" >
 
             <fieldset>
                 <legend>Add Products</legend>
                 <div class="row align-items-end">
 
-                    <div class="col-lg-5 col-md-5 col-sm-12">
+                    <div class="col-lg-6 col-md-5 col-sm-12">
                         <div class="form-group mb-3">
                             <label for="product-id">Select Product</label>
                             <select id="product-id" class="form-select form-select-sm">
@@ -42,16 +65,16 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-5 col-md-12">
+                    <div class="col-lg-2 col-md-5 col-md-12">
                         <div class="form-group mb-3">
                             <label for="product-qty">Qty</label>
-                            <input type="number" class="form-control form-control-sm text-center" step="any" id="product-qty" value="1">
+                            <input style="height: 38px;" type="number" class="form-control form-control-sm text-center" step="any" id="product-qty" value="1">
                         </div>
 
                     </div>
-                    <div class="col-lg-4 col-md-2 col-md-12">
+                    <div class="col-lg-2 col-md-2 col-md-12">
                         <div class="form-group mb-3">
-                            <button class="btn btn-light btn-sm bg-gradient border rounded-0 text-start" type="button" id="add_item"><i class="mdi mdi-plus"></i> Add Item</button>
+                            <button style="height: 38px;" class="btn btn-light btn-sm bg-gradient border  text-start" type="button" id="add_item"><i class="mdi mdi-plus"></i> Add Item</button>
                         </div>
                     </div>
 
@@ -59,19 +82,20 @@
                 </div>
             </fieldset>
             <fieldset>
-                <div class="d-flex w-100" id="POS-field">
-                    <div class="col-8 bg-gradient bg-light border h-100">
-                        <table class="table table-bordered">
+                
+                <div class="d-flex w-100" id="POS-field" >
+                    <div class="col-9 bg-gradient ">
+                        <table class="table" style="color: aliceblue;">
                             <colgroup>
                                 <col width="5%">
-                                <col width="15%">
-                                <col width="40%">
+                                <col width="10%">
                                 <col width="20%">
-                                <col width="20%">
+                                <col width="10%">
+                                <col width="10%">
                             </colgroup>
                             <thead>
                                 <tr class="bg-dark bg-gradient bg-opacity-50 text-light">
-                                    <th class="py-1 px-2 text-center  text-light"></th>
+                                    <th class="py-1 px-2 text-center  ">R</th>
                                     <th class="py-1 px-2 text-center  text-light">QTY</th>
                                     <th class="py-1 px-2 text-center  text-light">Product</th>
                                     <th class="py-1 px-2 text-center  text-light">Price</th>
@@ -82,52 +106,75 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-4 bg-gradient bg-dark bg-opacity-60 border h-150">
-                        <div class="col-12 py-15 px-2">
-                            <dl>
-                                <dt class="py-1 px-2 text-left  text-light">Sub Total</dt>
-                                <dd class="text-end py-1 px-2 rounded-0 bg-light">
-                                    <input type="hidden" name="sub_total" value="0">
-                                    <span class="py-1 fw-bold" id="sub_total">0.00</span>
-                                </dd>
-                                <dt class="py-1 px-2 text-left  text-light">Number of People</dt>
-                                <dd>
-                                    <input type="number" class="form-control form-control-lg rounded-0 text-end" step="any" min="0" max="5000" name="tax" value="0">
-                                </dd>
-
-                                <dt class="py-1 px-2 text-left  text-light">Hall Charges</dt>
-                                <dd>
-                                    <input type="number" class="form-control form-control-lg rounded-0 text-end" step="any" name="hall" value="0">
-                                </dd>
-
-                                <dt class="py-1 px-2 text-left  text-light">Menu/head</dt>
-                                <dd class="text-end py-1 px-2 rounded-0 bg-light">
-                                    <input type="hidden" name="tax_amount" value="0">
-                                    <span class="py-1 fw-bold" id="tax_amount">0.00</span>
-                                </dd>
-                                <dt class="py-1 px-2 text-left  text-light">Grand Total</dt>
-                                <dd class="text-end py-1 px-2 rounded-0 bg-light">
-                                    <input type="hidden" name="grand_total" value="0">
-                                    <input type="hidden" name="tendered_amount" value="0">
-                                    <input type="hidden" name="amount_change" value="0">
-                                    <input type="hidden" name="grand_total" value="0">
-                                    <input type="hidden" name="grand_total" value="0">
-                                    <span class="py-1 fw-bold" id="grand_total">0.00</span>
-                                </dd>
-                            </dl>
-                        </div>
+                    <div class="row" >
+                        <div class="col-lg-12 col-md-12 col-sm-12" >
+                            <div class="card">
+                                <div class="card-body calc" >
+                    
+                                    <form action="#">
+                                        <div class="mb-4">
+                                            <label class="form-label">Sub Total</label>
+                                            <div class="input-group " id="datepicker1" >
+                                                <input type="number" class="form-control " name="sub_total" value="0">
+                    
+                                                <span class="input-group-text" id="sub_total">0.00</span>
+                                            </div><!-- input-group -->
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Number of Peoplee</label>
+                                            <div class="input-group" id="datepicker2">
+                                                <input type="number" class="form-control" step="any" min="0" max="5000" name="tax" value="0">
+                                                <span class="input-group-text">0</span>
+                                            </div><!-- input-group -->
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Hall Charges</label>
+                                            <div class="input-group" id="datepicker3">
+                                                <input type="number" class="form-control" step="any" name="hall" value="0">
+                                                <span class="input-group-text">0</span>
+                                            </div><!-- input-group -->
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Menu/head</label>
+                                            <div class="input-group" id="datepicker3">
+                                                <input type="number" class="form-control" name="tax_amount" value="0">
+                                                <span class="input-group-text" id="tax_amount">0.00</span>
+                                            </div><!-- input-group -->
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Grand Total</label>
+                                            <input type="hidden" name="grand_total" value="0">
+                                            <input type="hidden" name="tendered_amount" value="0">
+                                            <input type="hidden" name="amount_change" value="0">
+                                            <input type="hidden" name="grand_total" value="0">
+                                            <input type="hidden" name="grand_total" value="0">
+                                            <div class="input-group" id="datepicker3">
+                                                <input type="text" class="form-control" data-date-container='#datepicker3' data-date-format="dd M, yyyy"
+                                                    data-date-multidate="true">
+                                                <span class="input-group-text" id="grand_total">0.00</span>
+                                            </div><!-- input-group -->
+                                        </div>
+                    
+                                        <div class="row row-cols-4">
+                                            <div class="col-md-1 text-end">
+                                                <button class="btn btn-primary btn-sm " type="button" id="check_out"> Checkout</button>
+                                            </div>
+                                        </div>
+                                      
+                    
+                                    </form>
+                                </div>
+                            </div>
                     </div>
+               
                 </div>
             </fieldset>
-            <div class="row row-cols-4">
-                <div class="col-md-1 text-end">
-                    <button class="btn btn-primary btn-sm rounded-0" type="button" id="check_out"><i class="mdi mdi-save"></i> Checkout</button>
-                </div>
-            </div>
+         
         </form>
     </div>
 </div>
 <noscript id="item-clone">
+    
     <tr>
         <td class="px-2 py-1 text-center">
             <button class="btn btn-sm btn-outline-danger rounded-0 rem-item" type="button"><i class="mdi mdi-close"></i></button>

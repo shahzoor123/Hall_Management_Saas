@@ -1,4 +1,21 @@
 @import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap);
+
+.mdc-card{
+  padding: 20px;
+  background-color: #45577b;
+  border-radius: 10px;
+  margin: 10px;
+  color: aliceblue;
+
+}
+
+
+@media (min-width: 1700px) {
+  .calc {
+    width: 400px;
+  }
+}
+
 #page-topbar {
   position: fixed;
   top: 0;

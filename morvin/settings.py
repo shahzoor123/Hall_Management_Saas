@@ -89,23 +89,23 @@ WSGI_APPLICATION = 'morvin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': 'your_database_name',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': "db.vvmxvtvmocwshytaqfsw.supabase.co",
-        'NAME': "postgres",
-        'USER': "postgres",
-        'PASSWORD': "saas12345!@#$%",
-        'PORT': "5432",
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'your_database_name',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'HOST': "db.vvmxvtvmocwshytaqfsw.supabase.co",
+#         'NAME': "postgres",
+#         'USER': "postgres",
+#         'PASSWORD': "saas12345!@#$%",
+#         'PORT': "5432",
+#     }
+# }
 
 
 # DATABASES['default'] = dj_database_url.config()
