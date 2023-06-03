@@ -4121,3 +4121,52 @@ div.dataTables_wrapper div.dataTables_filter input {
   }
 }
 /*# sourceMappingURL=app.min.css.map */
+
+
+
+/* Custom models */
+
+/* Custom styles for the modal form */
+.modal-content {
+  background-color: var(--primary-color);
+  color: rgb(0, 0, 0);
+
+}
+
+/* Adjust the modal size */
+.modal-dialog {
+  max-width: 600px;
+
+}
+
+/* Add padding to the modal body */
+.modal-body {
+  padding: 20px;
+
+
+}
+
+/* Style the form labels */
+.form-label {
+  font-weight: bold;
+}
+
+/* Style the form inputs */
+.form-control {
+  border-radius: 0;
+}
+
+form {
+  margin: 50px;
+
+}
+
+/* Style the form buttons */
+.modal-footer .btn {
+  border-radius: 0;
+}
+select{
+  width: 500px;
+  height: 38px;
+  border-radius: 5px;
+}
