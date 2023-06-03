@@ -9,10 +9,10 @@ class Products(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-products.html"
 class ProductsDetail(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-product-detail.html"
-class ProductsOrder(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/ecommerce-orders.html"
-class ProductsCustomers(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/ecommerce-customers.html"
+class Eventsale(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/event-sale.html"
+class Eventexpense(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/event-expense.html"
 class ProductsCart(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-cart.html"
 class ProductsCheckout(LoginRequiredMixin,TemplateView):
