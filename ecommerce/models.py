@@ -86,7 +86,7 @@ class EventExpense(models.Model):
 
     def save(self, *args, **kwargs):
         # BBQ PRICE
-        products = Products.objects.filter(code='BBQ')
+        products = MyProducts.objects.filter(code='BBQ')
         bbq_product = products.first()
 
         if bbq_product is not None:
@@ -96,7 +96,7 @@ class EventExpense(models.Model):
 
 
         # WAITERS PRICE
-        waiter = Products.objects.filter(code='WAITERS')
+        waiter = MyProducts.objects.filter(code='WAITERS')
         waiters = waiter.first()
 
         if waiters is not None:
@@ -105,7 +105,7 @@ class EventExpense(models.Model):
         self.waiters_bill = w
 
         # WATER
-        water = Products.objects.filter(code='WATER')
+        water = MyProducts.objects.filter(code='WATER')
         wat = water.first()
 
         if wat is not None:
@@ -115,7 +115,7 @@ class EventExpense(models.Model):
 
 
         # NAAN
-        naans = Products.objects.filter(code='NAAN')
+        naans = MyProducts.objects.filter(code='NAAN')
         naan = naans.first()
         if naan is not None:
             nan_qty = self.naan_qty
@@ -123,7 +123,7 @@ class EventExpense(models.Model):
         self.naan_bill = naan
 
         # Cold Drinks
-        drinks = Products.objects.filter(code='DRINKS')
+        drinks = MyProducts.objects.filter(code='DRINKS')
         cold_drink = drinks.first()
         if cold_drink is not None:
             drink_qty = self.cold_drink
@@ -131,7 +131,7 @@ class EventExpense(models.Model):
         self.cold_drink_bill = drink
 
         # Stuffs
-        stuff = Products.objects.filter(code='STUFF')
+        stuff = MyProducts.objects.filter(code='STUFF')
         st = stuff.first()
         if st is not None:
             stuf = self.bill.no_of_people * st.price

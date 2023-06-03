@@ -1,7 +1,36 @@
 @import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap);
 
+:root {
+  --primary-color: #cde5f9;
+  --secondary-color: #ECF2FF;
+}
+
+.mdc-card{
+  padding: 20px;
+  background-color: #4068B1;
+  border-radius: 10px;
+  margin: 10px;
+  color: rgb(255, 255, 255);
+}
+
+.calc{
+  color: #000000;
+}
+
+@media (min-width: 1700px) {
+  .calc {
+    width: 400px;
+  }
+}
+
+
+.card-body{
+  background-color: var(--primary-color);
+  border-radius: 5px;
+}
+
 body{
-  background-color: #e6e6e6;
+  background-color: var(--secondary-color);
 }
 
 #page-topbar {
@@ -10,7 +39,7 @@ body{
   right: 0;
   left: 0;
   z-index: 1001;
-  background-color: #fff;
+  background-color: var(--primary-color);
 }
 .navbar-header {
   display: -webkit-box;
@@ -252,13 +281,13 @@ body[data-layout="horizontal"] .page-content {
   padding: 20px calc(24px / 2);
   position: absolute;
   right: 0;
-  border-top: 1px solid #edf1f5;
+  border-top: 1px solid #EEE3CB;
   color: #74788d;
   left: 260px;
   height: 60px;
   -webkit-box-shadow: 0 2px 4px rgba(126, 142, 177, 0.1);
   box-shadow: 0 2px 4px rgba(126, 142, 177, 0.1);
-  background-color: #fff;
+  background-color: var(--primary-color);
 }
 @media (max-width: 992px) {
   .footer {
@@ -355,7 +384,7 @@ body[data-layout="horizontal"] .footer {
 .vertical-menu {
   width: 260px;
   z-index: 1001;
-  background: #e3e3e3;
+  background: var(--primary-color);
   bottom: 0;
   margin-top: 0;
   position: fixed;
@@ -583,7 +612,7 @@ body[data-layout="horizontal"] .footer {
 .vertical-collpsed .vertical-menu #sidebar-menu > ul > li:hover > a {
   position: relative;
   width: calc(190px + 70px);
-  background-color: #f5f7fa;
+  background-color: #EEE3CB;
   -webkit-transition: none;
   transition: none;
 }
@@ -4092,3 +4121,52 @@ div.dataTables_wrapper div.dataTables_filter input {
   }
 }
 /*# sourceMappingURL=app.min.css.map */
+
+
+
+/* Custom models */
+
+/* Custom styles for the modal form */
+.modal-content {
+  background-color: var(--primary-color);
+  color: rgb(0, 0, 0);
+
+}
+
+/* Adjust the modal size */
+.modal-dialog {
+  max-width: 600px;
+
+}
+
+/* Add padding to the modal body */
+.modal-body {
+  padding: 20px;
+
+
+}
+
+/* Style the form labels */
+.form-label {
+  font-weight: bold;
+}
+
+/* Style the form inputs */
+.form-control {
+  border-radius: 0;
+}
+
+form {
+  margin: 50px;
+
+}
+
+/* Style the form buttons */
+.modal-footer .btn {
+  border-radius: 0;
+}
+select{
+  width: 500px;
+  height: 38px;
+  border-radius: 5px;
+}
