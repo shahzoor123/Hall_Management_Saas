@@ -1,5 +1,19 @@
 @import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap);
 
+
+#model-btn1{
+  border-radius: 10px;
+  background-color:#F14E4E;
+  color: white;
+  
+}
+#model-btn2{
+  border-radius: 10px;
+  background-color: #1EA77A;
+  color: white;
+}
+
+
 .mdc-card{
   padding: 20px;
   background-color: #45577b;
