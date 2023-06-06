@@ -85,61 +85,64 @@ class EventExpense(models.Model):
         return str(self.bill)
 
     def save(self, *args, **kwargs):
-        # BBQ PRICE
-        products = MyProducts.objects.filter(code='BBQ')
-        bbq_product = products.first()
+        products = MyProducts.objects.filter(code__in=['BBQ', 'WAITERS', 'WATER', 'NAAN', 'DRINKS', 'STUFF'])
+        product_dict = {product.code: product for product in products}
 
+        # BBQ PRICE
+        bbq_product = product_dict.get('BBQ')
+        bbq_price = 0
         if bbq_product is not None:
             bbq_kg_qty = self.bbq_kg_qty
             bbq_price = bbq_product.price * bbq_kg_qty
         self.bbq_price = bbq_price
 
-
         # WAITERS PRICE
-        waiter = MyProducts.objects.filter(code='WAITERS')
-        waiters = waiter.first()
-
-        if waiters is not None:
+        waiters_product = product_dict.get('WAITERS')
+        waiters_bill = 0
+        if waiters_product is not None:
             wait = self.no_of_waiters
-            w = waiters.price * wait
-        self.waiters_bill = w
+            w = waiters_product.price * wait
+            waiters_bill = w
+        self.waiters_bill = waiters_bill
 
         # WATER
-        water = MyProducts.objects.filter(code='WATER')
-        wat = water.first()
-
-        if wat is not None:
+        water_product = product_dict.get('WATER')
+        water_bill = 0
+        if water_product is not None:
             water_qty = self.water
-            w = wat.price * water_qty
-        self.water_bill = w
-
+            w = water_product.price * water_qty
+            water_bill = w
+        self.water_bill = water_bill
 
         # NAAN
-        naans = MyProducts.objects.filter(code='NAAN')
-        naan = naans.first()
-        if naan is not None:
-            nan_qty = self.naan_qty
-            naan = naan.price * nan_qty
-        self.naan_bill = naan
+        naan_product = product_dict.get('NAAN')
+        naan_bill = 0
+        if naan_product is not None:
+            naan_qty = self.naan_qty
+            naan_bill = naan_product.price * naan_qty
+        self.naan_bill = naan_bill
 
         # Cold Drinks
-        drinks = MyProducts.objects.filter(code='DRINKS')
-        cold_drink = drinks.first()
-        if cold_drink is not None:
+        cold_drink_product = product_dict.get('DRINKS')
+        cold_drink_bill = 0
+        if cold_drink_product is not None:
             drink_qty = self.cold_drink
-            drink = cold_drink.price * drink_qty
-        self.cold_drink_bill = drink
+            w = cold_drink_product.price * drink_qty
+            cold_drink_bill = w
+        self.cold_drink_bill = cold_drink_bill
 
         # Stuffs
-        stuff = MyProducts.objects.filter(code='STUFF')
-        st = stuff.first()
-        if st is not None:
-            stuf = self.bill.no_of_people * st.price
-        self.stuff_bill = stuf
+        stuff_product = product_dict.get('STUFF')
+        stuff_bill = 0
+        if stuff_product is not None:
+            stuf = self.bill.no_of_people * stuff_product.price
+            stuff_bill = stuf
+        self.stuff_bill = stuff_bill
 
         # Update the instance with the calculated bbq_price
-        EventExpense.objects.filter(id=self.id).update(bbq_price=bbq_price)
-        self.total_expense = self.pakwan_bill + self.electicity + self.naan_bill + self.cold_drink_bill + self.water_bill + self.bbq_price + self.diesel_ltr + self.waiters_bill + self.stuff_bill + self.dhobi + self.other_expense + self.setup_bill + self.decor_bill
+        self.total_expense = (
+            self.pakwan_bill + self.electicity + self.naan_bill + self.cold_drink_bill +
+            self.water_bill + self.bbq_price + self.diesel_ltr + self.waiters_bill +
+            self.stuff_bill + self.dhobi + self.other_expense + self.setup_bill + self.decor_bill
+        )
         super(EventExpense, self).save(*args, **kwargs)
-  
-    
