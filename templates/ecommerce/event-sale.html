@@ -96,19 +96,7 @@
                                                             {{sale.total_amount}}
                                                         </td>
                                                        
-                                                        {% if sale.recieved_amount == 0 and sale.remaining_amount == 0%}
-                                                        <td>
-                                                            <div class="badge badge-soft-warning font-size-12">unpaid</div>
-                                                        </td>
-                                                        {% elif sale.recieved_amount != 0 and sale.remaining_amount != 0 %} 
-                                                        <td>
-                                                            <div class="badge badge-soft-danger font-size-12">Remaining</div>
-                                                        </td>
-                                                        {% else %}
-                                                        <td>
-                                                            <div class="badge badge-soft-success font-size-12">Paid</div>
-                                                        </td>
-                                                        {% endif %}
+                                                 
                                                         
                                                       
                                                         <td>
