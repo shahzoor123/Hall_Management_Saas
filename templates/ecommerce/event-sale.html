@@ -95,15 +95,22 @@
                                                         <td>
                                                             {{sale.total_amount}}
                                                         </td>
-                                                        <td>
-                                                            <div class="badge badge-soft-success font-size-12">{{Paid}}</div>
-                                                        </td>
+                                                       
+                                                        {% if sale.recieved_amount == 0 and sale.remaining_amount == 0%}
                                                         <td>
                                                             <div class="badge badge-soft-warning font-size-12">unpaid</div>
                                                         </td>
+                                                        {% elif sale.recieved_amount != 0 and sale.remaining_amount != 0 %} 
                                                         <td>
-                                                            <div class="badge badge-soft-danger font-size-12">Chargeback</div>
+                                                            <div class="badge badge-soft-danger font-size-12">Remaining</div>
                                                         </td>
+                                                        {% else %}
+                                                        <td>
+                                                            <div class="badge badge-soft-success font-size-12">Paid</div>
+                                                        </td>
+                                                        {% endif %}
+                                                        
+                                                      
                                                         <td>
                                                             <button class="btn btn-light btn-rounded">Invoice <i class="mdi mdi-download ml-2"></i></button>
                                                         </td>
