@@ -35,10 +35,8 @@ class Calculate(LoginRequiredMixin,TemplateView):
         context['products'] = products
         context['product_json'] = json.dumps(product_json)
 
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         deal = Deals.objects.first()  # Retrieve the first deal object
         menu_items = deal.menu_items.all() # Retrieve all the menu items associated with the deal
 
-        for item in menu_items:
-            print(item.name)
+    
         return context

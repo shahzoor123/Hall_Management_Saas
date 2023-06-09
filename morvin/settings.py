@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'morvin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'your_database_name',
+        'NAME': 'hall',
     }
 }
 

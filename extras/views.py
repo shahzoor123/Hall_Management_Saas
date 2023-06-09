@@ -7,6 +7,8 @@ class Timeline(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/pages-timeline.html"
 class Invoice(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/pages-invoice.html"
+class Invoices(LoginRequiredMixin,TemplateView):
+    template_name = "extras/pages/invoice.html"
 class Blankpage(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/pages-blank.html"
 class Error404(LoginRequiredMixin,TemplateView):
