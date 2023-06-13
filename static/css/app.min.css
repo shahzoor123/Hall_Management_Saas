@@ -5,6 +5,19 @@
   --secondary-color: #ECF2FF;
 }
 
+
+#model-btn1{
+  border-radius: 10px;
+  background-color:#F14E4E;
+  color: white;
+  
+}
+#model-btn2{
+  border-radius: 10px;
+  background-color: #1EA77A;
+}
+
+
 .mdc-card{
   padding: 20px;
   background-color: #4068B1;
@@ -1638,7 +1651,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .navbar-header {
   border-bottom: 1px solid #eaedf1;
 }
 .dash-info-widget {
-  background: #f9fafc;
+  background: var(--primary-color);
 }
 .dash-goal {
   border-left: 1px solid #eaedf1;
@@ -4121,6 +4134,13 @@ div.dataTables_wrapper div.dataTables_filter input {
   }
 }
 /*# sourceMappingURL=app.min.css.map */
+
+
+
+
+
+
+
 
 
 
