@@ -53,7 +53,7 @@
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="{% url 'event-sale' %} " key="t-orders">Event Sale</a></li>
                                 <li><a href="{% url 'event-expense' %} " key="t-customers">Event Expense</a></li>
-                                <li><a href="{% url 'custom_invoice' %} " key="t-customers">Invoice</a></li>
+                                <li><a href="{% url 'pages_invoice' %} " key="t-customers">Invoice</a></li>
 
                             </ul>
 
@@ -112,6 +112,25 @@
                             <li><a href="{% url 'email_compose' %}" key="t-email-compose">Hall Items</a></li>
                         </ul>
                     </li>
+
+
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="mdi mdi-camera-burst"></i>
+                            <span key="t-email">Deals</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'calculate_menu' %}" key="t-email-compose">Custom Deal</a></li>
+                            <li><a href="{% url 'deals-calculator' %}" key="t-inbox">Deal 1</a></li>
+                            <li><a href="{% url 'deals-calculator' %}" key="t-read-email">Deal 2</a></li>
+                            <li><a href="{% url 'deals-calculator' %}" key="t-email-compose">Deal 3 </a></li>
+                            <li><a href="{% url 'deals-calculator' %}" key="t-email-compose">Deal 4</a></li>
+                            <li><a href="{% url 'deals-calculator' %}" key="t-email-compose">Deal 5</a></li>
+
+                        </ul>
+                    </li>
+
+
                     <li class="menu-title" key="t-components">Components</li>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">

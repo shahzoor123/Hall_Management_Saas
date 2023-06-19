@@ -19,4 +19,5 @@ class Calculate(LoginRequiredMixin,TemplateView):
         context['product_json'] = json.dumps(product_json)
         return context
 
-    
+class DealsCalulator(LoginRequiredMixin,TemplateView):
+    template_name = "items/deals-calculator.html"

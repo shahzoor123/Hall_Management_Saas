@@ -6,7 +6,7 @@ urlpatterns = [
     # Pages
     path('pages_timeline', views.Timeline.as_view(),name='pages_timeline'),
     path('pages_invoice', views.Invoice.as_view(),name='pages_invoice'),
-    path('custom_invoice', views.Invoices.as_view(),name='custom_invoice'),
+    path('details', views.Details.as_view(),name='details'),
     path('pages_blank', views.Blankpage.as_view(),name='pages_blank'),
     path('pages_error404', views.Error404.as_view(),name='pages_error404'),
     path('pages_error500', views.Error500.as_view(),name='pages_error500'),

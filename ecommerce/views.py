@@ -22,8 +22,10 @@ class Eventsale(LoginRequiredMixin, View):
 
     def get(self, request):
         sale = EventSale.objects.all()
+        deals = Deals.objects.all()
         context = {
-            "sales": sale
+            "sales": sale,
+            "deals": deals
         }
         return render(request, self.template_name, context)
         
@@ -55,18 +57,38 @@ class ProductsAddProduct(LoginRequiredMixin,TemplateView):
 class Calculate(LoginRequiredMixin,TemplateView):
     template_name = "items/pos.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get(self, request):
+
+        deal = request.GET.get('deals')
+        no_people = request.GET.get("numberOfPeople")
+
+        
+
+
         products = MyProducts.objects.all()
         product_json = []
         for product in products:
             product_json.append({'id': product.id, 'name': product.name, 'price': float(product.price)})
-        context['page_title'] = "Point of Sale"
-        context['products'] = products
-        context['product_json'] = json.dumps(product_json)
+        
+        deals_json = []
+        deals_obj = Deals.objects.get(pk=1)
+        menu_items = deals_obj.menu_items.all()
 
-        deal = Deals.objects.first()  # Retrieve the first deal object
-        menu_items = deal.menu_items.all() # Retrieve all the menu items associated with the deal
+        for item in menu_items:
+            deals_json.append({'id': item.id, 'name': item.name, 'price': float(item.price)})
+        
+        context = {
+            "page_title": "Point of Sale",
+            "products": products,
+            "product_json": json.dumps(product_json),
+            'deal_type': "custom", 
+            "default_items": deals_json,
+            "isCustomDeal": False,
+            "deal_items": deals_json,
+            "no_people": no_people
+        }
+        return render(request, self.template_name, context)
 
-    
-        return context
+
+class DealsCalulator(LoginRequiredMixin,TemplateView):
+    template_name = "items/deals-calculator.html"

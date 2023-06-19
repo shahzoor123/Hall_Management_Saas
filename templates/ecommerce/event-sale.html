@@ -145,16 +145,15 @@
                                 <!-- Small modal -->
                               
                                 <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Add Sale</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                                </button>
-                                            </div>
-                                            
-                                            <div class="modal-body">
-                                                <form class="form" enctype="multipart/form-data" action="" method="POST">
+                                  <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Add Sale</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                
+                                      <div class="modal-body">
+                                        <form class="form" id="sale-form" enctype="multipart/form-data" action="" method="POST">
 
 
                                                     <!-- Form -->
@@ -289,6 +288,27 @@
                                                         <!-- End Input Group -->
                                                       </div>
                                                     </div>
+
+                                                    <div class="row mb-4">
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Deals</label>
+                                        
+                                                      <div class="col-sm-9">
+                                                        <!-- Input Group -->
+                                                        <div class="input-group input-group-merge">
+                                                          <select class="js-select form-select" autocomplete="off" name="deals">
+                                        
+                                                            <!-- <option value="" disabled selected></option> -->
+                                                            {% for deal in deals %}
+                                                                <option value="{{ deal.pk }}">{{ deal.code }}</option>
+                                                            {% endfor %}
+                                                            <option>Custom Deal</option>
+                                        
+                                                          </select>
+                                        
+                                                        </div>
+                                                        <!-- End Input Group -->
+                                                      </div>
+                                                    </div>
                                                     <!-- End Form -->
                                         
                                                     <!-- Form -->
@@ -408,12 +428,14 @@
                                             </div>
                                             
                                             <div class="modal-footer">
-                                                <button  id="model-btn1" type="button" class="btn  " data-bs-dismiss="modal">Close</button>
-                                                <button id="model-btn2" type="button" class="btn btn-primary ">Save changes</button>
-                                                </div>
-                                        </div><!-- /.modal-content -->
+                                              <button id="model-btn1" type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                              <button id="model-btn2" type="button" class="btn btn-primary" onclick="saveChanges()">Save changes</button>
+                                            </div>
+                                          </form>
+                                        </div>
+                                      </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
+                                  </div>
                             </td>
                         </tr>
                       
@@ -429,6 +451,8 @@
 {% endblock content %}
 
 {% block extra_javascript %}
+
+
     <!-- Required datatable js -->
   
     <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
@@ -440,7 +464,52 @@
 
     <script src="{% static 'js/pages/ecommerce-datatables.init.js' %}"></script>
 
-
+    <script>
+      function saveChanges() {
+        // Get form values
+        var form = document.getElementById('sale-form');
+        var billNo = form.elements['bill-no'].value;
+        var serialNo = form.elements['serial-no'].value;
+        var status = form.elements['status'].value;
+        var eventTiming = form.elements['event-timing'].value;
+        var eventDate = form.elements['event-date'].value;
+        var numberOfPeople = form.elements['no-of-people'].value;
+        var setup = form.elements['setup'].value;
+        var deals = form.elements['deals'].value;
+        var customerName = form.elements['customer-name'].value;
+        var customerNumber = form.elements['customer-number'].value;
+        var perHead = form.elements['per-head'].value;
+        var extraCharges = form.elements['extra-charges'].value;
+        var foodMenu = form.elements['food-menu'].value;
+        var details = form.elements['details'].value;
+        var receivedAmount = form.elements['received-amount'].value;
+      
+        // Construct URL with query parameters
+        var url = "{% url 'calculate_menu' %}?" +
+          "billNo=" + encodeURIComponent(billNo) +
+          "&serialNo=" + encodeURIComponent(serialNo) +
+          "&status=" + encodeURIComponent(status) +
+          "&eventTiming=" + encodeURIComponent(eventTiming) +
+          "&eventDate=" + encodeURIComponent(eventDate) +
+          "&numberOfPeople=" + encodeURIComponent(numberOfPeople) +
+          "&setup=" + encodeURIComponent(setup) +
+          "&deals=" + encodeURIComponent(deals) +
+          "&customerName=" + encodeURIComponent(customerName) +
+          "&customerNumber=" + encodeURIComponent(customerNumber) +
+          "&perHead=" + encodeURIComponent(perHead) +
+          "&extraCharges=" + encodeURIComponent(extraCharges) +
+          "&foodMenu=" + encodeURIComponent(foodMenu) +
+          "&details=" + encodeURIComponent(details) +
+          "&receivedAmount=" + encodeURIComponent(receivedAmount);
+      
+        // Redirect to the constructed URL
+        window.location.href = url;
+      }
+      
+      
+       
+      
+    </script>
     
  
 {% endblock extra_javascript %}
