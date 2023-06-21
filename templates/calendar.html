@@ -101,15 +101,26 @@
                                                 <div class="col-12">
                                                     <div class="mb-3">
                                                         <label class="form-label">Bill no</label>
-                                                        <input class="form-control" placeholder="Bill no" type="number"
-                                                            name="title" id="event-title" required value="">
+                                                        <select id="bill-no" class="js-select form-select" autocomplete="off" name="setup">
+                                        
+                                                            {% for bill in sales %}
+                                                            <option>{{bill.bill_no}}</option>
+                                                            
+                                                            {% endfor %}
+                                                          </select>
                                                     </div>
                                                 </div> <!-- end col-->
                                                 <div class="col-12">
                                                     <div class="mb-3">
-                                                        <label class="form-label">Customer Name</label>
-                                                        <input class="form-control" placeholder="Customer Name" type="text"
-                                                            name="title" id="event-title" required value="">
+                                                        <label id="customer-name" class="form-label">Customer Name</label>
+                                                        <select class="js-select form-select" autocomplete="off" name="setup">
+                                        
+                                                            {% for customer in sales %}
+                                                            <option>{{customer.customer_name}}</option>
+                                                            
+                                                            {% endfor %}
+                                                          </select>
+                                               
                                                     </div>
                                                 </div> <!-- end col-->
                                             </div> <!-- end row-->
