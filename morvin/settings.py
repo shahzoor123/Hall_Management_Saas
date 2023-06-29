@@ -79,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'ecommerce.context_processors.deals',
             ],
         },
     },
@@ -92,7 +93,7 @@ WSGI_APPLICATION = 'morvin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'your_database_name',
+        'NAME': 'hall',
     }
 }
 

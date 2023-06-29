@@ -3,6 +3,7 @@
 
 {% block title %}Orders{% endblock title %}
 
+
 {% block extra_css %}
      <!-- DataTables -->
      <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
@@ -30,7 +31,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="float-end d-none d-sm-block">
-                                <a href="" class="btn btn-success" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="mdi mdi-plus me-2"></i>Add Sale</a>
+                                <!-- <a href="" class="btn btn-success" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="mdi mdi-plus me-2"></i>Add Sale</a> -->
                             </div>
                         </div>
                     </div>
@@ -44,7 +45,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div>
-                                            <a href="javascript:void(0);" class="btn btn-success mb-2" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="mdi mdi-plus me-2"></i> Add Sale</a>
+                                            <!-- <a href="javascript:void(0);" class="btn btn-success mb-2" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="mdi mdi-plus me-2"></i> Add Sale</a> -->
                                         </div>
                                         <ul class="nav nav-tabs nav-tabs-custom mb-4">
                                             <li class="nav-item">
@@ -115,9 +116,18 @@
                                                             <button class="btn btn-light btn-rounded">Invoice <i class="mdi mdi-download ml-2"></i></button>
                                                         </td>
                                                         <td id="tooltip-container1">
-                                                            <a href="javascript:void(0);" class="me-3 text-primary" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="text-danger" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="mdi mdi-trash-can font-size-18"></i></a>
+                                                          <div class="d-flex">
+                                                            <a href="javascript:void(0);"  class="btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"  class="me-3 text-primary" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                                              <i class="mdi mdi-pencil font-size-18" class="modal-title mt-0" id="exampleModalScrollableTitle"></i>
+                                                            </a>
+                
+                                                              <a href="#" class="text-danger" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                                <i class="mdi mdi-trash-can font-size-18"></i>
+                                                              </a>
+                                                            
+                                                          </div>
                                                         </td>
+                                                        
                                                     </tr>
                                                     {% endfor %}
                                                
@@ -136,17 +146,17 @@
                                 <!-- Small modal -->
                               
                                 <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Add Sale</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                                </button>
-                                            </div>
-                                            
-                                            <div class="modal-body">
-                                                <form class="form" enctype="multipart/form-data" action="" method="POST">
-
+                                  <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <!-- <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Add Sale</h5> -->
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                
+                                      <div class="modal-body">
+                                      
+                                        <form class="form" id="sale-form" enctype="multipart/form-data" action="" method="POST">
+                                          {% csrf_token %}
 
                                                     <!-- Form -->
                                                     <div class="row mb-4">
@@ -194,16 +204,15 @@
                                                     <div class="row mb-4">
                                                       <label for="" class="col-sm-3 col-form-label form-label">Status</label>
                                         
+                                                   
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <select class="js-select form-select" autocomplete="off" name="status">
-                                                            <option>Status</option>
+                                        
                                         
                                                             <option>Tentative</option>
                                                             <option>Confirm</option>
-                                        
-                                        
                                         
                                                           </select>
                                         
@@ -211,21 +220,20 @@
                                                         <!-- End Input Group -->
                                                       </div>
                                                     </div>
-                                                    <!-- End Form -->
                                         
                                                     <!-- Form -->
                                                     <div class="row mb-4">
                                                       <label for="" class="col-sm-3 col-form-label form-label">Event timing</label>
                                         
+                                                   
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
-                                                          <select class="js-select form-select" autocomplete="off" name="event-timing">
-                                        
+                                                          <select class="js-select form-select" autocomplete="off" name="event-time">
                                         
                                                             <option>Day</option>
                                                             <option>Night</option>
-                                        
+
                                                           </select>
                                         
                                                         </div>
@@ -273,6 +281,27 @@
                                                             <option>Normal</option>
                                                             <option>Delux</option>
                                                             <option>VIP</option>
+                                        
+                                                          </select>
+                                        
+                                                        </div>
+                                                        <!-- End Input Group -->
+                                                      </div>
+                                                    </div>
+
+                                                    <div class="row mb-4">
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Deals</label>
+                                        
+                                                      <div class="col-sm-9">
+                                                        <!-- Input Group -->
+                                                        <div class="input-group input-group-merge">
+                                                          <select class="js-select form-select" autocomplete="off" name="deals">
+                                        
+                                                            <!-- <option value="" disabled selected></option> -->
+                                                            {% for deal in deals %}
+                                                                <option value="{{ deal.pk }}">{{ deal.code }}</option>
+                                                            {% endfor %}
+                                                            <option>Custom Deal</option>
                                         
                                                           </select>
                                         
@@ -395,16 +424,19 @@
                                                     </div>
                                                  
                                                     <!-- End Form -->
+                                                    <div class="modal-footer">
+                                                      <button id="model-btn1" type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                                      <button id="model-btn2" type="submit" class="btn btn-primary" >Save changes</button>
+                                                    </div>
                                                   </form>
                                             </div>
                                             
-                                            <div class="modal-footer">
-                                                <button  id="model-btn1" type="button" class="btn  " data-bs-dismiss="modal">Close</button>
-                                                <button id="model-btn2" type="button" class="btn btn-primary ">Save changes</button>
-                                                </div>
-                                        </div><!-- /.modal-content -->
+                                        
+                                     
+                                        </div>
+                                      </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
+                                  </div>
                             </td>
                         </tr>
                       
@@ -415,9 +447,13 @@
           
          
             <!-- End Page-content -->
+
+
 {% endblock content %}
 
 {% block extra_javascript %}
+
+
     <!-- Required datatable js -->
   
     <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
@@ -429,5 +465,52 @@
 
     <script src="{% static 'js/pages/ecommerce-datatables.init.js' %}"></script>
 
+    <script>
+      function saveChanges() {
+        // Get form values
+        var form = document.getElementById('sale-form');
+        var billNo = form.elements['bill-no'].value;
+        var serialNo = form.elements['serial-no'].value;
+        var status = form.elements['status'].value;
+        var eventTiming = form.elements['event-timing'].value;
+        var eventDate = form.elements['event-date'].value;
+        var numberOfPeople = form.elements['no-of-people'].value;
+        var setup = form.elements['setup'].value;
+        var deals = form.elements['deals'].value;
+        var customerName = form.elements['customer-name'].value;
+        var customerNumber = form.elements['customer-number'].value;
+        var perHead = form.elements['per-head'].value;
+        var extraCharges = form.elements['extra-charges'].value;
+        var foodMenu = form.elements['food-menu'].value;
+        var details = form.elements['details'].value;
+        var receivedAmount = form.elements['received-amount'].value;
+      
+        // Construct URL with query parameters
+        var url = "{% url 'calculate_menu' %}?" +
+          "billNo=" + encodeURIComponent(billNo) +
+          "&serialNo=" + encodeURIComponent(serialNo) +
+          "&status=" + encodeURIComponent(status) +
+          "&eventTiming=" + encodeURIComponent(eventTiming) +
+          "&eventDate=" + encodeURIComponent(eventDate) +
+          "&numberOfPeople=" + encodeURIComponent(numberOfPeople) +
+          "&setup=" + encodeURIComponent(setup) +
+          "&deals=" + encodeURIComponent(deals) +
+          "&customerName=" + encodeURIComponent(customerName) +
+          "&customerNumber=" + encodeURIComponent(customerNumber) +
+          "&perHead=" + encodeURIComponent(perHead) +
+          "&extraCharges=" + encodeURIComponent(extraCharges) +
+          "&foodMenu=" + encodeURIComponent(foodMenu) +
+          "&details=" + encodeURIComponent(details) +
+          "&receivedAmount=" + encodeURIComponent(receivedAmount);
+      
+        // Redirect to the constructed URL
+        window.location.href = url;
+      }
+      
+      
+       
+      
+    </script>
+    
  
 {% endblock extra_javascript %}

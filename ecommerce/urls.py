@@ -11,4 +11,6 @@ urlpatterns = [
     path('ecommerce_checkout', views.ProductsCheckout.as_view(),name='ecommerce_checkout'),
     path('ecommerce_shops', views.ProductsShops.as_view(),name='ecommerce_shops'),
     path('ecommerce_add_product', views.ProductsAddProduct.as_view(),name='ecommerce_add_product'),
+    # path('ecommerce_add_product', views.ProductsAddProduct.as_view(),name='ecommerce_add_product'),
+
 ]

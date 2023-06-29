@@ -95,7 +95,7 @@
                             </colgroup>
                             <thead >
                                 <tr class="bg-dark bg-gradient bg-opacity-50 text-light">
-                                    <th class="py-1 px-2 text-center  ">R</th>
+                                    <th class="py-1 px-2 text-center  ">No</th>
                                     <th class="py-1 px-2 text-center  text-light">QTY</th>
                                     <th class="py-1 px-2 text-center  text-light">Product</th>
                                     <th class="py-1 px-2 text-center  text-light">Price</th>
@@ -103,6 +103,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                 
                             </tbody>
                         </table>
                     </div>
@@ -123,7 +124,7 @@
                                         <div class="mb-4">
                                             <label class="form-label">Number of Peoplee</label>
                                             <div class="input-group" id="datepicker2">
-                                                <input type="number" class="form-control" step="any" min="0" max="5000" name="tax" value="0">
+                                                <input type="number" class="form-control" step="any" min="0" max="5000" name="tax" value="1">
                                                 <span class="input-group-text">0</span>
                                             </div><!-- input-group -->
                                         </div>
@@ -157,7 +158,9 @@
                     
                                         <div class="row row-cols-4">
                                             <div class="col-md-1 text-end">
-                                                <button class="btn btn-primary btn-sm " type="button" id="check_out"> Checkout</button>
+                                                <!-- <button class="btn btn-primary btn-sm " type="button" id="check_out"> Checkout</button> -->
+                                                <a  href="{% url 'details' %}"  class="btn btn-primary btn-sm " id="check_out"> Checkout </a>
+
                                             </div>
                                         </div>
                                       

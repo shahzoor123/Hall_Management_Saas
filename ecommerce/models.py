@@ -6,14 +6,14 @@ class EventSale(models.Model):
     tentative = 'Tentative '
 
     STATUS = ((confirm, 'Confirm'),
-              (tentative, 'Tentative '),
+              (tentative, 'Tentative'),
               )
 
     day = 'Day'
     night = 'Night '
 
     EVENT_TIMING = ((day, 'Day'),
-                    (night, 'Night '),
+                    (night, 'Night'),
                     )
 
     delux = 'Delux'
@@ -21,35 +21,37 @@ class EventSale(models.Model):
     vip = 'VIP'
 
     SETUP_TYPE = ((normal, 'Normal'),
-                  (delux, 'Delux '),
-                  (vip, 'VIP '),
+                  (delux, 'Delux'),
+                  (vip, 'VIP'),
                   )
 
-    bill_no = models.IntegerField(default=000)
-    sr = models.IntegerField(default=000)
+    bill_no = models.IntegerField(null=True)
+    sr = models.IntegerField(null=True)
     status = models.CharField(choices=STATUS, default=tentative, max_length=10)
     event_timing = models.CharField(choices=EVENT_TIMING, default=night, max_length=10)
     booking_date = models.DateField(auto_now_add=True)
-    event_date = models.DateField(blank=True)
-    no_of_people = models.IntegerField(default=0)
+    event_date = models.DateField()
+    no_of_people = models.IntegerField(null=True)
+
     setup = models.CharField(choices=SETUP_TYPE, default=delux, max_length=10)
+    # deals = models.CharField(choices=EVENT_TIMING, default=night, max_length=10)
     customer_name = models.CharField(max_length=200)
-    customer_number = models.BigIntegerField(blank=True)
-    per_head = models.IntegerField(default=000)
-    extra_charges = models.IntegerField(blank=True)
-    food_menu = models.CharField(blank=True, max_length=200)
-    detials = models.TextField(blank=True)
-    total_amount = models.IntegerField(blank=True, editable=False)
-    recieved_amount = models.IntegerField(blank=True)
-    remaining_amount = models.IntegerField(blank=True, editable=False)
+    customer_number = models.BigIntegerField()
+    per_head = models.IntegerField(null=True)
+    extra_charges = models.IntegerField()
+    food_menu = models.CharField(max_length=200)
+    detials = models.TextField()
+    total_amount = models.IntegerField(editable=False, null=True)
+    recieved_amount = models.IntegerField(null=True)
+    remaining_amount = models.IntegerField(editable=False, null=True)
 
     def __str__(self):
         return str(self.bill_no)
 
-    def save(self, *args, **kwargs):
-        self.total_amount = (self.no_of_people * self.per_head) + self.extra_charges
-        self.remaining_amount = self.total_amount - self.recieved_amount
-        super(EventSale, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.total_amount = (self.no_of_people * self.per_head) + self.extra_charges
+    #     self.remaining_amount = self.total_amount - self.recieved_amount
+    #     super(EventSale, self).save(*args, **kwargs)
 
 
 class EventExpense(models.Model):
