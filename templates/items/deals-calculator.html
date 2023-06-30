@@ -322,10 +322,10 @@
                                     <select class="js-select form-select" autocomplete="off" name="deals">
                   
                                       <!-- <option value="" disabled selected></option> -->
-                                      {% for deal in deals %}
-                                          <option value="{{ deal.pk }}">{{ deal.code }}</option>
-                                      {% endfor %}
-                                      <option>Custom Deal</option>
+                                      
+                                          <option value="{{Deal_name}}">{{Deal_name}}</option>
+                                 
+                                     
                   
                                     </select>
                   
@@ -406,8 +406,9 @@
                                 <div class="col-sm-9">
                                   <!-- Input Group -->
                                   <div class="input-group input-group-merge">
+                                    
                                     <input type="text" class="js-toggle-password form-control" name="food-menu" id=""
-                                      placeholder="Food menu" aria-label="">
+                                      placeholder="{{food_menu}}" aria-label="" readonly>
                                   </div>
                   
                                   <!-- End Input Group -->
