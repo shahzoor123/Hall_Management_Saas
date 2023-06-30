@@ -71,7 +71,7 @@ class Eventsale(LoginRequiredMixin, View):
             )
 
         print('Posted')
-        return render(request, self.template_name)
+        return render(request, 'items/deals-calculator')
 
 
             # x = 'Deal1'

@@ -85,19 +85,19 @@
                                     <th class="py-1 px-2 text-center  text-light">Total</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for dish in items %}
-                                  
+                            <tbody id="item-clone">
+                                {% for dish, price in combined_data %}
                                 <tr>
-                                    
-                                    <th class="py-1 px-2 text-center  text-light">{{dish.code}}</th>
-                                    <th class="py-1 px-2 text-center  text-light">3</th>
-                                    <th class="py-1 px-2 text-center  ">{{dish.name}}</th>
-                                    <th class="py-1 px-2 text-center  text-light">{{product.dish.code.price}}</th>
-                                    <th class="py-1 px-2 text-center  text-light">300</th>
+                                    <th class="py-1 px-2 text-center text-light">{{ dish.code }}</th>
+                                    <th><input type="number" name="qty[]" min="1" class="form-control form-control-sm rounded-0 text-center" placeholder="0"></th>
+                                    <th class="py-1 px-2 text-center">{{ dish.name }}</th>
+                                    <th class="py-1 px-2 text-center text-light">{{ price.price }}</th>
+                                    <th class="py-1 px-2 text-center text-light">300</th>
                                 </tr>
-                               
-                                {% endfor %}
+                            {% endfor %}
+                            
+                            
+                            
                             </tbody>
                         </table>
                     </div>
@@ -153,11 +153,11 @@
                                         <div class="row row-cols-4">
                                             <div class="col-md-1 text-end">
                                                 <!-- <button class="btn btn-primary btn-sm " type="button" id="check_out"> Checkout</button> -->
-                                                <a  href="{% url 'details' %}"  class="btn btn-primary btn-sm " id="check_out"> Checkout </a>
+                                                <a    class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"  data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top"> Checkout </a>
 
                                             </div>
                                         </div>
-                                      
+                                    
                     
                                     </form>
                                 </div>
@@ -168,6 +168,299 @@
             </fieldset>
          
         </form>
+
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <!-- <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Add Sale</h5> -->
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+          
+                <div class="modal-body">
+                
+                  <form class="form" id="sale-form" enctype="multipart/form-data" action="" method="POST">
+                    {% csrf_token %}
+
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="vehicalType" class="col-sm-3 col-form-label form-label">Bill no</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                  
+                  
+                                  <div class="input-group input-group-merge">
+                                    <input type="text" class="js-toggle-password form-control" name="bill-no" id=""
+                                      placeholder="Bill no" aria-label="">
+                  
+                                  </div>
+                  
+                  
+                  
+                  
+                  
+                  
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                  
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="vehicalType" class="col-sm-3 col-form-label form-label">Serial:</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <input type="text" class="js-toggle-password form-control" name="serial-no" id="" placeholder="Sr"
+                                      aria-label="">
+                  
+                                  </div>
+                  
+                                  </select>
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Status</label>
+                  
+                             
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <select class="js-select form-select" autocomplete="off" name="status">
+                  
+                  
+                                      <option>Tentative</option>
+                                      <option>Confirm</option>
+                  
+                                    </select>
+                  
+                                  </div>
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Event timing</label>
+                  
+                             
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <select class="js-select form-select" autocomplete="off" name="event-time">
+                  
+                                      <option>Day</option>
+                                      <option>Night</option>
+
+                                    </select>
+                  
+                                  </div>
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Event Date</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <input type="date" class="js-toggle-password form-control" name="event-date" id="" placeholder="StartRow"
+                                    aria-label="">
+                  
+                                </div>
+                                <!-- End Input Group -->
+                              </div>
+                              <!-- End Form -->
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Number of people</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <input type="number" class="js-toggle-password form-control" name="no-of-people" id=""
+                                    placeholder="Number of people" aria-label="">
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Setup</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <select class="js-select form-select" autocomplete="off" name="setup">
+                  
+                  
+                                      <option>Normal</option>
+                                      <option>Delux</option>
+                                      <option>VIP</option>
+                  
+                                    </select>
+                  
+                                  </div>
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Deals</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <select class="js-select form-select" autocomplete="off" name="deals">
+                  
+                                      <!-- <option value="" disabled selected></option> -->
+                                      {% for deal in deals %}
+                                          <option value="{{ deal.pk }}">{{ deal.code }}</option>
+                                      {% endfor %}
+                                      <option>Custom Deal</option>
+                  
+                                    </select>
+                  
+                                  </div>
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Customer name</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <input type="text" class="js-toggle-password form-control" name="customer-name" id=""
+                                    placeholder="Customer name" aria-label="">
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Customer number</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <input type="number" class="js-toggle-password form-control" name="customer-number" id=""
+                                      placeholder="Customer number" aria-label="">
+                  
+                                  </div>
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Per head</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <input type="number" class="js-toggle-password form-control" name="per-head" id=""
+                                      placeholder="Per head" aria-label="">
+                  
+                                  </div>
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                  
+                              <!-- Form -->
+                  
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Extra Charges</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <input type="number" class="js-toggle-password form-control" name="extra-charges" id=""
+                                      placeholder="Extra Charges" aria-label="">
+                                  </div>
+                  
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Food menu</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <input type="text" class="js-toggle-password form-control" name="food-menu" id=""
+                                      placeholder="Food menu" aria-label="">
+                                  </div>
+                  
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                  
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="vehiclImg" class="col-sm-3 col-form-label form-label">Details</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                  
+                                    <textarea class="form-select" name="details" id="" cols="90" rows="5" ></textarea>
+                  
+                                  </div>
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+                  
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="countryShortDescription" class="col-sm-3 col-form-label form-label">Received amount</label>
+                  
+                                <div class="col-sm-9">
+                                  <!-- Checkbox Switch -->
+                                  <div class="input-group input-group-merge">
+                                      <input type="number" class="js-toggle-password form-control" name="received-amount" id=""
+                                        placeholder="Received amount" aria-label="">
+                                    </div>
+                                  <!-- End Checkbox Switch -->
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                           
+                              <!-- End Form -->
+                              <div class="modal-footer">
+                                <button id="model-btn1" type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                                <button id="model-btn2" type="submit" class="btn btn-primary" >Save changes</button>
+                              </div>
+                            </form>
+                      </div>
+                      
+                  
+               
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div>
     </div>
 </div>
 <noscript id="item-clone">

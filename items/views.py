@@ -28,16 +28,22 @@ class Calculate(LoginRequiredMixin,TemplateView):
 def item(request, deal_id):
 
     products = MyProducts.objects.all()
+    product_price = MyProducts.objects.filter()
 
     deal = get_object_or_404(Deals, pk=deal_id)
     print(deal)
     items = MyProducts.objects.filter(deals=deal)
+
+    combined_data = zip(items, products)
     
     # for i in items:
     #     print(i)
     context = {
+        'combined_data': combined_data,
         'items' : items,
         'product': products,
         'Deal_name' : deal,
     }
     return render(request, 'items/deals-calculator.html', context)   
+
+
