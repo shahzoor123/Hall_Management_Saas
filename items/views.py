@@ -27,7 +27,7 @@ class Calculate(LoginRequiredMixin,TemplateView):
 
 
 def item(request, deal_id):
-
+        context = {}
         if request.method == "POST":
                 bill_number = request.POST.get('bill-no')
                 serial = request.POST.get('serial-no')
@@ -39,6 +39,10 @@ def item(request, deal_id):
                 number_of_people = request.POST.get('no-of-people')
                 setup = request.POST.get('setup')
 
+                deal_number = request.POST.get('deals')
+
+                deal_id = request.POST.get('deals')
+                deal = Deals.objects.get(id=deal_id)
             
                 customer_name = request.POST.get('customer-name')
                 customer_number = request.POST.get('customer-number')
@@ -48,6 +52,9 @@ def item(request, deal_id):
                 details = request.POST.get('details')
                 received_ammount = request.POST.get('received-amount')
 
+                request.session['bill-no'] = bill_number
+                request.session['deals'] = deal_number
+
                 add_event_sale = EventSale.objects.create(
                     bill_no=bill_number,
                     sr=serial,
@@ -56,6 +63,7 @@ def item(request, deal_id):
                     event_date=event_date,
                     no_of_people=number_of_people,
                     setup=setup,
+                    deals=deal,
                     customer_name=customer_name,
                     customer_number=customer_number,
                     per_head=per_head,
@@ -64,32 +72,67 @@ def item(request, deal_id):
                     detials=details,
                     recieved_amount=received_ammount
                 )
-                return render (request, 'extras/pages/pages-invoice.html')
+               
+                bill_num = request.session.get('bill-no')
+                deal_num = request.session.get('deals')
+                
+                print(bill_num)  
+                print(deal_num)     
+                
+                products = MyProducts.objects.all()
+                deal = get_object_or_404(Deals, pk=deal_id)
+                items = MyProducts.objects.filter(deals=deal)
+                
 
-        print('Posted')
+                print('done')
+               
+                sale = EventSale.objects.filter(bill_no=bill_num)
+                 
+                print(sale)
+                                
+                
+            
 
+                combined_data = zip(items, products)
+        
+                
+                context = {
+                    'combined_data': combined_data,
+                    'sales' : sale,
+                }
+                # Render extras/pages/pages-invoice.html with the context
+                return render(request, 'extras/pages/pages-invoice.html', context)
+        
         food_list = []
         products = MyProducts.objects.all()
         deal = get_object_or_404(Deals, pk=deal_id)
         items = MyProducts.objects.filter(deals=deal)
         for item in items:
-              food_list.append(item.name)
-       
-        food_menu = tuple(food_list)
+            food_list.append(item.name)
     
+        food_menu = tuple(food_list)
+
+        sale = EventSale.objects.all()
+     
+
+        deals = Deals.objects.all()
+
         combined_data = zip(items, products)
-
-        
         context = {
-            'combined_data': combined_data,
-            'items' : items,
-            'product': products,
-            'Deal_name' : deal,
-            'food_menu' : food_menu,
-        }
+                    'combined_data': combined_data,
+                    'items' : items,
+                    'product': products,
+                    'Deal_name' : deal,
+                    'food_menu' : food_menu,
+                    'sale' : sale,
+                    'deals' : deals
+                }
+        # Render items/deals-calculator.html with the context
+        return render(request, 'items/deals-calculator.html', context)
 
         
-        return render(request, 'items/deals-calculator.html', context)   
+
+        
 
 
 

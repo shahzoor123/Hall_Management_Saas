@@ -29,58 +29,35 @@
                     </div>
                 </div>
                 <!-- end page title -->    
-                <div class="container-fluid">
-                    <div class="page-content-wrapper">
+                <div class="container-fluid" >
+                    <div class="page-content-wrapper" >
                         <div class="row">
                             <div class="col-12">
                                 <div class="card m-b-30">
-                                    <div class="card-body">
+                                    <div class="card-body" style="padding: 50px;">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="invoice-title">
-                                                    <h4 class="float-end font-size-16"><strong>Order # 12345</strong></h4>
+                                                    {% for fields in sales %}
+                                                    <h4 class="float-end font-size-16"><strong>Order {{fields.bill_no}}</strong></h4>
+                                                   {% endfor %}
                                                     <h3 class="m-t-0">
-                                                        <img src="{% static 'images/logo-dark.png' %}" alt="logo" height="18"/>
+                                                        <img src="{% static 'images/black.png' %}" alt="logo" height="18"/>
                                                     </h3>
                                                 </div>
                                                 <hr>
                                                 <div class="row">
+                                                
                                                     <div class="col-6">
-                                                        <address>
-                                                            <strong>Billed To:</strong><br>
-                                                            Ricky Clemons<br>
-                                                            1234 Main<br>
-                                                            Apt. 4B<br>
-                                                            Springfield, ST 54321
-                                                        </address>
+                                                        {% for fields in sales %}
+                                                            <h5><strong>Billed To: </strong>{{fields.customer_name}}</h5>
+                                                            <h5><strong>Number: </strong>{{fields.customer_number}}</h5>
+                                                            <h5><strong>Number of People: </strong>{{fields.no_of_people}}</h5>
+                                                            <h5><strong>Setup : </strong>{{fields.setup}}</h5>
+                                                            {% endfor %}
                                                     </div>
-                                                    <div class="col-6 text-end">
-                                                        <address>
-                                                            <strong>Shipped To:</strong><br>
-                                                            Kenny Rigdon<br>
-                                                            1234 Main<br>
-                                                            Apt. 4B<br>
-                                                            Springfield, ST 54321
-                                                        </address>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6 m-t-30">
-                                                        <address>
-                                                            <strong>Payment Method:</strong><br>
-                                                            Visa ending **** 4242<br>
-                                                            RClemons@email.com
-                                                        </address>
-                                                    </div>
-                                                    <div class="col-6 m-t-30 text-end">
-                                                        <address>
-                                                            <strong>Order Date:</strong><br>
-                                                            October 7, 2016<br><br>
-                                                        </address>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                             
+                                           
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="panel panel-default">
@@ -101,24 +78,14 @@
                                                                 </thead>
                                                                 <tbody>
                                                                 <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                                                {% for dish, price in combined_data %}
                                                                 <tr>
-                                                                    <td>BS-200</td>
-                                                                    <td class="text-center">$10.99</td>
+                                                                    <td>{{ dish.name }}</td>
+                                                                    <td class="text-center">{{ price.price }}</td>
                                                                     <td class="text-center">1</td>
-                                                                    <td class="text-end">$10.99</td>
+                                                                    <td class="text-end">0</td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>BS-400</td>
-                                                                    <td class="text-center">$20.00</td>
-                                                                    <td class="text-center">3</td>
-                                                                    <td class="text-end">$60.00</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>BS-1000</td>
-                                                                    <td class="text-center">$600.00</td>
-                                                                    <td class="text-center">1</td>
-                                                                    <td class="text-end">$600.00</td>
-                                                                </tr>
+                                                                {% endfor %}
                                                                 <tr>
                                                                     <td class="thick-line"></td>
                                                                     <td class="thick-line"></td>

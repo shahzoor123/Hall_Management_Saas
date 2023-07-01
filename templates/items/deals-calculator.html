@@ -319,16 +319,17 @@
                                 <div class="col-sm-9">
                                   <!-- Input Group -->
                                   <div class="input-group input-group-merge">
+                              
+                       
                                     <select class="js-select form-select" autocomplete="off" name="deals">
                   
-                                      <!-- <option value="" disabled selected></option> -->
-                                      
-                                          <option value="{{Deal_name}}">{{Deal_name}}</option>
-                                 
-                                     
+                                      {% for deal in deals %}
+                                      <option value="{{deal.id}}">{{deal}}</option>
+                                      {% endfor %}
                   
                                     </select>
-                  
+                                   
+                                   
                                   </div>
                                   <!-- End Input Group -->
                                 </div>

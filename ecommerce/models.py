@@ -1,6 +1,6 @@
 from django.db import models
 from items.models import MyProducts
-
+from items.models import MyProducts, Deals
 class EventSale(models.Model):
     confirm = 'Confirm'
     tentative = 'Tentative '
@@ -25,7 +25,7 @@ class EventSale(models.Model):
                   (vip, 'VIP'),
                   )
 
-    bill_no = models.IntegerField(null=True)
+    bill_no = models.IntegerField(null=True, unique=True)
     sr = models.IntegerField(null=True)
     status = models.CharField(choices=STATUS, default=tentative, max_length=10)
     event_timing = models.CharField(choices=EVENT_TIMING, default=night, max_length=10)
@@ -34,7 +34,9 @@ class EventSale(models.Model):
     no_of_people = models.IntegerField(null=True)
 
     setup = models.CharField(choices=SETUP_TYPE, default=delux, max_length=10)
-    # deals = models.CharField(choices=EVENT_TIMING, default=night, max_length=10)
+
+    deals = models.ForeignKey(Deals, on_delete=models.PROTECT)
+
     customer_name = models.CharField(max_length=200)
     customer_number = models.BigIntegerField()
     per_head = models.IntegerField(null=True)
