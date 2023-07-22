@@ -87,49 +87,50 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body p-4">
-                                        <form class="needs-validation" name="event-form" id="form-event" novalidate>
+                                        <!-- this id 7 class is link with js so that enevt will come & show on calender will fix this later -->
+                                        <!--id="form-event" this id is not letting the form to post-->
+                                        <form class="needs-validation" name="event-form" enctype="multipart/form-data"  method="POST">
+                                            {% csrf_token %}
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="mb-3">
                                                         <label class="form-label">Customer Name</label>
                                                         <input class="form-control" placeholder="Insert Event Name or Customer Name" type="text"
-                                                            name="title" id="event-title" required value="">
+                                                            name="event_name" id="event-title" required value="" >
                                                         <div class="invalid-feedback">Please provide a valid event name
                                                         </div>
                                                     </div>
                                                 </div> <!-- end col-->
-                                                <div class="col-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Bill no</label>
-                                                        <select id="bill-no" class="js-select form-select" autocomplete="off" name="setup">
-                                        
-                                                            {% for bill in sales %}
-                                                            <option>{{bill.bill_no}}</option>
-                                                            
-                                                            {% endfor %}
-                                                          </select>
-                                                    </div>
-                                                </div> <!-- end col-->
-                                                <div class="col-12">
-                                                    <div class="mb-3">
-                                                        <label id="customer-name" class="form-label">Customer Name</label>
-                                                        <select class="js-select form-select" autocomplete="off" name="setup">
-                                        
-                                                            {% for customer in sales %}
-                                                            
-                                                            {% endfor %}
-                                                          </select>
                                                
-                                                    <button type="button" class="btn btn-danger"
-                                                        id="btn-delete-event">Delete</button>
-                                                </div> <!-- end col-->
-                                                <div class="col-6 text-end">
-                                                    <button type="button" class="btn btn-light me-1"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
-                                                </div> <!-- end col-->
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label id="customer-name" class="form-label">Event start date</label>
+                                                        <input class="form-control" placeholder="Event start date" type="date"
+                                                        name="event_start_date" id="event-title" required value="">
+
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label id="customer-name" class="form-label">Event End date</label>
+                                                        <input class="form-control" placeholder="Event End date" type="date"
+                                                        name="event_end_date" id="event-title" required value="">
+
+                                                </div> 
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label id="customer-name" class="form-label">Event Timing</label>
+                                                        <input class="form-control" placeholder="Event Timing" type="time"
+                                                        name="event_timing" id="event-title" required value="">
+
+                                                </div> 
+                                                <!-- end col-->
+                                                <!-- end col-->
+                                            </div>
+                                            <div class="col-6 text-end">
+                                              
+                                                <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
                                             </div> <!-- end row-->
-                                        </form>
+                                            </form>
                                     </div>
                                 </div>
                                 <!-- end modal-content-->

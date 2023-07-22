@@ -8,6 +8,11 @@ from items.models import Deals
 import json
 from django.views import View
 from items.models import Deals , MyProducts
+from rest_framework import viewsets
+from .models import Event
+from .serializers import EventSerializer
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -154,3 +159,37 @@ class DealsCalulator(LoginRequiredMixin,TemplateView):
     template_name = "items/deals-calculator.html"
 
 
+
+class Calendar(LoginRequiredMixin,TemplateView):
+    template_name = "calendar.html"
+    
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+    
+    def post(self, request):
+        
+        if request.method == "POST":
+            event_name = request.POST.get('event_name')
+            event_start_date = request.POST.get('event_start_date')
+            event_end_date = request.POST.get('event_end_date')
+            event_timing = request.POST.get('event_timing') 
+        
+            create_event = Event.objects.create(event_title=event_name,start_date=event_start_date,end_date=event_end_date,event_time=event_timing)
+            
+            
+            print('Posted')      
+        return render(request, self.template_name)
+
+    def get(self, request):
+        sale = EventSale.objects.all()
+        context = {
+            "sales": sale
+        }
+        return render(request, self.template_name, context)
+    
+
+
+class EventViewSet(viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer    

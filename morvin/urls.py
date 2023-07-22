@@ -30,7 +30,7 @@ urlpatterns = [
     # Index
     path('', views.Index.as_view(),name='index'),
     # Calendar
-    path('calendar/', views.Calendar.as_view(),name='calendar'),
+   
     # Chat
     path('chat/', views.Chat.as_view(),name='chat'),
     # Ecommerce
