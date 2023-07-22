@@ -154,3 +154,13 @@ class DealsCalulator(LoginRequiredMixin,TemplateView):
     template_name = "items/deals-calculator.html"
 
 
+
+class Calendar(LoginRequiredMixin,TemplateView):
+    template_name = "calendar.html"
+
+    def get(self, request):
+        sale = EventSale.objects.all()
+        context = {
+            "sales": sale
+        }
+        return render(request, self.template_name, context)
