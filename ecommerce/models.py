@@ -160,5 +160,4 @@ class Event(models.Model):
     event_time = models.TimeField()
     # Add any other fields you need for your events
 
-    def __str__(self):
-        return self.title
+

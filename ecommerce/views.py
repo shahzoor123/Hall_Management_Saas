@@ -13,6 +13,8 @@ from .models import Event
 from .serializers import EventSerializer
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers import serialize
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -179,17 +181,29 @@ class Calendar(LoginRequiredMixin,TemplateView):
             
             
             print('Posted')      
-        return render(request, self.template_name)
+        
 
     def get(self, request):
+        event_list = []
+        
         sale = EventSale.objects.all()
+        events = Event.objects.all()
+        
+        serialized_event = serialize('json', events)
+        
+        data = json.loads(serialized_event)
+        
+        for i in data:
+            event_list.append(i['fields'])
+            
+        
+        
+        event_json = json.dumps(event_list)
+        print(event_json)
+        
         context = {
-            "sales": sale
+            "events" : event_json,
         }
-        return render(request, self.template_name, context)
+        return render(request, 'calendar.html', {'serialized_events': serialized_event})
     
 
-
-class EventViewSet(viewsets.ModelViewSet):
-    queryset = Event.objects.all()
-    serializer_class = EventSerializer    
