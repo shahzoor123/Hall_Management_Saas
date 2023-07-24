@@ -8,6 +8,13 @@ from items.models import Deals
 import json
 from django.views import View
 from items.models import Deals , MyProducts
+from rest_framework import viewsets
+from .models import Event
+from .serializers import EventSerializer
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers import serialize
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -153,4 +160,50 @@ class Calculate(LoginRequiredMixin,TemplateView):
 class DealsCalulator(LoginRequiredMixin,TemplateView):
     template_name = "items/deals-calculator.html"
 
+
+
+class Calendar(LoginRequiredMixin,TemplateView):
+    template_name = "calendar.html"
+    
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+    
+    def post(self, request):
+        
+        if request.method == "POST":
+            event_name = request.POST.get('event_name')
+            event_start_date = request.POST.get('event_start_date')
+            event_end_date = request.POST.get('event_end_date')
+            event_timing = request.POST.get('event_timing') 
+        
+            create_event = Event.objects.create(event_title=event_name,start_date=event_start_date,end_date=event_end_date,event_time=event_timing)
+            
+            
+            print('Posted')      
+        
+
+    def get(self, request):
+        event_list = []
+        
+        sale = EventSale.objects.all()
+        events = Event.objects.all()
+        
+        serialized_event = serialize('json', events)
+        
+        data = json.loads(serialized_event)
+        
+        for i in data:
+            event_list.append(i['fields'])
+            
+        
+        
+        event_json = json.dumps(event_list)
+        print(event_json)
+        
+        context = {
+            "events" : event_json,
+        }
+        return render(request, 'calendar.html', {'serialized_events': serialized_event})
+    
 

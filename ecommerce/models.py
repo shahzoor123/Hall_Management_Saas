@@ -150,3 +150,14 @@ class EventExpense(models.Model):
             self.stuff_bill + self.dhobi + self.other_expense + self.setup_bill + self.decor_bill
         )
         super(EventExpense, self).save(*args, **kwargs)
+
+
+
+class Event(models.Model):
+    event_title = models.CharField(max_length=200)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    event_time = models.TimeField()
+    # Add any other fields you need for your events
+
+
