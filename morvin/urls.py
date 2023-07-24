@@ -37,6 +37,8 @@ urlpatterns = [
     path('ecommerce/', include('ecommerce.urls')),
     #Items
     path('menu/', include('items.urls')),
+    #Store
+    path('store/', include('store.urls')),
     # Email
     path('email/',include('e_mail.urls')),
     # Components

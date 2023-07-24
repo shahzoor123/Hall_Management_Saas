@@ -104,12 +104,32 @@
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="dripicons-cart"></i>
-                            <span key="t-email">Items</span>
+                            <span key="t-email">Store</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{% url 'email_inbox' %}" key="t-inbox">Kitchen Items</a></li>
+                            <!-- <li><a href="{% url 'email_inbox' %}" key="t-inbox">Kitchen Items</a></li>
                             <li><a href="{% url 'email_read' %}" key="t-read-email">Electricity Items</a></li>
-                            <li><a href="{% url 'email_compose' %}" key="t-email-compose">Hall Items</a></li>
+                            <li><a href="{% url 'email_compose' %}" key="t-email-compose">Hall Items</a></li> -->
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="dripicons-shopping-bag"></i>
+                                    <span key="t-events">View Items</span>
+                                </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{% url 'ecommerce_product' %} " key="t-add-product">Kitchen Items</a></li>
+                                <li><a href="{% url 'ecommerce_product' %} " key="t-products">Electricity Items</a></li>
+                                <li><a href="{% url 'ecommerce_product' %} " key="t-product-detail">Hall Items</a></li>
+                            </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="dripicons-shopping-bag"></i>
+                                    <span key="t-events">Add Items</span>
+                                </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a href="{% url 'ecommerce_add_product' %} " key="t-add-product">Add New Item</a></li>
+                            </ul>
+                            </li>
                         </ul>
                     </li>
 
@@ -120,19 +140,17 @@
                             <span key="t-email">Deals</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{% url 'calculate_menu' %}" key="t-email-compose">Custom Deal</a></li>
-                            <li><a href="{% url 'deals-calculator' %}" key="t-inbox">Deal 1</a></li>
-                            <li><a href="{% url 'deals-calculator' %}" key="t-read-email">Deal 2</a></li>
-                            <li><a href="{% url 'deals-calculator' %}" key="t-email-compose">Deal 3 </a></li>
-                            <li><a href="{% url 'deals-calculator' %}" key="t-email-compose">Deal 4</a></li>
-                            <li><a href="{% url 'deals-calculator' %}" key="t-email-compose">Deal 5</a></li>
+                            <li><a href="{% url 'calculate_menu' %}" >Custom Deal</a></li>
+                            {% for d in deals %}
+                            <li><a href="{% url 'deals-calculator' d.pk %}" >{{ d.code }}</a></li>
+                            {% endfor %}
 
                         </ul>
                     </li>
 
 
-                    <li class="menu-title" key="t-components">Components</li>
-                    <li>
+                     <!-- <li class="menu-title" key="t-components">Components</li>
+                    <li> 
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="dripicons-suitcase"></i>
                             <span key="t-ui-elements">UI Elements</span>
@@ -280,8 +298,8 @@
                             <li><a href="{% url 'pages_comingsoon' %}" key="t-coming-soon">Coming Soon</a></li>
                             <li><a href="{% url 'pages_faqs' %}" key="t-faqs">FAQs</a></li>
                         </ul>
-                    </li>
-                    <!-- <li>
+                    </li> 
+                    <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="dripicons-checklist"></i>
                             <span key="t-multi-level">Multi Level</span>
@@ -295,8 +313,8 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li> -->
-                </ul>
+                    </li> 
+                </ul> -->
             </div>
             <!-- Sidebar -->
             </div>

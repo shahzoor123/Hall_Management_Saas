@@ -80,7 +80,8 @@
         n.removeClass("was-validated"),
         n[0].reset(),
         v("#event-title").val(),
-        v("#event-category").val(),
+        v("#bill-no").val(),
+        v("#bill-no").val(),
         t.text("Add Event"),
         (i = e);
     }
@@ -101,7 +102,8 @@
           n[0].reset(),
           (l = e.event),
           v("#event-title").val(l.title),
-          v("#event-category").val(l.classNames[0]),
+          v("#bill-no").val(l.classNames[0]),
+          v("#bill-no").val(l.classNames[0]),
           (i = null),
           t.text("Edit Event"),
           (i = null);
@@ -116,7 +118,7 @@
         e.preventDefault();
         v("#form-event :input");
         var t = v("#event-title").val(),
-          e = v("#event-category").val();
+          e = v("#bill-no").val();
         !1 === r[0].checkValidity()
           ? (event.preventDefault(),
             event.stopPropagation(),

@@ -1,10 +1,10 @@
 from django.urls import path
 from django.views.generic import TemplateView
-from ecommerce import views
+from items import views
 urlpatterns = [
     # Ecommerce
     path('calculate_menu', views.Calculate.as_view(),name='calculate_menu'),
-    path('deals-calculator', views.DealsCalulator.as_view(),name='deals-calculator'),
+    path('deals-calculator/<int:deal_id>/', views.item,name='deals-calculator'),
 
 
 ]

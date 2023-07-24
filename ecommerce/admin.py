@@ -9,5 +9,5 @@ class EventExpenseAdmin(admin.ModelAdmin):
 
 @admin.register(EventSale)   
 class EventSaleAdmin(admin.ModelAdmin):
-    list_display = ('customer_name', 'status', 'bill_no', 'status', 'event_timing', 'setup', 'total_amount', 'recieved_amount', 'remaining_amount')
+    list_display = ('customer_name', 'bill_no', 'status', 'event_timing', 'setup', 'total_amount', 'recieved_amount', 'remaining_amount')
 

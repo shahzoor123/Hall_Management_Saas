@@ -1,3 +1,5 @@
+// Habib bhai please dont make any changes in this file this is my msg  this file is a complete trouble maker or aleast discuss with me
+
 function checkAll(e) {
   var t = document.getElementsByTagName("input");
   if (e.checked)
@@ -62,6 +64,8 @@ function checkAll(e) {
         (e[t].parentElement.classList.remove("active"),
         e[t].nextElementSibling.classList.remove("show"));
   }
+
+  
   function l(e) {
     1 == n("#light-mode-switch").prop("checked") && "light-mode-switch" === e
       ? (n("html").removeAttr("dir"),
@@ -103,7 +107,7 @@ function checkAll(e) {
 
 
 
-
+// Habib bhai please dont make any changes in this file this is my msg  this file is a complete trouble maker or aleast discuss with me
 
 
 
@@ -271,3 +275,4 @@ function checkAll(e) {
     }),
     Waves.init();
 })(jQuery);
+// Habib bhai please dont make any changes in this file this is my msg  this file is a complete trouble maker or aleast discuss with me

@@ -1,0 +1,82 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    
+    <meta charset="utf-8" />
+    <title key="t-title">{% block title %}{% endblock title %} | Hall</title>
+  
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesdesign" name="author" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
+    {% block extra_css %}
+    {% endblock extra_css %}
+    
+    {% block css %}           
+    <!-- Bootstrap Css -->
+    <link href="{% static 'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+    {% endblock %}    
+</head>
+
+
+<body {% block extra_body %}{% endblock extra_body %}>
+    {% block preloader %}
+    {% endblock preloader %}
+    
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        {% block header %}
+            {% include 'partials/header.html' %}
+        {% endblock header %}
+
+        {% block sidebar %}
+            {% include 'partials/sidebar.html' %}
+        {% endblock sidebar %}
+
+        {% comment %} {% block header %}
+            {% include 'partials/hori-header.html' %}
+        {% endblock %}
+        {% block sidebar %}
+            {% include 'partials/hori-sidebar.html' %}
+        {% endblock %} {% endcomment %}
+        
+        {% block content %}
+        {% endblock content %}
+    
+        {% block footer %}
+            {% include 'partials/footer.html' %}
+        {% endblock footer %}
+
+        </div>
+        <!-- end main content-->
+
+   
+    <!-- END layout-wrapper -->
+        {% block rightsidebar %}
+            {% include 'partials/rightsidebar.html' %}
+        {% endblock rightsidebar %}
+    
+    {% block javascript %}        
+    <!-- JAVASCRIPT -->
+    <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'libs/metismenu/dist/metisMenu.min.js' %}"></script>
+    <script src="{% static 'libs/simplebar/dist/simplebar.min.js' %}"></script>
+    <script src="{% static 'libs/node-waves/dist/waves.min.js' %}"></script>    
+    {% block extra_javascript %}
+    {% endblock extra_javascript %}    
+    <script src="{% static 'js/primary_app.js' %}"></script>
+    {% endblock %}
+</body>
