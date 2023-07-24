@@ -51,16 +51,19 @@
           events: formattedEvents,
 
           eventClick: function (e) {
-              a.modal("show");
-              n[0].reset();
-              l = e.event;
-              v("#event-title").val(l.title);
-              v("#start_date").val(l.classNames[0]);
-              v("#end_date").val(l.classNames[0]);
-              i = null;
-              t.text("Edit Event");
-              i = null;
-          },
+            a.modal("show");
+            n.removeClass("was-validated");
+            n[0].reset();
+            l = e.event;
+            v("#event-title").val(l.title);
+            v("#start_date").val(l.start.toISOString().split('T')[0]); // Set the start date
+            v("#end_date").val(l.end.toISOString().split('T')[0]); // Set the end date
+            v("#event-time").val(l.start.toISOString().split('T')[1].slice(0, 5)); // Set the event time
+            i = null;
+            t.text("Edit Event");
+            i = null;
+        },
+        
           dateClick: function (e) {
               o(e);
           }
@@ -73,39 +76,48 @@
           n.removeClass("was-validated");
           n[0].reset();
           v("#event-title").val();
-          v("#bill-no").val();
-          v("#bill-no").val();
+          v("#start_date").val();
+          v("#end_date").val();
           t.text("Add Event");
           i = e;
       }
 
-      v(n).on("submit", function (e) {
-          e.preventDefault();
-          v("#form-event :input");
-          var t = v("#event-title").val();
-          var e = v("#bill-no").val();
+  v(n).on("submit", function (e) {
+    e.preventDefault();
+    v("#form-event :input");
+    var t = v("#event-title").val();
+    var start_date = v("#start_date").val();
+    var end_date = v("#end_date").val();
+    var event_time = v("#event-time").val();
 
-          if (!r[0].checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-              r[0].classList.add("was-validated");
-          } else {
-              if (l) {
-                  l.setProp("title", t);
-                  l.setProp("classNames", [e]);
-              } else {
-                  var newEvent = {
-                      title: t,
-                      start: i.date,
-                      allDay: i.allDay,
-                      className: e
-                  };
-                  calendar.addEvent(newEvent);
-              }
+    if (!r[0].checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+        r[0].classList.add("was-validated");
+    } else {
+        var newEvent = {
+            title: t,
+            start: start_date + "T" + event_time + ":00",
+            end: end_date + "T" + event_time + ":00",
+            allDay: false,
+            className: "bg-success" // You can set the class name here, or use the existing class from the event
+        };
 
-              a.modal("hide");
-          }
-      });
+        if (l) {
+            // Update existing event
+            l.setProp("title", t);
+            l.setStart(start_date + "T" + event_time + ":00");
+            l.setEnd(end_date + "T" + event_time + ":00");
+            l.setProp("classNames", [newEvent.className]);
+        } else {
+            // Create new event
+            calendar.addEvent(newEvent);
+        }
+
+        a.modal("hide");
+    }
+});
+
 
       v("#btn-delete-event").on("click", function (e) {
           if (l) {

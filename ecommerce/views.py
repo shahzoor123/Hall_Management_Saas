@@ -181,7 +181,11 @@ class Calendar(LoginRequiredMixin,TemplateView):
             
             
             print('Posted')      
+
+        return render(request, 'calendar.html')
+
         
+
 
     def get(self, request):
         event_list = []

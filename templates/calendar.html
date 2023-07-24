@@ -89,8 +89,8 @@
                             </div>
                             <div class="modal-body p-4">
                                 <!-- this id 7 class is link with js so that enevt will come & show on calender will fix this later -->
-                                <!--id="form-event" this id is not letting the form to post-->
-                                <form class="needs-validation" id="form-event" name="event-form" enctype="multipart/form-data"
+                                <!--id="form-event" this id is not letting the form to post from now we can add event from admin or later make a seperate dash for it something is clashing here --> 
+                                <form class="needs-validation"  id="form-event" name="event-form" enctype="multipart/form-data"
                                     method="POST">
                                     {% csrf_token %}
                                     <div class="row">
@@ -131,11 +131,12 @@
                                                     <!-- end col-->
                                                     <!-- end col-->
                                                 </div>
-                                                <div class="col-6 text-end">
-
-                                                    <button type="submit" class="btn btn-success"
-                                                        id="btn-save-event">Save</button>
-                                                </div> <!-- end row-->
+                                                <div class="col-12 text-end">
+                                                    <button type="submit" class="btn btn-danger" id="btn-save-event">Delete</button>
+                                                     <button type="button" class="btn btn-info" id="btn-save-event">Clear</button>
+                                                    <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+                                                </div>
+                                                <!-- end row-->
                                 </form>
 
                             </div>
@@ -146,9 +147,12 @@
                     <!-- end modal dialog-->
                 </div>
                 <!-- end modal-->
+                
             </div>
         </div> <!-- container-fluid -->
     </div>
+  
+                <!-- end modal-->
     <h1 id="h1" data-my-variable="{{serialized_events}}"></h1>
     <script>
 
