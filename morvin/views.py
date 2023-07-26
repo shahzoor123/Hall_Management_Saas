@@ -4,10 +4,28 @@ from allauth.account.views import PasswordSetView,PasswordChangeView
 from django.urls import reverse_lazy
 from ecommerce.models import EventSale
 from django.shortcuts import render
+from ecommerce.models import EventExpense, EventSale
+from django.db.models import Sum
+
 
 
 class Index(LoginRequiredMixin,TemplateView):
     template_name = "index.html"
+
+    def get(self, request):
+        
+        total_sales = EventSale.objects.aggregate(total_sales=Sum('total_amount'))['total_sales']
+        total_expenses = EventExpense.objects.aggregate(total_expenses=Sum('total_expense'))['total_expenses']
+
+        total_sales = total_sales or 0
+        total_expenses = total_expenses or 0
+
+        context = {
+            "total_sales": total_sales,
+            "total_expense": total_expenses,
+            "revenue": total_sales - total_expenses
+        }
+        return render(request, self.template_name, context)
 class Calendar(LoginRequiredMixin,TemplateView):
     template_name = "calendar.html"
 

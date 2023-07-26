@@ -39,6 +39,8 @@ urlpatterns = [
     path('menu/', include('items.urls')),
     #Store
     path('store/', include('store.urls')),
+    #General Expenses
+    path('expenses/', include('generalExpense.urls')),
     # Email
     path('email/',include('e_mail.urls')),
     # Components

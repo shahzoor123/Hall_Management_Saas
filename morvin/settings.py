@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'items',
     'extras',
     'store',
+    'generalExpense',
     'crispy_forms',
     'crispy_bootstrap4',
     'django.contrib.sites',
