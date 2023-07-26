@@ -93,21 +93,17 @@
                     <tbody>
 
                       {% for dish, price in combined_data %}
-
-
                       <tr>
                         <th class="py-1 px-2 text-center">{{ dish.code }}</th>
-                        <th><input type="number" class="item-qty form-control" data-price="{{price.price}}" value="0"
-                            style="width: 100px; border-radius: 10px;"></th>
+                        <th><input type="number" id="positive-integer-input" class="item-qty form-control" data-price="{{ price.price }}" min="1" value="0" style="width: 100px; border-radius: 10px;"></th>
                         <span hidden class="subtotal">0.00</span>
                         <th class="py-1 px-2 text-center">{{ dish.name }}</th>
                         <th class="py-1 px-2 text-center">{{ price.price }}</th>
-                        <th class="py-1 px-2 text-center">300</th>
-
+                        <td class="py-1 px-2 text-center total-value">0.00</td> <!-- Add a new 'td' for the total value -->
                       </tr>
-
-
-                      {% endfor %}
+                    {% endfor %}
+                    
+                  
 
 
 
@@ -129,14 +125,14 @@
                           <div class="mb-4">
                             <label class="form-label">Number of Peoplee</label>
                             <div class="input-group" id="datepicker2">
-                              <input type="number" class="form-control" id="no-of-people" value="1">
+                              <input type="number" class="form-control" min="1" id="no-of-people" value="1">
 
                             </div><!-- input-group -->
                           </div>
                           <div class="mb-4">
                             <label class="form-label">Hall Charges</label>
                             <div class="input-group" id="datepicker3">
-                              <input type="number" class="form-control" id="hall-charges" value="0">
+                              <input type="number" class="form-control" min="1" id="hall-charges" value="0">
 
                             </div><!-- input-group -->
                           </div>
@@ -513,6 +509,28 @@
 
     {% endblock content %}
     {% block extra_javascript %}
+
+    <!-- For positive integer -->
+
+
+
+
+    <!-- For item total -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      // When the quantity input changes, update the subtotal and total
+      $('.item-qty').on('input', function () {
+        var quantity = parseFloat($(this).val());
+        var price = parseFloat($(this).data('price'));
+        var subtotal = (quantity * price).toFixed(2); // Calculate the subtotal
+        $(this).closest('tr').find('.subtotal').text(subtotal); // Update the subtotal cell
+
+        var total = (quantity * price).toFixed(2); // Calculate the total
+        $(this).closest('tr').find('.total-value').text(total); // Update the total cell
+      });
+    </script>
+
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
