@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'layouts',
     'items',
     'extras',
+    'store',
+    'generalExpense',
     'crispy_forms',
     'crispy_bootstrap4',
     'django.contrib.sites',
@@ -86,6 +88,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'morvin.wsgi.application'
+ITEM_FUNCTION_MODEL = 'ecommerce.EventSale'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

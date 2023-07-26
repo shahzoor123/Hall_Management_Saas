@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
 from items.models import MyProducts
 from ecommerce.models import EventSale
 from ecommerce.models import EventExpense
@@ -32,6 +33,16 @@ class Eventsale(LoginRequiredMixin, View):
     def get(self, request):
         sale = EventSale.objects.all()
         deals = Deals.objects.all()
+        total_sales = EventSale.objects.aggregate(total_sales=Sum('total_amount'))['total_sales']
+        total_expenses = EventExpense.objects.aggregate(total_expenses=Sum('total_expense'))['total_expenses']
+
+        total_sales = total_sales or 0
+        total_expenses = total_expenses or 0
+
+        print(total_sales)
+        print(total_expenses)
+
+
         context = {
             "sales": sale,
             "deals": deals
@@ -59,7 +70,6 @@ class Eventsale(LoginRequiredMixin, View):
             food_menu = request.POST.get('food-menu')
             details = request.POST.get('details')
             received_ammount = request.POST.get('received-amount')
-
             add_event_sale = EventSale.objects.create(
                 bill_no=bill_number,
                 sr=serial,
@@ -74,7 +84,9 @@ class Eventsale(LoginRequiredMixin, View):
                 extra_charges=extra_charge,
                 food_menu=food_menu,
                 detials=details,
-                recieved_amount=received_ammount
+                total_amount= (int(number_of_people) * int(per_head)) + int(extra_charge),
+                recieved_amount=received_ammount, 
+                remaining_amount = total_amount - received_ammount
             )
 
         print('Posted')

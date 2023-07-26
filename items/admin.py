@@ -28,3 +28,4 @@ class DealsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Deals, DealsAdmin)
+
