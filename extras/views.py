@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class Timeline(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/pages-timeline.html"
 class Invoice(LoginRequiredMixin,TemplateView):
-    template_name = "extras/pages/pages-invoice.html"
+    template_name = "extras/pages/invoice.html"
 class Details(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/details.html"
 
