@@ -15,10 +15,6 @@ class Details(LoginRequiredMixin,TemplateView):
         grand_total = request.POST.get('grand_total')
         menu_items = request.POST.get('menu_items')
 
-        print(no_of_people)
-        print(grand_total)
-        print(menu_items)
-
         return render(request, self.template_name)
 
 class Blankpage(LoginRequiredMixin,TemplateView):

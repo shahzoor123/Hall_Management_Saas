@@ -157,7 +157,7 @@ class Event(models.Model):
     event_title = models.CharField(max_length=200)
     start_date = models.DateField()
     end_date = models.DateField()
-    event_time = models.TimeField()
+    event_time = models.CharField(max_length=10)
     # Add any other fields you need for your events
 
 

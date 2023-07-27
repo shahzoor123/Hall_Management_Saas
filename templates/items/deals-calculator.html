@@ -551,11 +551,11 @@
 
           const hallCharges = parseFloat(hallChargesInput.value);
           const noOfPeople = parseInt(noOfPeopleInput.value, 10);
-          const perHead = ((subtotal + hallCharges) / noOfPeople).toFixed(2);
+          const perHead = (subtotal / noOfPeople).toFixed(2);
 
           // Display Subtotal, Grand Total, and Per Head values
           document.getElementById("subtotal").value = subtotal.toFixed(2);
-          const grandTotal = (subtotal + hallCharges).toFixed(2);
+          const grandTotal = (subtotal + (hallCharges * noOfPeople)).toFixed(2);
           document.getElementById("grand-total").value = grandTotal;
           document.getElementById("per-head").value = perHead;
         }

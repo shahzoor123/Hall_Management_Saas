@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import MyProducts, Deals
-from ecommerce.models import EventSale
+from ecommerce.models import EventSale, Event
 import json
 
 
@@ -104,6 +104,9 @@ def item(request, deal_id):
                     'sales' : sale,
                 }
                 # Render extras/pages/pages-invoice.html with the context
+
+
+                create_event = Event.objects.create(event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
                 return render(request, 'extras/pages/pages-invoice.html', context)
         
         food_list = []
