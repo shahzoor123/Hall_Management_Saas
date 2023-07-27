@@ -184,7 +184,8 @@ class Calendar(LoginRequiredMixin,TemplateView):
     def post(self, request):
         
         if request.method == "POST":
-            event_name = request.POST.get('event_name')
+            event_id = request.POST.get('event_name')
+            event_name = EventSale.objects.get(id=event_id)
             event_start_date = request.POST.get('event_start_date')
             event_end_date = request.POST.get('event_end_date')
             event_timing = request.POST.get('event_timing') 
@@ -219,7 +220,8 @@ class Calendar(LoginRequiredMixin,TemplateView):
         
         context = {
             "events" : event_json,
+            "event_sale" : sale
         }
-        return render(request, 'calendar.html', {'serialized_events': serialized_event})
+        return render(request, 'calendar.html', {'serialized_events': serialized_event,'event_sale' : sale})
     
 
