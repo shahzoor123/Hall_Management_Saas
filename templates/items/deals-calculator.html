@@ -93,21 +93,16 @@
                     <tbody>
 
                       {% for dish, price in combined_data %}
-
-
                       <tr>
                         <th class="py-1 px-2 text-center">{{ dish.code }}</th>
-                        <th><input type="number" class="item-qty form-control" data-price="{{price.price}}" value="0"
-                            style="width: 100px; border-radius: 10px;"></th>
+                        <th><input type="number" id="positive-integer-input" class="item-qty form-control" data-price="{{ price.price }}" min="1" value="0" style="width: 100px; border-radius: 10px;"></th>
                         <span hidden class="subtotal">0.00</span>
                         <th class="py-1 px-2 text-center">{{ dish.name }}</th>
                         <th class="py-1 px-2 text-center">{{ price.price }}</th>
-                        <th class="py-1 px-2 text-center">300</th>
-
+                        <td class="py-1 px-2 text-center total-value">0.00</td> <!-- Add a new 'td' for the total value -->
                       </tr>
-
-
-                      {% endfor %}
+                    {% endfor %}
+                
 
 
 
@@ -129,14 +124,14 @@
                           <div class="mb-4">
                             <label class="form-label">Number of Peoplee</label>
                             <div class="input-group" id="datepicker2">
-                              <input type="number" class="form-control" id="no-of-people" value="1">
+                              <input type="number" class="form-control" min="1" id="no-of-people" value="1">
 
                             </div><!-- input-group -->
                           </div>
                           <div class="mb-4">
                             <label class="form-label">Hall Charges</label>
                             <div class="input-group" id="datepicker3">
-                              <input type="number" class="form-control" id="hall-charges" value="0">
+                              <input type="number" class="form-control" min="1" id="hall-charges" value="0">
 
                             </div><!-- input-group -->
                           </div>
@@ -348,14 +343,11 @@
                         <div class="input-group input-group-merge">
 
 
-                          <select class="js-select form-select" autocomplete="off" name="deals">
+                        
 
-                            {% for deal in deals %}
-                            <option value="{{deal.id}}">{{deal}}</option>
-                            {% endfor %}
+                          <input type="text" class="form-control" autocomplete="off" value="{{Deal_name}}" readonly>
 
-                          </select>
-
+                          <input type="hidden" class="form-control" autocomplete="off" name="deals" value="{{deal}}">
 
                         </div>
                         <!-- End Input Group -->
@@ -430,13 +422,16 @@
                     <!-- Form -->
                     <div class="row mb-4">
                       <label for="" class="col-sm-3 col-form-label form-label">Food menu</label>
-
+                    
                       <div class="col-sm-9">
                         <!-- Input Group -->
                         <div class="input-group input-group-merge">
-
-                          <input type="text" class="js-toggle-password form-control" name="food-menu" id=""
-                            placeholder="{{food_menu}}" aria-label="" readonly>
+                    
+                          <input type="text" class="js-toggle-password form-control" id="" value="{{food_menu}}"
+                            aria-label="" readonly>
+                    
+                          <input type="hidden" class="js-toggle-password form-control" name="food-menu" id="" value="{{food_menu}}"
+                            aria-label="">
                         </div>
 
                         <!-- End Input Group -->
@@ -513,6 +508,43 @@
 
     {% endblock content %}
     {% block extra_javascript %}
+
+    <!-- For positive integer -->
+
+
+
+
+    <!-- For item total -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      var itemQtyList = [];
+    
+      $('.item-qty').on('input', function () {
+        var quantity = parseFloat($(this).val());
+        var price = parseFloat($(this).data('price'));
+        var dishCode = $(this).data('dish-name');
+        var subtotal = (quantity * price).toFixed(2);
+    
+        $(this).closest('tr').find('.subtotal').text(subtotal);
+    
+        var total = (quantity * price).toFixed(2);
+        $(this).closest('tr').find('.total-value').text(total);
+    
+        // Update the quantity in the itemQtyList array
+        var itemIndex = itemQtyList.findIndex(item => item.dishCode === dishCode);
+        if (itemIndex !== -1) {
+          itemQtyList[itemIndex].quantity = quantity;
+        } else {
+          itemQtyList.push({ dishCode: dishCode, quantity: quantity });
+        }
+        console.log(itemQtyList);
+      });
+    
+ 
+    </script>
+    
+
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {

@@ -117,8 +117,8 @@
                                                         </td>
                                                         <td id="tooltip-container1">
                                                           <div class="d-flex">
-                                                            <a href="javascript:void(0);"  class="btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"  class="me-3 text-primary" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                                                              <i class="mdi mdi-pencil font-size-18" class="modal-title mt-0" id="exampleModalScrollableTitle"></i>
+                                                            <a href="javascript:void(0);"  class="btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#sale{{ sale.id }}"  class="me-3 text-primary" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                                              <i class="mdi mdi-pencil font-size-18" class="modal-title mt-0" id="sale{{sale.id}}"></i>
                                                             </a>
                 
                                                               <a href="#" class="text-danger" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
@@ -129,23 +129,10 @@
                                                         </td>
                                                         
                                                     </tr>
-                                                    {% endfor %}
                                                
                                                 </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        
-                        <tr>
-                            <td>
-                                <!-- Small modal -->
-                              
-                                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                                <!-- Small modal -->
+                                <div class="modal fade" id="sale{{ sale.id }}" tabindex="-1" role="dialog" aria-labelledby="sale{{sale.id}}" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-scrollable">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -168,7 +155,7 @@
                                         
                                                         <div class="input-group input-group-merge">
                                                           <input type="text" class="js-toggle-password form-control" name="bill-no" id=""
-                                                            placeholder="Bill no" aria-label="">
+                                                            placeholder="Bill no" aria-label="" value="{{sale.bill_no}}">
                                         
                                                         </div>
                                         
@@ -190,7 +177,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <input type="text" class="js-toggle-password form-control" name="serial-no" id="" placeholder="Sr"
-                                                            aria-label="">
+                                                            aria-label="" value="{{sale.sr}}">
                                         
                                                         </div>
                                         
@@ -210,7 +197,7 @@
                                                         <div class="input-group input-group-merge">
                                                           <select class="js-select form-select" autocomplete="off" name="status">
                                         
-                                        
+                                                            <option value="{{sale.status}}">{{sale.status}}</option>
                                                             <option>Tentative</option>
                                                             <option>Confirm</option>
                                         
@@ -230,7 +217,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <select class="js-select form-select" autocomplete="off" name="event-time">
-                                        
+                                                            <option value="{{sale.event_timing}}">{{ sale.event_timing}}</option>
                                                             <option>Day</option>
                                                             <option>Night</option>
 
@@ -248,7 +235,7 @@
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <input type="date" class="js-toggle-password form-control" name="event-date" id="" placeholder="StartRow"
-                                                          aria-label="">
+                                                          aria-label="" value="{{sale.event_date}}">
                                         
                                                       </div>
                                                       <!-- End Input Group -->
@@ -262,7 +249,7 @@
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <input type="number" class="js-toggle-password form-control" name="no-of-people" id=""
-                                                          placeholder="Number of people" aria-label="">
+                                                          placeholder="Number of people" aria-label="" value="{{sale.no_of_people}}">
                                                         <!-- End Input Group -->
                                                       </div>
                                                     </div>
@@ -277,7 +264,7 @@
                                                         <div class="input-group input-group-merge">
                                                           <select class="js-select form-select" autocomplete="off" name="setup">
                                         
-                                        
+                                                            <option value="{{sale.setup}}"> {{sale.setup}}</option>
                                                             <option>Normal</option>
                                                             <option>Delux</option>
                                                             <option>VIP</option>
@@ -298,6 +285,7 @@
                                                           <select class="js-select form-select" autocomplete="off" name="deals">
                                         
                                                             <!-- <option value="" disabled selected></option> -->
+                                                            <option value="{{sale.deals}}"> {{sale.deals}}</option>
                                                             {% for deal in deals %}
                                                                 <option value="{{ deal.pk }}">{{ deal.code }}</option>
                                                             {% endfor %}
@@ -318,7 +306,7 @@
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <input type="text" class="js-toggle-password form-control" name="customer-name" id=""
-                                                          placeholder="Customer name" aria-label="">
+                                                          placeholder="Customer name" aria-label="" value="{{sale.customer_name}}">
                                                         <!-- End Input Group -->
                                                       </div>
                                                     </div>
@@ -332,7 +320,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <input type="number" class="js-toggle-password form-control" name="customer-number" id=""
-                                                            placeholder="Customer number" aria-label="">
+                                                            placeholder="Customer number" aria-label="" value="{{sale.customer_number}}">
                                         
                                                         </div>
                                                         <!-- End Input Group -->
@@ -348,7 +336,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <input type="number" class="js-toggle-password form-control" name="per-head" id=""
-                                                            placeholder="Per head" aria-label="">
+                                                            placeholder="Per head" aria-label=""  value="{{sale.per_head}}">
                                         
                                                         </div>
                                                         <!-- End Input Group -->
@@ -367,7 +355,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <input type="number" class="js-toggle-password form-control" name="extra-charges" id=""
-                                                            placeholder="Extra Charges" aria-label="">
+                                                            placeholder="Extra Charges" aria-label="" value="{{sale.extra_charges}}">
                                                         </div>
                                         
                                                         <!-- End Input Group -->
@@ -383,7 +371,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <input type="text" class="js-toggle-password form-control" name="food-menu" id=""
-                                                            placeholder="Food menu" aria-label="">
+                                                            placeholder="Food menu" aria-label="" value="{{sale.food_menu}}">
                                                         </div>
                                         
                                                         <!-- End Input Group -->
@@ -400,7 +388,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                         
-                                                          <textarea class="form-select" name="details" id="" cols="90" rows="5" ></textarea>
+                                                          <textarea class="form-select" name="details" id="" cols="90" rows="5" >{{sale.details}}</textarea>
                                         
                                                         </div>
                                                         <!-- End Input Group -->
@@ -416,7 +404,7 @@
                                                         <!-- Checkbox Switch -->
                                                         <div class="input-group input-group-merge">
                                                             <input type="number" class="js-toggle-password form-control" name="received-amount" id=""
-                                                              placeholder="Received amount" aria-label="">
+                                                              placeholder="Received amount" aria-label="" value="{{sale.recieved_amount}}">
                                                           </div>
                                                         <!-- End Checkbox Switch -->
                                                         <!-- End Input Group -->
@@ -436,6 +424,20 @@
                                         </div>
                                       </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
+
+                                {% endfor %}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                        <tr>
+                            <td>
+                                
                                   </div>
                             </td>
                         </tr>

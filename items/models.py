@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from django.conf import settings
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -24,7 +24,7 @@ class MyProducts(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return self.code + " - " + self.name
+        return self.name
 
 
 class Deals(models.Model):
@@ -42,6 +42,3 @@ class Deals(models.Model):
         super().save(*args, **kwargs)  # Save the Deals object first
         self.price_per_head = self.total_price()  # Access the many-to-many relationship after saving
         super().save(*args, **kwargs)  # Save the Deals object again to update the price_per_head field
-
-
-    

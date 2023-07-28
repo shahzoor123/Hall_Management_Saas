@@ -49,6 +49,7 @@ def item(request, deal_id):
                 per_head = request.POST.get('per-head')
                 extra_charge = request.POST.get('extra-charges')
                 food_menu = request.POST.get('food-menu')
+                
                 details = request.POST.get('details')
                 received_ammount = request.POST.get('received-amount')
 
@@ -70,7 +71,9 @@ def item(request, deal_id):
                     extra_charges=extra_charge,
                     food_menu=food_menu,
                     detials=details,
-                    recieved_amount=received_ammount
+                    total_amount = (int(number_of_people) * int(per_head)) + int(extra_charge),
+                    recieved_amount=received_ammount, 
+                    remaining_amount = ((int(number_of_people) * int(per_head)) + int(extra_charge)) - int(received_ammount)
                 )
                
                 bill_num = request.session.get('bill-no')
@@ -110,7 +113,7 @@ def item(request, deal_id):
         for item in items:
             food_list.append(item.name)
     
-        food_menu = tuple(food_list)
+        food_menu = ', '.join(food_list)
 
         sale = EventSale.objects.all()
      
@@ -125,7 +128,7 @@ def item(request, deal_id):
                     'Deal_name' : deal,
                     'food_menu' : food_menu,
                     'sale' : sale,
-                    'deals' : deals
+                    'deal' : deal_id
                 }
         # Render items/deals-calculator.html with the context
         return render(request, 'items/deals-calculator.html', context)
