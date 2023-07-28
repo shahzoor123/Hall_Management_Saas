@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class Timeline(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/pages-timeline.html"
 class Invoice(LoginRequiredMixin,TemplateView):
-    template_name = "extras/pages/pages-invoice.html"
+    template_name = "extras/pages/invoice.html"
 class Details(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/details.html"
 
@@ -14,10 +14,6 @@ class Details(LoginRequiredMixin,TemplateView):
         no_of_people = request.POST.get('no_of_people')
         grand_total = request.POST.get('grand_total')
         menu_items = request.POST.get('menu_items')
-
-        print(no_of_people)
-        print(grand_total)
-        print(menu_items)
 
         return render(request, self.template_name)
 
