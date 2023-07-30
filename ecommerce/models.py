@@ -38,6 +38,9 @@ class EventSale(models.Model):
     deals = models.ForeignKey(Deals, on_delete=models.PROTECT)
 
     customer_name = models.CharField(max_length=200)
+    stage_charges = models.IntegerField(null=True, default=0)
+    entry_charges = models.IntegerField(null=True, default=0)
+
     customer_number = models.BigIntegerField()
     per_head = models.IntegerField(null=True)
     extra_charges = models.IntegerField()

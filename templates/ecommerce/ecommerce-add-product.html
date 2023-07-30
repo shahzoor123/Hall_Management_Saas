@@ -59,11 +59,11 @@
                                                         <span class="step-number">02. Product Img</span>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item">
+                                                <!-- <li class="nav-item">
                                                     <a href="#metadata" class="nav-link" data-toggle="tab">
                                                         <span class="step-number">03. Meta Data</span>
                                                     </a>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                             <div class="tab-content twitter-bs-wizard-tab-content">
                                                 <div class="tab-pane" id="basic-info">
@@ -81,12 +81,12 @@
                                                                     <input id="manufacturername" name="manufacturername" type="text" class="form-control">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-4">
+                                                            <!-- <div class="col-lg-4">
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="manufacturerbrand">Manufacturer Brand</label>
                                                                     <input id="manufacturerbrand" name="manufacturerbrand" type="text" class="form-control">
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="col-lg-4">
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="price">Price</label>
@@ -100,9 +100,9 @@
                                                                     <label class="control-label">Category</label>
                                                                     <select class="form-control select2">
                                                                         <option>Select</option>
-                                                                        <option value="EL">Electronic</option>
-                                                                        <option value="FA">Fashion</option>
-                                                                        <option value="FI">Fitness</option>
+                                                                        {% for cat in category %}
+                                                                        <option>{{cat}}</option>
+                                                                        {% endfor %}
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -142,7 +142,7 @@
                                                             <h4>Drop files here or click to upload.</h4>
                                                         </div>
                                                     </form>
-                                                    <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                                    <!-- <ul class="pager wizard twitter-bs-wizard-pager-link">
                                                         <li class="previous"><a href="#"><i class="mdi mdi-arrow-left mr-1"></i> Basic Info</a></li>
                                                         <li class="next"><a href="#">Meta Data <i class="mdi mdi-arrow-right ml-1"></i></a></li>
                                                     </ul>
@@ -169,7 +169,7 @@
                                                             <label class="form-label" for="metadescription">Meta Description</label>
                                                             <textarea class="form-control" id="metadescription" rows="5"></textarea>
                                                         </div>
-                                                    </form>
+                                                    </form> -->
                                                     <ul class="pager wizard twitter-bs-wizard-pager-link">
                                                         <li class="previous"><a href="#"><i class="mdi mdi-arrow-left mr-1"></i> Product Img</a></li>
                                                         <li class="float-end"><a href="#">Save Changes <i class="mdi mdi-arrow-right ml-1"></i></a></li>

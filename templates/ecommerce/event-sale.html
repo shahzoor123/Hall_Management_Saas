@@ -71,7 +71,9 @@
                                                         <th>Bill ID</th>
                                                         <th>Date</th>
                                                         <th>Billing Name</th>
-                                                        <th>Total</th>
+                                                        <th>Total Amount</th>
+                                                        <th>Received Amount</th>
+                                                        <th>Remaining Amount</th>
                                                         <th>Payment Status</th>
                                                         <th>Invoice</th>
                                                         <th style="width: 120px;">Action</th>
@@ -96,8 +98,14 @@
                                                         <td>
                                                             {{sale.total_amount}}
                                                         </td>
+                                                        <td>
+                                                          {{sale.recieved_amount}}
+                                                        </td>
+                                                          <td>
+                                                            {{sale.remaining_amount}}
+                                                          </td>
                                                        
-                                                        {% if sale.recieved_amount == 0 and sale.remaining_amount == 0%}
+                                                        {% if not sale.remaining_amount == 0%}
                                                         <td>
                                                             <div class="badge badge-soft-warning font-size-12">unpaid</div>
                                                         </td>

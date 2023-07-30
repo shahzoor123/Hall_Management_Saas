@@ -16,7 +16,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
 from django.http import JsonResponse
-
+from items.models import Category
 
 # Create your views here.
 class Products(LoginRequiredMixin,TemplateView):
@@ -45,6 +45,7 @@ class Eventsale(LoginRequiredMixin, View):
 
         context = {
             "sales": sale,
+            
             "deals": deals
         }
         return render(request, self.template_name, context)
@@ -124,14 +125,47 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
         return render(request, self.template_name, context)
 
 
-class ProductsCart(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/ecommerce-cart.html"
+class ProductsAddCategory(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/ecommerce-add-category.html"
+   
+   
+    def post(self, request):
+        
+        if request.method == "POST":
+            
+            cat_name = request.POST['categoryname']
+            cat_dsc = request.POST['categorydesc']
+            status = request.POST.get('status', None)
+            my_stat = status
+            if status == None:
+                my_stat = 0
+            Category.objects.create(
+                name = cat_name,
+                description = cat_dsc,
+                status= my_stat
+            )
+        
+        return render(request, self.template_name)
+
+
 class ProductsCheckout(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-checkout.html"
 class ProductsShops(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-shops.html"
 class ProductsAddProduct(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-add-product.html"
+
+    def get(self, request):
+        category = Category.objects.all()
+        # for i in get_eventsale:
+        #     print(i.recieved_amount)
+        # if amount == 0:
+        #     payment_status = 'Unpaid'
+        context = {
+            "category": category,
+        }
+        return render(request, self.template_name, context)
+
 
 class Calculate(LoginRequiredMixin,TemplateView):
     template_name = "items/pos.html"

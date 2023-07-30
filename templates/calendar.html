@@ -104,11 +104,8 @@
                                         <div class="col-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Customer Name</label>
-                                                <select name="event_name"  id="event-title" >
-                                                    {% for i in event_sale %}
-                                                    <option value="{{i.id}}">{{i.customer_name}}</option>
-                                                    {% endfor %}
-                                                </select>
+                                                <input class="form-control" type="text"
+                                                    name="customer-name" id="customer-name"  value="">
 
                                                 <div class="invalid-feedback">Please provide a valid event name
                                                 </div>
@@ -117,24 +114,24 @@
 
                                         <div class="col-12">
                                             <div class="mb-3">
-                                                <label id="customer-name" class="form-label">Event start date</label>
-                                                <input class="form-control" placeholder="Event start date" type="date"
-                                                    name="event_start_date" id="start_date" required value="">
+                                                <label id="event-date" class="form-label">Event date</label>
+                                                <input class="form-control" placeholder="Event date" type="date"
+                                                    name="event-date" id="event-date"  value="">
 
                                             </div>
                                             <div class="col-12">
                                                 <div class="mb-3">
-                                                    <label id="customer-name" class="form-label">Event End date</label>
-                                                    <input class="form-control" placeholder="Event End date" type="date"
-                                                        name="event_end_date" id="end_date" required value="">
+                                                    <label id="location" class="form-label">Event Location</label>
+                                                    <input class="form-control" placeholder="Lawn Or Hall" type="text"
+                                                        name="location" id="location" value="">
 
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="mb-3">
                                                         <label id="customer-name" class="form-label">Event
                                                             Timing</label>
-                                                        <input class="form-control" placeholder="Event Timing"
-                                                            type="time" name="event_timing" id="event-time" required
+                                                        <input class="form-control" placeholder="Day Or Night"
+                                                            type="text" name="event_timing" id="event-time" required
                                                             value="">
 
                                                     </div>
