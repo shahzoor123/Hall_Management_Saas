@@ -116,7 +116,7 @@ def item(request, deal_id):
         for item in items:
             food_list.append(item.name)
     
-        food_menu = tuple(food_list)
+        food_menu = ', '.join(food_list)
 
         sale = EventSale.objects.all()
      
@@ -131,7 +131,7 @@ def item(request, deal_id):
                     'Deal_name' : deal,
                     'food_menu' : food_menu,
                     'sale' : sale,
-                    'deals' : deals
+                    'deal' : deal_id
                 }
         # Render items/deals-calculator.html with the context
         return render(request, 'items/deals-calculator.html', context)

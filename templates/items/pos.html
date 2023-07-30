@@ -84,29 +84,73 @@
             <fieldset>
                 
                 <div class="d-flex w-100" id="POS-field" >
-                    <div class="col-9 bg-gradient ">
-                        <table class="table" style="color: aliceblue;">
-                            <colgroup>
-                                <col width="5%">
-                                <col width="10%">
-                                <col width="20%">
-                                <col width="10%">
-                                <col width="10%">
-                            </colgroup>
-                            <thead >
-                                <tr class="bg-dark bg-gradient bg-opacity-50 text-light">
-                                    <th class="py-1 px-2 text-center  ">No</th>
-                                    <th class="py-1 px-2 text-center  text-light">QTY</th>
-                                    <th class="py-1 px-2 text-center  text-light">Product</th>
-                                    <th class="py-1 px-2 text-center  text-light">Price</th>
-                                    <th class="py-1 px-2 text-center  text-light">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                 
-                            </tbody>
+                    <style>
+                        /* Add your custom styles here */
+                        .bg-gradient {
+                          /* Add your background gradient styles here */
+                          background-color: rgb(239, 239, 239);
+                          border-radius: 20px;
+                        }
+                      
+                        .table {
+                          /* Add your table styles here */
+                          border-collapse: collapse;
+                          width: 100%;
+                          border: 2px solid #000000;
+                          border-radius: 10px;
+                        }
+                      
+                        th, td {
+                          /* Add your header and cell styles here */
+                          padding: 8px;
+                          
+                          border-bottom: 1px solid #ddd;
+                        }
+                      
+                        th {
+                          background-color: #333;
+                          color: rgb(10, 10, 10);
+                          text-align: center;
+                        }
+                      
+                        tbody tr:nth-child(even) {
+                          /* Add your alternate row styles here */
+                          background-color: #f2f2f2;
+                          text-align: center;
+                        }
+                      
+                        /* Add more custom styles as needed */
+                      </style>
+                      
+                      <div class="col-9 bg-gradient">
+                        <table class="table">
+                          <colgroup>
+                            <col width="5%">
+                            <col width="10%">
+                            <col width="5%">
+                            <col width="10%">
+                            <col width="10%">
+                          </colgroup>
+                          <thead>
+                            <tr class="bg-dark bg-gradient bg-opacity-50 text-light">
+                              <th class="py-1 px-2">No</th>
+                              <th class="py-1 px-2">QTY</th>
+                              <th class="py-1 px-2">Product</th>
+                              <th class="py-1 px-2">Price</th>
+                              <th class="py-1 px-2">Total</th>
+                            </tr>
+                          </thead>
+                          <tbody >
+                      
+                          </tbody>
                         </table>
-                    </div>
+                      </div>
+                 
+                      
+                      
+                      
+                      
+                      
                     <div class="row" >
                         <div class="col-lg-12 col-md-12 col-sm-12" >
                             <div class="card">

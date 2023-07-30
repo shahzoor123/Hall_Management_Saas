@@ -102,8 +102,7 @@
                         <td class="py-1 px-2 text-center total-value">0.00</td> <!-- Add a new 'td' for the total value -->
                       </tr>
                     {% endfor %}
-                    
-                  
+                
 
 
 
@@ -344,14 +343,11 @@
                         <div class="input-group input-group-merge">
 
 
-                          <select class="js-select form-select" autocomplete="off" name="deals">
+                        
 
-                            {% for deal in deals %}
-                            <option value="{{deal.id}}">{{deal}}</option>
-                            {% endfor %}
+                          <input type="text" class="form-control" autocomplete="off" value="{{Deal_name}}" readonly>
 
-                          </select>
-
+                          <input type="hidden" class="form-control" autocomplete="off" name="deals" value="{{deal}}">
 
                         </div>
                         <!-- End Input Group -->
@@ -426,13 +422,16 @@
                     <!-- Form -->
                     <div class="row mb-4">
                       <label for="" class="col-sm-3 col-form-label form-label">Food menu</label>
-
+                    
                       <div class="col-sm-9">
                         <!-- Input Group -->
                         <div class="input-group input-group-merge">
-
-                          <input type="text" class="js-toggle-password form-control" name="food-menu" id=""
-                            placeholder="{{food_menu}}" aria-label="" readonly>
+                    
+                          <input type="text" class="js-toggle-password form-control" id="" value="{{food_menu}}"
+                            aria-label="" readonly>
+                    
+                          <input type="hidden" class="js-toggle-password form-control" name="food-menu" id="" value="{{food_menu}}"
+                            aria-label="">
                         </div>
 
                         <!-- End Input Group -->
@@ -519,17 +518,32 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      // When the quantity input changes, update the subtotal and total
+      var itemQtyList = [];
+    
       $('.item-qty').on('input', function () {
         var quantity = parseFloat($(this).val());
         var price = parseFloat($(this).data('price'));
-        var subtotal = (quantity * price).toFixed(2); // Calculate the subtotal
-        $(this).closest('tr').find('.subtotal').text(subtotal); // Update the subtotal cell
-
-        var total = (quantity * price).toFixed(2); // Calculate the total
-        $(this).closest('tr').find('.total-value').text(total); // Update the total cell
+        var dishCode = $(this).data('dish-name');
+        var subtotal = (quantity * price).toFixed(2);
+    
+        $(this).closest('tr').find('.subtotal').text(subtotal);
+    
+        var total = (quantity * price).toFixed(2);
+        $(this).closest('tr').find('.total-value').text(total);
+    
+        // Update the quantity in the itemQtyList array
+        var itemIndex = itemQtyList.findIndex(item => item.dishCode === dishCode);
+        if (itemIndex !== -1) {
+          itemQtyList[itemIndex].quantity = quantity;
+        } else {
+          itemQtyList.push({ dishCode: dishCode, quantity: quantity });
+        }
+        console.log(itemQtyList);
       });
+    
+ 
     </script>
+    
 
 
     <script>
