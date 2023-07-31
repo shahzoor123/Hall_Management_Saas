@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect,get_object_or_404
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
@@ -154,6 +154,29 @@ class ProductsShops(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-shops.html"
 class ProductsAddProduct(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-add-product.html"
+
+    def post(self, request):
+        if request.method == "POST":
+            product_name = request.POST.get('productname')
+            manu_name = request.POST.get('manufacturername')
+            price = request.POST.get('price')
+            category_id = request.POST['category_id']
+            print(category_id)
+            category = get_object_or_404(Category, pk=category_id)
+
+            desc = request.POST.get('productdesc')
+            MyProducts.objects.create(
+                category_id= category,
+                name = product_name,
+                manufacturer_name= manu_name,
+                description= desc,
+                price = price,
+                status=1
+            )
+
+
+        return render(request, self.template_name)
+        
 
     def get(self, request):
         category = Category.objects.all()
