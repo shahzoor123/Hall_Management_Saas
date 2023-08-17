@@ -1,12 +1,70 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from ecommerce.models import EventSale
 
 # Create your views here.
 class Timeline(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/pages-timeline.html"
+
+
+
+def order_slip(request, sale_id):
+    sale = get_object_or_404(EventSale, pk = sale_id)
+    # Split quantity and menu items for Invoice to show only items.
+    my_menu = {}
+    lst = sale.food_menu.split(',')
+    # print(lst)
+    for ls in lst:
+        lss = ls.strip().split(' ')
+        
+        item = lss[0]
+        my_menu.update({item: lss[1][1:-1]})
+
+    context = {
+        'sale': sale,
+        'menu': my_menu
+    }
+    return render(request, 'extras/pages/pages-invoice.html', context)
+    
+
 class Invoice(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/invoice.html"
+
+def sale_invoice(request, sale_id):
+    
+    sale = get_object_or_404(EventSale, pk=sale_id)
+    status = ''
+    if sale.remaining_amount == 0:
+        status = "Paid"
+    else:
+        status = "Unpaid"
+
+    # Split quantity and menu items for Invoice to show only items.
+    my_menu = []
+    lst = sale.food_menu.split(',')
+    for ls in lst:
+        lss = ls.strip().split(' ')
+        item = lss[0]
+        my_menu.append(item)
+  
+    stage = int(sale.stage_charges)
+    entry = int(sale.entry_charges)
+    extra = int(sale.extra_charges)
+
+    total_extra_charges = stage + entry + extra
+
+    context = {
+        'sale': sale,
+        'status': status,
+        'food_menu': my_menu,
+        'extra' : total_extra_charges,
+        'sub_total' : sale.total_amount - total_extra_charges
+    }
+
+    return render(request, 'extras/pages/invoice.html', context)
+
+
 class Details(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/details.html"
 

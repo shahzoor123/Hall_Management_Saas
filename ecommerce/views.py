@@ -7,6 +7,7 @@ from ecommerce.models import EventSale
 from ecommerce.models import EventExpense
 from items.models import Deals
 import json
+from django.urls import reverse
 from django.views import View
 from items.models import Deals , MyProducts
 from rest_framework import viewsets
@@ -17,6 +18,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
 from django.http import JsonResponse
 from items.models import Category
+from datetime import datetime
+
 
 # Create your views here.
 class Products(LoginRequiredMixin,TemplateView):
@@ -39,8 +42,7 @@ class Eventsale(LoginRequiredMixin, View):
         total_sales = total_sales or 0
         total_expenses = total_expenses or 0
 
-        print(total_sales)
-        print(total_expenses)
+       
 
 
         context = {
@@ -67,10 +69,14 @@ class Eventsale(LoginRequiredMixin, View):
             customer_name = request.POST.get('customer-name')
             customer_number = request.POST.get('customer-number')
             per_head = request.POST.get('per-head')
+
             extra_charge = request.POST.get('extra-charges')
+           
             food_menu = request.POST.get('food-menu')
             details = request.POST.get('details')
             received_ammount = request.POST.get('received-amount')
+
+            
             add_event_sale = EventSale.objects.create(
                 bill_no=bill_number,
                 sr=serial,
@@ -83,13 +89,14 @@ class Eventsale(LoginRequiredMixin, View):
                 customer_number=customer_number,
                 per_head=per_head,
                 extra_charges=extra_charge,
+                stage_charges= stage_charge,
+                entry_charges=entry_charge,
                 food_menu=food_menu,
                 detials=details,
-                total_amount= (int(number_of_people) * int(per_head)) + int(extra_charge),
+                total_amount= (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) ,
                 recieved_amount=received_ammount, 
                 remaining_amount = total_amount - received_ammount
             )
-
         print('Posted')
         return render(request, 'items/deals-calculator')
 
@@ -105,9 +112,104 @@ class Eventsale(LoginRequiredMixin, View):
 
             #     return  calc_get_function.get_context_data(request, context)   
 
+class UpdateEventsale(LoginRequiredMixin, View):
+    template_name = "ecommerce/event-sale.html"
+
+    def get(self, request):
+        sale = EventSale.objects.all()
+        deals = Deals.objects.all()
+        total_sales = EventSale.objects.aggregate(total_sales=Sum('total_amount'))['total_sales']
+        total_expenses = EventExpense.objects.aggregate(total_expenses=Sum('total_expense'))['total_expenses']
+
+        total_sales = total_sales or 0
+        total_expenses = total_expenses or 0
+
+       
+
+
+        context = {
+            "sales": sale,
+            
+            "deals": deals
+        }
+        return render(request, self.template_name, context)
+    
+    
+    def post(self, request, sale_id):
+        if request.method == "POST":
+            requests = EventSale.objects.get(id=sale_id)
+
+            bill_number = request.POST.get('bill-no')
+            serial = request.POST.get('serial-no')
+
+            event_status = request.POST.get('status')
+            event_time = request.POST.get('event-time')
+
+            event_date = request.POST.get('event-date')
+            number_of_people = request.POST.get('no-of-people')
+            setup = request.POST.get('setup')
+
+            deals = request.POST.get('deals')
+            customer_name = request.POST.get('customer-name')
+            customer_number = request.POST.get('customer-number')
+            per_head = request.POST.get('per-head')
+            extra_charge = request.POST.get('extra-charges')
+            food_menu = request.POST.get('food-menu')
+            details = request.POST.get('details')
+            received_ammount = request.POST.get('received-amount')
+
+            stage_charges = request.POST.get('stage-charges')
+            entry_charges = request.POST.get('entry-charges')
+
+            payments_details = ''
+            if not received_ammount == "0":
+                now = datetime.now()
+                formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
+                
+                requests.payment_count = requests.payment_count + 1
+                payments_details = f"\n{requests.payment_count}: was {received_ammount}. Change date was: {formatted_date}"
+
+            
 
 
 
+            requests.bill_no = bill_number
+            requests.sr = serial
+
+            requests.status = event_status
+            requests.event_timing = event_time
+
+            requests.event_date = event_date
+            requests.no_of_people = number_of_people
+            requests.setup = setup
+
+            requests.customer_name = customer_name
+            requests.customer_number = customer_number
+            # print(requests.deals)
+            # deal = get_object_or_404(Deals, pk=requests.deals)
+            # requests.deals = deal
+            if len(payments_details) > 1:
+                requests.payment_details = requests.payment_details + payments_details
+            requests.per_head = per_head
+            requests.extra_charges = extra_charge
+            requests.stage_charges = stage_charges
+            requests.entry_charges = entry_charges
+
+            requests.food_menu = food_menu
+            requests.details = details
+           
+            requests.recieved_amount = requests.recieved_amount + int(received_ammount)
+
+            
+
+            requests.remaining_amount = int(requests.total_amount)  - int(requests.recieved_amount)
+            requests.save()
+            
+
+        print('Posted')
+        return redirect('event-sale')
+
+ 
         
 
 class Eventexpense(LoginRequiredMixin,TemplateView):
@@ -115,15 +217,138 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
     def get(self, request):
         expense = EventExpense.objects.all()
+        events = EventSale.objects.all()
         # for i in get_eventsale:
         #     print(i.recieved_amount)
         # if amount == 0:
         #     payment_status = 'Unpaid'
         context = {
             "expenses": expense,
+            "events": events
         }
         return render(request, self.template_name, context)
 
+
+    def post(self, request):
+        if request.method == "POST":
+            bill = request.POST.get('bill-no')
+            bill_number = get_object_or_404(EventSale, pk=bill)
+            pakwan = int(request.POST.get('pakwan-bill'))
+
+            electicity = request.POST.get('electicity-bill')
+            naan =int(request.POST.get('naan-qty'))
+            
+        
+            drinks = int(request.POST.get('cold-drinks'))
+            drinks_type = request.POST.get('cold-drinks-type')
+
+
+            water = int(request.POST.get('water-bottles'))
+            water_type = request.POST.get('water-bottles-type')
+
+            bbq = int(request.POST.get('bbq-qty'))
+
+            diesel = request.POST.get('diesel-ltr')
+            no_of_waiters = request.POST.get('no-of-waiters')
+            dhobi = request.POST.get('dhobi')
+            stuff = request.POST.get('stuff')
+
+            other_expenses = request.POST.get('other-expense')
+
+            expense_details = request.POST.get('expense-details')
+           
+            setup = request.POST.get('setup-bill')
+            decor = request.POST.get('decore-details')
+            decor_bill = request.POST.get('decor-bill')
+    
+            # try:
+            nan = MyProducts.objects.get(name='Naan')
+            naan_price = nan.price * naan
+
+
+
+
+            drink = 0
+            if drinks_type == 'Cold Drinks 1.5L':
+                drink = MyProducts.objects.get(name='Cold Drinks 1.5')
+
+            elif drinks_type == "Cold Drinks Tin":
+                drink = MyProducts.objects.get(name='Cold Drinks Tin')
+
+            else:
+                drink = ''
+            
+            if not drink == '' :
+                drink = drink.price * drinks
+
+            
+            bottles = 0
+            if water_type == 'Water 1.5L':
+                bottles = MyProducts.objects.get(name='Water 1.5L')
+
+            elif water_type == "Water 500ML":
+                bottles = MyProducts.objects.get(name='Water 500ML')
+
+            else:
+                bottles = ''
+            
+            if not bottles == '' :
+                bottles = bottles.price * water
+            
+            bbqs = MyProducts.objects.get(name="BBQ")
+            bbq_price = bbq * bbqs.price
+
+            wait = MyProducts.objects.get(name="Waiters")
+            waiters = wait.price * int(no_of_waiters)
+
+            pakwan = int(pakwan)
+            naan_price = int(naan_price)
+            drink = int(drink)
+            bottles = int(bottles)
+            bbq_price = int(bbq_price)
+            diesel = int(diesel)
+            waiters = int(waiters)
+            stuff = int(stuff)
+            dhobi = int(dhobi)
+            other_expenses = int(other_expenses)
+            setup = int(setup)
+            decor_bill = int(decor_bill)
+            
+
+
+            total = pakwan + naan_price + bottles + drink + bbq_price + diesel + waiters + stuff + dhobi + other_expenses + setup + decor_bill
+           
+
+
+            add_event_expense = EventExpense.objects.create(
+                    bill=bill_number,
+                    pakwan_bill=pakwan,
+                    electicity = electicity,
+                    naan_qty =  naan,
+                    cold_drink= drinks,
+                    water = water,
+                    bbq_kg_qty=bbq,
+                    naan_bill=naan_price,
+                    cold_drink_bill=drink,
+                    water_bill=bottles,
+                    bbq_price=bbq_price,
+                    diesel_ltr=diesel,
+                    no_of_waiters= no_of_waiters,
+                    waiters_bill=waiters,
+                    stuff_bill=stuff,
+                    dhobi=dhobi,
+                    other_expense= other_expenses,
+                    setup_bill=setup,
+                    decor= decor,
+                    decor_bill=decor_bill,
+                    total_expense = total
+                )
+            return render(request, 'ecommerce/event-expense.html')
+
+            # except MyProducts.DoesNotExist:
+            #     # Handle case where product is not found
+            #     error_message = "Product not found"
+            #     return render(request, 'add_event_expense.html', {'error_message': error_message})
 
 class ProductsAddCategory(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-add-category.html"

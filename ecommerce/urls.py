@@ -6,6 +6,7 @@ urlpatterns = [
     path('ecommerce_product', views.Products.as_view(),name='ecommerce_product'),
     path('ecommerce_product_detail', views.ProductsDetail.as_view(),name='ecommerce_product_detail'),
     path('event-sale', views.Eventsale.as_view(),name='event-sale'),
+    path('update-event-sale/<int:sale_id>', views.UpdateEventsale.as_view(),name='update-event-sale'),
     path('event-expense', views.Eventexpense.as_view(),name='event-expense'),
     path('ecommerce_add_category', views.ProductsAddCategory.as_view(),name='ecommerce_add_category'),
     path('ecommerce_checkout', views.ProductsCheckout.as_view(),name='ecommerce_checkout'),

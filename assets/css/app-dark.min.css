@@ -1,4 +1,35 @@
 @import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap);
+
+
+#model-btn1{
+  border-radius: 10px;
+  background-color:#F14E4E;
+  color: white;
+  
+}
+#model-btn2{
+  border-radius: 10px;
+  background-color: #1EA77A;
+  color: white;
+}
+
+
+.mdc-card{
+  padding: 20px;
+  background-color: #45577b;
+  border-radius: 10px;
+  margin: 10px;
+  color: aliceblue;
+
+}
+
+
+@media (min-width: 1700px) {
+  .calc {
+    width: 400px;
+  }
+}
+
 #page-topbar {
   position: fixed;
   top: 0;
@@ -4132,3 +4163,47 @@ div.dataTables_wrapper div.dataTables_filter input {
   }
 }
 /*# sourceMappingURL=app-dark.min.css.map */
+
+
+/* Custom models */
+
+/* Custom styles for the modal form */
+
+
+/* Adjust the modal size */
+.modal-dialog {
+  max-width: 600px;
+
+}
+
+/* Add padding to the modal body */
+.modal-body {
+  padding: 20px;
+
+
+}
+
+/* Style the form labels */
+.form-label {
+  font-weight: bold;
+}
+
+/* Style the form inputs */
+.form-control {
+  border-radius: 0;
+}
+
+form {
+  margin: 50px;
+
+}
+
+/* Style the form buttons */
+.modal-footer .btn {
+  border-radius: 0;
+}
+select{
+  width: 500px;
+  height: 38px;
+  border-radius: 5px;
+}

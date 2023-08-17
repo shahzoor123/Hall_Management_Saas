@@ -121,7 +121,7 @@
                                                         
                                                       
                                                         <td>
-                                                            <button class="btn btn-light btn-rounded">Invoice <i class="mdi mdi-download ml-2"></i></button>
+                                                            <a href="{% url 'sale-invoice' sale.id %}" class="btn btn-light btn-rounded">Invoice <i class="mdi mdi-download ml-2"></i></a>
                                                         </td>
                                                         <td id="tooltip-container1">
                                                           <div class="d-flex">
@@ -131,6 +131,10 @@
                 
                                                               <a href="#" class="text-danger" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                                                 <i class="mdi mdi-trash-can font-size-18"></i>
+                                                              </a>
+
+                                                              <a href="{% url 'order-slip' sale.id %}" class="text-success" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Order Slip">
+                                                                <i class="mdi mdi-alpha-s-box font-size-18"></i>
                                                               </a>
                                                             
                                                           </div>
@@ -144,13 +148,13 @@
                                   <div class="modal-dialog modal-dialog-scrollable">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <!-- <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Add Sale</h5> -->
+                                        <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Edit Record</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                 
                                       <div class="modal-body">
                                       
-                                        <form class="form" id="sale-form" enctype="multipart/form-data" action="" method="POST">
+                                        <form class="form" id="sale-form" enctype="multipart/form-data" action="{% url 'update-event-sale' sale.id %}" method="POST">
                                           {% csrf_token %}
 
                                                     <!-- Form -->
@@ -242,8 +246,9 @@
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
-                                                        <input type="date" class="js-toggle-password form-control" name="event-date" id="" placeholder="StartRow"
-                                                          aria-label="" value="{{sale.event_date}}">
+                                                        {% with formatted_event_date=sale.event_date|date:"Y-m-d" %}
+                                                            <input type="date" class="js-toggle-password form-control" name="event-date" id="event-date" placeholder="Event Date" value="{{ formatted_event_date }}">
+                                                        {% endwith %}
                                         
                                                       </div>
                                                       <!-- End Input Group -->
@@ -284,27 +289,7 @@
                                                       </div>
                                                     </div>
 
-                                                    <div class="row mb-4">
-                                                      <label for="" class="col-sm-3 col-form-label form-label">Deals</label>
-                                        
-                                                      <div class="col-sm-9">
-                                                        <!-- Input Group -->
-                                                        <div class="input-group input-group-merge">
-                                                          <select class="js-select form-select" autocomplete="off" name="deals">
-                                        
-                                                            <!-- <option value="" disabled selected></option> -->
-                                                            <option value="{{sale.deals}}"> {{sale.deals}}</option>
-                                                            {% for deal in deals %}
-                                                                <option value="{{ deal.pk }}">{{ deal.code }}</option>
-                                                            {% endfor %}
-                                                            <option>Custom Deal</option>
-                                        
-                                                          </select>
-                                        
-                                                        </div>
-                                                        <!-- End Input Group -->
-                                                      </div>
-                                                    </div>
+                                                    
                                                     <!-- End Form -->
                                         
                                                     <!-- Form -->
@@ -370,7 +355,39 @@
                                                       </div>
                                                     </div>
                                                     <!-- End Form -->
+                                                    
+                                                     <!-- Form -->
+                                                     <div class="row mb-4">
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Stage Charges</label>
                                         
+                                                      <div class="col-sm-9">
+                                                        <!-- Input Group -->
+                                                        <div class="input-group input-group-merge">
+                                                          <input type="number" class="js-toggle-password form-control" name="stage-charges" id=""
+                                                            placeholder="Extra Charges" aria-label="" value="{{sale.stage_charges}}">
+                                                        </div>
+                                        
+                                                        <!-- End Input Group -->
+                                                      </div>
+                                                    </div>
+                                                    <!-- End Form -->
+
+                                                     <!-- Form -->
+                                                     <div class="row mb-4">
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Entry Charges</label>
+                                        
+                                                      <div class="col-sm-9">
+                                                        <!-- Input Group -->
+                                                        <div class="input-group input-group-merge">
+                                                          <input type="number" class="js-toggle-password form-control" name="entry-charges" id=""
+                                                            placeholder="Extra Charges" aria-label="" value="{{sale.entry_charges}}">
+                                                        </div>
+                                        
+                                                        <!-- End Input Group -->
+                                                      </div>
+                                                    </div>
+                                                    <!-- End Form -->
+
                                                     <!-- Form -->
                                                     <div class="row mb-4">
                                                       <label for="" class="col-sm-3 col-form-label form-label">Food menu</label>
@@ -412,7 +429,7 @@
                                                         <!-- Checkbox Switch -->
                                                         <div class="input-group input-group-merge">
                                                             <input type="number" class="js-toggle-password form-control" name="received-amount" id=""
-                                                              placeholder="Received amount" aria-label="" value="{{sale.recieved_amount}}">
+                                                              placeholder="Received amount" aria-label="" value="0">
                                                           </div>
                                                         <!-- End Checkbox Switch -->
                                                         <!-- End Input Group -->
