@@ -23,7 +23,11 @@ class Index(LoginRequiredMixin,TemplateView):
         context = {
             "total_sales": total_sales,
             "total_expense": total_expenses,
+            "fifty_sale": total_sales /2,
+            "user": request.user,
+            "fifty_revenue": (total_sales - total_expenses)/2,
             "revenue": total_sales - total_expenses
+
         }
         return render(request, self.template_name, context)
 class Calendar(LoginRequiredMixin,TemplateView):

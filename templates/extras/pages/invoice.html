@@ -38,7 +38,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="invoice-title">
-                                                    <h4 class="float-end font-size-16"><strong>Invoice # 12345</strong></h4>
+                                                    <h4 class="float-end font-size-16"><strong>Invoice {{sale.id}}</strong></h4>
                                                     <h3 class="m-t-0">
                                                         <img src="{% static 'images/black.png' %}" alt="logo" height="18"/>
                                                     </h3>
@@ -48,8 +48,8 @@
                                                     <div class="col-6">
                                                         <address>
                                                             <strong>Customer Details:</strong><br>
-                                                            Customer Name : <br>
-                                                            Customer Number : <br>
+                                                            Customer Name : <strong>{{sale.customer_name}}</strong><br>
+                                                            Customer Number : <strong>{{sale.customer_number}}</strong><br>
                                                             Address : <br>
                                                         </address>
                                                     </div>
@@ -57,9 +57,11 @@
                                                     <div class="col-6 text-end">
                                                         <address>
                                                             <strong>Event Details:</strong><br>
-                                                            Day/Night :<br>
-                                                            Booking Date :<br>
-                                                            Event Date :<br>
+                                                            Day/Night : <strong>{{sale.event_timing}}</strong><br>
+                                                            Booking Date : <strong> {{sale.booking_date}} </strong><br>
+                                                            Event Date : <strong> {{sale.event_date}} </strong><br>
+                                                            Setup: <strong>{{sale.setup}}</strong><br>
+
                                                         </address>
                                                     </div>
                                                 </div>
@@ -67,8 +69,8 @@
                                                     <div class="col-6">
                                                         <address>
                                                             <strong>Event Details:</strong><br>
-                                                            Number of People :<br>
-                                                            Charges per Head :<br>
+                                                            Number of People : <strong>{{sale.no_of_people}}</strong><br>
+                                                            Charges per Head : <strong>{{sale.per_head}}</strong><br>
                                                         </address>
                                                     </div>
                                                 </div>
@@ -77,15 +79,15 @@
                                                         <address>
                                                             <strong>Payment Details:</strong><br>
                                                             Payment Method: <br>
-                                                            Payment Status: 
+                                                            Payment Status: <strong> {{status}} </strong>
                                                         </address>
                                                     </div>
                                                     <div class="col-6 text-end">
                                                         <address>
                                                             <strong>Venue Details:</strong><br>
-                                                            Hall/Lawn: <br>
-                                                            Gents: <br>
-                                                            Ladies: <br>
+                                                            Hall/Lawn/Outside: <strong>{{sale.location}}</strong><br>
+                                                            Gents: <strong>{{sale.gents}}</strong><br>
+                                                            Ladies: <strong>{{sale.ladies}}</strong> <br>
 
 
                                                         </address>
@@ -103,63 +105,48 @@
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                 <tr>
-                                                                    <td class="text-center"><strong>Item</strong></td>
+                                                                    <td class="text-center"><strong>Menu Items</strong></td>
                                                                 
                                                                 </tr>
                                                                 </thead>
                                                                 
                                                                 <tbody>
                                                                 <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                                                                
+                                                                {% for item in food_menu %}
                                                                 <tr class="text-center">
-                                                                    <td>BS-1000</td>
+                                                                    <td>{{item}}</td>
                                                                     
                                                                 </tr>
+                                                                {% endfor %}
                                                                 <tr>
                                                                     <td class="thick-line"></td>
                                                                     <td class="thick-line"></td>
                                                                     <td class="thick-line text-center">
                                                                         <strong>Subtotal</strong></td>
-                                                                    <td class="thick-line text-end">$670.99</td>
+                                                                    <td class="thick-line text-end">&#8360; {{sub_total}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="no-line"></td>
                                                                     <td class="no-line"></td>
                                                                     <td class="no-line text-center">
                                                                         <strong>Extra Charges</strong></td>
-                                                                    <td class="no-line text-end">$15</td>
+                                                                    <td class="no-line text-end">&#8360; {{extra}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="no-line"></td>
                                                                     <td class="no-line"></td>
                                                                     <td class="no-line text-center">
                                                                         <strong>Grand Total</strong></td>
-                                                                    <td class="no-line text-end"><h4 class="m-0">$685.99</h4></td>
+                                                                    <td class="no-line text-end"><h4 class="m-0">&#8360; {{sale.total_amount}}</h4></td>
                                                                 </tr>
-<!--                                                                 
-                                                                <tr>
-                                                                
-                                                                    <td class="text-end">
-                                                                        <strong>Cash Recieved</strong></td>
-                                                                    <td class="no-line text-end"><h4 class="m-0">$685.99</h4></td>
-                                                                </tr>
-                                                                    
-                                                                <tr>
-                                                                    
-                                                                    <td class="text-end">
-                                                                        <strong>Balance Due</strong></td>
-                                                                    <td class="no-line text-end"><h4 class="m-0">$685.99</h4></td>
-                                                                </tr> -->
+
 
                                                                 
                                                             
                                                                 </tbody>
                                                             </table>
                                                             
-                                                            <span><strong>Note:</strong> Extra charges are added, When
-                                                                special or custom arrangements are
-                                                                requested.</span>
-                                                            <br>
+                                                            
                                                             <br>
                                                             <div class="container">
                                                                 <div class="row justify-content-end">
@@ -168,14 +155,20 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td><strong>Cash Received</strong></td>
-                                                                                    <td><h4 class="m-0">$685.99</h4></td>
+                                                                                    <td><h4 class="m-0">&#8360; {{sale.recieved_amount}}</h4></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td><strong>Balance Due</strong></td>
-                                                                                    <td><h4 class="m-0">$685.99</h4></td>
+                                                                                    <td><h4 class="m-0">&#8360; {{sale.remaining_amount}}</h4></td>
                                                                                 </tr>
+
+                                                                                
                                                                             </tbody>
                                                                         </table>
+                                                                        <span><strong>Note:</strong> Extra charges are added, When
+                                                                            special or custom arrangements are
+                                                                            requested. Extra Charges incudes (Stage charges, Couple Entry Charges and other special arrangements) </span>
+                                                                        <br>
                                                                     </div>
                                                                 </div>
                                                             </div>

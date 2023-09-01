@@ -1,6 +1,8 @@
 from django.db import models
 from items.models import MyProducts
 from items.models import MyProducts, Deals
+
+
 class EventSale(models.Model):
     confirm = 'Confirm'
     tentative = 'Tentative '
@@ -33,22 +35,51 @@ class EventSale(models.Model):
     event_date = models.DateField()
     no_of_people = models.IntegerField(null=True)
 
+    location = models.CharField(max_length=10, default="Hall", blank=True)
+
     setup = models.CharField(choices=SETUP_TYPE, default=delux, max_length=10)
 
-    deals = models.ForeignKey(Deals, on_delete=models.PROTECT)
+    deals = models.CharField(max_length=200)
 
     customer_name = models.CharField(max_length=200)
+    stage_charges = models.IntegerField(null=True, default=0)
+    entry_charges = models.IntegerField(null=True, default=0)
+
+    gents = models.IntegerField(default=0)
+    ladies = models.IntegerField(default=0)
+
+
     customer_number = models.BigIntegerField()
     per_head = models.IntegerField(null=True)
     extra_charges = models.IntegerField()
     food_menu = models.CharField(max_length=200)
     detials = models.TextField()
+    total_menu = models.IntegerField(default=0)
+    payment_details = models.TextField()
+    payment_count = models.IntegerField(default=0,editable=False)
     total_amount = models.IntegerField(editable=False, null=True)
     recieved_amount = models.IntegerField(null=True)
     remaining_amount = models.IntegerField(editable=False, null=True)
 
     def __str__(self):
         return str(self.bill_no)
+
+    def save(self, *args, **kwargs):
+        # Set payment_details if it's empty
+        if not self.payment_details:
+            self.payment_count += 1
+            self.payment_details = f"{self.payment_count}: Initial Payment was {self.recieved_amount}"
+
+        if not self.bill_no:
+            # Get the latest bill_no from the database and increment it
+            latest_bill_no = EventSale.objects.aggregate(models.Max('bill_no'))['bill_no__max']
+            if latest_bill_no is None:
+                latest_bill_no = 0
+            self.bill_no = latest_bill_no + 1
+        
+        # Set sr to be the same as bill_no
+        self.sr = self.bill_no
+        super().save(*args, **kwargs)
 
     # def save(self, *args, **kwargs):
     #     self.total_amount = (self.no_of_people * self.per_head) + self.extra_charges
@@ -88,68 +119,68 @@ class EventExpense(models.Model):
     def __str__(self):
         return str(self.bill)
 
-    def save(self, *args, **kwargs):
-        products = MyProducts.objects.filter(code__in=['BBQ', 'WAITERS', 'WATER', 'NAAN', 'DRINKS', 'STUFF'])
-        product_dict = {product.code: product for product in products}
+    # def save(self, *args, **kwargs):
+    #     products = MyProducts.objects.filter(code__in=['BBQ', 'WAITERS', 'WATER', 'NAAN', 'DRINKS', 'STUFF'])
+    #     product_dict = {product.code: product for product in products}
 
-        # BBQ PRICE
-        bbq_product = product_dict.get('BBQ')
-        bbq_price = 0
-        if bbq_product is not None:
-            bbq_kg_qty = self.bbq_kg_qty
-            bbq_price = bbq_product.price * bbq_kg_qty
-        self.bbq_price = bbq_price
+    #     # BBQ PRICE
+    #     bbq_product = product_dict.get('BBQ')
+    #     bbq_price = 0
+    #     if bbq_product is not None:
+    #         bbq_kg_qty = self.bbq_kg_qty
+    #         bbq_price = bbq_product.price * bbq_kg_qty
+    #     self.bbq_price = bbq_price
 
-        # WAITERS PRICE
-        waiters_product = product_dict.get('WAITERS')
-        waiters_bill = 0
-        if waiters_product is not None:
-            wait = self.no_of_waiters
-            w = waiters_product.price * wait
-            waiters_bill = w
-        self.waiters_bill = waiters_bill
+    #     # WAITERS PRICE
+    #     waiters_product = product_dict.get('WAITERS')
+    #     waiters_bill = 0
+    #     if waiters_product is not None:
+    #         wait = self.no_of_waiters
+    #         w = waiters_product.price * wait
+    #         waiters_bill = w
+    #     self.waiters_bill = waiters_bill
 
-        # WATER
-        water_product = product_dict.get('WATER')
-        water_bill = 0
-        if water_product is not None:
-            water_qty = self.water
-            w = water_product.price * water_qty
-            water_bill = w
-        self.water_bill = water_bill
+    #     # WATER
+    #     water_product = product_dict.get('WATER')
+    #     water_bill = 0
+    #     if water_product is not None:
+    #         water_qty = self.water
+    #         w = water_product.price * water_qty
+    #         water_bill = w
+    #     self.water_bill = water_bill
 
-        # NAAN
-        naan_product = product_dict.get('NAAN')
-        naan_bill = 0
-        if naan_product is not None:
-            naan_qty = self.naan_qty
-            naan_bill = naan_product.price * naan_qty
-        self.naan_bill = naan_bill
+    #     # NAAN
+    #     naan_product = product_dict.get('NAAN')
+    #     naan_bill = 0
+    #     if naan_product is not None:
+    #         naan_qty = self.naan_qty
+    #         naan_bill = naan_product.price * naan_qty
+    #     self.naan_bill = naan_bill
 
-        # Cold Drinks
-        cold_drink_product = product_dict.get('DRINKS')
-        cold_drink_bill = 0
-        if cold_drink_product is not None:
-            drink_qty = self.cold_drink
-            w = cold_drink_product.price * drink_qty
-            cold_drink_bill = w
-        self.cold_drink_bill = cold_drink_bill
+    #     # Cold Drinks
+    #     cold_drink_product = product_dict.get('DRINKS')
+    #     cold_drink_bill = 0
+    #     if cold_drink_product is not None:
+    #         drink_qty = self.cold_drink
+    #         w = cold_drink_product.price * drink_qty
+    #         cold_drink_bill = w
+    #     self.cold_drink_bill = cold_drink_bill
 
-        # Stuffs
-        stuff_product = product_dict.get('STUFF')
-        stuff_bill = 0
-        if stuff_product is not None:
-            stuf = self.bill.no_of_people * stuff_product.price
-            stuff_bill = stuf
-        self.stuff_bill = stuff_bill
+    #     # Stuffs
+    #     stuff_product = product_dict.get('STUFF')
+    #     stuff_bill = 0
+    #     if stuff_product is not None:
+    #         stuf = self.bill.no_of_people * stuff_product.price
+    #         stuff_bill = stuf
+    #     self.stuff_bill = stuff_bill
 
-        # Update the instance with the calculated bbq_price
-        self.total_expense = (
-            self.pakwan_bill + self.electicity + self.naan_bill + self.cold_drink_bill +
-            self.water_bill + self.bbq_price + self.diesel_ltr + self.waiters_bill +
-            self.stuff_bill + self.dhobi + self.other_expense + self.setup_bill + self.decor_bill
-        )
-        super(EventExpense, self).save(*args, **kwargs)
+    #     # Update the instance with the calculated bbq_price
+    #     self.total_expense = (
+    #         self.pakwan_bill + self.electicity + self.naan_bill + self.cold_drink_bill +
+    #         self.water_bill + self.bbq_price + self.diesel_ltr + self.waiters_bill +
+    #         self.stuff_bill + self.dhobi + self.other_expense + self.setup_bill + self.decor_bill
+    #     )
+    #     super(EventExpense, self).save(*args, **kwargs)
 
 
 

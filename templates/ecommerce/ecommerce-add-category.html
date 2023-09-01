@@ -1,0 +1,121 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Add Product{% endblock title %}
+
+{% block extra_css %}
+    <!-- twitter-bootstrap-wizard css -->
+    <link rel="stylesheet" href="{% static  'libs/twitter-bootstrap-wizard/prettify.css' %}">
+
+    <!-- select2 css -->
+    <link href="{% static  'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- dropzone css -->
+    <link href="{% static  'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+
+{% endblock extra_css %}
+    
+{% block content %}
+        <div class="main-content">
+            <div class="page-content">
+                <!-- start page title -->
+                <div class="page-title-box">
+                    <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <div class="page-title">
+                                <h4>Add Product</h4>
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="{% url 'index' %}">Hall</a></li>
+                                        <li class="breadcrumb-item"><a href="{% url 'event-sale' %}">Ecommerce</a></li>
+                                        <li class="breadcrumb-item active">Add Category</li>
+                                    </ol>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </div>
+                </div>
+                <!-- end page title -->    
+                <div class="container-fluid">
+                    <div class="page-content-wrapper">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div id="addproduct-nav-pills-wizard" class="twitter-bs-wizard">
+                                            <ul class="twitter-bs-wizard-nav">
+                                                <li class="nav-item add-product-border">
+                                                    <a href="#basic-info" class="nav-link" data-toggle="tab">
+                                                        <span class="step-number">01. Basic Info</span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!-- <li class="nav-item">
+                                                    <a href="#metadata" class="nav-link" data-toggle="tab">
+                                                        <span class="step-number">03. Meta Data</span>
+                                                    </a>
+                                                </li> -->
+                                            </ul>
+                                            <div class="tab-content twitter-bs-wizard-tab-content">
+                                                <div class="tab-pane" id="basic-info">
+                                                    <h4 class="header-title">Basic Information</h4>
+                                                    <p class="card-title-desc">Fill all information below</p>
+                                                    <form method="post" action="{% url 'ecommerce_add_category' %}">
+                                                        {% csrf_token %}
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="categoryname">Category Name</label>
+                                                            <input id="categoryname" name="categoryname" type="text" class="form-control">
+                                                        </div>                                                                                                            
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="status">Status</label>
+                                                                    <div class="form-check form-switch">
+                                                                        <label class="checkbox-label">
+                                                                            <input class="form-check-input" type="checkbox" name="status" value="1" role="switch" id="flexSwitchCheckChecked" checked> Alive
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="categorydesc">Category Description</label>
+                                                            <textarea class="form-control" id="categorydesc" name="categorydesc" rows="5"></textarea>
+                                                        </div>
+                                                    
+                                                    <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                                        <!-- <li class="float-end btn btn-primary"><a href="{% url 'ecommerce_add_category' %}">Save Changes <i class="mdi mdi-arrow-right ml-1"></i></a></li> -->
+                                                        <li class="float-end btn btn-primary" ><button type="submit" class="float-end btn btn btn-primary">Save Changes <i class="mdi mdi-arrow-right ml-1"></i></button> </li>
+                                                    </ul>
+                                                </form>                                                  
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                    </div>
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+{% endblock content %}
+{% block extra_javascript %}
+    <!-- twitter-bootstrap-wizard js -->
+    <script src="{% static  'libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
+
+    <script src="{% static  'libs/twitter-bootstrap-wizard/prettify.js' %}"></script>
+
+    <!-- select 2 plugin -->
+    <script src="{% static  'libs/select2/dist/js/select2.min.js' %}"></script>
+
+    <!-- dropzone plugin -->
+    <script src="{% static  'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+
+    <!-- init js -->
+    <script src="{% static  'js/pages/ecommerce-add-product.init.js' %}"></script>
+{% endblock extra_javascript %}
