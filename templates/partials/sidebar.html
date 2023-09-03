@@ -50,51 +50,45 @@
                         <span key="t-chat">Chat</span>
                     </a>
                 </li> -->
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fas fa-dollar-sign"></i>
-                        <span key="t-ecommerce">Finance</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="dripicons-camcorder"></i>
-                                <span key="t-events">Events</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{% url 'event-sale' %} " key="t-orders">Event Sale</a></li>
-                                <li><a href="{% url 'event-expense' %} " key="t-customers">Event Expense</a></li>
-                                <li><a href="{% url 'pages_invoice' %} " key="t-customers">Invoice</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="dripicons-cutlery"></i>
-                                <span key="t-events">Kitchen</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{% url 'calculate_menu' %} " key="t-customers">Kitchen Sale</a></li>
-                                <li><a href="{% url 'event-expense' %} " key="t-customers">Kitchen Expense</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="dripicons-shopping-bag"></i>
-                                <span key="t-events">Inventory</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{% url 'ecommerce_add_product' %} " key="t-add-product">Add Product</a>
-                                </li>
-                                <li><a href="{% url 'ecommerce_product' %} " key="t-products">Products</a></li>
-                                <li><a href="{% url 'ecommerce_product_detail' %} " key="t-product-detail">Product
-                                        Detail</a></li>
-                            </ul>
+                    
+                    
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span key="t-finance">Finance</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'event-sale' %} " key="t-finance">Sales Report</a></li>
+                            <li><a href="{% url 'event-expense' %} " key="t-finance">Expense Report</a></li>
+                            <li><a href="{% url 'event-expense' %} " key="t-finance">Kitchen Report</a></li>
+                            <li><a href="{% url 'event-expense' %} " key="t-finance">Salaries</a></li>
 
-                            </li>
-
-                            
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-camcorder"></i>
+                            <span key="t-events">Events</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'event-sale' %} " key="t-events">Event Sale</a></li>
+                            <li><a href="{% url 'event-expense' %} " key="t-events">Event Expenses</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="dripicons-cutlery"></i>
+                            <span key="t-events">Kitchen</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{% url 'calculate_menu' %} " key="t-customers">Kitchen Sale</a></li>
+                            <li><a href="{% url 'event-expense' %} " key="t-customers">Kitchen Expense</a></li>
+                        </ul>
+                    </li>
+
+
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="dripicons-mail"></i>
@@ -106,7 +100,9 @@
                             <li><a href="{% url 'email_compose' %}" key="t-email-compose">Email Compose</a></li>
                         </ul>
                     </li>
-                    <li>
+
+
+                <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="dripicons-cart"></i>
                             <span key="t-email">Store</span>
@@ -138,6 +134,23 @@
                         </li>
                     </ul>
                 </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="dripicons-shopping-bag"></i>
+                        <span key="t-events">Inventory</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{% url 'ecommerce_add_product' %} " key="t-add-product">Add Product</a>
+                        </li>
+                        <li><a href="{% url 'ecommerce_product' %} " key="t-products">Products</a></li>
+                        <li><a href="{% url 'ecommerce_product_detail' %} " key="t-product-detail">Product
+                                Detail</a></li>
+                    </ul>
+
+                    </li>
+
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-camera-burst"></i>
