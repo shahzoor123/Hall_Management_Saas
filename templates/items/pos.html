@@ -84,29 +84,73 @@
             <fieldset>
                 
                 <div class="d-flex w-100" id="POS-field" >
-                    <div class="col-9 bg-gradient ">
-                        <table class="table" style="color: aliceblue;">
-                            <colgroup>
-                                <col width="5%">
-                                <col width="10%">
-                                <col width="20%">
-                                <col width="10%">
-                                <col width="10%">
-                            </colgroup>
-                            <thead >
-                                <tr class="bg-dark bg-gradient bg-opacity-50 text-light">
-                                    <th class="py-1 px-2 text-center  ">No</th>
-                                    <th class="py-1 px-2 text-center  text-light">QTY</th>
-                                    <th class="py-1 px-2 text-center  text-light">Product</th>
-                                    <th class="py-1 px-2 text-center  text-light">Price</th>
-                                    <th class="py-1 px-2 text-center  text-light">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                 
-                            </tbody>
+                    <style>
+                        /* Add your custom styles here */
+                        .bg-gradient {
+                          /* Add your background gradient styles here */
+                          background-color: rgb(239, 239, 239);
+                          border-radius: 20px;
+                        }
+                      
+                        .table {
+                          /* Add your table styles here */
+                          border-collapse: collapse;
+                          width: 100%;
+                          border: 2px solid #000000;
+                          border-radius: 10px;
+                        }
+                      
+                        th, td {
+                          /* Add your header and cell styles here */
+                          padding: 8px;
+                          
+                          border-bottom: 1px solid #ddd;
+                        }
+                      
+                        th {
+                          background-color: #333;
+                          color: rgb(10, 10, 10);
+                          text-align: center;
+                        }
+                      
+                        tbody tr:nth-child(even) {
+                          /* Add your alternate row styles here */
+                          background-color: #f2f2f2;
+                          text-align: center;
+                        }
+                      
+                        /* Add more custom styles as needed */
+                      </style>
+                      
+                      <div class="col-9 bg-gradient">
+                        <table class="table" id="data-table">
+                          <colgroup>
+                            <col width="5%">
+                            <col width="10%">
+                            <col width="5%">
+                            <col width="10%">
+                            <col width="10%">
+                          </colgroup>
+                          <thead>
+                            <tr class="bg-dark bg-gradient bg-opacity-50 text-light">
+                              <th class="py-1 px-2">No</th>
+                              <th class="py-1 px-2">QTY</th>
+                              <th class="py-1 px-2">Product</th>
+                              <th class="py-1 px-2">Price</th>
+                              <th class="py-1 px-2">Total</th>
+                            </tr>
+                          </thead>
+                          <tbody >
+                      
+                          </tbody>
                         </table>
-                    </div>
+                      </div>
+                 
+                      
+                      
+                      
+                      
+                      
                     <div class="row" >
                         <div class="col-lg-12 col-md-12 col-sm-12" >
                             <div class="card">
@@ -115,30 +159,30 @@
                                     <form action="#">
                                         <div class="mb-4">
                                             <label class="form-label">Sub Total</label>
-                                            <div class="input-group " id="datepicker1" >
-                                                <input type="number" class="form-control " name="sub_total" value="0">
+                                            <div class="input-group " id="subtotal" >
+                                                <input type="number"  class="form-control " name="sub_total" value="0">
                     
                                                 <span class="input-group-text" id="sub_total">0.00</span>
                                             </div><!-- input-group -->
                                         </div>
                                         <div class="mb-4">
                                             <label class="form-label">Number of Peoplee</label>
-                                            <div class="input-group" id="datepicker2">
-                                                <input type="number" class="form-control" step="any" min="0" max="5000" name="tax" value="1">
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="no-of-people" min="0"  name="tax" value="1">
                                                 <span class="input-group-text">0</span>
                                             </div><!-- input-group -->
                                         </div>
                                         <div class="mb-4">
                                             <label class="form-label">Hall Charges</label>
-                                            <div class="input-group" id="datepicker3">
-                                                <input type="number" class="form-control" step="any" name="hall" value="0">
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="hall-charges" step="any" name="hall" value="0">
                                                 <span class="input-group-text">0</span>
                                             </div><!-- input-group -->
                                         </div>
                                         <div class="mb-4">
                                             <label class="form-label">Menu/head</label>
-                                            <div class="input-group" id="datepicker3">
-                                                <input type="number" class="form-control" name="tax_amount" value="0">
+                                            <div class="input-group" >
+                                                <input type="number" class="form-control" id="per-head" name="tax_amount" value="0">
                                                 <span class="input-group-text" id="tax_amount">0.00</span>
                                             </div><!-- input-group -->
                                         </div>
@@ -158,12 +202,13 @@
                     
                                         <div class="row row-cols-4">
                                             <div class="col-md-1 text-end">
-                                                <!-- <button class="btn btn-primary btn-sm " type="button" id="check_out"> Checkout</button> -->
-                                                <a  href="{% url 'details' %}"  class="btn btn-primary btn-sm " id="check_out"> Checkout </a>
-
+                                              <!-- <button class="btn btn-primary btn-sm " type="button" id="check_out"> Checkout</button> -->
+                                              <a class="btn btn-primary btn-sm " data-bs-toggle="modal"
+                                                data-bs-target="#exampleModalScrollable" data-bs-container="#tooltip-container1"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" onclick="populateNumOfPeople()"> Checkout </a>
+                
                                             </div>
-                                        </div>
-                                      
+                                          </div>
                     
                                     </form>
                                 </div>
@@ -174,6 +219,352 @@
             </fieldset>
          
         </form>
+
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Add Sale</h5> -->
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+              <form class="form" id="sale-form" enctype="multipart/form-data" action="{% url 'custom-menu' %}" method="POST">
+                {% csrf_token %}
+
+               
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Status</label>
+
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <select class="js-select form-select" autocomplete="off" name="status">
+
+
+                        <option>Tentative</option>
+                        <option>Confirm</option>
+
+                      </select>
+
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Event timing</label>
+
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <select class="js-select form-select" autocomplete="off" name="event-time">
+
+                        <option>Day</option>
+                        <option>Night</option>
+
+                      </select>
+
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Event Date</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <input type="date" class="js-toggle-password form-control" name="event-date" id=""
+                      placeholder="StartRow" aria-label="">
+
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Number of people</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <input type="number" class="js-toggle-password form-control" name="no-of-people"
+                      placeholder="Number of people" aria-label="">
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Location</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <select class="js-select form-select" autocomplete="off" name="location">
+
+
+                        <option>Hall</option>
+                        <option>Lawn</option>
+
+                      </select>
+
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Setup</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <select class="js-select form-select" autocomplete="off" name="setup">
+
+
+                        <option>Normal</option>
+                        <option>Delux</option>
+                        <option>VIP</option>
+
+                      </select>
+
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Deals</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+
+
+                    
+
+                      <input type="text" class="form-control" autocomplete="off" value="Custom Deal" readonly>
+
+                      <input type="hidden" class="form-control" autocomplete="off" name="deals" value="Custom Deal">
+
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Customer name</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <input type="text" class="js-toggle-password form-control" name="customer-name" id=""
+                      placeholder="Customer name" aria-label="">
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+
+                <!-- Form -->
+                <div class="row mb-4">
+                    <label for="" class="col-sm-3 col-form-label form-label">Menu Amount</label>
+  
+                    <div class="col-sm-9">
+                      <!-- Input Group -->
+                      <input type="text" class="js-toggle-password form-control" name="menu-amount" id="menu-amount"
+                        placeholder="Menu Amount" aria-label="">
+                      <!-- End Input Group -->
+                    </div>
+                  </div>
+                  <!-- End Form -->
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Customer number</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="customer-number" id=""
+                        placeholder="Customer number" aria-label="">
+
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Per head</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="per-head" id=""
+                        placeholder="Per head" aria-label="">
+
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Extra Charges</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="extra-charges" id=""
+                        placeholder="Extra Charges" aria-label="">
+                    </div>
+
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Stage Charges</label>
+    
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="stage-charges" id=""
+                        placeholder="Stage Charges" aria-label="" value="0">
+                    </div>
+    
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                 <!-- Form -->
+                 <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Couple Entry Charges</label>
+    
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="entry-charges" id=""
+                        placeholder="Entry Charges" aria-label="" value="0">
+                    </div>
+    
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Gents</label>
+    
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="gents" id=""
+                        placeholder="Number of Gents" aria-label="" value="0">
+                    </div>
+    
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                 <!-- Form -->
+                 <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Ladies</label>
+    
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="ladies" id=""
+                        placeholder="Number of ladies" aria-label="" value="0">
+                    </div>
+    
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+                
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Food menu</label>
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <input type="text" class="js-toggle-password form-control" id="menuDisplay" 
+                        aria-label="" readonly>
+                      <input type="hidden" class="js-toggle-password form-control" name="food-menu" id="menuInput" 
+                        aria-label="">
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="vehiclImg" class="col-sm-3 col-form-label form-label">Details</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+
+                      <textarea class="form-select" name="details" id="" cols="90" rows="5"></textarea>
+
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="countryShortDescription" class="col-sm-3 col-form-label form-label">Received
+                    amount</label>
+
+                  <div class="col-sm-9">
+                    <!-- Checkbox Switch -->
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="received-amount" id=""
+                        placeholder="Received amount" aria-label="">
+                    </div>
+                    <!-- End Checkbox Switch -->
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+
+                <!-- End Form -->
+                <div class="modal-footer">
+                  <button id="model-btn1" type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                  <button id="model-btn2" type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+
+
+
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
     </div>
 </div>
 <noscript id="item-clone">
@@ -185,7 +576,7 @@
         <td class="px-2 py-1">
             <input type="hidden" name="product_id[]">
             <input type="hidden" name="price[]">
-            <input type="number" name="qty[]" min="0" class="form-control form-control-sm rounded-0 text-center">
+            <input type="number" name="qty[]" min="0" class="form-control item-qty form-control-sm rounded-0 text-center">
         </td>
         <td class="px-2 py-1 product_name text-start"></td>
         <td class="px-2 py-1 product_price text-end"></td>
@@ -286,62 +677,58 @@
         $('[name="tax"]').on('input keypress keydown keyup', function() {
             calc()
         })
-        $('#check_out').click(function() {
-            if ($('#POS-field table tbody tr').length <= 0) {
-                alert("Add atleast 1 product first!")
-                return false;
-            }
-            uni_modal("Checkout", "{% url 'calculate_menu' %}?grand_total=" + $('[name="grand_total"]').val())
 
-        })
-        $('#pos-form').submit(function(e) {
-            e.preventDefault();
-            var _this = $(this)
-            $('.err-msg').remove();
-            var el = $('<div>')
-            el.addClass("alert alert-danger err-msg")
-            el.hide()
-            if (_this[0].checkValidity() == false) {
-                _this[0].reportValidity();
-                return false;
-            }
-            start_loader();
-            $.ajax({
-                headers: {
-                    "X-CSRFToken": '{{csrf_token}}'
-                },
-                url: "{% url 'calculate_menu' %}",
-                data: new FormData($(this)[0]),
-                cache: false,
-                contentType: false,
-                processData: false,
-                method: 'POST',
-                type: 'POST',
-                dataType: 'json',
-                error: err => {
-                    console.log(err)
-                    end_loader();
-                },
-                success: function(resp) {
-                    if (typeof resp == 'object' && resp.status == 'success') {
-                        el.removeClass("alert alert-danger err-msg")
-                            // location.reload()
-                        uni_modal("Receipt", "#?id=" + resp.sale_id)
-                        $('#uni_modal').on('hide.bs.modal', function() {
-                            location.reload()
-                        })
-                    } else if (resp.status == 'failed' && !!resp.msg) {
-                        el.text(resp.msg)
-                    }
-                   
-                    _this.prepend(el)
-                    el.show('slow')
-                    $("html, body, .modal").scrollTop(0);
-                    end_loader()
-                }
-            })
+        $('[id="hall-charges"]').on('input keypress keydown keyup', function() {
+            calc()
         })
     })
+
+    function populateNumOfPeople() {
+        // Get the value from the "Number of People" input in the first form
+        const numberOfPeopleInput = document.getElementById('no-of-people');
+        const numOfPeopleValue = numberOfPeopleInput.value;
+
+        // Set the value in the "Number of people" input field in the second form
+        const numOfPeopleInputForm2 = document.querySelector('form#sale-form [name="no-of-people"]');
+        numOfPeopleInputForm2.value = numOfPeopleValue;
+
+        // Get values from the first form
+      const hallChargesInput = document.getElementById('hall-charges');
+      const menuPerHeadInput = document.getElementById('per-head');
+
+
+       // Get the value of the sub_total input in Form 1
+    const subTotalInput = document.querySelector('input[name="sub_total"]');
+    const subTotalValue = subTotalInput.value;
+
+    // Set the value of the menu-amount input in Form 2
+    const menuAmountInput = document.querySelector('input[name="menu-amount"]');
+    menuAmountInput.value = subTotalValue;
+
+
+      // Calculate per head value
+      const perHeadValue = parseFloat(hallChargesInput.value) + parseFloat(menuPerHeadInput.value);
+
+      // Set values in the second form
+      const perHeadInputForm2 = document.querySelector('form#sale-form [name="per-head"]');
+      numOfPeopleInputForm2.value = numberOfPeopleInput.value;
+      perHeadInputForm2.value = perHeadValue.toFixed(2);
+        
+      var menu = "";
+        
+     // Iterate through table rows
+     $('#data-table tbody tr').each(function(index, row) {
+        var qty = $(row).find('.item-qty').val();
+        var productName = $(row).find('.product_name').text();
+        
+        // Append product name and quantity to the menu string
+        menu += `(${qty} x ${productName}\n)`;
+    });
+
+    // Set the menu string to the input fields in Form 2
+    $('#menuDisplay').val(menu);
+    $('#menuInput').val(menu);
+      }
 </script>
     <!-- twitter-bootstrap-wizard js -->
     <script src="{% static  'libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>

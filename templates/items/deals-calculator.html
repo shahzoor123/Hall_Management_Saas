@@ -74,17 +74,17 @@
                 <div class="col-9 bg-gradient ">
                   <table class="table">
                     <colgroup>
+                      <col width="20%">
                       <col width="5%">
                       <col width="10%">
-                      <col width="20%">
                       <col width="10%">
                       <col width="10%">
                     </colgroup>
                     <thead>
                       <tr class="bg-dark bg-gradient  text-light">
-                        <th class="py-1 px-2 text-center  ">No</th>
-                        <th class="py-1 px-2 text-center  ">QTY</th>
+                        <!-- <th class="py-1 px-2 text-center  ">No</th> -->
                         <th class="py-1 px-2 text-center  ">Product</th>
+                        <th class="py-1 px-2 text-center  ">QTY</th>
                         <th class="py-1 px-2 text-center  ">Price</th>
                         <th class="py-1 px-2 text-center  ">Total</th>
 
@@ -94,16 +94,16 @@
 
                       {% for dish, price in combined_data %}
                       <tr>
-                        <th class="py-1 px-2 text-center">{{ dish.code }}</th>
-                        <th><input type="number" id="positive-integer-input" class="item-qty form-control" data-price="{{ price.price }}" min="1" value="0" style="width: 100px; border-radius: 10px;"></th>
-                        <span hidden class="subtotal">0.00</span>
+                        <!-- <th class="py-1 px-2 text-center">{{ dish.id }}</th> -->
+                        
                         <th class="py-1 px-2 text-center">{{ dish.name }}</th>
+                        <th><input type="number" id="positive-integer-input" class="item-qty form-control center" data-price="{{ price.price }}" min="1" value="0" style="width: 100px; border-radius: 10px;"></th>
+                        <span hidden class="subtotal">0.00</span>
                         <th class="py-1 px-2 text-center">{{ price.price }}</th>
                         <td class="py-1 px-2 text-center total-value">0.00</td> <!-- Add a new 'td' for the total value -->
                       </tr>
                     {% endfor %}
-                    
-                  
+                
 
 
 
@@ -119,12 +119,12 @@
                           <div class="mb-4">
                             <label class="form-label">Sub Total</label>
                             <div class="input-group " id="datepicker1">
-                              <input type="text" class="form-control" id="subtotal" value="0.00" readonly>
+                              <input type="text" class="form-control" name="sub-total" id="subtotal" value="0.00" readonly>
                             </div><!-- input-group -->
                           </div>
                           <div class="mb-4">
                             <label class="form-label">Number of Peoplee</label>
-                            <div class="input-group" id="datepicker2">
+                            <div class="input-group" id="no-of-people1">
                               <input type="number" class="form-control" min="1" id="no-of-people" value="1">
 
                             </div><!-- input-group -->
@@ -157,7 +157,7 @@
                               <!-- <button class="btn btn-primary btn-sm " type="button" id="check_out"> Checkout</button> -->
                               <a class="btn btn-primary btn-sm " data-bs-toggle="modal"
                                 data-bs-target="#exampleModalScrollable" data-bs-container="#tooltip-container1"
-                                data-bs-toggle="tooltip" data-bs-placement="top"> Checkout </a>
+                                data-bs-toggle="tooltip" data-bs-placement="top" onclick="populateNumOfPeople()"> Checkout </a>
 
                             </div>
                           </div>
@@ -187,48 +187,7 @@
                   <form class="form" id="sale-form" enctype="multipart/form-data" action="" method="POST">
                     {% csrf_token %}
 
-                    <!-- Form -->
-                    <div class="row mb-4">
-                      <label for="vehicalType" class="col-sm-3 col-form-label form-label">Bill no</label>
-
-                      <div class="col-sm-9">
-                        <!-- Input Group -->
-
-
-                        <div class="input-group input-group-merge">
-                          <input type="text" class="js-toggle-password form-control" name="bill-no" id=""
-                            placeholder="Bill no" aria-label="">
-
-                        </div>
-
-
-
-
-
-
-                      </div>
-                    </div>
-                    <!-- End Form -->
-
-
-                    <!-- Form -->
-                    <div class="row mb-4">
-                      <label for="vehicalType" class="col-sm-3 col-form-label form-label">Serial:</label>
-
-                      <div class="col-sm-9">
-                        <!-- Input Group -->
-                        <div class="input-group input-group-merge">
-                          <input type="text" class="js-toggle-password form-control" name="serial-no" id=""
-                            placeholder="Sr" aria-label="">
-
-                        </div>
-
-                        </select>
-                        <!-- End Input Group -->
-                      </div>
-                    </div>
-                    <!-- End Form -->
-
+                   
                     <!-- Form -->
                     <div class="row mb-4">
                       <label for="" class="col-sm-3 col-form-label form-label">Status</label>
@@ -290,7 +249,7 @@
 
                       <div class="col-sm-9">
                         <!-- Input Group -->
-                        <input type="number" class="js-toggle-password form-control" name="no-of-people" id=""
+                        <input type="number" class="js-toggle-password form-control" name="no-of-people"
                           placeholder="Number of people" aria-label="">
                         <!-- End Input Group -->
                       </div>
@@ -303,7 +262,7 @@
                       <div class="col-sm-9">
                         <!-- Input Group -->
                         <div class="input-group input-group-merge">
-                          <select class="js-select form-select" autocomplete="off" name="setup">
+                          <select class="js-select form-select" autocomplete="off" name="location">
 
 
                             <option>Hall</option>
@@ -344,14 +303,11 @@
                         <div class="input-group input-group-merge">
 
 
-                          <select class="js-select form-select" autocomplete="off" name="deals">
+                        
 
-                            {% for deal in deals %}
-                            <option value="{{deal.id}}">{{deal}}</option>
-                            {% endfor %}
+                          <input type="text" class="form-control" autocomplete="off" value="{{Deal_name}}" readonly>
 
-                          </select>
-
+                          <input type="hidden" class="form-control" autocomplete="off" name="deals" value="{{Deal_name}}">
 
                         </div>
                         <!-- End Input Group -->
@@ -425,20 +381,95 @@
 
                     <!-- Form -->
                     <div class="row mb-4">
-                      <label for="" class="col-sm-3 col-form-label form-label">Food menu</label>
-
+                      <label for="" class="col-sm-3 col-form-label form-label">Stage Charges</label>
+        
                       <div class="col-sm-9">
                         <!-- Input Group -->
                         <div class="input-group input-group-merge">
-
-                          <input type="text" class="js-toggle-password form-control" name="food-menu" id=""
-                            placeholder="{{food_menu}}" aria-label="" readonly>
+                          <input type="number" class="js-toggle-password form-control" name="stage-charges" id=""
+                            placeholder="Stage Charges" aria-label="" value="0">
                         </div>
-
+        
                         <!-- End Input Group -->
                       </div>
                     </div>
                     <!-- End Form -->
+                    
+                    <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Menu Amount</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <input type="text" class="js-toggle-password form-control" name="menu-amount" id="menu-amount"
+                      placeholder="Menu Amount" aria-label="">
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                     <!-- Form -->
+                     <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Couple Entry Charges</label>
+        
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="entry-charges" id=""
+                            placeholder="Entry Charges" aria-label="" value="0">
+                        </div>
+        
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                     <!-- Form -->
+                     <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Gents</label>
+        
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="gents" id=""
+                            placeholder="Number of Gents" aria-label="" value="0">
+                        </div>
+        
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                     <!-- Form -->
+                     <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Ladies</label>
+        
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="ladies" id=""
+                            placeholder="Number of ladies" aria-label="" value="0">
+                        </div>
+        
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Food menu</label>
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="text" class="js-toggle-password form-control" id="menuDisplay" 
+                            aria-label="" readonly>
+                          <input type="hidden" class="js-toggle-password form-control" name="food-menu" id="menuInput" 
+                            aria-label="">
+                        </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
 
 
                     <!-- Form -->
@@ -519,17 +550,32 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      // When the quantity input changes, update the subtotal and total
+      var itemQtyList = [];
+    
       $('.item-qty').on('input', function () {
         var quantity = parseFloat($(this).val());
         var price = parseFloat($(this).data('price'));
-        var subtotal = (quantity * price).toFixed(2); // Calculate the subtotal
-        $(this).closest('tr').find('.subtotal').text(subtotal); // Update the subtotal cell
-
-        var total = (quantity * price).toFixed(2); // Calculate the total
-        $(this).closest('tr').find('.total-value').text(total); // Update the total cell
+        var dishCode = $(this).data('dish-name');
+        var subtotal = (quantity * price).toFixed(2);
+    
+        $(this).closest('tr').find('.subtotal').text(subtotal);
+    
+        var total = (quantity * price).toFixed(2);
+        $(this).closest('tr').find('.total-value').text(total);
+    
+        // Update the quantity in the itemQtyList array
+        var itemIndex = itemQtyList.findIndex(item => item.dishCode === dishCode);
+        if (itemIndex !== -1) {
+          itemQtyList[itemIndex].quantity = quantity;
+        } else {
+          itemQtyList.push({ dishCode: dishCode, quantity: quantity });
+        }
+        console.log(itemQtyList);
       });
+    
+ 
     </script>
+    
 
 
     <script>
@@ -551,11 +597,11 @@
 
           const hallCharges = parseFloat(hallChargesInput.value);
           const noOfPeople = parseInt(noOfPeopleInput.value, 10);
-          const perHead = ((subtotal + hallCharges) / noOfPeople).toFixed(2);
+          const perHead = (subtotal / noOfPeople).toFixed(2);
 
           // Display Subtotal, Grand Total, and Per Head values
           document.getElementById("subtotal").value = subtotal.toFixed(2);
-          const grandTotal = (subtotal + hallCharges).toFixed(2);
+          const grandTotal = (subtotal + (hallCharges * noOfPeople)).toFixed(2);
           document.getElementById("grand-total").value = grandTotal;
           document.getElementById("per-head").value = perHead;
         }
@@ -570,6 +616,58 @@
         hallChargesInput.addEventListener("input", updateTotals);
         noOfPeopleInput.addEventListener("input", updateTotals);
       });
+
+      function populateNumOfPeople() {
+        // Get the value from the "Number of People" input in the first form
+        const numberOfPeopleInput = document.getElementById('no-of-people');
+        const numOfPeopleValue = numberOfPeopleInput.value;
+
+        // Set the value in the "Number of people" input field in the second form
+        const numOfPeopleInputForm2 = document.querySelector('form#sale-form [name="no-of-people"]');
+        numOfPeopleInputForm2.value = numOfPeopleValue;
+
+        // Get values from the first form
+      const hallChargesInput = document.getElementById('hall-charges');
+      const menuPerHeadInput = document.getElementById('per-head');
+
+
+   // Get the value of the sub-total input in Form 1
+   const subTotalInput = document.querySelector('input[name="sub-total"]');
+   const subTotalValue = subTotalInput.value;
+
+   // Set the value of the menu-amount input in Form 2
+   const menuAmountInput = document.querySelector('input[name="menu-amount"]');
+   menuAmountInput.value = subTotalValue;
+
+    
+      // Calculate per head value
+      const perHeadValue = (parseFloat(hallChargesInput.value) + parseFloat(menuPerHeadInput.value));
+
+      // Set values in the second form
+      const perHeadInputForm2 = document.querySelector('form#sale-form [name="per-head"]');
+      numOfPeopleInputForm2.value = numberOfPeopleInput.value;
+      perHeadInputForm2.value = perHeadValue.toFixed(2);
+        
+      const products = [];
+      const quantityInputs = document.querySelectorAll('.item-qty');
+    
+      quantityInputs.forEach(input => {
+        const quantity = parseInt(input.value);
+        if (quantity > 0) {
+          const product = input.closest('tr').querySelector('.py-1.px-2.text-center').textContent;
+          products.push(`${product} (${quantity})`);
+        }
+      });
+    
+      // Set the gathered product and quantity information in the "Food menu" input field in form 2
+      const menuDisplay = document.getElementById('menuDisplay');
+      const menuInput = document.getElementById('menuInput');
+    
+      menuDisplay.value = products.join(', ');
+      menuInput.value = products.join(', ');
+            
+      }
+      
     </script>
 
     <!-- twitter-bootstrap-wizard js -->

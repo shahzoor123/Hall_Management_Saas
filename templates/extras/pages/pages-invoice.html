@@ -1,7 +1,8 @@
-{% extends 'partials/primary_base.html' %}
+{% extends 'partials/base.html' %}
 {% load static %}
 
 {% block title %}Invoice{% endblock title %}
+
 
 {% block content %}
         <div class="main-content">
@@ -12,9 +13,9 @@
                     <div class="row align-items-center">
                         <div class="col-sm-6">
                             <div class="page-title">
-                                <h4>Invoice</h4>
+                                <h4>Order Slip</h4>
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Morvin</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
                                         <li class="breadcrumb-item active">Invoice</li>
                                     </ol>
@@ -29,89 +30,80 @@
                     </div>
                 </div>
                 <!-- end page title -->    
-                <div class="container-fluid" >
-                    <div class="page-content-wrapper" >
+                <div class="container-fluid">
+                    <div class="page-content-wrapper">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card m-b-30">
-                                    <div class="card-body" style="padding: 50px;">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="invoice-title">
-                                                    {% for fields in sales %}
-                                                    <h4 class="float-end font-size-16"><strong>Order {{fields.bill_no}}</strong></h4>
-                                                   {% endfor %}
+                                                    <h4 class="float-end font-size-16"><strong>Order # {{sale.id}}</strong></h4>
                                                     <h3 class="m-t-0">
-                                                        <img src="{% static 'images/black.png' %}" alt="logo" height="18"/>
+                                                        <img src="{% static 'images/black.png' %}" alt="logo" height="18" />
                                                     </h3>
                                                 </div>
                                                 <hr>
                                                 <div class="row">
-                                                
                                                     <div class="col-6">
-                                                        {% for fields in sales %}
-                                                            <h5><strong>Billed To: </strong>{{fields.customer_name}}</h5>
-                                                            <h5><strong>Number: </strong>{{fields.customer_number}}</h5>
-                                                            <h5><strong>Number of People: </strong>{{fields.no_of_people}}</h5>
-                                                            <h5><strong>Setup : </strong>{{fields.setup}}</h5>
-                                                            {% endfor %}
+                                                        <address>
+                                                            <strong>Customer Details:</strong><br><br>
+                                                            Customer Name : <strong>{{sale.customer_name}}</strong><br>
+                                                            Customer Number : <strong>{{sale.customer_number}}</strong><br>
+                                                            Gents : <strong> {{sale.gents}} </strong><br>
+                                                            Ladies: <strong> {{sale.ladies}}</strong><br>
+                                                        </address>
                                                     </div>
-                                             
-                                           
+                                                    
+                                                    <div class="col-6 text-end">
+                                                        <address>
+                                                            <strong>Event Details:</strong><br><br>
+                                                            Event Timing: <strong>{{sale.event_timing}}</strong><br>
+                                                            Event Date : <strong> {{sale.event_date}} </strong><br>
+                                                            Setup : <strong>{{sale.setup}}</strong><br>
+                                                            Location : <strong>{{sale.location}}</strong><br>
+                                                            
+
+                                                        </address>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="panel panel-default">
                                                     <div class="p-2">
-                                                        <h3 class="panel-title font-size-20"><strong>Order summary</strong></h3>
+                                                        <h3 class="panel-title font-size-20"><strong>Order Slip</strong></h3>
                                                     </div>
                                                     <div class="">
                                                         <div class="table-responsive">
                                                             <table class="table">
                                                                 <thead>
                                                                 <tr>
-                                                                    <td><strong>Item</strong></td>
-                                                                    <td class="text-center"><strong>Price</strong></td>
+                                                                    <td class="text-center"><strong>Menu Items</strong></td>
                                                                     <td class="text-center"><strong>Quantity</strong>
                                                                     </td>
-                                                                    <td class="text-end"><strong>Totals</strong></td>
+                                                                    <td class="text-end"><strong></strong></td>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                 <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                                                                {% for dish, price in combined_data %}
+                                                                {% for item, qty in menu.items %}
                                                                 <tr>
-                                                                    <td>{{ dish.name }}</td>
-                                                                    <td class="text-center">{{ price.price }}</td>
-                                                                    <td class="text-center">1</td>
-                                                                    <td class="text-end">0</td>
+                                                                    <td class="text-center">{{item}}</td>
+                                                                    <td class="text-center">{{qty}}</td>
+                                                                    <td class="text-end"></td>
                                                                 </tr>
-                                                                {% endfor %}
-                                                                <tr>
-                                                                    <td class="thick-line"></td>
-                                                                    <td class="thick-line"></td>
-                                                                    <td class="thick-line text-center">
-                                                                        <strong>Subtotal</strong></td>
-                                                                    <td class="thick-line text-end">$670.99</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="no-line"></td>
-                                                                    <td class="no-line"></td>
-                                                                    <td class="no-line text-center">
-                                                                        <strong>Shipping</strong></td>
-                                                                    <td class="no-line text-end">$15</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="no-line"></td>
-                                                                    <td class="no-line"></td>
-                                                                    <td class="no-line text-center">
-                                                                        <strong>Total</strong></td>
-                                                                    <td class="no-line text-end"><h4 class="m-0">$685.99</h4></td>
-                                                                </tr>
+                                                               {% endfor %}
+                                                               
                                                                 </tbody>
                                                             </table>
                                                         </div>
                                                         <div class="d-print-none mo-mt-2">
                                                             <div class="float-end">
+                                                               
                                                                 <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
                                                                 <a href="#" class="btn btn-primary waves-effect waves-light">Send</a>
                                                             </div>
@@ -128,4 +120,6 @@
                 </div> <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
+
+              
 {% endblock content %}
