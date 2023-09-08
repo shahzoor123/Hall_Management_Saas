@@ -183,6 +183,28 @@ class EventExpense(models.Model):
     #     super(EventExpense, self).save(*args, **kwargs)
 
 
+class Kitchensale(models.Model):
+    bill = models.ForeignKey(EventSale, on_delete=models.PROTECT)
+    date = models.DateField()
+    payment_details = models.TextField(max_length=300)
+    mutton = models.CharField(max_length=50)
+    chicken = models.CharField(max_length=50)
+    beef = models.CharField(max_length=50)
+    rice = models.CharField(max_length=50)
+    dahi = models.CharField(max_length=50)
+    doodh = models.CharField(max_length=50)
+    sabzi = models.CharField(max_length=50)
+    fruits = models.CharField(max_length=50)
+    khoya_cream_paneer = models.CharField(max_length=50)
+    dry_fruits = models.CharField(max_length=50)
+    oil = models.CharField(max_length=50)
+    other_items_bill = models.CharField(max_length=50)
+    other_items_desc = models.CharField(max_length=50)
+    total_bill = models.CharField(max_length=50)
+
+    def __str__(self):
+        return str(self.bill)
+
 
 class Event(models.Model):
     event_title = models.CharField(max_length=200)
