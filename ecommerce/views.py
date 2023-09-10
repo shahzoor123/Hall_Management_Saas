@@ -117,7 +117,75 @@ class Eventsale(LoginRequiredMixin, View):
 
 
 
+class Kitchensale(LoginRequiredMixin, View):
+    template_name = "ecommerce/kitchen-sale.html"
 
+    def get(self, request):
+        sale = EventSale.objects.all()
+        deals = Deals.objects.all()
+        total_sales = EventSale.objects.aggregate(total_sales=Sum('total_amount'))['total_sales']
+        total_expenses = EventExpense.objects.aggregate(total_expenses=Sum('total_expense'))['total_expenses']
+
+        total_sales = total_sales or 0
+        total_expenses = total_expenses or 0
+
+       
+
+
+        context = {
+            "sales": sale,
+            
+            "deals": deals
+        }
+        return render(request, self.template_name, context)
+    
+    
+    # def post(self, request):
+    #     if request.method == "POST":
+    #         bill_number = request.POST.get('bill-no')
+    #         serial = request.POST.get('serial-no')
+
+    #         event_status = request.POST.get('status')
+    #         event_time = request.POST.get('event-time')
+
+    #         event_date = request.POST.get('event-date')
+    #         number_of_people = request.POST.get('no-of-people')
+    #         setup = request.POST.get('setup')
+
+    #         deals = request.POST.get('deals')
+    #         customer_name = request.POST.get('customer-name')
+    #         customer_number = request.POST.get('customer-number')
+    #         per_head = request.POST.get('per-head')
+
+    #         extra_charge = request.POST.get('extra-charges')
+           
+    #         food_menu = request.POST.get('food-menu')
+    #         details = request.POST.get('details')
+    #         received_ammount = request.POST.get('received-amount')
+
+            
+    #         add_event_sale = EventSale.objects.create(
+    #             bill_no=bill_number,
+    #             sr=serial,
+    #             status=event_status,
+    #             event_timing=event_time,
+    #             event_date=event_date,
+    #             no_of_people=number_of_people,
+    #             setup=setup,
+    #             customer_name=customer_name,
+    #             customer_number=customer_number,
+    #             per_head=per_head,
+    #             extra_charges=extra_charge,
+    #             stage_charges= stage_charge,
+    #             entry_charges=entry_charge,
+    #             food_menu=food_menu,
+    #             detials=details,
+    #             total_amount= (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) ,
+    #             recieved_amount=received_ammount, 
+    #             remaining_amount = total_amount - received_ammount
+    #         )
+    #     print('Posted')
+        # return render(request, 'items/deals-calculator')
 
 
 class UpdateEventsale(LoginRequiredMixin, View):
@@ -278,7 +346,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
             drink = 0
             if drinks_type == 'Cold Drinks 1.5L':
-                drink = MyProducts.objects.get(name='Cold Drinks 1.5')
+                drink = MyProducts.objects.get(name='Cold Drinks 1.5L')
 
             elif drinks_type == "Cold Drinks Tin":
                 drink = MyProducts.objects.get(name='Cold Drinks Tin')

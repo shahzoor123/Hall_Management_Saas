@@ -61,27 +61,30 @@
                                             <table class="table table-centered datatable dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th style="width: 20px;">
+                                                        <!-- <th style="width: 20px;">
                                                             <div class="form-check">
                                                                 <input type="checkbox" class="form-check-input" id="ordercheck" onchange="checkAll(this)" name="chk[]">
                                                                 <label class="form-check-label" for="ordercheck">&nbsp;</label>
                                                             </div>
-                                                        </th>
+                                                        </th> -->
                                                         <th>Bill ID</th>
-                                                        <th>Pakwan Bill</th>
-                                                        <th>Diesel LTR</th>
-                                                        <th>Electicity Bill</th>
-                                                        <th>Naan Bill</th>
-                                                        <th>Water Bill</th>
-                                                        <th>Cold Drinks</th>
-                                                        <th>Dhobi</th>
-                                                        <th>Other Expenses</th>
-                                                        <th>Waiters</th>
-                                                        <th>BBQ</th>
-                                                        <th>Stuff</th>
-                                                        <th>Setup</th>
-                                                        <th>Decor</th>
-                                                        <th>Total Expenses</th>
+                                                        <th>Date</th>
+                                                        <th>Payment Dtls</th>
+                                                        <th>Mutton</th>
+                                                        <th>Chicken </th>
+                                                        <th>Beef</th>
+                                                        <th>Rice</th>
+                                                        <th>Dahi</th>
+                                                        <th>Doodh</th>
+                                                        <th>Sabzi</th>
+                                                        <th>Fruits</th>
+                                                        <th>Khoya/Cream/Paneer</th>
+                                                        <th>Dry Fruits</th>
+                                                        <th>Oil</th>
+                                                        <th>Other Items Bill</th>
+                                                        <th>Other Items Desc</th>
+                                                        <th>Total Bill</th>
+
                                                         <!-- <th>Invoice</th> -->
                                                         <th style="width: 120px;">Action</th>
                                                     </tr>
@@ -778,21 +781,11 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
       var selectElement = document.querySelector('select[name="bill-no"]');
-<<<<<<< HEAD
-      var pakwanBillInput = document.querySelector('input[name="pakwan-bill"]');
-=======
       var pakwanBillInput = document.getElementById("pakhwan");
->>>>>>> 98355d30799fd66056c5eaf4529c6b6d446a5de2
   
       selectElement.addEventListener('change', function() {
           var selectedOption = selectElement.options[selectElement.selectedIndex];
           var pakwanBill = selectedOption.getAttribute('data-pakwan-bill');
-<<<<<<< HEAD
-          
-          if (pakwanBill !== null) {
-              pakwanBillInput.value = pakwanBill;
-          } else {
-=======
 
           
           if (pakwanBill !== null) {
@@ -801,7 +794,6 @@
               
           } else {
               console.log('else')
->>>>>>> 98355d30799fd66056c5eaf4529c6b6d446a5de2
               pakwanBillInput.value = ''; // Clear the input if no data found
           }
       });
