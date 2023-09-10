@@ -419,13 +419,12 @@
                                     
                                     
                                                     <div class="input-group input-group-merge">
-                                                        <select class="js-select form-select" autocomplete="off" name="bill-no">
-                                                          
-                                                            <option>Select</option>
-                                                            {% for event in events %}
-                                                            <option value="{{event.id}}">{{event.customer_name}}_bill_{{event}}</option>
-                                                            {% endfor %}
-                                                        </select>
+                                                      <select class="js-select form-select" autocomplete="off" name="bill-no">
+                                                        <option>Select</option>
+                                                        {% for event in events %}
+                                                        <option value="{{ event.id }}" data-pakwan-bill="{{ event.total_menu }}">{{ event.customer_name }}_bill_{{ event }}</option>
+                                                        {% endfor %}
+                                                    </select>
                                                         
                                       
                                                       </div>
@@ -540,7 +539,9 @@
                                                       <select class="js-select form-select" autocomplete="off" name="water-bottles-type">
                                                         <option> Select</option>
                                                         <option>Water 500ML</option>
+                                                        <option>Water 300ML</option>  
                                                         <option>Water 1.5L</option>                                    
+
                                                       </select>
                                     
                                                     </div>
@@ -733,10 +734,32 @@
 {% endblock content %}
 
 {% block extra_javascript %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var selectElement = document.querySelector('select[name="bill-no"]');
+      var pakwanBillInput = document.querySelector('input[name="pakwan-bill"]');
+  
+      selectElement.addEventListener('change', function() {
+          var selectedOption = selectElement.options[selectElement.selectedIndex];
+          var pakwanBill = selectedOption.getAttribute('data-pakwan-bill');
+          
+          if (pakwanBill !== null) {
+              pakwanBillInput.value = pakwanBill;
+          } else {
+              pakwanBillInput.value = ''; // Clear the input if no data found
+          }
+      });
+  });
+  </script>
+  
+
     <!-- Required datatable js -->
   
     <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     
     <!-- Responsive examples -->
     <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>

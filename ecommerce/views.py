@@ -1,12 +1,15 @@
 from django.shortcuts import render , redirect,get_object_or_404
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.http import require_GET
 from django.db.models import Sum
 from items.models import MyProducts
 from ecommerce.models import EventSale
 from ecommerce.models import EventExpense
 from items.models import Deals
 import json
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
 from django.urls import reverse
 from django.views import View
 from items.models import Deals , MyProducts
@@ -111,6 +114,11 @@ class Eventsale(LoginRequiredMixin, View):
             #     calc_get_function = Calculate()
 
             #     return  calc_get_function.get_context_data(request, context)   
+
+
+
+
+
 
 class UpdateEventsale(LoginRequiredMixin, View):
     template_name = "ecommerce/event-sale.html"
@@ -288,6 +296,9 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
             elif water_type == "Water 500ML":
                 bottles = MyProducts.objects.get(name='Water 500ML')
+
+            elif water_type == "Water 300ML":
+                bottles = MyProducts.objects.get(name='Water 300ML')
 
             else:
                 bottles = ''
