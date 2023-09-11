@@ -778,19 +778,23 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
       var selectElement = document.querySelector('select[name="bill-no"]');
+
+      var pakwanBillInput = document.querySelector('input[name="pakwan-bill"]');
+
       var pakwanBillInput = document.getElementById("pakhwan");
+
   
       selectElement.addEventListener('change', function() {
           var selectedOption = selectElement.options[selectElement.selectedIndex];
           var pakwanBill = selectedOption.getAttribute('data-pakwan-bill');
 
-          
           if (pakwanBill !== null) {
               pakwanBillInput.value = pakwanBill;
-              console.log(pakwanBillInput)
-              
           } else {
+
+
               console.log('else')
+
               pakwanBillInput.value = ''; // Clear the input if no data found
           }
       });
