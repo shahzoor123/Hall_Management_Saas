@@ -117,6 +117,7 @@ class Eventsale(LoginRequiredMixin, View):
 
 
 
+
 class Kitchensale(LoginRequiredMixin, View):
     template_name = "ecommerce/kitchen-sale.html"
 
@@ -187,6 +188,28 @@ class Kitchensale(LoginRequiredMixin, View):
     #     print('Posted')
         # return render(request, 'items/deals-calculator')
 
+class Kitchenexpense(LoginRequiredMixin, View):
+    template_name = "ecommerce/kitchen-expense.html"
+
+    def get(self, request):
+        sale = EventSale.objects.all()
+        deals = Deals.objects.all()
+        total_sales = EventSale.objects.aggregate(total_sales=Sum('total_amount'))['total_sales']
+        total_expenses = EventExpense.objects.aggregate(total_expenses=Sum('total_expense'))['total_expenses']
+
+        total_sales = total_sales or 0
+        total_expenses = total_expenses or 0
+
+       
+
+
+        context = {
+            "sales": sale,
+            
+            "deals": deals
+        }
+        return render(request, self.template_name, context)
+    
 
 class UpdateEventsale(LoginRequiredMixin, View):
     template_name = "ecommerce/event-sale.html"

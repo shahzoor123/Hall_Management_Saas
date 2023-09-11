@@ -722,12 +722,13 @@
         var productName = $(row).find('.product_name').text();
         
         // Append product name and quantity to the menu string
-        menu += `(${qty} x ${productName}\n)`;
+        menu += `${productName} (${qty}), `;
     });
 
     // Set the menu string to the input fields in Form 2
     $('#menuDisplay').val(menu);
     $('#menuInput').val(menu);
+
       }
 </script>
     <!-- twitter-bootstrap-wizard js -->

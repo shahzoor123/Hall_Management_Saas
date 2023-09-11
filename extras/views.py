@@ -18,8 +18,10 @@ def order_slip(request, sale_id):
     for ls in lst:
         lss = ls.strip().split(' ')
         
-        item = lss[0]
-        my_menu.update({item: lss[1][1:-1]})
+        if len(lss) > 1:
+            item = lss[0]
+            print(lss)
+            my_menu.update({item: lss[1][1:-1]})
 
     context = {
         'sale': sale,
@@ -45,8 +47,10 @@ def sale_invoice(request, sale_id):
     lst = sale.food_menu.split(',')
     for ls in lst:
         lss = ls.strip().split(' ')
-        item = lss[0]
-        my_menu.append(item)
+
+        if len(lss) > 1:
+            item = lss[0]
+            my_menu.append(item)
   
     stage = int(sale.stage_charges)
     entry = int(sale.entry_charges)

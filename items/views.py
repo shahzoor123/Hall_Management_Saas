@@ -90,6 +90,9 @@ def custom_menu(request):
                     recieved_amount=received_ammount, 
                     remaining_amount = total - int(received_ammount)
                 )
+
+                create_event = Event.objects.create(event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
+
                 return render(request, 'extras/pages/pages-invoice.html')
 
 def item(request, deal_id):
@@ -166,15 +169,8 @@ def item(request, deal_id):
                 products = MyProducts.objects.all()
                 deal = get_object_or_404(Deals, pk=deal_id)
                 items = MyProducts.objects.filter(deals=deal)
-                
-
-                print('done')
-               
+                               
                 sale = EventSale.objects.filter(bill_no=bill_num)
-                 
-                print(sale)
-                                
-                
             
 
                 combined_data = zip(items, products)
