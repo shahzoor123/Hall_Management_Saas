@@ -183,7 +183,9 @@ class EventExpense(models.Model):
     #     super(EventExpense, self).save(*args, **kwargs)
 
 
-class Kitchensale(models.Model):
+class MyKitchenexpense(models.Model):
+    
+
     bill = models.ForeignKey(EventSale, on_delete=models.PROTECT)
     date = models.DateField()
     payment_details = models.TextField(max_length=300)
@@ -201,6 +203,9 @@ class Kitchensale(models.Model):
     other_items_bill = models.CharField(max_length=50)
     other_items_desc = models.CharField(max_length=50)
     total_bill = models.CharField(max_length=50)
+
+    # Define a manager for your model
+    objects = models.Manager()
 
     def __str__(self):
         return str(self.bill)

@@ -6,6 +6,7 @@ from django.db.models import Sum
 from items.models import MyProducts
 from ecommerce.models import EventSale
 from ecommerce.models import EventExpense
+from ecommerce.models import MyKitchenexpense
 from items.models import Deals
 import json
 from django.http import JsonResponse
@@ -194,6 +195,7 @@ class Kitchenexpense(LoginRequiredMixin, View):
     def get(self, request):
         sale = EventSale.objects.all()
         deals = Deals.objects.all()
+        kitchen_expense = MyKitchenexpense.objects.all()
         total_sales = EventSale.objects.aggregate(total_sales=Sum('total_amount'))['total_sales']
         total_expenses = EventExpense.objects.aggregate(total_expenses=Sum('total_expense'))['total_expenses']
 
@@ -206,10 +208,69 @@ class Kitchenexpense(LoginRequiredMixin, View):
         context = {
             "sales": sale,
             
-            "deals": deals
+            "deals": deals,
+
+            "kitchen_expense" : kitchen_expense
         }
         return render(request, self.template_name, context)
     
+    def post(self, request):
+        if request.method == "POST":
+            bill_num = request.POST.get('bill')
+            payment = request.POST.get('payment-details')
+
+            date = request.POST.get('date')
+            mutton = request.POST.get('mutton')
+
+            chicken = request.POST.get('chicken')
+            beef = request.POST.get('beef')
+            rice = request.POST.get('rice')
+
+            dahi = request.POST.get('dahi')
+            doodh = request.POST.get('doodh')
+            sabzi = request.POST.get('sabzi')
+            fruits = request.POST.get('fruits')
+
+            khoya_paneer = request.POST.get('khoya-paneer')
+            dry = request.POST.get('dry-fruits')
+            oil = request.POST.get('oil')
+            other = request.POST.get('other-items-bill')
+            other_desc = request.POST.get('other-items-desc')
+
+            
+            # Fetch the EventSale object based on the provided bill_num
+            try:
+                event_sale = EventSale.objects.get(id=bill_num)
+            except EventSale.DoesNotExist:
+                # Handle the case where the EventSale with the given ID doesn't exist
+                # You can return an error message or redirect to an error page
+                pass
+            else:
+                # Create the Kitchenexpense object using the EventSale object
+                total=int(mutton) + int(chicken) + int(beef) + int(rice) + int(rice) + int(dahi) + int(doodh) + int(sabzi) + int(fruits) + int(khoya_paneer) + int(oil) + int(other) + int(dry)
+                add_kitchen_expense = MyKitchenexpense.objects.create(
+                    bill=event_sale,  # Use the EventSale object
+                    date=date,
+                    payment_details=payment,
+                    mutton=mutton,
+                    chicken=chicken,
+                    beef=beef,
+                    rice=rice,
+                    dahi=dahi,
+                    doodh=doodh,
+                    sabzi=sabzi,
+                    fruits=fruits,
+                    dry_fruits = dry,
+                    khoya_cream_paneer=khoya_paneer,
+                    oil=oil,
+                    other_items_bill=other,
+                    other_items_desc=other_desc,
+                    total_bill= total
+                )
+
+        return render(request, "ecommerce/kitchen-expense.html")
+
+
 
 class UpdateEventsale(LoginRequiredMixin, View):
     template_name = "ecommerce/event-sale.html"
