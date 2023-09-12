@@ -1,7 +1,7 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 
-{% block title %}Orders{% endblock title %}
+{% block title %}Kitchen Sale{% endblock title %}
 
 {% block extra_css %}
      <!-- DataTables -->
@@ -20,17 +20,17 @@
                     <div class="row align-items-center">
                         <div class="col-sm-6">
                             <div class="page-title">
-                                <h4>Orders</h4>
+                                <h4>Sales</h4>
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Hall</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                        <li class="breadcrumb-item active">Orders</li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Kitchen></a></li>
+                                        <li class="breadcrumb-item active"> <a href="javascript: void(0);">Sales</a></li>
                                     </ol>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="float-end d-none d-sm-block">
-                                <a href="" class="btn btn-success" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#add-expense-model"><i class="mdi mdi-plus me-2"></i>Add Expense</a>
+                                <a href="" class="btn btn-success" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#add-expense-model"><i class="mdi mdi-plus me-2"></i>Add Sale</a>
                             </div>
                         </div>
                     </div>
@@ -61,27 +61,30 @@
                                             <table class="table table-centered datatable dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th style="width: 20px;">
+                                                        <!-- <th style="width: 20px;">
                                                             <div class="form-check">
                                                                 <input type="checkbox" class="form-check-input" id="ordercheck" onchange="checkAll(this)" name="chk[]">
                                                                 <label class="form-check-label" for="ordercheck">&nbsp;</label>
                                                             </div>
-                                                        </th>
+                                                        </th> -->
                                                         <th>Bill ID</th>
-                                                        <th>Pakwan Bill</th>
-                                                        <th>Diesel LTR</th>
-                                                        <th>Electicity Bill</th>
-                                                        <th>Naan Bill</th>
-                                                        <th>Water Bill</th>
-                                                        <th>Cold Drinks</th>
-                                                        <th>Dhobi</th>
-                                                        <th>Other Expenses</th>
-                                                        <th>Waiters</th>
-                                                        <th>BBQ</th>
-                                                        <th>Stuff</th>
-                                                        <th>Setup</th>
-                                                        <th>Decor</th>
-                                                        <th>Total Expenses</th>
+                                                        <th>Date</th>
+                                                        <th>Payment Details</th>
+                                                        <th>Mutton</th>
+                                                        <th>Chicken </th>
+                                                        <th>Beef</th>
+                                                        <th>Rice</th>
+                                                        <th>Dahi</th>
+                                                        <th>Doodh</th>
+                                                        <th>Sabzi</th>
+                                                        <th>Fruits</th>
+                                                        <th>Khoya/Cream/Paneer</th>
+                                                        <th>Dry Fruits</th>
+                                                        <th>Oil</th>
+                                                        <th>Other Items Bill</th>
+                                                        <th>Other Items Desc</th>
+                                                        <th>Total Bill</th>
+
                                                         <!-- <th>Invoice</th> -->
                                                         <th style="width: 120px;">Action</th>
                                                     </tr>
@@ -171,7 +174,7 @@
                                     <div class="modal-dialog modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title mt-0" id="#expense{{ expense.id }}Title">Edit Expense</h5>
+                                                <h5 class="modal-title mt-0" id="#expense{{ expense.id }}Title">Edit Sale</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                 </button>
                                             </div>
@@ -189,16 +192,14 @@
                                         
                                         
                                                         <div class="input-group input-group-merge">
-                                                            <select class="js-select form-select" autocomplete="off" name="bill">
-                                                            
-                                        
-                                                            </select>
+                                                          <select class="js-select form-select" autocomplete="off" name="bill">
+                                                            <option>Select</option>
+                                                              {% for bill in sales %}
+                                                              <option value="{{ bill.id }}" >{{ bill.customer_name }}_bill_{{ bill.id }}</option>
+                                                              {% endfor %}
+                                                          </select>
                                           
                                                           </div>
-                                        
-                                        
-                                        
-                                        
                                         
                                                       </div>
                                                     </div>
@@ -207,12 +208,12 @@
                                         
                                                     <!-- Form -->
                                                     <div class="row mb-4">
-                                                      <label for="vehicalType" class="col-sm-3 col-form-label form-label">Pakwan bill</label>
+                                                      <label for="date" class="col-sm-3 col-form-label form-label">date</label>
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
-                                                          <input type="number" class="js-toggle-password form-control" name="pakwan-bill" id="" placeholder="0"
+                                                          <input type="number" class="js-toggle-password form-control" name="date" id="" 
                                                             aria-label="">
                                         
                                                         </div>
@@ -225,12 +226,12 @@
                                         
                                                     <!-- Form -->
                                                     <div class="row mb-4">
-                                                      <label for="" class="col-sm-3 col-form-label form-label">Electicity bill</label>
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Mutton</label>
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
-                                                            <input type="number" class="js-toggle-password form-control" name="electicity-bill" id="" placeholder="0"
+                                                            <input type="number" class="js-toggle-password form-control" name="mutton" id="" placeholder="0"
                                                             aria-label="">
                                         
                                                         </div>
@@ -241,12 +242,12 @@
                                         
                                                     <!-- Form -->
                                                     <div class="row mb-4">
-                                                      <label for="" class="col-sm-3 col-form-label form-label">Naan qty</label>
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Chicken</label>
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
-                                                            <input type="number" class="js-toggle-password form-control" name="naan-qty" id="" placeholder="0"
+                                                            <input type="number" class="js-toggle-password form-control" name="chicken" id="" placeholder="0"
                                                             aria-label="">
                                         
                                                         </div>
@@ -256,11 +257,11 @@
                                                     <!-- End Form -->
                                                     <!-- Form -->
                                                     <div class="row mb-4">
-                                                      <label for="" class="col-sm-3 col-form-label form-label">Cold drinks</label>
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Beef</label>
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
-                                                        <input type="number" class="js-toggle-password form-control" name="event-date" id="" placeholder="0"
+                                                        <input type="number" class="js-toggle-password form-control" name="beef" id="" placeholder="0"
                                                           aria-label="">
                                         
                                                       </div>
@@ -270,11 +271,11 @@
                                         
                                                     <!-- Form -->
                                                     <div class="row mb-4">
-                                                      <label for="" class="col-sm-3 col-form-label form-label">Water bottles</label>
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Rice</label>
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
-                                                        <input type="number" class="js-toggle-password form-control" name="no-of-people" id=""
+                                                        <input type="number" class="js-toggle-password form-control" name="rice" id=""
                                                           placeholder="0" aria-label="">
                                                         <!-- End Input Group -->
                                                       </div>
@@ -283,12 +284,12 @@
                                         
                                                     <!-- Form -->
                                                     <div class="row mb-4">
-                                                      <label for="" class="col-sm-3 col-form-label form-label">BBQ kg qty</label>
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Dahi</label>
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
-                                                            <input type="number" class="js-toggle-password form-control" name="bbq-qty" id=""
+                                                            <input type="number" class="js-toggle-password form-control" name="dahi" id=""
                                                           placeholder="0" aria-label="">
                                         
                                                         </div>
@@ -299,11 +300,11 @@
                                         
                                                     <!-- Form -->
                                                     <div class="row mb-4">
-                                                      <label for="" class="col-sm-3 col-form-label form-label">Diesel ltr</label>
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Doodh</label>
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
-                                                        <input type="text" class="js-toggle-password form-control" name="diesel-ltr" id=""
+                                                        <input type="text" class="js-toggle-password form-control" name="doodh" id=""
                                                           placeholder="0" aria-label="">
                                                         <!-- End Input Group -->
                                                       </div>
@@ -312,12 +313,12 @@
                                         
                                                     <!-- Form -->
                                                     <div class="row mb-4">
-                                                      <label for="" class="col-sm-3 col-form-label form-label">No of waiters:</label>
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Sabzi</label>
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
-                                                          <input type="number" class="js-toggle-password form-control" name="no-of-waiters" id=""
+                                                          <input type="number" class="js-toggle-password form-control" name="sabzi" id=""
                                                             placeholder="0" aria-label="">
                                         
                                                         </div>
@@ -328,12 +329,12 @@
                                         
                                                     <!-- Form -->
                                                     <div class="row mb-4">
-                                                      <label for="" class="col-sm-3 col-form-label form-label">Dhobi</label>
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Fruits</label>
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
-                                                          <input type="number" class="js-toggle-password form-control" name="dhobi" id=""
+                                                          <input type="number" class="js-toggle-password form-control" name="fruits" id=""
                                                             placeholder="0" aria-label="">
                                         
                                                         </div>
@@ -347,12 +348,12 @@
                                         
                                                     <!-- Form -->
                                                     <div class="row mb-4">
-                                                      <label for="" class="col-sm-3 col-form-label form-label">Other expense</label>
+                                                      <label for="" class="col-sm-3 col-form-label form-label">Khoya/Cream/Paneer</label>
                                         
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
-                                                          <input type="number" class="js-toggle-password form-control" name="other-expense" id=""
+                                                          <input type="number" class="js-toggle-password form-control" name="khoya-paneer" id=""
                                                             placeholder="0" aria-label="">
                                                         </div>
                                         
@@ -361,68 +362,54 @@
                                                     </div>
                                                     <!-- End Form -->
                                         
-                                                  
-                                        
-                                        
-                                                    <!-- Form -->
-                                                    <div class="row mb-4">
-                                                      <label for="vehiclImg" class="col-sm-3 col-form-label form-label">Other expense Details</label>
-                                        
-                                                      <div class="col-sm-9">
-                                                        <!-- Input Group -->
-                                                        <div class="input-group input-group-merge">
-                                        
-                                                          <textarea class="form-select" name="details" id="" cols="90" rows="5" ></textarea>
-                                        
-                                                        </div>
-                                                        <!-- End Input Group -->
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Oil</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <div class="input-group input-group-merge">
+                                                        <input type="number" class="js-toggle-password form-control" name="oil" id=""
+                                                          placeholder="0" aria-label="">
                                                       </div>
+                                      
+                                                      <!-- End Input Group -->
                                                     </div>
-                                                    <!-- End Form -->
-                                        
-                                                    <!-- Form -->
-                                                    <div class="row mb-4">
-                                                      <label for="countryShortDescription" class="col-sm-3 col-form-label form-label">Setup bill</label>
-                                        
-                                                      <div class="col-sm-9">
-                                                        <!-- Checkbox Switch -->
-                                                        <div class="input-group input-group-merge">
-                                                            <input type="number" class="js-toggle-password form-control" name="setup-bill" id=""
-                                                              placeholder="0" aria-label="">
-                                                          </div>
-                                                        <!-- End Checkbox Switch -->
-                                                        <!-- End Input Group -->
-                                                      </div>
-                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
 
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Other Items Bill</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <div class="input-group input-group-merge">
+                                                        <input type="number" class="js-toggle-password form-control" name="other-items-bill" id=""
+                                                          placeholder="0" aria-label="">
+                                                      </div>
+                                      
+                                                      <!-- End Input Group -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                          
+                                        
+                                        
+                                                    <!-- Form -->
                                                     <div class="row mb-4">
-                                                        <label for="countryShortDescription" class="col-sm-3 col-form-label form-label">Decor</label>
-                                          
-                                                        <div class="col-sm-9">
-                                                          <!-- Checkbox Switch -->
-                                                          <div class="input-group input-group-merge">
-                                                              <input type="number" class="js-toggle-password form-control" name="decor" id=""
-                                                                placeholder="0" aria-label="">
-                                                            </div>
-                                                          <!-- End Checkbox Switch -->
-                                                          <!-- End Input Group -->
+                                                      <label for="dry-fruits" class="col-sm-3 col-form-label form-label">Other items Description</label>
+                                        
+                                                      <div class="col-sm-9">
+                                                        <!-- Input Group -->
+                                                        <div class="input-group input-group-merge">
+                                        
+                                                          <textarea class="form-select" name="other-items-desc" id="" cols="90" rows="5" ></textarea>
+                                        
                                                         </div>
+                                                        <!-- End Input Group -->
                                                       </div>
-
-                                                      <div class="row mb-4">
-                                                        <label for="countryShortDescription" class="col-sm-3 col-form-label form-label">Decor bill</label>
-                                          
-                                                        <div class="col-sm-9">
-                                                          <!-- Checkbox Switch -->
-                                                          <div class="input-group input-group-merge">
-                                                              <input type="number" class="js-toggle-password form-control" name="decor-bill" id=""
-                                                                placeholder="0" aria-label="">
-                                                            </div>
-                                                          <!-- End Checkbox Switch -->
-                                                          <!-- End Input Group -->
-                                                        </div>
-                                                      </div>
-                                                 
+                                                    </div>
                                                     <!-- End Form -->
                                                   </form>
                                             </div>
@@ -441,7 +428,7 @@
                                 <div class="modal-dialog modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title mt-0" id="add-expense-modelTitle">Add Expense</h5>
+                                            <h5 class="modal-title mt-0" id="add-expense-modelTitle">Add Sale</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                             </button>
                                         </div>
@@ -449,314 +436,238 @@
                                         <div class="modal-body">
                                             <form class="form" enctype="multipart/form-data" action="{% url 'event-expense' %}" method="POST">
                                                 {% csrf_token %}
-  
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="vehicalType" class="col-sm-3 col-form-label form-label">Bill</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                    
-                                    
-                                                    <div class="input-group input-group-merge">
-                                                      <select class="js-select form-select" autocomplete="off" name="bill-no">
-                                                        <option>Select</option>
-                                                        {% for event in events %}
-                                                        <option value="{{ event.id }}" data-pakwan-bill="{{ event.total_menu }}">{{ event.customer_name }}_bill_{{ event.id }}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                        
-                                      
-                                                      </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-                                    
-                                    
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="vehicalType" class="col-sm-3 col-form-label form-label">Pakwan bill</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                                      <input type="number" class="js-toggle-password form-control" name="pakwan-bill" id="pakhwan" placeholder="0"
-                                                        aria-label="">
-                                    
-                                                    </div>
-                                    
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-                                    
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">Electicity bill</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                                        <input type="number" class="js-toggle-password form-control" name="electicity-bill" id="" placeholder="0"
-                                                        aria-label="">
-                                    
-                                                    </div>
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-                                    
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">Naan qty</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                                        <input type="number" class="js-toggle-password form-control" name="naan-qty" id="" placeholder="0"
-                                                        aria-label="">
-                                    
-                                                    </div>
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">Cold drinks</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <input type="number" class="js-toggle-password form-control" name="cold-drinks" id="" placeholder="0"
-                                                      aria-label="">
-                                    
-                                                  </div>
-                                                  <!-- End Input Group -->
-                                                </div>
-                                                <!-- End Form -->
-                                                
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">Cold drink Type</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                                      <select class="js-select form-select" autocomplete="off" name="cold-drinks-type">
-                                                        <option> Select</option>
-                                                        <option>Cold Drinks Tin</option>
-                                                        <option>Cold Drinks 1.5L</option>                                    
-                                                      </select>
-                                    
-                                                    </div>
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
 
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">Water bottles</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <input type="number" class="js-toggle-password form-control" name="water-bottles" id=""
-                                                      placeholder="0" aria-label="">
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-                                                
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">Water Bottles Type</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                                      <select class="js-select form-select" autocomplete="off" name="water-bottles-type">
-                                                        <option> Select</option>
-                                                        <option>Water 500ML</option>
-                                                        <option>Water 300ML</option>  
-                                                        <option>Water 1.5L</option>                                    
-
-                                                      </select>
-                                    
-                                                    </div>
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">BBQ kg qty</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                                        <input type="number" class="js-toggle-password form-control" name="bbq-qty" id=""
-                                                      placeholder="0" aria-label="">
-                                    
-                                                    </div>
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-                                    
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">Diesel ltr</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <input type="text" class="js-toggle-password form-control" name="diesel-ltr" id=""
-                                                      placeholder="0" aria-label="">
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-                                    
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">No of waiters:</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                                      <input type="number" class="js-toggle-password form-control" name="no-of-waiters" id=""
-                                                        placeholder="0" aria-label="">
-                                    
-                                                    </div>
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-                                    
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">Dhobi</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                                      <input type="number" class="js-toggle-password form-control" name="dhobi" id=""
-                                                        placeholder="0" aria-label="">
-                                    
-                                                    </div>
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-
-                                              <!-- Form -->
-                                              <div class="row mb-4">
-                                                <label for="" class="col-sm-3 col-form-label form-label">Stuff</label>
-                                  
-                                                <div class="col-sm-9">
-                                                  <!-- Input Group -->
-                                                  <div class="input-group input-group-merge">
-                                                    <input type="number" class="js-toggle-password form-control" name="stuff" id=""
-                                                      placeholder="0" aria-label="">
-                                  
-                                                  </div>
-                                                  <!-- End Input Group -->
-                                                </div>
-                                              </div>
-                                              <!-- End Form -->
-
-                                                <!-- Form -->
-                                    
-                                    
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="" class="col-sm-3 col-form-label form-label">Other expense</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                                      <input type="number" class="js-toggle-password form-control" name="other-expense" id=""
-                                                        placeholder="0" aria-label="">
-                                                    </div>
-                                    
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-                                    
-                                              
-                                    
-                                    
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="vehiclImg" class="col-sm-3 col-form-label form-label">Other expense Details</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                    
-                                                      <textarea class="form-select" name="expense-details" id="" cols="90" rows="5" ></textarea>
-                                    
-                                                    </div>
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-                                    
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="countryShortDescription" class="col-sm-3 col-form-label form-label">Setup bill</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Checkbox Switch -->
-                                                    <div class="input-group input-group-merge">
-                                                        <input type="number" class="js-toggle-password form-control" name="setup-bill" id=""
-                                                          placeholder="0" aria-label="">
-                                                      </div>
-                                                    <!-- End Checkbox Switch -->
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-  
-                                                <!-- Form -->
-                                                <div class="row mb-4">
-                                                  <label for="vehiclImg" class="col-sm-3 col-form-label form-label">Decore Details</label>
-                                    
-                                                  <div class="col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group input-group-merge">
-                                    
-                                                      <textarea class="form-select" name="decore-details" id="" cols="90" rows="5" ></textarea>
-                                    
-                                                    </div>
-                                                    <!-- End Input Group -->
-                                                  </div>
-                                                </div>
-                                                <!-- End Form -->
-  
+                                                  <!-- Form -->
                                                   <div class="row mb-4">
-                                                    <label for="countryShortDescription" class="col-sm-3 col-form-label form-label">Decor bill</label>
+                                                    <label for="vehicalType" class="col-sm-3 col-form-label form-label">Bill</label>
                                       
                                                     <div class="col-sm-9">
-                                                      <!-- Checkbox Switch -->
+                                                      <!-- Input Group -->
+                                      
+                                      
                                                       <div class="input-group input-group-merge">
-                                                          <input type="number" class="js-toggle-password form-control" name="decor-bill" id=""
-                                                            placeholder="0" aria-label="">
-                                                        </div>
-                                                      <!-- End Checkbox Switch -->
+                                                        <select class="js-select form-select" autocomplete="off" name="bill">
+                                                          <option>Select</option>
+                                                            {% for bill in sales %}
+                                                            <option value="{{ bill.id }}" >{{ bill.customer_name }}_bill_{{ bill.id }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                      </div>                                                                         
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                                      
+                                      
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="date" class="col-sm-3 col-form-label form-label">date</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <div class="input-group input-group-merge">
+                                                        <input type="number" class="js-toggle-password form-control" name="date" id="" 
+                                                          aria-label="">
+                                      
+                                                      </div>
+                                      
+                                                      </select>
                                                       <!-- End Input Group -->
                                                     </div>
                                                   </div>
-                                             
+                                                  <!-- End Form -->
+                                      
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Mutton</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <div class="input-group input-group-merge">
+                                                          <input type="number" class="js-toggle-password form-control" name="mutton" id="" placeholder="0"
+                                                          aria-label="">
+                                      
+                                                      </div>
+                                                      <!-- End Input Group -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                                      
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Chicken</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <div class="input-group input-group-merge">
+                                                          <input type="number" class="js-toggle-password form-control" name="chicken" id="" placeholder="0"
+                                                          aria-label="">
+                                      
+                                                      </div>
+                                                      <!-- End Input Group -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Beef</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <input type="number" class="js-toggle-password form-control" name="beef" id="" placeholder="0"
+                                                        aria-label="">
+                                      
+                                                    </div>
+                                                    <!-- End Input Group -->
+                                                  </div>
+                                                  <!-- End Form -->
+                                      
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Rice</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <input type="number" class="js-toggle-password form-control" name="rice" id=""
+                                                        placeholder="0" aria-label="">
+                                                      <!-- End Input Group -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                                      
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Dahi</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <div class="input-group input-group-merge">
+                                                          <input type="number" class="js-toggle-password form-control" name="dahi" id=""
+                                                        placeholder="0" aria-label="">
+                                      
+                                                      </div>
+                                                      <!-- End Input Group -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                                      
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Doodh</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <input type="text" class="js-toggle-password form-control" name="doodh" id=""
+                                                        placeholder="0" aria-label="">
+                                                      <!-- End Input Group -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                                      
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Sabzi</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <div class="input-group input-group-merge">
+                                                        <input type="number" class="js-toggle-password form-control" name="sabzi" id=""
+                                                          placeholder="0" aria-label="">
+                                      
+                                                      </div>
+                                                      <!-- End Input Group -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                                      
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Fruits</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <div class="input-group input-group-merge">
+                                                        <input type="number" class="js-toggle-password form-control" name="fruits" id=""
+                                                          placeholder="0" aria-label="">
+                                      
+                                                      </div>
+                                                      <!-- End Input Group -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                                      
+                                                  <!-- Form -->
+                                      
+                                      
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="" class="col-sm-3 col-form-label form-label">Khoya/Cream/Paneer</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <div class="input-group input-group-merge">
+                                                        <input type="number" class="js-toggle-password form-control" name="khoya-paneer" id=""
+                                                          placeholder="0" aria-label="">
+                                                      </div>
+                                      
+                                                      <!-- End Input Group -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                                      
+                                                <!-- Form -->
+                                                <div class="row mb-4">
+                                                  <label for="" class="col-sm-3 col-form-label form-label">Oil</label>
+                                    
+                                                  <div class="col-sm-9">
+                                                    <!-- Input Group -->
+                                                    <div class="input-group input-group-merge">
+                                                      <input type="number" class="js-toggle-password form-control" name="oil" id=""
+                                                        placeholder="0" aria-label="">
+                                                    </div>
+                                    
+                                                    <!-- End Input Group -->
+                                                  </div>
+                                                </div>
                                                 <!-- End Form -->
-                                              
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button id="model-btn1" type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                                          <button id="model-btn2" type="submit" class="btn btn-primary" >Save changes</button>
-                                        </div>
-                                          </form>
+
+                                                <!-- Form -->
+                                                <div class="row mb-4">
+                                                  <label for="" class="col-sm-3 col-form-label form-label">Other Items Bill</label>
+                                    
+                                                  <div class="col-sm-9">
+                                                    <!-- Input Group -->
+                                                    <div class="input-group input-group-merge">
+                                                      <input type="number" class="js-toggle-password form-control" name="other-items-bill" id=""
+                                                        placeholder="0" aria-label="">
+                                                    </div>
+                                    
+                                                    <!-- End Input Group -->
+                                                  </div>
+                                                </div>
+                                                <!-- End Form -->
+                        
+                                      
+                                      
+                                                  <!-- Form -->
+                                                  <div class="row mb-4">
+                                                    <label for="dry-fruits" class="col-sm-3 col-form-label form-label">Other items Description</label>
+                                      
+                                                    <div class="col-sm-9">
+                                                      <!-- Input Group -->
+                                                      <div class="input-group input-group-merge">
+                                      
+                                                        <textarea class="form-select" name="other-items-desc" id="" cols="90" rows="5" ></textarea>
+                                      
+                                                      </div>
+                                                      <!-- End Input Group -->
+                                                    </div>
+                                                  </div>
+                                                  <!-- End Form -->
+                                                </form>
+                                                <div class="modal-footer">
+                                                  <button id="model-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                  <button id="model-btn" type="button" class="btn btn-primary">Save changes</button>
+                                                  </div>
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
                               
@@ -778,23 +689,19 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
       var selectElement = document.querySelector('select[name="bill-no"]');
-
-      var pakwanBillInput = document.querySelector('input[name="pakwan-bill"]');
-
       var pakwanBillInput = document.getElementById("pakhwan");
-
   
       selectElement.addEventListener('change', function() {
           var selectedOption = selectElement.options[selectElement.selectedIndex];
           var pakwanBill = selectedOption.getAttribute('data-pakwan-bill');
 
+          
           if (pakwanBill !== null) {
               pakwanBillInput.value = pakwanBill;
+              console.log(pakwanBillInput)
+              
           } else {
-
-
               console.log('else')
-
               pakwanBillInput.value = ''; // Clear the input if no data found
           }
       });
