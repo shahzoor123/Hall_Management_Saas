@@ -219,4 +219,5 @@ def item(request, deal_id):
 
 
 
-        
+
+      

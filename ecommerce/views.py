@@ -33,6 +33,7 @@ class ProductsDetail(LoginRequiredMixin,TemplateView):
 
 
 
+
 class Eventsale(LoginRequiredMixin, View):
     template_name = "ecommerce/event-sale.html"
 
@@ -609,3 +610,5 @@ class Calendar(LoginRequiredMixin,TemplateView):
         return render(request, 'calendar.html', {'serialized_events': serialized_event,'event_sale' : sale})
     
 
+def update_deal(request):
+    return render(request, 'items/update_deals.html')
