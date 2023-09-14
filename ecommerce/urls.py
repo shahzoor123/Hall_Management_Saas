@@ -17,6 +17,10 @@ urlpatterns = [
     path('ecommerce_add_product', views.ProductsAddProduct.as_view(),name='ecommerce_add_product'),
     # path('ecommerce_add_product', views.ProductsAddProduct.as_view(),name='ecommerce_add_product'),
     path('calendar/', views.Calendar.as_view(),name='calendar'),
+<<<<<<< HEAD
     path('update-deals/<int:pk>', views.update_deal, name='update-deals'),
+=======
+    path('update-deals/', views.update_deal, name='update-deals'),
+>>>>>>> 6eed5b5a85ab8790e3abf48c45061680652b7dd2
     
 ]
