@@ -1,0 +1,686 @@
+{% extends 'partials/primary_base.html' %}
+
+{% load static %}
+
+{% block title %}Add Product{% endblock title %}
+
+
+
+{% block extra_css %}
+<!-- twitter-bootstrap-wizard css -->
+<link rel="stylesheet" href="{% static  'libs/twitter-bootstrap-wizard/prettify.css' %}">
+
+<!-- select2 css -->
+<link href="{% static  'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+
+<!-- dropzone css -->
+<link href="{% static  'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+
+
+
+
+{% endblock extra_css %}
+
+{% block content %}
+<div class="main-content">
+  <div class="page-content">
+    <!-- start page title -->
+    <div class="page-title-box">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-sm-6">
+            <div class="page-title">
+              <h4>Calculator</h4>
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Hall</a></li>
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                <li class="breadcrumb-item active">Calculator</li>
+              </ol>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="float-end d-none d-sm-block">
+              <a href="" class="btn btn-success">Add Widget</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- end page title -->
+    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+
+      <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+        <div class="mdc-card">
+
+          <form action="POST" id="pos-form">
+
+            <fieldset>
+              <legend>{{Deal_name}}</legend>
+              <div class="row align-items-end">
+
+
+
+
+
+              </div>
+            </fieldset>
+            <fieldset>
+
+              <div class="d-flex w-100" id="POS-field">
+                <div class="col-9 bg-gradient ">
+                  <table class="table">
+                    <colgroup>
+                      <col width="20%">
+                      <col width="5%">
+                      <col width="10%">
+                      <col width="10%">
+                      <col width="10%">
+                    </colgroup>
+                    <thead>
+                      <tr class="bg-dark bg-gradient  text-light">
+                        <!-- <th class="py-1 px-2 text-center  ">No</th> -->
+                        <th class="py-1 px-2 text-center  ">Product</th>
+                        <th class="py-1 px-2 text-center  ">QTY</th>
+                        <th class="py-1 px-2 text-center  ">Price</th>
+                        <th class="py-1 px-2 text-center  ">Total</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      {% for dish, price in combined_data %}
+                      <tr>
+                        <!-- <th class="py-1 px-2 text-center">{{ dish.id }}</th> -->
+                        
+                        <th class="py-1 px-2 text-center">{{ dish.name }}</th>
+                        <th><input type="number" id="positive-integer-input" class="item-qty form-control center" data-price="{{ price.price }}" min="1" value="0" style="width: 100px; border-radius: 10px;"></th>
+                        <span hidden class="subtotal">0.00</span>
+                        <th class="py-1 px-2 text-center">{{ price.price }}</th>
+                        <td class="py-1 px-2 text-center total-value">0.00</td> <!-- Add a new 'td' for the total value -->
+                      </tr>
+                    {% endfor %}
+                
+
+
+
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                      <div class="card-body calc">
+
+                        <form action="#">
+                          <div class="mb-4">
+                            <label class="form-label">Sub Total</label>
+                            <div class="input-group " id="datepicker1">
+                              <input type="text" class="form-control" name="sub-total" id="subtotal" value="0.00" readonly>
+                            </div><!-- input-group -->
+                          </div>
+                          <div class="mb-4">
+                            <label class="form-label">Number of Peoplee</label>
+                            <div class="input-group" id="no-of-people1">
+                              <input type="number" class="form-control" min="1" id="no-of-people" value="1">
+
+                            </div><!-- input-group -->
+                          </div>
+                          <div class="mb-4">
+                            <label class="form-label">Hall Charges</label>
+                            <div class="input-group" id="datepicker3">
+                              <input type="number" class="form-control" min="1" id="hall-charges" value="0">
+
+                            </div><!-- input-group -->
+                          </div>
+                          <div class="mb-4">
+                            <label class="form-label">Menu/head</label>
+                            <div class="input-group" id="datepicker3">
+                              <input type="text" id="per-head" class="form-control" value="0.00" readonly>
+                            </div><!-- input-group -->
+                          </div>
+                          <div class="mb-4">
+                            <label class="form-label">Grand Total</label>
+
+                            <div class="input-group" id="datepicker3">
+
+                              <input type="text" class="form-control" id="grand-total" value="0.00" readonly>
+
+                            </div><!-- input-group -->
+                          </div>
+
+                          <div class="row row-cols-4">
+                            <div class="col-md-1 text-end">
+                              <!-- <button class="btn btn-primary btn-sm " type="button" id="check_out"> Checkout</button> -->
+                              <a class="btn btn-primary btn-sm " data-bs-toggle="modal"
+                                data-bs-target="#exampleModalScrollable" data-bs-container="#tooltip-container1"
+                                data-bs-toggle="tooltip" data-bs-placement="top" onclick="populateNumOfPeople()"> Checkout </a>
+
+                            </div>
+                          </div>
+
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            </fieldset>
+
+          </form>
+
+          <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <!-- <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Add Sale</h5> -->
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                  <form class="form" id="sale-form" enctype="multipart/form-data" action="" method="POST">
+                    {% csrf_token %}
+
+                   
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Status</label>
+
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <select class="js-select form-select" autocomplete="off" name="status">
+
+
+                            <option>Tentative</option>
+                            <option>Confirm</option>
+
+                          </select>
+
+                        </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Event timing</label>
+
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <select class="js-select form-select" autocomplete="off" name="event-time">
+
+                            <option>Day</option>
+                            <option>Night</option>
+
+                          </select>
+
+                        </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Event Date</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <input type="date" class="js-toggle-password form-control" name="event-date" id=""
+                          placeholder="StartRow" aria-label="">
+
+                      </div>
+                      <!-- End Input Group -->
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Number of people</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <input type="number" class="js-toggle-password form-control" name="no-of-people"
+                          placeholder="Number of people" aria-label="">
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Location</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <select class="js-select form-select" autocomplete="off" name="location">
+
+
+                            <option>Hall</option>
+                            <option>Lawn</option>
+
+                          </select>
+
+                        </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Setup</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <select class="js-select form-select" autocomplete="off" name="setup">
+
+
+                            <option>Normal</option>
+                            <option>Delux</option>
+                            <option>VIP</option>
+
+                          </select>
+
+                        </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Deals</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+
+
+                        
+
+                          <input type="text" class="form-control" autocomplete="off" value="{{Deal_name}}" readonly>
+
+                          <input type="hidden" class="form-control" autocomplete="off" name="deals" value="{{Deal_name}}">
+
+                        </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Customer name</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <input type="text" class="js-toggle-password form-control" name="customer-name" id=""
+                          placeholder="Customer name" aria-label="">
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Customer number</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="customer-number" id=""
+                            placeholder="Customer number" aria-label="">
+
+                        </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Per head</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="per-head" id=""
+                            placeholder="Per head" aria-label="">
+
+                        </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Extra Charges</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="extra-charges" id=""
+                            placeholder="Extra Charges" aria-label="">
+                        </div>
+
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Stage Charges</label>
+        
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="stage-charges" id=""
+                            placeholder="Stage Charges" aria-label="" value="0">
+                        </div>
+        
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+                    
+                    <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Menu Amount</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <input type="text" class="js-toggle-password form-control" name="menu-amount" id="menu-amount"
+                      placeholder="Menu Amount" aria-label="">
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                     <!-- Form -->
+                     <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Couple Entry Charges</label>
+        
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="entry-charges" id=""
+                            placeholder="Entry Charges" aria-label="" value="0">
+                        </div>
+        
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                     <!-- Form -->
+                     <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Gents</label>
+        
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="gents" id=""
+                            placeholder="Number of Gents" aria-label="" value="0">
+                        </div>
+        
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                     <!-- Form -->
+                     <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Ladies</label>
+        
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="ladies" id=""
+                            placeholder="Number of ladies" aria-label="" value="0">
+                        </div>
+        
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Food menu</label>
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+                          <input type="text" class="js-toggle-password form-control" id="menuDisplay" 
+                            aria-label="" readonly>
+                          <input type="hidden" class="js-toggle-password form-control" name="food-menu" id="menuInput" 
+                            aria-label="">
+                        </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="vehiclImg" class="col-sm-3 col-form-label form-label">Details</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <div class="input-group input-group-merge">
+
+                          <textarea class="form-select" name="details" id="" cols="90" rows="5"></textarea>
+
+                        </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="countryShortDescription" class="col-sm-3 col-form-label form-label">Received
+                        amount</label>
+
+                      <div class="col-sm-9">
+                        <!-- Checkbox Switch -->
+                        <div class="input-group input-group-merge">
+                          <input type="number" class="js-toggle-password form-control" name="received-amount" id=""
+                            placeholder="Received amount" aria-label="">
+                        </div>
+                        <!-- End Checkbox Switch -->
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+
+                    <!-- End Form -->
+                    <div class="modal-footer">
+                      <button id="model-btn1" type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                      <button id="model-btn2" type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </form>
+                </div>
+
+
+
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div>
+      </div>
+    </div>
+    <noscript id="item-clone">
+
+      <tr>
+        <td class="px-2 py-1 text-center">
+          <button class="btn btn-sm btn-outline-danger rounded-0 rem-item" type="button"><i
+              class="mdi mdi-close"></i></button>
+        </td>
+        <td class="px-2 py-1">
+          <input type="hidden" name="product_id[]">
+          <input type="hidden" name="price[]">
+          <input type="number" name="qty[]" min="0" class="form-control form-control-sm rounded-0 text-center">
+        </td>
+        <td class="px-2 py-1 product_name text-start"></td>
+        <td class="px-2 py-1 product_price text-end"></td>
+        <td class="px-2 py-1 product_total text-end"></td>
+      </tr>
+    </noscript>
+
+    {% endblock content %}
+    {% block extra_javascript %}
+
+    <!-- For positive integer -->
+
+
+
+
+    <!-- For item total -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      var itemQtyList = [];
+    
+      $('.item-qty').on('input', function () {
+        var quantity = parseFloat($(this).val());
+        var price = parseFloat($(this).data('price'));
+        var dishCode = $(this).data('dish-name');
+        var subtotal = (quantity * price).toFixed(2);
+    
+        $(this).closest('tr').find('.subtotal').text(subtotal);
+    
+        var total = (quantity * price).toFixed(2);
+        $(this).closest('tr').find('.total-value').text(total);
+    
+        // Update the quantity in the itemQtyList array
+        var itemIndex = itemQtyList.findIndex(item => item.dishCode === dishCode);
+        if (itemIndex !== -1) {
+          itemQtyList[itemIndex].quantity = quantity;
+        } else {
+          itemQtyList.push({ dishCode: dishCode, quantity: quantity });
+        }
+        console.log(itemQtyList);
+      });
+    
+ 
+    </script>
+    
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function updateTotals() {
+          let subtotal = 0;
+          const quantityInputs = document.querySelectorAll(".item-qty");
+          const subtotalElements = document.querySelectorAll(".subtotal");
+          const hallChargesInput = document.getElementById("hall-charges");
+          const noOfPeopleInput = document.getElementById("no-of-people");
+
+          quantityInputs.forEach((input, index) => {
+            const price = parseFloat(input.dataset.price);
+            const quantity = parseInt(input.value, 10);
+            const subtotalValue = (price * quantity).toFixed(2);
+            subtotalElements[index].value = subtotalValue;
+            subtotal += parseFloat(subtotalValue);
+          });
+
+          const hallCharges = parseFloat(hallChargesInput.value);
+          const noOfPeople = parseInt(noOfPeopleInput.value, 10);
+          const perHead = (subtotal / noOfPeople).toFixed(2);
+
+          // Display Subtotal, Grand Total, and Per Head values
+          document.getElementById("subtotal").value = subtotal.toFixed(2);
+          const grandTotal = (subtotal + (hallCharges * noOfPeople)).toFixed(2);
+          document.getElementById("grand-total").value = grandTotal;
+          document.getElementById("per-head").value = perHead;
+        }
+
+        const quantityInputs = document.querySelectorAll(".item-qty");
+        quantityInputs.forEach((input) => {
+          input.addEventListener("input", updateTotals);
+        });
+
+        const hallChargesInput = document.getElementById("hall-charges");
+        const noOfPeopleInput = document.getElementById("no-of-people");
+        hallChargesInput.addEventListener("input", updateTotals);
+        noOfPeopleInput.addEventListener("input", updateTotals);
+      });
+
+      function populateNumOfPeople() {
+        // Get the value from the "Number of People" input in the first form
+        const numberOfPeopleInput = document.getElementById('no-of-people');
+        const numOfPeopleValue = numberOfPeopleInput.value;
+
+        // Set the value in the "Number of people" input field in the second form
+        const numOfPeopleInputForm2 = document.querySelector('form#sale-form [name="no-of-people"]');
+        numOfPeopleInputForm2.value = numOfPeopleValue;
+
+        // Get values from the first form
+      const hallChargesInput = document.getElementById('hall-charges');
+      const menuPerHeadInput = document.getElementById('per-head');
+
+
+   // Get the value of the sub-total input in Form 1
+   const subTotalInput = document.querySelector('input[name="sub-total"]');
+   const subTotalValue = subTotalInput.value;
+
+   // Set the value of the menu-amount input in Form 2
+   const menuAmountInput = document.querySelector('input[name="menu-amount"]');
+   menuAmountInput.value = subTotalValue;
+
+    
+      // Calculate per head value
+      const perHeadValue = (parseFloat(hallChargesInput.value) + parseFloat(menuPerHeadInput.value));
+
+      // Set values in the second form
+      const perHeadInputForm2 = document.querySelector('form#sale-form [name="per-head"]');
+      numOfPeopleInputForm2.value = numberOfPeopleInput.value;
+      perHeadInputForm2.value = perHeadValue.toFixed(2);
+        
+      const products = [];
+      const quantityInputs = document.querySelectorAll('.item-qty');
+    
+      quantityInputs.forEach(input => {
+        const quantity = parseInt(input.value);
+        if (quantity > 0) {
+          const product = input.closest('tr').querySelector('.py-1.px-2.text-center').textContent;
+          products.push(`${product} (${quantity})`);
+        }
+      });
+    
+      // Set the gathered product and quantity information in the "Food menu" input field in form 2
+      const menuDisplay = document.getElementById('menuDisplay');
+      const menuInput = document.getElementById('menuInput');
+    
+      menuDisplay.value = products.join(', ');
+      menuInput.value = products.join(', ');
+            
+      }
+      
+    </script>
+
+    <!-- twitter-bootstrap-wizard js -->
+    <script src="{% static  'libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
+
+    <script src="{% static  'libs/twitter-bootstrap-wizard/prettify.js' %}"></script>
+
+    <!-- select 2 plugin -->
+    <script src="{% static  'libs/select2/dist/js/select2.min.js' %}"></script>
+
+    <!-- dropzone plugin -->
+    <script src="{% static  'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+
+    <!-- init js -->
+    <script src="{% static  'js/pages/ecommerce-add-product.init.js' %}"></script>
+    {% endblock extra_javascript %}

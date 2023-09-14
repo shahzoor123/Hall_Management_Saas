@@ -396,7 +396,7 @@
                                                        
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
-                                                          <a href="{% url 'calculate_menu' %}"  class="btn-sm waves-effect waves-light"  data-bs-target="#sale{{ sale.id }}"  class="me-3 text-primary" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                                          <a href="{% url 'update-deals' sale.id %}"  class="btn-sm waves-effect waves-light"  data-bs-target="#sale{{ sale.id }}"  class="me-3 text-primary" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                                             <i class="mdi mdi-pencil font-size-18" class="modal-title mt-0" id="sale{{sale.id}}"></i>
                                                           </a>
                                                           <input type="text" class="js-toggle-password form-control" name="food-menu" id=""
