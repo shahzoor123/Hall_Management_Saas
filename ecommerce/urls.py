@@ -1,6 +1,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
 from ecommerce import views
+
 urlpatterns = [
     # Ecommerce
     path('ecommerce_product', views.Products.as_view(),name='ecommerce_product'),
@@ -16,4 +17,6 @@ urlpatterns = [
     path('ecommerce_add_product', views.ProductsAddProduct.as_view(),name='ecommerce_add_product'),
     # path('ecommerce_add_product', views.ProductsAddProduct.as_view(),name='ecommerce_add_product'),
     path('calendar/', views.Calendar.as_view(),name='calendar'),
+    path('update-deals/<int:pk>', views.update_deal, name='update-deals'),
+    
 ]
