@@ -610,10 +610,6 @@ class Calendar(LoginRequiredMixin,TemplateView):
         return render(request, 'calendar.html', {'serialized_events': serialized_event,'event_sale' : sale})
     
 
-<<<<<<< HEAD
 def update_deal(request, pk):
     print(pk)
-=======
-def update_deal(request):
->>>>>>> 6eed5b5a85ab8790e3abf48c45061680652b7dd2
     return render(request, 'items/update_deals.html')
