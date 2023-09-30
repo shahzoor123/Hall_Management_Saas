@@ -32,6 +32,8 @@ class ProductsDetail(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-product-detail.html"
 
 
+class HallSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/hall_summary.html"
 
 
 

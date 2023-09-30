@@ -4,6 +4,7 @@ from ecommerce import views
 
 urlpatterns = [
     # Ecommerce
+    path('hall-summary', views.HallSummary.as_view(),name='hall-summary'),
     path('ecommerce_product', views.Products.as_view(),name='ecommerce_product'),
     path('ecommerce_product_detail', views.ProductsDetail.as_view(),name='ecommerce_product_detail'),
     path('event-sale', views.Eventsale.as_view(),name='event-sale'),
