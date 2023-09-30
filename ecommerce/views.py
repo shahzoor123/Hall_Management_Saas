@@ -28,12 +28,32 @@ from datetime import datetime
 # Create your views here.
 class Products(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-products.html"
+    
+    
 class ProductsDetail(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-product-detail.html"
 
 
+class HallSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/hall_summary.html"
 
 
+    
+class HallExpenseSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/hall_expense_summary.html"
+
+class KitchenSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/kitchen_summary.html"
+    
+
+    
+class SalariesSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/salaries_summary.html"  
+    
+    
+    
+    
+          
 
 class Eventsale(LoginRequiredMixin, View):
     template_name = "ecommerce/event-sale.html"

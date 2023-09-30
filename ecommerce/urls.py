@@ -19,4 +19,10 @@ urlpatterns = [
     path('calendar/', views.Calendar.as_view(),name='calendar'),
     path('update-deals/<int:pk>', views.update_deal, name='update-deals'),
     
+    path('hall-summary', views.HallSummary.as_view(),name='hall-summary'),
+    path('hall-expense-summary', views.HallExpenseSummary.as_view(),name='hall-expense-summary'),
+    
+    path('kitchen-summary', views.KitchenSummary.as_view(),name='kitchen-summary'),
+    path('salaries-summary', views.SalariesSummary.as_view(),name='salaries-summary'),
+    
 ]
