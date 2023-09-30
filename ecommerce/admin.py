@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import EventExpense, EventSale, Event, Kitchensale
+from .models import EventExpense, EventSale, Event, MyKitchenexpense
 
 @admin.register(EventExpense)
 class EventExpenseAdmin(admin.ModelAdmin):
@@ -15,8 +15,8 @@ class EventSaleAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     list_display = ('event_title', 'start_date', 'end_date', 'event_time')
 
-@admin.register(Kitchensale)   
-class KitchensaleAdmin(admin.ModelAdmin):
+@admin.register(MyKitchenexpense)   
+class MyKitchenexpenseAdmin(admin.ModelAdmin):
     list_display = ('bill', 'date', 'total_bill')
 
 
