@@ -25,6 +25,8 @@ from items.models import Category
 from datetime import datetime
 
 
+current_date = datetime.now()
+
 # Create your views here.
 class Products(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-products.html"
@@ -36,6 +38,28 @@ class ProductsDetail(LoginRequiredMixin,TemplateView):
 
 class HallSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/hall_summary.html"
+    
+    def get(self, request):
+        events_this_month = EventSale.objects.filter(event_date__month=current_date.month)
+        print(events_this_month)
+        received_amount = []
+        remaining_amount = []
+        sales = EventSale.objects.all()
+        for sale in sales:
+            received_amount.append(sale.recieved_amount)
+            remaining_amount.append(sale.remaining_amount)
+        print(received_amount,remaining_amount)
+
+       
+
+
+        context = {
+            "received": received_amount,
+            "remaining": remaining_amount,
+        
+        }
+        return render(request, self.template_name, context)
+        
 
 
     
