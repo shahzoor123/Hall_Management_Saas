@@ -3,7 +3,6 @@ from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.http import require_GET
 from django.db.models import Sum
-from items.models import MyProducts
 from ecommerce.models import EventSale
 from ecommerce.models import EventExpense
 from ecommerce.models import MyKitchenexpense
@@ -13,7 +12,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 from django.urls import reverse
 from django.views import View
-from items.models import Deals , MyProducts
+from items.models import Deals , MyProducts,Brand, Unit, Inventory
 from rest_framework import viewsets
 from .models import Event
 from .serializers import EventSerializer
@@ -28,6 +27,21 @@ from datetime import datetime
 # Create your views here.
 class Products(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-products.html"
+
+    def get(self, request):
+        cat = Category.objects.all()
+        products = MyProducts.objects.all()
+
+
+       
+
+
+        context = {
+            "category": cat,
+            "products": products,
+        }
+        return render(request, self.template_name, context)
+
 class ProductsDetail(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-product-detail.html"
 
@@ -317,12 +331,15 @@ class UpdateEventsale(LoginRequiredMixin, View):
             customer_number = request.POST.get('customer-number')
             per_head = request.POST.get('per-head')
             extra_charge = request.POST.get('extra-charges')
+            stage_charges = request.POST.get('stage-charges')
+            entry_charges = request.POST.get('entry-charges')
+
             food_menu = request.POST.get('food-menu')
             details = request.POST.get('details')
             received_ammount = request.POST.get('received-amount')
 
-            stage_charges = request.POST.get('stage-charges')
-            entry_charges = request.POST.get('entry-charges')
+            total= (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charges)) 
+            
 
             payments_details = ''
             if not received_ammount == "0":
@@ -353,23 +370,25 @@ class UpdateEventsale(LoginRequiredMixin, View):
             # requests.deals = deal
             if len(payments_details) > 1:
                 requests.payment_details = requests.payment_details + payments_details
+
             requests.per_head = per_head
+            
             requests.extra_charges = extra_charge
             requests.stage_charges = stage_charges
             requests.entry_charges = entry_charges
+
+            
 
             requests.food_menu = food_menu
             requests.details = details
            
             requests.recieved_amount = requests.recieved_amount + int(received_ammount)
-
-            
-
             requests.remaining_amount = int(requests.total_amount)  - int(requests.recieved_amount)
+
+            requests.total_amount = total
             requests.save()
             
 
-        print('Posted')
         return redirect('event-sale')
 
  
@@ -543,26 +562,101 @@ class ProductsCheckout(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-checkout.html"
 class ProductsShops(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-shops.html"
+
+class ProductsAddUnit(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/ecommerce-add-unit.html"
+    
+    def post(self, request):
+        if request.method == "POST":
+            name = request.POST.get('name')
+            shortname = request.POST.get('shortname')
+            unit = request.POST.get('unit')
+
+
+            Unit.objects.create(
+                name= name,
+                short_name = shortname,
+                unit = unit,
+            )
+        return render(request, self.template_name)
+
+
+class ProductsAddBrand(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/ecommerce-add-brand.html"
+
+    def post(self, request):
+        if request.method == "POST":
+            name = request.POST.get('name')
+
+            desc = request.POST.get('desc')
+
+            Brand.objects.create(
+                name= name,
+                desc = desc
+            )
+        return render(request, self.template_name)
+
+
+class ProductsAddInventory(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/ecommerce-add-inventory.html"
+
+    def post(self, request):
+        if request.method == "POST":
+
+            product_id = request.POST.get('productname')
+            product = get_object_or_404(MyProducts, pk=product_id)
+
+            product_qty= request.POST.get('qty')
+
+            previous_qty = product.qty
+            qty = int(previous_qty) + int(product_qty)
+            
+            product.qty = qty
+            product.save()
+
+        return render(request, self.template_name)
+
+    def get(self, request):
+        products = MyProducts.objects.all()
+
+        context = {
+            "products": products
+        }
+        return render(request, self.template_name, context)
+
 class ProductsAddProduct(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-add-product.html"
 
     def post(self, request):
         if request.method == "POST":
             product_name = request.POST.get('productname')
-            manu_name = request.POST.get('manufacturername')
-            price = request.POST.get('price')
+
+            brand_id = request.POST.get('brand_id')
+            brand = get_object_or_404(Brand, pk=brand_id)
+
+            unit_id = request.POST.get('unit_id')
+            unit = get_object_or_404(Unit, pk=unit_id)
+            
+        
             category_id = request.POST['category_id']
-            print(category_id)
             category = get_object_or_404(Category, pk=category_id)
 
-            desc = request.POST.get('productdesc')
+            product_cost = request.POST.get('cost')
+            product_price= request.POST.get('price')
+            product_qty= request.POST.get('qty')
+            productdesc = request.POST.get('productdesc')
+
+
             MyProducts.objects.create(
-                category_id= category,
-                name = product_name,
-                manufacturer_name= manu_name,
-                description= desc,
-                price = price,
-                status=1
+                product_name= product_name,
+                brand = brand,
+                unit = unit,
+                category_id = category,
+                cost= product_cost,
+                price = product_price,
+                qty=product_qty,
+                product_desc = productdesc
+
             )
 
 
@@ -571,12 +665,15 @@ class ProductsAddProduct(LoginRequiredMixin,TemplateView):
 
     def get(self, request):
         category = Category.objects.all()
-        # for i in get_eventsale:
-        #     print(i.recieved_amount)
-        # if amount == 0:
-        #     payment_status = 'Unpaid'
+        brand = Brand.objects.all()
+        unit = Unit.objects.all()
+        products = MyProducts.objects.all()
+        
         context = {
             "category": category,
+            "brands": brand,
+            "units": unit,
+            "products": products
         }
         return render(request, self.template_name, context)
 

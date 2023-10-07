@@ -13,6 +13,7 @@
     <!-- dropzone css -->
     <link href="{% static  'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
 
+
 {% endblock extra_css %}
     
 {% block content %}
@@ -69,92 +70,43 @@
                                                 <div class="tab-pane" id="basic-info">
                                                     <h4 class="header-title">Basic Information</h4>
                                                     <p class="card-title-desc">Fill all information below</p>
-                                                    <form action="{% url 'ecommerce_add_product' %}" method="post">
+                                                    <form action="{% url 'ecommerce_add_inventory' %}" method="post">
                                                         {% csrf_token %}
                                                         
                                                         <div class="row">
-                                                            <div class="col-lg-3">
+                                                            <div class="col-lg-6">
                                                                 <div class="mb-3">
-                                                                    <label class="form-label" for="productname"> Product Name </label>
-                                                                    <input id="productname" name="productname" type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <!-- <div class="col-lg-4">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label" for="manufacturerbrand">Manufacturer Brand</label>
-                                                                    <input id="manufacturerbrand" name="manufacturerbrand" type="text" class="form-control">
-                                                                </div>
-                                                            </div> -->
-                                                            <div class="col-lg-4">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label" for="brand">Brand</label>
-                                                                    <select class="form-control select2" name="brand_id">
+                                                                    <label class="form-label" for="productname">Product Name</label>
+                                                                    <select class="form-control js-select form-select" id="productname" name="productname">
                                                                         <option>Select</option>
-                                                                        {% for brand in brands %}
-                                                                        <option value="{{brand.id}}">{{brand}}</option>
+                                                                        {% for product in products %}
+                                                                            <option value="{{ product.id }}" data-stock="{{ product.qty }}">{{ product.product_name }}</option>
                                                                         {% endfor %}
                                                                     </select>
                                                                 </div>
                                                             </div>
-
-                                                            <div class="col-lg-4">
+                                                            
+                                                            <div class="col-lg-6">
                                                                 <div class="mb-3">
-                                                                    <label class="form-label" for="unit">Unit</label>
-                                                                    <select class="form-control select2" name="unit_id">
-                                                                        <option>Select</option>
-                                                                        {% for unit in units %}
-                                                                        <option value="{{unit.id}}">{{unit}}</option>
-                                                                        {% endfor %}
-                                                                    </select>
+                                                                    <label class="form-label" for="qty">QTY</label>
+                                                                    <input id="qty" name="qty" type="number" class="form-control">
                                                                 </div>
                                                             </div>
+                                                            
                                                             
                                                         </div>
                                                        
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label" for="price"> Product Cost</label>
-                                                                    <input id="cost" name="cost" type="number" class="form-control" placeholder="&#8360;">
-                                                                </div>
-                                                            </div>
-                                                            <!-- <div class="col-lg-3">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label" for="manufacturerbrand">Manufacturer Brand</label>
-                                                                    <input id="manufacturerbrand" name="manufacturerbrand" type="text" class="form-control">
-                                                                </div>
-                                                            </div> -->
-                                                            <div class="col-lg-3">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label" for="price"> Prodcut Price</label>
-                                                                    <input id="price" name="price" type="number" class="form-control" placeholder="&#8360;">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label" for="qty"> QTY </label>
-                                                                    <input id="qty" name="qty" type="number" class="form-control" >
-                                                                </div>
-                                                            </div>
+                                                        
 
-                                                            <div class="col-lg-3">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label" for="category">Category</label>
-                                                                    <select class="form-control select2" name="category_id">
-                                                                        <option>Select</option>
-                                                                        {% for cat in category %}
-                                                                        <option value="{{cat.id}}">{{cat}}</option>
-                                                                        {% endfor %}
-                                                                    </select>
-                                                                </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="stock-input"> Stock Left</label>
+                                                                <input type="text" id="stock-input" name="stock" class="form-control" readonly>
+
                                                             </div>
-                                                            
                                                         </div>
 
-                                                        <div class="mb-3">
-                                                            <label class="form-label" for="productdesc">Product Description</label>
-                                                            <textarea class="form-control" name= "productdesc" id="productdesc" rows="5"></textarea>
-                                                        </div>
+                                                        
                                                     <ul class="pager wizard twitter-bs-wizard-pager-link">
                                                         <li class="float-end"><button type="submit" class="float-end btn btn btn-primary">Save Changes <i class="mdi mdi-arrow-right ml-1"></i></button> </li>
                                                     </ul>
@@ -199,6 +151,21 @@
             <!-- End Page-content -->
 {% endblock content %}
 {% block extra_javascript %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var productSelect = document.querySelector('#productname'); // Use id attribute for selection
+        var stockInput = document.getElementById("stock-input");
+      
+        // Event listener for product selection
+        productSelect.addEventListener("change", function() {
+          var selectedOption = productSelect.options[productSelect.selectedIndex];
+          var stock = selectedOption.getAttribute("data-stock");
+          stockInput.value = stock;
+        });
+      });
+      
+    </script>
+    
     <!-- twitter-bootstrap-wizard js -->
     <script src="{% static  'libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
 

@@ -112,40 +112,29 @@
                             <li><a href="{% url 'email_read' %}" key="t-read-email">Electricity Items</a></li>
                             <li><a href="{% url 'email_compose' %}" key="t-email-compose">Hall Items</a></li> -->
                             <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="dripicons-shopping-bag"></i>
-                                    <span key="t-events">View Items</span>
-                                </a>
-                            <ul class="sub-menu" aria-expanded="false">
+                                
                                 <li><a href="{% url 'ecommerce_product' %} " key="t-add-product">Kitchen Items</a></li>
                                 <li><a href="{% url 'ecommerce_product' %} " key="t-products">Electricity Items</a></li>
                                 <li><a href="{% url 'ecommerce_product' %} " key="t-product-detail">Hall Items</a></li>
-                            </ul>
                         </li>
-                        <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                <i class="dripicons-shopping-bag"></i>
-                                <span key="t-events">Add Items</span>
-                            </a>
-                            <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="{% url 'ecommerce_add_product' %} " key="t-add-product">Add New Item</a>
-                                </li>
-                            </ul>
-                        </li>
+                       
                     </ul>
                 </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="dripicons-shopping-bag"></i>
-                        <span key="t-events">Inventory</span>
+                        <span key="t-events">Products</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{% url 'ecommerce_add_product' %} " key="t-add-product">Add Product</a>
-                        </li>
-                        <li><a href="{% url 'ecommerce_product' %} " key="t-products">Products</a></li>
-                        <li><a href="{% url 'ecommerce_product_detail' %} " key="t-product-detail">Product
-                                Detail</a></li>
+                        <li><a href="{% url 'ecommerce_add_product' %} " key="t-add-product">Add Product</a></li>
+                        <li><a href="{% url 'ecommerce_add_category' %} " key="t-add-product">Add Category</a></li>
+                        <li><a href="{% url 'ecommerce_add_brand' %} " key="t-add-product">Add Brand</a></li>
+                        <li><a href="{% url 'ecommerce_add_unit' %} " key="t-add-product">Add Unit</a></li>
+                        <li><a href="{% url 'ecommerce_add_inventory' %} " key="t-add-product">Add Inventory</a></li>
+
+                        <li><a href="{% url 'ecommerce_product' %} " key="t-products">Products List</a></li>
+                        <!-- <li><a href="{% url 'ecommerce_product_detail' %} " key="t-product-detail">ProductDetail</a></li> -->
                     </ul>
 
                     </li>

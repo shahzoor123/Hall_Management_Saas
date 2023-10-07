@@ -13,20 +13,52 @@ class Category(models.Model):
         return self.name
 
 
-class MyProducts(models.Model):
-    
-    code = models.CharField(max_length=100, blank=True)
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+
+
+class Unit(models.Model):
     name = models.CharField(max_length=100)
-    manufacturer_name = models.CharField(max_length=100, default="none")
-    description = models.TextField()
-    price = models.IntegerField(default=0)
-    status = models.IntegerField(default=1)
-    product_image = models.ImageField(upload_to = f'product_images/%Y/%m', blank = True)
+    short_name = models.CharField(max_length=10)
+    unit = models.CharField(max_length=30)
     date_added = models.DateTimeField(default=timezone.now)
-    date_updated = models.DateTimeField(auto_now=True)
+    def __str__(self):
+            return self.name
+
+class Brand(models.Model):
+    name = models.CharField(max_length=100)
+    desc = models.TextField(max_length=300)
+    date_added = models.DateTimeField(default=timezone.now)
     def __str__(self):
         return self.name
+
+class MyProducts(models.Model):
+    
+    product_name = models.CharField(max_length=100)
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    price = models.IntegerField(default=0)
+    cost = models.IntegerField(default=0)
+    qty = models.IntegerField(default=0)
+    product_image = models.ImageField(upload_to = f'product_images/%Y/%m', blank = True)
+    product_desc = models.TextField()
+    date_added = models.DateTimeField(default=timezone.now)
+    date_updated = models.DateTimeField(auto_now=True)
+    status = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.product_name
+
+        
+class Inventory(models.Model):
+    
+    product_name = models.ForeignKey(MyProducts, on_delete=models.CASCADE)
+    qty = models.IntegerField(default=0)
+    date_added = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+            return f"{self.product_name}"
+
 
 
 class Deals(models.Model):

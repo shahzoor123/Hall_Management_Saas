@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import MyProducts, Category, Deals
+from .models import MyProducts, Category, Deals, Unit, Inventory, Brand
 
 
 @admin.register(Category)
@@ -10,7 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(MyProducts)
 class MyProductsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'price', 'status')
+    list_display = ('product_name', 'product_desc', 'price', 'status')
 
 
 class DealsAdmin(admin.ModelAdmin):
@@ -29,3 +29,6 @@ class DealsAdmin(admin.ModelAdmin):
 
 admin.site.register(Deals, DealsAdmin)
 
+admin.site.register(Inventory)
+admin.site.register(Brand)
+admin.site.register(Unit)
