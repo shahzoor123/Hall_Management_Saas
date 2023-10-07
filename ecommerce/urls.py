@@ -4,7 +4,14 @@ from ecommerce import views
 
 urlpatterns = [
     # Ecommerce
+    
     path('hall-summary', views.HallSummary.as_view(),name='hall-summary'),
+    path('hall-expense-summary', views.HallExpenseSummary.as_view(),name='hall-expense-summary'),
+    
+    path('kitchen-summary', views.KitchenSummary.as_view(),name='kitchen-summary'),
+    path('salaries-summary', views.SalariesSummary.as_view(),name='salaries-summary'),
+    
+    
     path('ecommerce_product', views.Products.as_view(),name='ecommerce_product'),
     path('ecommerce_product_detail', views.ProductsDetail.as_view(),name='ecommerce_product_detail'),
     path('event-sale', views.Eventsale.as_view(),name='event-sale'),
@@ -24,5 +31,7 @@ urlpatterns = [
     # path('ecommerce_add_product', views.ProductsAddProduct.as_view(),name='ecommerce_add_product'),
     path('calendar/', views.Calendar.as_view(),name='calendar'),
     path('update-deals/<int:pk>', views.update_deal, name='update-deals'),
+    
+   
     
 ]

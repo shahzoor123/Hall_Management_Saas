@@ -24,6 +24,8 @@ from items.models import Category
 from datetime import datetime
 
 
+current_date = datetime.now()
+
 # Create your views here.
 class Products(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-products.html"
@@ -48,8 +50,46 @@ class ProductsDetail(LoginRequiredMixin,TemplateView):
 
 class HallSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/hall_summary.html"
+    
+    def get(self, request):
+        events_this_month = EventSale.objects.filter(event_date__month=current_date.month)
+        print(events_this_month)
+        received_amount = []
+        remaining_amount = []
+        sales = EventSale.objects.all()
+        for sale in sales:
+            received_amount.append(sale.recieved_amount)
+            remaining_amount.append(sale.remaining_amount)
+        print(received_amount,remaining_amount)
+
+       
 
 
+        context = {
+            "received": received_amount,
+            "remaining": remaining_amount,
+        
+        }
+        return render(request, self.template_name, context)
+        
+
+
+    
+class HallExpenseSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/hall_expense_summary.html"
+
+class KitchenSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/kitchen_summary.html"
+    
+
+    
+class SalariesSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/salaries_summary.html"  
+    
+    
+    
+    
+          
 
 class Eventsale(LoginRequiredMixin, View):
     template_name = "ecommerce/event-sale.html"
@@ -771,5 +811,5 @@ class Calendar(LoginRequiredMixin,TemplateView):
     
 
 def update_deal(request, pk):
-    
+    print(pk)
     return render(request, 'items/update_deals.html')
