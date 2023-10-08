@@ -24,6 +24,8 @@ from morvin import views
 from django.views.generic import TemplateView
 from .views import MyPasswordSetView ,MyPasswordChangeView
 from django.contrib.auth.decorators import login_required
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -58,4 +60,4 @@ urlpatterns = [
     #Custum set password done page redirect
     path('accounts/password/set/', login_required(MyPasswordSetView.as_view()), name="account_set_password"),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

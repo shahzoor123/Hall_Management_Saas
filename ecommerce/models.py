@@ -1,6 +1,8 @@
 from django.db import models
 from items.models import MyProducts
 from items.models import MyProducts, Deals
+from django.utils import timezone
+
 
 
 class EventSale(models.Model):
@@ -115,6 +117,8 @@ class EventExpense(models.Model):
     decor = models.CharField(max_length=200, blank=True)
     decor_bill = models.IntegerField(default=0, blank=True)
     total_expense = models.IntegerField(editable=False, blank=True)
+    date_added = models.DateTimeField(default=timezone.now)
+
 
     def __str__(self):
         return str(self.bill)

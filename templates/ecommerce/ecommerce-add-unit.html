@@ -1,0 +1,144 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Add Product{% endblock title %}
+
+{% block extra_css %}
+    <!-- twitter-bootstrap-wizard css -->
+    <link rel="stylesheet" href="{% static  'libs/twitter-bootstrap-wizard/prettify.css' %}">
+
+    <!-- select2 css -->
+    <link href="{% static  'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- dropzone css -->
+    <link href="{% static  'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+
+{% endblock extra_css %}
+    
+{% block content %}
+        <div class="main-content">
+            <div class="page-content">
+                <!-- start page title -->
+                <div class="page-title-box">
+                    <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <div class="page-title">
+                                <h4>Add Product</h4>
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Hall</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                        <li class="breadcrumb-item active">Add Brand</li>
+                                    </ol>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="float-end d-none d-sm-block">
+                                <a href="" class="btn btn-success">Add Widget</a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- end page title -->    
+                <div class="container-fluid">
+                    <div class="page-content-wrapper">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div id="addproduct-nav-pills-wizard" class="twitter-bs-wizard">
+                                            <ul class="twitter-bs-wizard-nav">
+                                                <li class="nav-item add-product-border">
+                                                    <a href="#basic-info" class="nav-link" >
+                                                        <span class="step-number"> Basic Info</span>
+                                                    </a>
+                                                </li>
+                                                
+                                                <!-- <li class="nav-item">
+                                                    <a href="#metadata" class="nav-link" data-toggle="tab">
+                                                        <span class="step-number">03. Meta Data</span>
+                                                    </a>
+                                                </li> -->
+                                            </ul>
+                                            <div class="tab-content twitter-bs-wizard-tab-content">
+                                                <div class="tab-pane" id="basic-info">
+                                                    <h4 class="header-title">Fill all information below</h4>
+                                                    <form action="{% url 'ecommerce_add_unit' %}" method="post">
+                                                        {% csrf_token %}
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="price"> Name </label>
+                                                                    <input id="name" name="name" type="text" class="form-control" placeholder="Kilogram">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        <div class="col-lg-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="shortname"> shortname </label>
+                                                                <input id="shortname" name="shortname" type="text" class="form-control" placeholder="Kilo">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label" for="unit"> unit </label>
+                                                                <input id="unit" name="unit" type="text" class="form-control" placeholder="kg">
+                                                            </div>
+                                                        </div>
+                                                            
+                                                        </div>
+                                                       
+                                                        
+                                                    <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                                        <li class="float-end"><button type="submit" class="float-end btn btn btn-primary">Save Changes <i class="mdi mdi-arrow-right ml-1"></i></button> </li>
+                                                    </ul>
+                                                </form>
+
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                    </div>
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+{% endblock content %}
+{% block extra_javascript %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var productSelect = document.getElementById("product-select");
+      var stockInput = document.getElementById("stock-input");
+      
+      // Event listener for product selection
+      productSelect.addEventListener("change", function() {
+        var selectedOption = productSelect.options[productSelect.selectedIndex];
+        var stock = selectedOption.getAttribute("data-stock");
+        
+        // Update the stock input field with the stock value
+        stockInput.value = stock;
+      });
+    });
+    </script>
+    
+    <!-- twitter-bootstrap-wizard js -->
+    <script src="{% static  'libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
+
+    <script src="{% static  'libs/twitter-bootstrap-wizard/prettify.js' %}"></script>
+
+    <!-- select 2 plugin -->
+    <script src="{% static  'libs/select2/dist/js/select2.min.js' %}"></script>
+
+    <!-- dropzone plugin -->
+    <script src="{% static  'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+
+    <!-- init js -->
+    <script src="{% static  'js/pages/ecommerce-add-product.init.js' %}"></script>
+{% endblock extra_javascript %}

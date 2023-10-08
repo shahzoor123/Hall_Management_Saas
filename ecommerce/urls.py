@@ -23,6 +23,11 @@ urlpatterns = [
     path('ecommerce_checkout', views.ProductsCheckout.as_view(),name='ecommerce_checkout'),
     path('ecommerce_shops', views.ProductsShops.as_view(),name='ecommerce_shops'),
     path('ecommerce_add_product', views.ProductsAddProduct.as_view(),name='ecommerce_add_product'),
+    path('ecommerce_add_inventory', views.ProductsAddInventory.as_view(),name='ecommerce_add_inventory'),
+    path('ecommerce_add_brand', views.ProductsAddBrand.as_view(),name='ecommerce_add_brand'),
+    path('ecommerce_add_unit', views.ProductsAddUnit.as_view(),name='ecommerce_add_unit'),
+
+
     # path('ecommerce_add_product', views.ProductsAddProduct.as_view(),name='ecommerce_add_product'),
     path('calendar/', views.Calendar.as_view(),name='calendar'),
     path('update-deals/<int:pk>', views.update_deal, name='update-deals'),
