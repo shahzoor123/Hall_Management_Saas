@@ -1,3 +1,7 @@
+
+
+
+
 """
 Django settings for morvin project.
 
@@ -95,12 +99,24 @@ ITEM_FUNCTION_MODEL = 'ecommerce.EventSale'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'hall2',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'hall_db',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hall',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',  # Set the hostname or IP address of your PostgreSQL server
+        'PORT': '5432',       # Set the port number of your PostgreSQL server
     }
 }
+
 
 # DATABASES = {
 #     'default': {

@@ -117,7 +117,16 @@ class EventExpense(models.Model):
     decor = models.CharField(max_length=200, blank=True)
     decor_bill = models.IntegerField(default=0, blank=True)
     total_expense = models.IntegerField(editable=False, blank=True)
-    date_added = models.DateTimeField(default=timezone.now)
+    expense_date = models.DateField()
+
+
+    
+    def save(self, *args, **kwargs):
+        # Set the date of the expense to match the date of the sale
+        if not self.expense_date:
+            self.expense_date = self.bill.event_date
+        super(EventExpense, self).save(*args, **kwargs)
+
 
 
     def __str__(self):

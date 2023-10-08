@@ -1,9 +1,3 @@
-console.log(received)
-console.log(remaining)
-console.log("hello")
-
-var received = received;
-var remaining = remaining;
 var chart, seq, delays, durations, times, options, responsiveOptions, data, sum;
 $("#overlapping-bars").length &&
 
@@ -42,7 +36,8 @@ $("#overlapping-bars").length &&
       },
     ],
   ]),
-  new Chartist.Bar("#overlapping-barss", data, options, responsiveOptions)),
+  new Chartist.Bar("#overlapping-bars", data, options, responsiveOptions)),
+  
   $("#stacked-bar-chart").length &&
     new Chartist.Bar(
       "#stacked-bar-chart",

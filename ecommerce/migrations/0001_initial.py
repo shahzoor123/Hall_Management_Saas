@@ -103,7 +103,7 @@ class Migration(migrations.Migration):
                 ('decor', models.CharField(blank=True, max_length=200)),
                 ('decor_bill', models.IntegerField(blank=True, default=0)),
                 ('total_expense', models.IntegerField(blank=True, editable=False)),
-                ('date_added', models.DateTimeField(default=django.utils.timezone.now)),
+                ('expense_date', models.DateField()),
                 ('bill', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='ecommerce.eventsale')),
             ],
         ),

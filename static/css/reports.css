@@ -3,7 +3,7 @@
     /* Set the colour of this series line */
     stroke: red;
     /* Control the thikness of your lines */
-    stroke-width: 5px;
+    stroke-width: 115px;
     /* Create a dashed line with a pattern */
     stroke-dasharray: 10px 20px;
   }
