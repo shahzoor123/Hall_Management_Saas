@@ -8,6 +8,7 @@
     <!-- plugin css -->
     <link href="{% static 'libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'libs/chartist/dist/chartist.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reports.css' %}">
 
 {% endblock extra_css %}
     
@@ -59,10 +60,10 @@
                                                             <i class="mdi mdi-calendar-month text-primary font-size-20"></i>
                                                         </span>
                                                     </div>
-                                                    <h5 class="font-size-22">{{events_this_month}}</h5>
-                                                    <p class="text-muted">70% Target</p>
+                                                    <h5 class="font-size-22"></h5>
+                                                    <p class="text-muted">{{total_events_this_month}} Target</p>
                                                     <div class="progress mt-3" style="height: 4px;">
-                                                        <div class="progress-bar progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="70"></div>
+                                                        <div id="month-progressBar" class="progress-bar progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="70"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -75,14 +76,32 @@
                                                     <p class="font-size-16">Events This Year</p>
                                                     <div class="mini-stat-icon mx-auto mb-4 mt-3">
                                                         <span class="avatar-title rounded-circle bg-soft-success">
-                                                            <i class="mdi mdi-finance text-success font-size-20"></i>
+                                                            <i class="mdi mdi-finance text- font-size-20"></i>
                                                         </span>
                                                     </div>
-                                                    <h5 class="font-size-22">{{events_this_year}}</h5>
-                                                    <p class="text-muted">80% Target</p>
+                                                    <h5 class="font-size-22"></h5>
+                                                    <p class="text-muted">{{total_events_this_year}} Target</p>
                                                     <div class="progress mt-3" style="height: 4px;">
-                                                        <div class="progress-bar progress-bar bg-success" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="80"></div>
+                                                        <div id="yearly-progressBar" class="progress-bar progress-bar bg-success" role="progressbar"  aria-valuenow="{{total_events_this_year}}" aria-valuemin="0" aria-valuemax="{{ total_events_this_year }}"></div>
                                                     </div>
+
+                                                    <h1 hidden id="total_events_this_year" data-my-variable="{{total_events_this_year}}"></h1>
+
+                                                    <h1 hidden id="total_events_this_month" data-my-variable="{{total_events_this_month}}"></h1>
+
+                                                    <script>
+                                                        // Get the total_events_this_year value from the hidden element or another source
+                                                        var totalEventsThisYear = parseInt(document.getElementById('total_events_this_year').getAttribute('data-my-variable'));
+
+                                                        var total_events_this_month = parseInt(document.getElementById('total_events_this_month').getAttribute('data-my-variable'));
+                                                        
+                                                        // Calculate the percentage
+                                                        var yearly_percentage = totalEventsThisYear;
+                                                        var montly_percentage = totalEventsThisYear;
+                                                        // Set the style attribute of the progress bar
+                                                        document.getElementById('yearly-progressBar').style.width = yearly_percentage + '%';
+                                                        document.getElementById('month-progressBar').style.width = montly_percentage + '%';
+                                                    </script>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,38 +126,27 @@
                                             </div>
                                         </div>
                                         <div class="mt-3">
-                                            <div id="stastics-chart"></div>
+                                            <div id="stastics-charts"></div>
                                         </div>
+                                        <div >
+                                            <canvas id="myChart" style="height: 300px;" ></canvas>
+                                          </div>
                                     </div>
                                     
                                 </div>
                                 
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        
-                                        <h4 class="header-title">Sales Heads</h4>
-                                        <p class="card-title-desc">A very simple pie chart with label interpolation to show percentage instead of the actual data series value.
-                                        </p>
-                                        <div id="simple-pie" class="ct-chart ct-golden-section simple-pie-chart-chartist" dir="ltr"></div>
-                                    </div>
-                                </div>
+                        <div class="card">
+                            <div class="card-body">
+    
+                                <h4 class="header-title">Overlapping bars on mobile</h4>
+                                <p class="card-title-desc">This example makes use of label interpolation and the seriesBarDistance property that allows you to make bars overlap over each other.</p>
+    
+                                <div id="overlapping-barss" class="ct-chart ct-golden-section" dir="ltr"></div>
                             </div>
-                            <!-- end col -->
-                            <div class="col-xl-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title">Expense Heads</h4>
-                                        <p class="card-title-desc">Although it'd be also possible to achieve this animation with CSS, with some minor suboptimal things, here's an example of how to animate donut charts using Chartist.Svg.animate and SMIL.</p>
-                                        <div id="animating-donut" class="ct-chart ct-golden-section" dir="ltr"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end col -->
                         </div>
+                   
 
                     </div>
                 </div>
@@ -146,9 +154,20 @@
             </div>
         </div>
 
+
+
+        <h1 hidden id="received" data-my-variable="{{received}}"></h1>
+        <h1 hidden id="remaining" data-my-variable="{{remaining}}"></h1>
             <!-- End Page-content -->
 {% endblock content %}
+
 {% block extra_javascript %}
+
+    <!-- <script>
+        var received = "{{ received|escapejs }}"; // Use escapejs filter to safely escape the data
+        var remaining = "{{ remaining|escapejs }}"; 
+    </script> -->
+    <script src="{% static 'js/pages/chart.js' %}"></script>
     <!-- apexcharts -->
     <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script>
     <!-- Plugins js-->
@@ -162,5 +181,92 @@
     <script src="{% static 'libs/chartist-plugin-tooltips-updated/dist/chartist-plugin-tooltip.min.js' %}"></script>
     <!-- demo js-->
     <script src="{% static 'js/pages/chartist.init.js' %}"></script>
+
+    <!-- Bar chart -->
+    <script>
+
+        // Get the values from the data attributes
+        var receivedValue = document.getElementById('received').getAttribute('data-my-variable');
+        var remainingValue = document.getElementById('remaining').getAttribute('data-my-variable');
+
+        // Parse the values as JSON arrays
+        var totalSales = JSON.parse(receivedValue);
+        var totalExpense = JSON.parse(remainingValue);
+
+
+        ((data = {
+
+            labels: [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "Mai",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                ],
+                series: [
+                        totalSales,
+                      totalExpense,
+                      
+                     
+                      
+                    //   [8, 6, 9, 6, 8, 6, 3, 6, 7, 10, 9, 7],
+                    //   [7, 5, 4, 5, 7, 3, 4, 5, 4, 6, 8, 5],
+                ],
+            }),
+                (options = { seriesBarDistance: 1 }),
+                (responsiveOptions = [
+                    [
+                        "screen and (max-width: 640px)",
+                        {
+                            seriesBarDistance: 1,
+                            axisX: {
+                                labelInterpolationFnc: function (e) {
+                                    return e[0];
+                                },
+                            },
+                        },
+                    ],
+                ]),
+                new Chartist.Bar("#overlapping-bars", data, options, responsiveOptions));
+
+
+              
+    </script>
+
+    <!-- Apex chart -->
+
+
+ <script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+
+    
 
 {% endblock extra_javascript %}

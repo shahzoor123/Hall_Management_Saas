@@ -1,0 +1,9 @@
+/* Use this selector to override the line style on a given series */
+.ct-chart .ct-golden-section {
+    /* Set the colour of this series line */
+    stroke: red;
+    /* Control the thikness of your lines */
+    stroke-width: 5px;
+    /* Create a dashed line with a pattern */
+    stroke-dasharray: 10px 20px;
+  }

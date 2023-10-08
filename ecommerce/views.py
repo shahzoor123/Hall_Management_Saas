@@ -23,7 +23,7 @@ from django.core.serializers import serialize
 from django.http import JsonResponse
 from items.models import Category
 from datetime import datetime
-
+from django.db.models.functions import ExtractMonth
 
 current_date = datetime.now()
 
@@ -37,25 +37,72 @@ class ProductsDetail(LoginRequiredMixin,TemplateView):
 
 
 class HallSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/hall_summary.html"
+    template_name = "ecommerce/finance_reports/hall_summary.html"
     
     def get(self, request):
+        all_months = []
+        all_sales_this_year = []
+        
         events_this_month = EventSale.objects.filter(event_date__month=current_date.month)
-        print(events_this_month)
-        received_amount = []
-        remaining_amount = []
-        sales = EventSale.objects.all()
-        for sale in sales:
-            received_amount.append(sale.recieved_amount)
-            remaining_amount.append(sale.remaining_amount)
-        print(received_amount,remaining_amount)
+        events_this_year = EventSale.objects.filter(event_date__year=current_date.year)
+        
+        for j in events_this_year:  
+            all_sales_this_year.append(j)
+            total_sale_this_year = len(all_sales_this_year)
+        print(total_sale_this_year)
+        
+        for i in events_this_month:  
+            all_months.append(i)
+            total_events = len(all_months)
+        print(total_events)
+        
+        # Query the database to get total sales for every month in the current year
+        monthly_sales = EventSale.objects.filter(event_date__year=current_date.year).annotate(month=ExtractMonth('event_date')) \
+            .values('month') \
+            .annotate(total_sales=Sum('total_amount')) \
+            .order_by('month')
+            
+            # Get total expenses for each month based on the EventSale's create date
+        monthly_expenses = EventExpense.objects.values('bill').annotate(Sum('total_expense')).values('total_expense')
+        
+        print(monthly_expenses)
+     
+     
+     
+        month_sales_dict = {entry['month']: entry['total_sales'] for entry in monthly_sales}
+        
+        # Initialize a list to store total sales for every month
+        every_month_sale = []
+
+        # Iterate through all 12 months
+        for month in range(1, 13):
+            # Check if the month is present in the dictionary
+            if month in month_sales_dict:
+                total_sales = month_sales_dict[month]
+            else:
+                total_sales = 0  # Set total sales to 0 for missing months
+            every_month_sale.append(total_sales)
+
+        print(every_month_sale)
+
+
+        
+        # received_amount = []
+        # remaining_amount = []
+        # sales = EventSale.objects.all()
+        # for sale in sales:
+        #     received_amount.append(sale.recieved_amount)
+        #     remaining_amount.append(sale.remaining_amount)
+        # print(every_month_sale,remaining_amount)
 
        
 
 
         context = {
-            "received": received_amount,
-            "remaining": remaining_amount,
+            "received": every_month_sale,
+            "remaining": [15340, 1171050, 116399, 11440, 1111110, 111399, 111400],
+            "total_events_this_month" : total_events,
+            "total_events_this_year" : total_sale_this_year
         
         }
         return render(request, self.template_name, context)
@@ -64,15 +111,14 @@ class HallSummary(LoginRequiredMixin,TemplateView):
 
     
 class HallExpenseSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/hall_expense_summary.html"
+    template_name = "ecommerce/finance_reports/detail_finance_reports/days_report.html"
 
 class KitchenSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/kitchen_summary.html"
+    template_name = "ecommerce/finance_reports/kitchen_summary.html"
     
-
     
 class SalariesSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/salaries_summary.html"  
+    template_name = "ecommerce/finance_reports/detail_finance_reports/salaries_summary.html"  
     
     
     
@@ -552,7 +598,6 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                     total_expense = total
                 )
             return render(request, 'ecommerce/event-expense.html')
-
             # except MyProducts.DoesNotExist:
             #     # Handle case where product is not found
             #     error_message = "Product not found"
