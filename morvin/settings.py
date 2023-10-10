@@ -1,3 +1,7 @@
+
+
+
+
 """
 Django settings for morvin project.
 
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     'ecommerce',
     'e_mail',
     'components',
@@ -100,6 +105,18 @@ DATABASES = {
         'NAME': 'hall_db',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'hall',
+#         'USER': 'postgres',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',  # Set the hostname or IP address of your PostgreSQL server
+#         'PORT': '5432',       # Set the port number of your PostgreSQL server
+#     }
+# }
+
 
 # DATABASES = {
 #     'default': {

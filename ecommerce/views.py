@@ -22,7 +22,7 @@ from django.core.serializers import serialize
 from django.http import JsonResponse
 from items.models import Category
 from datetime import datetime
-
+from django.db.models.functions import ExtractMonth
 
 current_date = datetime.now()
 
@@ -49,25 +49,95 @@ class ProductsDetail(LoginRequiredMixin,TemplateView):
 
 
 class HallSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/hall_summary.html"
+    template_name = "ecommerce/finance_reports/hall_summary.html"
     
     def get(self, request):
+        all_months = []
+        all_sales_this_year = []
+        
         events_this_month = EventSale.objects.filter(event_date__month=current_date.month)
-        print(events_this_month)
-        received_amount = []
-        remaining_amount = []
-        sales = EventSale.objects.all()
-        for sale in sales:
-            received_amount.append(sale.recieved_amount)
-            remaining_amount.append(sale.remaining_amount)
-        print(received_amount,remaining_amount)
+        events_this_year = EventSale.objects.filter(event_date__year=current_date.year)
+        
+        for j in events_this_year:  
+            all_sales_this_year.append(j)
+            total_sale_this_year = len(all_sales_this_year)
+        
+        
+        for i in events_this_month:  
+            all_months.append(i)
+            total_events = len(all_months)
+        
+        
+        
+        
+        # montly sales
+        
+        # Query the database to get total sales for every month in the current year
+        monthly_sales = EventSale.objects.filter(event_date__year=current_date.year).annotate(month=ExtractMonth('event_date')) \
+            .values('month') \
+            .annotate(total_sales=Sum('total_amount')) \
+            .order_by('month')
+            
+        month_sales_dict = {entry['month']: entry['total_sales'] for entry in monthly_sales}
 
+         # Initialize a list to store total sales for every month
+        every_month_sale = []
+
+        # Iterate through all 12 months
+        for month in range(1, 13):
+            # Check if the month is present in the dictionary
+            if month in month_sales_dict:
+                total_sales = month_sales_dict[month]
+            else:
+                total_sales = 0  # Set total sales to 0 for missing months
+            every_month_sale.append(total_sales)
+
+        print(every_month_sale)
        
 
 
+
+       # montly expense
+        expense_list = []
+        # Get total expenses for each month based on the EventSale's create date
+        monthly_expenses = EventExpense.objects.values('bill').annotate(Sum('total_expense')).values('total_expense')
+        
+        for i in monthly_expenses:
+            expense_list.append(i.values())
+           
+            
+        # print(expense_list)
+        result_list = [value for dict_values_obj in expense_list for value in dict_values_obj]
+        print(result_list)
+     
+         # Iterate through all 12 months
+        for month in range(1, 13):
+            # Check if the month is present in the dictionary
+            if month in result_list:
+                total_sales = month_sales_dict[month]
+            else:
+                total_sales = 0  # Set total sales to 0 for missing months
+            every_month_sale.append(total_sales)
+
+        print(every_month_sale)
+       
+        
+      
+
+
+
+
+
         context = {
-            "received": received_amount,
-            "remaining": remaining_amount,
+            # "total_events_this_month" : total_events,
+            # "total_events_this_year" : total_sale_this_year,
+            
+            "sale": every_month_sale,
+            "expense": result_list,
+            
+            "daily_sale" : 0,
+            "daily_expense":0,
+            
         
         }
         return render(request, self.template_name, context)
@@ -76,15 +146,14 @@ class HallSummary(LoginRequiredMixin,TemplateView):
 
     
 class HallExpenseSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/hall_expense_summary.html"
+    template_name = "ecommerce/finance_reports/detail_finance_reports/days_report.html"
 
 class KitchenSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/kitchen_summary.html"
+    template_name = "ecommerce/finance_reports/kitchen_summary.html"
     
-
     
 class SalariesSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/salaries_summary.html"  
+    template_name = "ecommerce/finance_reports/detail_finance_reports/salaries_summary.html"  
     
     
     
@@ -114,52 +183,56 @@ class Eventsale(LoginRequiredMixin, View):
         return render(request, self.template_name, context)
     
     
-    def post(self, request):
-        if request.method == "POST":
-            bill_number = request.POST.get('bill-no')
-            serial = request.POST.get('serial-no')
+    # def post(self, request):
+    #     if request.method == "POST":
+    #         bill_number = request.POST.get('bill-no')
+    #         serial = request.POST.get('serial-no')
 
-            event_status = request.POST.get('status')
-            event_time = request.POST.get('event-time')
+    #         event_status = request.POST.get('status')
+    #         event_time = request.POST.get('event-time')
 
-            event_date = request.POST.get('event-date')
-            number_of_people = request.POST.get('no-of-people')
-            setup = request.POST.get('setup')
+    #         event_date = request.POST.get('event-date')
+    #         number_of_people = request.POST.get('no-of-people')
+    #         setup = request.POST.get('setup')
 
-            deals = request.POST.get('deals')
-            customer_name = request.POST.get('customer-name')
-            customer_number = request.POST.get('customer-number')
-            per_head = request.POST.get('per-head')
+    #         deals = request.POST.get('deals')
+    #         customer_name = request.POST.get('customer-name')
+            
+    #         stage_charge = request.POST.get('stage-charges')
+    #         entry_charge = request.POST.get('entry-charges')
+            
+    #         customer_number = request.POST.get('customer-number')
+    #         per_head = request.POST.get('per-head')
 
-            extra_charge = request.POST.get('extra-charges')
+    #         extra_charge = request.POST.get('extra-charges')
            
-            food_menu = request.POST.get('food-menu')
-            details = request.POST.get('details')
-            received_ammount = request.POST.get('received-amount')
+    #         food_menu = request.POST.get('food-menu')
+    #         details = request.POST.get('details')
+    #         received_ammount = request.POST.get('received-amount')
 
             
-            add_event_sale = EventSale.objects.create(
-                bill_no=bill_number,
-                sr=serial,
-                status=event_status,
-                event_timing=event_time,
-                event_date=event_date,
-                no_of_people=number_of_people,
-                setup=setup,
-                customer_name=customer_name,
-                customer_number=customer_number,
-                per_head=per_head,
-                extra_charges=extra_charge,
-                stage_charges= stage_charge,
-                entry_charges=entry_charge,
-                food_menu=food_menu,
-                detials=details,
-                total_amount= (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) ,
-                recieved_amount=received_ammount, 
-                remaining_amount = total_amount - received_ammount
-            )
-        print('Posted')
-        return render(request, 'items/deals-calculator')
+    #         add_event_sale = EventSale.objects.create(
+    #             bill_no=bill_number,
+    #             sr=serial,
+    #             status=event_status,
+    #             event_timing=event_time,
+    #             event_date=event_date,
+    #             no_of_people=number_of_people,
+    #             setup=setup,
+    #             customer_name=customer_name,
+    #             customer_number=customer_number,
+    #             per_head=per_head,
+    #             extra_charges=extra_charge,
+    #             stage_charges= stage_charge,
+    #             entry_charges=entry_charge,
+    #             food_menu=food_menu,
+    #             detials=details,
+    #             total_amount = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) ,
+    #             recieved_amount = received_ammount, 
+    #             remaining_amount = total_amount - received_ammount 
+    #         )
+    #     print('Posted')
+    #     return render(request, 'items/deals-calculator')
 
 
             # x = 'Deal1'
@@ -586,7 +659,6 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                     total_expense = total
                 )
             return render(request, 'ecommerce/event-expense.html')
-
             # except MyProducts.DoesNotExist:
             #     # Handle case where product is not found
             #     error_message = "Product not found"
