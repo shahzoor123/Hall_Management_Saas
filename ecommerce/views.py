@@ -557,7 +557,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             decor_bill = request.POST.get('decor-bill')
     
             # try:
-            nan = MyProducts.objects.get(name='Naan')
+            nan = MyProducts.objects.get(product_name='Naan')
             naan_price = nan.price * naan
 
 
@@ -565,10 +565,10 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
             drink = 0
             if drinks_type == 'Cold Drinks 1.5L':
-                drink = MyProducts.objects.get(name='Cold Drinks 1.5L')
+                drink = MyProducts.objects.get(product_name='Cold Drinks 1.5L')
 
             elif drinks_type == "Cold Drinks Tin":
-                drink = MyProducts.objects.get(name='Cold Drinks Tin')
+                drink = MyProducts.objects.get(product_name='Cold Drinks Tin')
 
             else:
                 drink = ''
@@ -579,13 +579,13 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             
             bottles = 0
             if water_type == 'Water 1.5L':
-                bottles = MyProducts.objects.get(name='Water 1.5L')
+                bottles = MyProducts.objects.get(product_name='Water 1.5L')
 
             elif water_type == "Water 500ML":
-                bottles = MyProducts.objects.get(name='Water 500ML')
+                bottles = MyProducts.objects.get(product_name='Water 500ML')
 
             elif water_type == "Water 300ML":
-                bottles = MyProducts.objects.get(name='Water 300ML')
+                bottles = MyProducts.objects.get(product_name='Water 300ML')
 
             else:
                 bottles = ''
@@ -593,10 +593,10 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             if not bottles == '' :
                 bottles = bottles.price * water
             
-            bbqs = MyProducts.objects.get(name="BBQ")
+            bbqs = MyProducts.objects.get(product_name="BBQ")
             bbq_price = bbq * bbqs.price
 
-            wait = MyProducts.objects.get(name="Waiters")
+            wait = MyProducts.objects.get(product_name="Waiters")
             waiters = wait.price * int(no_of_waiters)
 
             pakwan = int(pakwan)
