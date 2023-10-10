@@ -106,16 +106,16 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'hall',
-#         'USER': 'postgres',
-#         'PASSWORD': 'admin',
-#         'HOST': 'localhost',  # Set the hostname or IP address of your PostgreSQL server
-#         'PORT': '5432',       # Set the port number of your PostgreSQL server
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hall',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',  # Set the hostname or IP address of your PostgreSQL server
+        'PORT': '5432',       # Set the port number of your PostgreSQL server
+    }
+}
 
 
 # DATABASES = {
