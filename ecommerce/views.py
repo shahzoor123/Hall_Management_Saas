@@ -247,7 +247,24 @@ class Eventsale(LoginRequiredMixin, View):
             #     return  calc_get_function.get_context_data(request, context)   
 
 
+def delete_sale(request, sale_id):
+    
+    sales = get_object_or_404(EventSale, pk=sale_id)
+    if sales is not None:
+        sales.delete()
+        return redirect("event-sale")
 
+    sale = EventSale.objects.all()
+    deals = Deals.objects.all()
+
+
+    context = {
+            "sales": sale,
+            
+            "deals": deals
+        }
+    
+    return render(request, 'ecommerce/event-sale.html', context=context)
 
 class Kitchensale(LoginRequiredMixin, View):
     template_name = "ecommerce/kitchen-sale.html"
