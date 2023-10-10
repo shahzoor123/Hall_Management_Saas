@@ -32,7 +32,7 @@ class Brand(models.Model):
         return self.name
 
 class MyProducts(models.Model):
-    
+    code = models.CharField(max_length=100, blank=True)
     product_name = models.CharField(max_length=100)
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
@@ -43,7 +43,7 @@ class MyProducts(models.Model):
     product_image = models.ImageField(upload_to = f'product_images/%Y/%m', blank = True)
     product_desc = models.TextField()
     date_added = models.DateTimeField(default=timezone.now)
-    date_updated = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(default=timezone.now, null=True)
     status = models.IntegerField(default=1)
 
     def __str__(self):

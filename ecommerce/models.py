@@ -116,7 +116,7 @@ class EventExpense(models.Model):
     setup_bill = models.IntegerField(default=0, blank=True)
     decor = models.CharField(max_length=200, blank=True)
     decor_bill = models.IntegerField(default=0, blank=True)
-    total_expense = models.IntegerField(editable=False, blank=True)
+    total_expense = models.BigIntegerField(editable=False, blank=True)
     expense_date = models.DateField(blank=True)
 
     
@@ -188,9 +188,9 @@ class EventExpense(models.Model):
 
     #     # Update the instance with the calculated bbq_price
     #     self.total_expense = (
-    #         self.pakwan_bill + self.electicity + self.naan_bill + self.cold_drink_bill +
-    #         self.water_bill + self.bbq_price + self.diesel_ltr + self.waiters_bill +
-    #         self.stuff_bill + self.dhobi + self.other_expense + self.setup_bill + self.decor_bill
+    #         int(self.pakwan_bill) + int(self.electicity) + int(self.naan_bill) + int(self.cold_drink_bill) +
+    #         int(self.water_bill) + int(self.bbq_price) + int(self.diesel_ltr) + int(self.waiters_bill) +
+    #         int(self.stuff_bill) + int(self.dhobi) + int(self.other_expense) + int(self.setup_bill) + int(self.decor_bill)
     #     )
     #     super(EventExpense, self).save(*args, **kwargs)
 
