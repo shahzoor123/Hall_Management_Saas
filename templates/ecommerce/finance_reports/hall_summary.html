@@ -5,6 +5,7 @@
 <link href="{% static 'libs/chartist/dist/chartist.min.css' %}" rel="stylesheet" />
 <link rel="stylesheet" href="{% static 'css/reports.css' %}" />
 
+
 {% endblock extra_css %} {% block content %}
 <div class="main-content">
   <div class="page-content">
@@ -43,7 +44,14 @@
                   overlap over each other.
                 </p>
 
-                <div id="overlapping-bar" class="ct-chart ct-golden-section" dir="ltr"></div>
+                <!-- <div id="overlapping-bar" class="ct-chart ct-golden-section" dir="ltr"></div> -->
+
+                <div style="width: 80%;">
+                  <canvas id="salesChart"></canvas>
+              </div>
+              <div style="width: 80%;">
+                  <canvas id="expensesChart"></canvas>
+              </div>
               </div>
             </div>
           </div>
@@ -197,10 +205,64 @@
 <script src="{% static 'libs/chartist/dist/chartist.min.js' %}"></script>
 <script src="{% static 'libs/chartist-plugin-tooltips-updated/dist/chartist-plugin-tooltip.min.js' %}"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <!-- demo js-->
 <!-- <script src="{% static 'js/pages/chartist.init.js' %}"></script> -->
 
 <!-- Bar chart -->
+
+<script>
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const salesData = Array.from({ length: 12 }, () => Math.floor(Math.random() * 1000));
+  const expensesData = Array.from({ length: 12 }, () => Math.floor(Math.random() * 500));
+
+  const salesChartCtx = document.getElementById('salesChart').getContext('2d');
+  const expensesChartCtx = document.getElementById('expensesChart').getContext('2d');
+
+  const salesChart = new Chart(salesChartCtx, {
+      type: 'bar',
+      data: {
+          labels: months,
+          datasets: [{
+              label: 'Monthly Sales',
+              data: salesData,
+              backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          }],
+      },
+      options: {
+          onClick: function (event, elements) {
+              if (elements.length > 0) {
+                  const selectedIndex = elements[0].index;
+                  console.log(selectedIndex);
+                  updateExpensesChart(selectedIndex);
+              }
+          }
+      }
+  });
+
+  function updateExpensesChart(selectedIndex) {
+      const updatedExpensesData = expensesData.map((value, index) => (index === selectedIndex ? value : 0));
+      expensesChart.data.datasets[0].data = updatedExpensesData;
+      expensesChart.update();
+  }
+
+  const expensesChart = new Chart(expensesChartCtx, {
+      type: 'bar',
+      data: {
+          labels: months,
+          datasets: [{
+              label: 'Monthly Expenses',
+              data: expensesData,
+              backgroundColor: 'rgba(255, 99, 132, 0.6)',
+          }],
+      },
+  });
+</script>
+
+
+
+
 <script>
   // // Get the values from the data attributes
   // var montly_sale = document
@@ -251,6 +313,9 @@
       ],
     ]),
     new Chartist.Bar("#overlapping-bar", data, options, responsiveOptions);
+
+    var monthChart = new Chartist.Bar("#overlapping-bar", data, options, responsiveOptions);
+
      // Add a click event listener to the month-wise chart
   monthChart.on("draw", function (data) {
     if (data.type === "bar") {
@@ -360,5 +425,7 @@
   };
   new ApexCharts(document.querySelector("#stastics-charts"), options1).render();
 </script>
+
+
 
 {% endblock extra_javascript %}
