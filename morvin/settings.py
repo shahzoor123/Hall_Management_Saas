@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'generalExpense',
     'crispy_forms',
     'crispy_bootstrap4',
+    'django_seed',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -106,16 +107,16 @@ DATABASES = {
     }
 }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hall',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',  # Set the hostname or IP address of your PostgreSQL server
-        'PORT': '5432',       # Set the port number of your PostgreSQL server
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'hall',
+#         'USER': 'postgres',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',  # Set the hostname or IP address of your PostgreSQL server
+#         'PORT': '5432',       # Set the port number of your PostgreSQL server
+#     }
+# }
 
 
 # DATABASES = {

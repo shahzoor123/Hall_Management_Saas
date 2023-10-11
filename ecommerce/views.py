@@ -52,26 +52,7 @@ class HallSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/hall_summary.html"
     
     def get(self, request):
-        all_months = []
-        all_sales_this_year = []
-        
-        events_this_month = EventSale.objects.filter(event_date__month=current_date.month)
-        events_this_year = EventSale.objects.filter(event_date__year=current_date.year)
-        
-        for j in events_this_year:  
-            all_sales_this_year.append(j)
-            total_sale_this_year = len(all_sales_this_year)
-        
-        
-        for i in events_this_month:  
-            all_months.append(i)
-            total_events = len(all_months)
-        
-        
-        
-        
-        # montly sales
-        
+    
         # Query the database to get total sales for every month in the current year
         monthly_sales = EventSale.objects.filter(event_date__year=current_date.year).annotate(month=ExtractMonth('event_date')) \
             .values('month') \
@@ -92,23 +73,29 @@ class HallSummary(LoginRequiredMixin,TemplateView):
                 total_sales = 0  # Set total sales to 0 for missing months
             every_month_sale.append(total_sales)
 
-        print(every_month_sale , 'hrllo')
-       
-
+        print(every_month_sale , 'sale')
 
 
        # montly expense
         expense_list = []
         # Get total expenses for each month based on the EventSale's create date
-        monthly_expenses = EventExpense.objects.values('bill').annotate(Sum('total_expense')).values('total_expense')
-        
+        # monthly_expenses = EventExpense.objects.values('bill').annotate(Sum('total_expense')).values('total_expense')
+        monthly_expenses = EventExpense.objects.values('bill__event_date__month').annotate(total_expense=Sum('total_expense')).order_by('bill__event_date__month')
         for i in monthly_expenses:
             expense_list.append(i.values())
-           
+        print(monthly_expenses, 'query') 
             
         # print(expense_list)
         result_list = [value for dict_values_obj in expense_list for value in dict_values_obj]
-        print(result_list)
+        print(result_list, 'expenses')
+
+        cleaned_expenses = []
+                # Iterate through the list, skipping every other element (i.e., the month values)
+        for i in range(0, len(result_list), 2):
+            expense_value = result_list[i + 1]  # Get the expense value (skip the month)
+            cleaned_expenses.append(expense_value)
+
+        print(cleaned_expenses)
      
          # Iterate through all 12 months
         for month in range(1, 13):
@@ -119,27 +106,20 @@ class HallSummary(LoginRequiredMixin,TemplateView):
                 total_sales = 0  # Set total sales to 0 for missing months
             every_month_sale.append(total_sales)
 
-        print(every_month_sale)
        
-        
-      
-
-
-
-
 
         context = {
-            # "total_events_this_month" : total_events,
-            # "total_events_this_year" : total_sale_this_year,
+       
             
             "sale": every_month_sale,
-            "expense": result_list,
+            "expense": cleaned_expenses,
             
             "daily_sale" : 0,
             "daily_expense":0,
             
         
         }
+        
         return render(request, self.template_name, context)
         
 
