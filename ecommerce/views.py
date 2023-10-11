@@ -97,14 +97,14 @@ class HallSummary(LoginRequiredMixin,TemplateView):
 
         print(cleaned_expenses)
      
-         # Iterate through all 12 months
-        for month in range(1, 13):
-            # Check if the month is present in the dictionary
-            if month in result_list:
-                total_sales = month_sales_dict[month]
-            else:
-                total_sales = 0  # Set total sales to 0 for missing months
-            every_month_sale.append(total_sales)
+        #  # Iterate through all 12 months
+        # for month in range(1, 13):
+        #     # Check if the month is present in the dictionary
+        #     if month in result_list:
+        #         total_sales = month_sales_dict[month]
+        #     else:
+        #         total_sales = 0  # Set total sales to 0 for missing months
+        #     every_month_sale.append(total_sales)
 
        
 
@@ -116,7 +116,6 @@ class HallSummary(LoginRequiredMixin,TemplateView):
             
             "daily_sale" : 0,
             "daily_expense":0,
-            
         
         }
         

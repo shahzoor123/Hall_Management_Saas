@@ -157,6 +157,8 @@ class Index(LoginRequiredMixin,TemplateView):
 
         context = {
             "expense": cleaned_expenses,
+            
+            
             "total_sales": total_sales,
             "total_expense": total_expenses,
             "fifty_sale": total_sales /2,
@@ -171,6 +173,9 @@ class Index(LoginRequiredMixin,TemplateView):
 
         }
         return render(request, self.template_name, context)
+    
+    
+    
 class Calendar(LoginRequiredMixin,TemplateView):
     template_name = "calendar.html"
 
