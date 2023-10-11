@@ -374,21 +374,8 @@
                   </div>
                 </div>
                 <!-- End Form -->
-
-
-                <!-- Form -->
-                <div class="row mb-4">
-                    <label for="" class="col-sm-3 col-form-label form-label">Menu Amount</label>
-  
-                    <div class="col-sm-9">
-                      <!-- Input Group -->
-                      <input type="text" class="js-toggle-password form-control" name="menu-amount" id="menu-amount"
-                        placeholder="Menu Amount" aria-label="">
-                      <!-- End Input Group -->
-                    </div>
-                  </div>
-                  <!-- End Form -->
-
+                
+                
                 <!-- Form -->
                 <div class="row mb-4">
                   <label for="" class="col-sm-3 col-form-label form-label">Customer number</label>
@@ -404,6 +391,20 @@
                   </div>
                 </div>
                 <!-- End Form -->
+                
+
+                <!-- Form -->
+                <div class="row mb-4">
+                    <label for="" class="col-sm-3 col-form-label form-label">Menu Amount</label>
+  
+                    <div class="col-sm-9">
+                      <!-- Input Group -->
+                      <input type="text" class="js-toggle-password form-control" name="menu-amount" id="menu-amount"
+                        placeholder="Menu Amount" aria-label="">
+                      <!-- End Input Group -->
+                    </div>
+                  </div>
+                  <!-- End Form -->
 
                 <!-- Form -->
                 <div class="row mb-4">
@@ -712,7 +713,7 @@
       // Set values in the second form
       const perHeadInputForm2 = document.querySelector('form#sale-form [name="per-head"]');
       numOfPeopleInputForm2.value = numberOfPeopleInput.value;
-      perHeadInputForm2.value = perHeadValue.toFixed(2);
+      perHeadInputForm2.value = Math.round(perHeadValue);
         
       var menu = "";
         

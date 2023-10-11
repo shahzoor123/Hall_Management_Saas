@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import MyProducts, Deals
 from ecommerce.models import EventSale, Event
 import json
+from django.shortcuts import render , redirect,get_object_or_404
 
 
 class Calculate(LoginRequiredMixin,TemplateView):
@@ -57,6 +58,7 @@ def custom_menu(request):
                 menu_amount = request.POST.get('menu-amount')
                 menu_amount = float(menu_amount)
                 food_menu = request.POST.get('food-menu')
+                print(food_menu)
 
                 gents = request.POST.get('gents')
                 ladies = request.POST.get('ladies')
@@ -92,8 +94,26 @@ def custom_menu(request):
                 )
 
                 create_event = Event.objects.create(event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
+                
+                # Unfinish work
+                # st_list = food_menu.split(', ')
+                # product_list = []
+                # for i in range(len(st_list)):
+                #     if len(st_list[i]) == 0 or len(st_list[i]) < 1:
+                #         continue
+                #     item_qty = st_list[i].strip().split(' ')
+                #     if len(item_qty) == 0:
+                #         continue
+                #     else:
+                #         print(item_qty)
+                #         item = item_qty[0]
+                #         qty = int(item_qty[1].strip('()'))  # Convert the quantity to an integer
+                #         product_list.append([item, qty])
+                
 
-                return render(request, 'extras/pages/pages-invoice.html')
+                # print(product_list)
+
+                return redirect('event-sale')
 
 def item(request, deal_id):
         context = {}

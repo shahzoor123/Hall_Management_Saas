@@ -92,10 +92,6 @@ class HallSummary(LoginRequiredMixin,TemplateView):
                 total_sales = 0  # Set total sales to 0 for missing months
             every_month_sale.append(total_sales)
 
-        print(every_month_sale)
-       
-
-
 
        # montly expense
         expense_list = []
@@ -108,7 +104,6 @@ class HallSummary(LoginRequiredMixin,TemplateView):
             
         # print(expense_list)
         result_list = [value for dict_values_obj in expense_list for value in dict_values_obj]
-        print(result_list)
      
          # Iterate through all 12 months
         for month in range(1, 13):
@@ -250,8 +245,11 @@ class Eventsale(LoginRequiredMixin, View):
 def delete_sale(request, sale_id):
     
     sales = get_object_or_404(EventSale, pk=sale_id)
+    event = get_object_or_404(Event, pk=sales.id)
+    # print(event.id)
     if sales is not None:
         sales.delete()
+        event.delete()
         return redirect("event-sale")
 
     sale = EventSale.objects.all()
@@ -444,6 +442,8 @@ class UpdateEventsale(LoginRequiredMixin, View):
     
     def post(self, request, sale_id):
         if request.method == "POST":
+
+            # Updating Sales
             requests = EventSale.objects.get(id=sale_id)
 
             bill_number = request.POST.get('bill-no')
@@ -517,6 +517,15 @@ class UpdateEventsale(LoginRequiredMixin, View):
 
             requests.total_amount = total
             requests.save()
+
+            # Updating Events
+            e_requests = Event.objects.get(id=sale_id)
+            e_requests.event_title = customer_name
+            e_requests.start_date = event_date
+            e_requests.end_date = event_date
+            e_requests.event_time = event_time
+            e_requests.save()
+
             
 
         return redirect('event-sale')
@@ -661,7 +670,6 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
 
             total = pakwan + naan_price + bottles + drink + bbq_price + diesel + waiters + stuff + dhobi + other_expenses + setup + decor_bill
-            print(bill_number, pakwan, electicity, naan, drinks, water, bbq, naan_price, drink, bottles, bbq_price,diesel, no_of_waiters, waiters, stuff, dhobi, other_expenses, setup, decor,decor_bill,total)
 
 
             add_event_expense = EventExpense.objects.create(
@@ -803,7 +811,7 @@ class ProductsAddProduct(LoginRequiredMixin,TemplateView):
             product_price= request.POST.get('price')
             product_qty= request.POST.get('qty')
             productdesc = request.POST.get('productdesc')
-
+            image = request.FILES.get('image')
 
             MyProducts.objects.create(
                 product_name= product_name,
@@ -813,7 +821,8 @@ class ProductsAddProduct(LoginRequiredMixin,TemplateView):
                 # cost= product_cost,
                 price = product_price,
                 qty=product_qty,
-                product_desc = productdesc
+                product_desc = productdesc,
+                product_image = image
 
             )
 
@@ -896,7 +905,6 @@ class Calendar(LoginRequiredMixin,TemplateView):
             create_event = Event.objects.create(event_title=event_name,start_date=event_start_date,end_date=event_end_date,event_time=event_timing)
             
             
-            print('Posted')      
 
         return render(request, 'calendar.html')
 
@@ -919,7 +927,6 @@ class Calendar(LoginRequiredMixin,TemplateView):
         
         
         event_json = json.dumps(event_list)
-        print(event_json)
         
         context = {
             "events" : event_json,
@@ -929,5 +936,4 @@ class Calendar(LoginRequiredMixin,TemplateView):
     
 
 def update_deal(request, pk):
-    print(pk)
     return render(request, 'items/update_deals.html')

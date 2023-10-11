@@ -12,6 +12,25 @@
 
     <!-- dropzone css -->
     <link href="{% static  'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+    <style>
+        .dropzone input[type="file"] {
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            cursor: pointer;
+        }
+        
+        .dropzone {
+            position: relative;
+            text-align: center;
+        }
+        
+        
+    </style>
 
 {% endblock extra_css %}
     
@@ -69,7 +88,7 @@
                                                 <div class="tab-pane" id="basic-info">
                                                     <h4 class="header-title">Basic Information</h4>
                                                     <p class="card-title-desc">Fill all information below</p>
-                                                    <form action="{% url 'ecommerce_add_product' %}" method="post">
+                                                    <form action="{% url 'ecommerce_add_product' %}" method="post" enctype="multipart/form-data">
                                                         {% csrf_token %}
                                                         
                                                         <div class="row">
@@ -79,12 +98,7 @@
                                                                     <input id="productname" name="productname" type="text" class="form-control">
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="col-lg-4">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label" for="manufacturerbrand">Manufacturer Brand</label>
-                                                                    <input id="manufacturerbrand" name="manufacturerbrand" type="text" class="form-control">
-                                                                </div>
-                                                            </div> -->
+                                                            
                                                             <div class="col-lg-4">
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="brand">Brand</label>
@@ -112,32 +126,21 @@
                                                         </div>
                                                        
                                                         <div class="row">
-                                                            <!-- <div class="col-lg-3">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label" for="price"> Product Cost</label>
-                                                                    <input id="cost" name="cost" type="number" class="form-control" placeholder="&#8360;">
-                                                                </div>
-                                                            </div> -->
-                                                            <!-- <div class="col-lg-3">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label" for="manufacturerbrand">Manufacturer Brand</label>
-                                                                    <input id="manufacturerbrand" name="manufacturerbrand" type="text" class="form-control">
-                                                                </div>
-                                                            </div> -->
+                                                           
                                                             <div class="col-lg-3">
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="price"> Prodcut Price</label>
                                                                     <input id="price" name="price" type="number" class="form-control" placeholder="&#8360;">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-3">
+                                                            <div class="col-lg-4">
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="qty"> QTY </label>
                                                                     <input id="qty" name="qty" type="number" class="form-control" >
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-lg-3">
+                                                            <div class="col-lg-4">
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="category">Category</label>
                                                                     <select class="form-control select2" name="category_id">
@@ -155,6 +158,18 @@
                                                             <label class="form-label" for="productdesc">Product Description</label>
                                                             <textarea class="form-control" name= "productdesc" id="productdesc" rows="5"></textarea>
                                                         </div>
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="image">Product Image</label>
+                                                            <div class="dropzone text-center">
+                                                                <i class="display-5 mdi mdi-cloud-download-outline d-block mb-2"><br>Drop files here or click to upload image</i>
+                                                                <input type="file" name="image" id="image" multiple />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+                                                        
+
                                                     <ul class="pager wizard twitter-bs-wizard-pager-link">
                                                         <li class="float-end"><button type="submit" class="float-end btn btn btn-primary">Save Changes <i class="mdi mdi-arrow-right ml-1"></i></button> </li>
                                                     </ul>
