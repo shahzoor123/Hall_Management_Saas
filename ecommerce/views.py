@@ -92,7 +92,7 @@ class HallSummary(LoginRequiredMixin,TemplateView):
                 total_sales = 0  # Set total sales to 0 for missing months
             every_month_sale.append(total_sales)
 
-        print(every_month_sale)
+        print(every_month_sale , 'hrllo')
        
 
 
