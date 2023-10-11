@@ -131,60 +131,60 @@ class EventExpense(models.Model):
     def __str__(self):
         return str(self.bill)
 
-    # def save(self, *args, **kwargs):
-    #     products = MyProducts.objects.filter(code__in=['BBQ', 'WAITERS', 'WATER', 'NAAN', 'DRINKS', 'STUFF'])
-    #     product_dict = {product.code: product for product in products}
+    def save(self, *args, **kwargs):
+        products = MyProducts.objects.filter(product_name__in=['BBQ', 'Waiters', 'Water 1.5L', 'Naan', 'Cold Drinks 1.5L', 'STUFF'])
+        product_dict = {product.product_name: product for product in products}
 
-    #     # BBQ PRICE
-    #     bbq_product = product_dict.get('BBQ')
-    #     bbq_price = 0
-    #     if bbq_product is not None:
-    #         bbq_kg_qty = self.bbq_kg_qty
-    #         bbq_price = bbq_product.price * bbq_kg_qty
-    #     self.bbq_price = bbq_price
+        # BBQ PRICE
+        bbq_product = product_dict.get('BBQ')
+        bbq_price = 0
+        if bbq_product is not None:
+            bbq_kg_qty = self.bbq_kg_qty
+            bbq_price = bbq_product.price * bbq_kg_qty
+        self.bbq_price = bbq_price
 
-    #     # WAITERS PRICE
-    #     waiters_product = product_dict.get('WAITERS')
-    #     waiters_bill = 0
-    #     if waiters_product is not None:
-    #         wait = self.no_of_waiters
-    #         w = waiters_product.price * wait
-    #         waiters_bill = w
-    #     self.waiters_bill = waiters_bill
+        # WAITERS PRICE
+        waiters_product = product_dict.get('WAITERS')
+        waiters_bill = 0
+        if waiters_product is not None:
+            wait = self.no_of_waiters
+            w = waiters_product.price * wait
+            waiters_bill = w
+        self.waiters_bill = waiters_bill
 
-    #     # WATER
-    #     water_product = product_dict.get('WATER')
-    #     water_bill = 0
-    #     if water_product is not None:
-    #         water_qty = self.water
-    #         w = water_product.price * water_qty
-    #         water_bill = w
-    #     self.water_bill = water_bill
+        # WATER
+        water_product = product_dict.get('WATER')
+        water_bill = 0
+        if water_product is not None:
+            water_qty = self.water
+            w = water_product.price * water_qty
+            water_bill = w
+        self.water_bill = water_bill
 
-    #     # NAAN
-    #     naan_product = product_dict.get('NAAN')
-    #     naan_bill = 0
-    #     if naan_product is not None:
-    #         naan_qty = self.naan_qty
-    #         naan_bill = naan_product.price * naan_qty
-    #     self.naan_bill = naan_bill
+        # NAAN
+        naan_product = product_dict.get('NAAN')
+        naan_bill = 0
+        if naan_product is not None:
+            naan_qty = self.naan_qty
+            naan_bill = naan_product.price * naan_qty
+        self.naan_bill = naan_bill
 
-    #     # Cold Drinks
-    #     cold_drink_product = product_dict.get('DRINKS')
-    #     cold_drink_bill = 0
-    #     if cold_drink_product is not None:
-    #         drink_qty = self.cold_drink
-    #         w = cold_drink_product.price * drink_qty
-    #         cold_drink_bill = w
-    #     self.cold_drink_bill = cold_drink_bill
+        # Cold Drinks
+        cold_drink_product = product_dict.get('DRINKS')
+        cold_drink_bill = 0
+        if cold_drink_product is not None:
+            drink_qty = self.cold_drink
+            w = cold_drink_product.price * drink_qty
+            cold_drink_bill = w
+        self.cold_drink_bill = cold_drink_bill
 
-    #     # Stuffs
-    #     stuff_product = product_dict.get('STUFF')
-    #     stuff_bill = 0
-    #     if stuff_product is not None:
-    #         stuf = self.bill.no_of_people * stuff_product.price
-    #         stuff_bill = stuf
-    #     self.stuff_bill = stuff_bill
+        # Stuffs
+        stuff_product = product_dict.get('STUFF')
+        stuff_bill = 0
+        if stuff_product is not None:
+            stuf = self.bill.no_of_people * stuff_product.price
+            stuff_bill = stuf
+        self.stuff_bill = stuff_bill
 
     #     # Update the instance with the calculated bbq_price
     #     self.total_expense = (

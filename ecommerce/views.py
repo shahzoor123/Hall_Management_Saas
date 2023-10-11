@@ -584,21 +584,21 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             drink = 0
             if drinks_type == 'Cold Drinks 1.5L':
                 drink = MyProducts.objects.get(product_name='Cold Drinks 1.5L')
-                print("1.5")
+
 
             elif drinks_type == "Cold Drinks Tin":
                 drink = MyProducts.objects.get(product_name='Cold Drinks Tin')
-                print("1.tin")
+                
 
             
             elif drinks_type == "Cold Drinks 2.5L":
                 drink = MyProducts.objects.get(product_name='Cold Drinks 2.5L')
-                print("2.")
+                
 
 
             else:
                 drink = ''
-                print("khali")
+                
             
             if not drink == '' :
                 drink = drink.price * drinks
