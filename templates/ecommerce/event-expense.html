@@ -179,22 +179,23 @@
                                             <div class="modal-body">
                                                 <form class="form" enctype="multipart/form-data" action="" method="POST">
 
+                                                  {% csrf_token %}
+
 
                                                     <!-- Form -->
                                                     <div class="row mb-4">
                                                       <label for="vehicalType" class="col-sm-3 col-form-label form-label">Bill</label>
-                                        
+                                                      
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                         
                                         
+                                                
                                                         <div class="input-group input-group-merge">
-                                                            <select class="js-select form-select" autocomplete="off" name="bill">
-                                                            
+                                                          <input type="text" class="js-toggle-password form-control" name="bill-no" id=""
+                                                            placeholder="Bill no" aria-label="" value="{{expense.bill}}">
                                         
-                                                            </select>
-                                          
-                                                          </div>
+                                                        </div>
                                         
                                         
                                         
@@ -213,7 +214,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <input type="number" class="js-toggle-password form-control" name="pakwan-bill" id="" placeholder="0"
-                                                            aria-label="">
+                                                            aria-label="" value="{{expense.pakwan_bill}}">
                                         
                                                         </div>
                                         
@@ -231,7 +232,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                             <input type="number" class="js-toggle-password form-control" name="electicity-bill" id="" placeholder="0"
-                                                            aria-label="">
+                                                            aria-label="" value="{{expense.electicity}}">
                                         
                                                         </div>
                                                         <!-- End Input Group -->
@@ -247,7 +248,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                             <input type="number" class="js-toggle-password form-control" name="naan-qty" id="" placeholder="0"
-                                                            aria-label="">
+                                                            aria-label="" value="{{expense.naan_qty}}">
                                         
                                                         </div>
                                                         <!-- End Input Group -->
@@ -261,7 +262,7 @@
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <input type="number" class="js-toggle-password form-control" name="event-date" id="" placeholder="0"
-                                                          aria-label="">
+                                                          aria-label="" value="{{expense.cold_drink}}">
                                         
                                                       </div>
                                                       <!-- End Input Group -->
@@ -275,7 +276,7 @@
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <input type="number" class="js-toggle-password form-control" name="no-of-people" id=""
-                                                          placeholder="0" aria-label="">
+                                                          placeholder="0" aria-label="" value="{{expense.water}}">
                                                         <!-- End Input Group -->
                                                       </div>
                                                     </div>
@@ -289,7 +290,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                             <input type="number" class="js-toggle-password form-control" name="bbq-qty" id=""
-                                                          placeholder="0" aria-label="">
+                                                          placeholder="0" aria-label="" value="{{expense.bbq_kg_qty}}">
                                         
                                                         </div>
                                                         <!-- End Input Group -->
@@ -304,7 +305,7 @@
                                                       <div class="col-sm-9">
                                                         <!-- Input Group -->
                                                         <input type="text" class="js-toggle-password form-control" name="diesel-ltr" id=""
-                                                          placeholder="0" aria-label="">
+                                                          placeholder="0" aria-label="" value="{{expense.diesel_ltr}}">
                                                         <!-- End Input Group -->
                                                       </div>
                                                     </div>
@@ -318,7 +319,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <input type="number" class="js-toggle-password form-control" name="no-of-waiters" id=""
-                                                            placeholder="0" aria-label="">
+                                                            placeholder="0" aria-label="" value="{{expense.no_of_waiters}}">
                                         
                                                         </div>
                                                         <!-- End Input Group -->
@@ -334,7 +335,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <input type="number" class="js-toggle-password form-control" name="dhobi" id=""
-                                                            placeholder="0" aria-label="">
+                                                            placeholder="0" aria-label="" value="{{expense.dhobi}}"> 
                                         
                                                         </div>
                                                         <!-- End Input Group -->
@@ -353,7 +354,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                                           <input type="number" class="js-toggle-password form-control" name="other-expense" id=""
-                                                            placeholder="0" aria-label="">
+                                                            placeholder="0" aria-label="" value="{{expense.other_expense}}">
                                                         </div>
                                         
                                                         <!-- End Input Group -->
@@ -372,7 +373,7 @@
                                                         <!-- Input Group -->
                                                         <div class="input-group input-group-merge">
                                         
-                                                          <textarea class="form-select" name="details" id="" cols="90" rows="5" ></textarea>
+                                                          <textarea class="form-select" name="details" id="" cols="90" rows="5" value="{{expense.other_expense_detals}}"></textarea>
                                         
                                                         </div>
                                                         <!-- End Input Group -->
@@ -388,7 +389,7 @@
                                                         <!-- Checkbox Switch -->
                                                         <div class="input-group input-group-merge">
                                                             <input type="number" class="js-toggle-password form-control" name="setup-bill" id=""
-                                                              placeholder="0" aria-label="">
+                                                              placeholder="0" aria-label="" value="{{expense.setup_bill}}">
                                                           </div>
                                                         <!-- End Checkbox Switch -->
                                                         <!-- End Input Group -->
@@ -402,7 +403,7 @@
                                                           <!-- Checkbox Switch -->
                                                           <div class="input-group input-group-merge">
                                                               <input type="number" class="js-toggle-password form-control" name="decor" id=""
-                                                                placeholder="0" aria-label="">
+                                                                placeholder="0" aria-label="" value="{{expense.decor}}">
                                                             </div>
                                                           <!-- End Checkbox Switch -->
                                                           <!-- End Input Group -->
@@ -416,7 +417,7 @@
                                                           <!-- Checkbox Switch -->
                                                           <div class="input-group input-group-merge">
                                                               <input type="number" class="js-toggle-password form-control" name="decor-bill" id=""
-                                                                placeholder="0" aria-label="">
+                                                                placeholder="0" aria-label="" value="{{expense.decor_bill}}">
                                                             </div>
                                                           <!-- End Checkbox Switch -->
                                                           <!-- End Input Group -->
@@ -424,13 +425,15 @@
                                                       </div>
                                                  
                                                     <!-- End Form -->
+
+                                                    <div class="modal-footer">
+                                                      <button id="model-btn" type="close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                      <button id="model-btn" type="submit" class="btn btn-primary">Save changes</button>
+                                                      </div>
+                                              </div><!-- /.modal-content -->
                                                   </form>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button id="model-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button id="model-btn" type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                        </div><!-- /.modal-content -->
+                                      
                                     </div><!-- /.modal-dialog -->
                                   
                                 </div><!-- /.modal -->
