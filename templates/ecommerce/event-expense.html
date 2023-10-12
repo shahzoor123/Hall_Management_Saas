@@ -177,7 +177,7 @@
                                             </div>
                                             
                                             <div class="modal-body">
-                                                <form class="form" enctype="multipart/form-data" action="" method="POST">
+                                                <form class="form" enctype="multipart/form-data" action="{% url 'update-event-expense' expense.id %}" method="POST">
 
                                                   {% csrf_token %}
 

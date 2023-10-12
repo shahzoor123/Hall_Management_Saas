@@ -501,6 +501,141 @@ class UpdateEventsale(LoginRequiredMixin, View):
         return redirect('event-sale')
 
  
+ 
+ 
+ 
+ 
+
+class UpdateEventExpense(LoginRequiredMixin, View):
+    template_name = "ecommerce/event-expense.html"
+
+    
+    
+    def post(self, request, expense_id):
+        if request.method == "POST":
+            
+            requests = EventExpense.objects.get(id=expense_id)
+            
+            
+            bill = request.POST.get('bill-no')
+            bill_number = get_object_or_404(EventExpense, pk=bill)
+            pakwan = int(request.POST.get('pakwan-bill'))
+
+            electicity = request.POST.get('electicity-bill')
+            naan =int(request.POST.get('naan-qty'))
+            
+        
+            drinks = int(request.POST.get('cold-drinks'))
+            drinks_type = request.POST.get('cold-drinks-type')
+
+
+            water = int(request.POST.get('water-bottles'))
+            water_type = request.POST.get('water-bottles-type')
+
+            bbq = int(request.POST.get('bbq-qty'))
+
+            diesel = request.POST.get('diesel-ltr')
+            no_of_waiters = request.POST.get('no-of-waiters')
+            dhobi = request.POST.get('dhobi')
+            stuff = request.POST.get('stuff')
+
+            other_expenses = request.POST.get('other-expense')
+
+            expense_details = request.POST.get('expense-details')
+           
+            setup = request.POST.get('setup-bill')
+            decor = request.POST.get('decore-details')
+            decor_bill = request.POST.get('decor-bill')
+    
+            # try:
+            nan = MyProducts.objects.get(product_name='Naan')
+            naan_price = nan.price * naan
+
+
+
+
+            drink = 0
+            if drinks_type == 'Cold Drinks 1.5L':
+                drink = MyProducts.objects.get(product_name='Cold Drinks 1.5L')
+
+            elif drinks_type == "Cold Drinks Tin":
+                drink = MyProducts.objects.get(product_name='Cold Drinks Tin')
+
+            else:
+                drink = ''
+            
+            if not drink == '' :
+                drink = drink.price * drinks
+
+            
+            bottles = 0
+            if water_type == 'Water 1.5L':
+                bottles = MyProducts.objects.get(product_name='Water 1.5L')
+
+            elif water_type == "Water 500ML":
+                bottles = MyProducts.objects.get(product_name='Water 500ML')
+
+            elif water_type == "Water 300ML":
+                bottles = MyProducts.objects.get(product_name='Water 300ML')
+
+            else:
+                bottles = ''
+            
+            if not bottles == '' :
+                bottles = bottles.price * water
+            
+            bbqs = MyProducts.objects.get(product_name="BBQ")
+            bbq_price = bbq * bbqs.price
+
+            wait = MyProducts.objects.get(product_name="Waiters")
+            waiters = wait.price * int(no_of_waiters)
+
+            pakwan = int(pakwan)
+            naan_price = int(naan_price)
+            drink = int(drink)
+            bottles = int(bottles)
+            bbq_price = int(bbq_price)
+            diesel = int(diesel)
+            waiters = int(waiters)
+            stuff = int(stuff)
+            dhobi = int(dhobi)
+            other_expenses = int(other_expenses)
+            setup = int(setup)
+            decor_bill = int(decor_bill)
+            
+
+
+            total = pakwan + naan_price + bottles + drink + bbq_price + diesel + waiters + stuff + dhobi + other_expenses + setup + decor_bill
+           
+           
+            requests.bill = bill_number
+            requests.pakwan_bill = pakwan
+            requests.electicity = electicity
+            requests.naan_qty = naan
+            requests.cold_drink = drink
+            requests.water = water
+            requests.bbq_kg_qty = bbq
+            requests.diesel_ltr = diesel
+            requests.no_of_waiters = waiters
+            requests.dhobi = dhobi
+            requests.other_expense = other_expenses
+            requests.other_expense_detals = expense_details
+            requests.setup_bill = setup
+            requests.decor = decor
+            requests.decor_bill = decor_bill
+            requests.total_expense = total
+            
+            requests.save()
+
+        return redirect('event-expense') 
+ 
+ 
+   
+   
+   
+   
+   
+   
         
 
 class Eventexpense(LoginRequiredMixin,TemplateView):
@@ -642,6 +777,13 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             #     # Handle case where product is not found
             #     error_message = "Product not found"
             #     return render(request, 'add_event_expense.html', {'error_message': error_message})
+            
+            
+            
+            
+            
+            
+            
 
 class ProductsAddCategory(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-add-category.html"
