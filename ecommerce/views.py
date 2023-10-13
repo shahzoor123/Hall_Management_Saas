@@ -864,7 +864,7 @@ class ProductsAddProduct(LoginRequiredMixin,TemplateView):
             )
 
 
-        return render(request, 'ecommerce\product_list.html')
+        return render(request, 'ecommerce/product_list.html')
         
 
     def get(self, request):
