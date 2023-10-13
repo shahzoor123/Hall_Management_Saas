@@ -114,6 +114,23 @@
 
 
 <script>
+
+
+const dailySalesData = {
+  'Jan': [10, 20, 15, 30, 25, 12, 18, 5, 0, 0, 0, 0],
+  'Feb': [5, 15, 18, 12, 10, 10, 25, 30, 0, 0, 0, 0],
+  'Mar': [8, 12, 15, 25, 22, 16, 20, 10, 0, 0, 0, 0],
+  'Apr': [12, 18, 20, 22, 30, 28, 24, 15, 0, 0, 0, 0],
+  'May': [15, 25, 28, 32, 35, 30, 28, 22, 0, 0, 0, 0],
+  'Jun': [20, 30, 35, 40, 42, 38, 32, 30, 0, 0, 0, 0],
+  'Jul': [22, 32, 36, 45, 48, 42, 40, 35, 0, 0, 0, 0],
+  'Aug': [18, 28, 32, 38, 42, 40, 38, 32, 0, 0, 0, 0],
+  'Sep': [10, 20, 25, 28, 30, 32, 28, 25, 0, 0, 0, 0],
+  'Oct': [5, 15, 20, 22, 25, 30, 28, 20, 0, 0, 0, 0],
+  'Nov': [0, 10, 15, 18, 20, 22, 25, 12, 0, 0, 0, 0],
+  'Dec': [0, 5, 10, 12, 15, 18, 20, 8, 0, 0, 0, 0]
+};
+
   // Get the values from the data attributes
   var montly_sale = document.getElementById("sale").getAttribute("data-my-variable");
   var montly_expense = document.getElementById("expense").getAttribute("data-my-variable");
@@ -175,7 +192,7 @@
 
 
   function updateSalesChart(selectedIndex) {
-    const updatedExpensesData = salesData.map((value, index) => (index === selectedIndex ? value : 0));
+    const updatedExpensesData = dailySalesData[months[0]].map((value, index) => (index === selectedIndex ? value : 0));
     salesChartDaily.data.datasets[0].data = updatedExpensesData;
     salesChartDaily.update();
   }
@@ -185,10 +202,10 @@
   const salesChartDaily = new Chart(salesChartDailyCtx, {
     type: 'bar',
     data: {
-      labels: months,
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10', 'Day 11', 'Day 12'],
       datasets: [{
         label: 'Monthly Expenses',
-        data: salesData,
+        data: dailySalesData[months[0]],
         backgroundColor: [
 
         'rgba(51, 255, 189, 0.5)'
@@ -203,6 +220,14 @@
   });
 
   
+
+
+
+
+
+
+
+
 
   const expensesChartMonthly = new Chart(expensesChartMonthlyCtx, {
     type: 'bar',

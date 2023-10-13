@@ -15,8 +15,13 @@ urlpatterns = [
     path('ecommerce_product', views.Products.as_view(),name='ecommerce_product'),
     path('ecommerce_product_detail', views.ProductsDetail.as_view(),name='ecommerce_product_detail'),
     path('event-sale', views.Eventsale.as_view(),name='event-sale'),
+    
     path('update-event-sale/<int:sale_id>', views.UpdateEventsale.as_view(),name='update-event-sale'),
-     path('delete-sale/<int:sale_id>/', views.delete_sale, name='delete-sale'),
+    path('update-event-expense/<int:expense_id>', views.UpdateEventExpense.as_view(),name='update-event-expense'),
+    
+    
+    
+    path('delete-sale/<int:sale_id>/', views.delete_sale, name='delete-sale'),
     path('kitchen-sale', views.Kitchensale.as_view(),name='kitchen-sale'),
     path('kitchen-expense', views.Kitchenexpense.as_view(),name='kitchen-expense'),
     path('event-expense', views.Eventexpense.as_view(),name='event-expense'),
