@@ -497,6 +497,8 @@ class UpdateEventsale(LoginRequiredMixin, View):
             requests.total_amount = total
             requests.save()
             
+        
+            
 
         return redirect('event-sale')
 
@@ -515,10 +517,11 @@ class UpdateEventExpense(LoginRequiredMixin, View):
         if request.method == "POST":
             
             requests = EventExpense.objects.get(id=expense_id)
-            
+    
             
             bill = request.POST.get('bill-no')
-            bill_number = get_object_or_404(EventExpense, pk=bill)
+         
+            bill_number = get_object_or_404(EventExpense, pk=requests.id)
             pakwan = int(request.POST.get('pakwan-bill'))
 
             electicity = request.POST.get('electicity-bill')
@@ -541,100 +544,39 @@ class UpdateEventExpense(LoginRequiredMixin, View):
 
             other_expenses = request.POST.get('other-expense')
 
-            expense_details = request.POST.get('expense-details')
+            expense_details = request.POST.get('details')
            
             setup = request.POST.get('setup-bill')
-            decor = request.POST.get('decore-details')
+            decor = request.POST.get('decor')
             decor_bill = request.POST.get('decor-bill')
     
-            # try:
-            nan = MyProducts.objects.get(product_name='Naan')
-            naan_price = nan.price * naan
 
-
-
-
-            drink = 0
-            if drinks_type == 'Cold Drinks 1.5L':
-                drink = MyProducts.objects.get(product_name='Cold Drinks 1.5L')
-
-            elif drinks_type == "Cold Drinks Tin":
-                drink = MyProducts.objects.get(product_name='Cold Drinks Tin')
-
-            else:
-                drink = ''
-            
-            if not drink == '' :
-                drink = drink.price * drinks
-
-            
-            bottles = 0
-            if water_type == 'Water 1.5L':
-                bottles = MyProducts.objects.get(product_name='Water 1.5L')
-
-            elif water_type == "Water 500ML":
-                bottles = MyProducts.objects.get(product_name='Water 500ML')
-
-            elif water_type == "Water 300ML":
-                bottles = MyProducts.objects.get(product_name='Water 300ML')
-
-            else:
-                bottles = ''
-            
-            if not bottles == '' :
-                bottles = bottles.price * water
-            
-            bbqs = MyProducts.objects.get(product_name="BBQ")
-            bbq_price = bbq * bbqs.price
-
-            wait = MyProducts.objects.get(product_name="Waiters")
-            waiters = wait.price * int(no_of_waiters)
-
-            pakwan = int(pakwan)
-            naan_price = int(naan_price)
-            drink = int(drink)
-            bottles = int(bottles)
-            bbq_price = int(bbq_price)
-            diesel = int(diesel)
-            waiters = int(waiters)
-            stuff = int(stuff)
-            dhobi = int(dhobi)
-            other_expenses = int(other_expenses)
-            setup = int(setup)
-            decor_bill = int(decor_bill)
-            
-
-
-            total = pakwan + naan_price + bottles + drink + bbq_price + diesel + waiters + stuff + dhobi + other_expenses + setup + decor_bill
            
-           
-            requests.bill = bill_number
-            requests.pakwan_bill = pakwan
+        
             requests.electicity = electicity
             requests.naan_qty = naan
-            requests.cold_drink = drink
+            requests.cold_drink_bill = drinks
             requests.water = water
             requests.bbq_kg_qty = bbq
             requests.diesel_ltr = diesel
-            requests.no_of_waiters = waiters
+            requests.no_of_waiters = no_of_waiters
             requests.dhobi = dhobi
             requests.other_expense = other_expenses
             requests.other_expense_detals = expense_details
             requests.setup_bill = setup
             requests.decor = decor
             requests.decor_bill = decor_bill
-            requests.total_expense = total
+          
             
             requests.save()
+            
+            print('Data updated')
 
         return redirect('event-expense') 
  
  
    
-   
-   
-   
-   
+
    
         
 
