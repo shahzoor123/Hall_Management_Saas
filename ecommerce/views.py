@@ -432,8 +432,28 @@ class Kitchenexpense(LoginRequiredMixin, View):
 
         return render(request, "ecommerce/kitchen-expense.html")
 
-class DeleteProducts(LoginRequiredMixin, View):
-    pass
+def DeleteProducts(request, product_id):
+        
+    product = get_object_or_404(MyProducts, pk=product_id)
+    # print(event.id)
+    if product is not None:
+        product.delete()
+        return redirect("ecommerce-product-list")
+
+    
+    category = Category.objects.all()
+    brand = Brand.objects.all()
+    unit = Unit.objects.all()
+    products = MyProducts.objects.all()
+    
+    context = {
+        "category": category,
+        "brands": brand,
+        "units": unit,
+        "products": products
+    }
+    return render(request, "ecommerce\product_list.html", context = context)
+
 class UpdateEventsale(LoginRequiredMixin, View):
     template_name = "ecommerce/event-sale.html"
 
