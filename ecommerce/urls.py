@@ -17,7 +17,7 @@ urlpatterns = [
     path('event-sale', views.Eventsale.as_view(),name='event-sale'),
     
     path('update-event-sale/<int:sale_id>', views.UpdateEventsale.as_view(),name='update-event-sale'),
-    path('update-event-expense/<int:sale_id>', views.UpdateEventExpense.as_view(),name='update-event-expense'),
+    path('update-event-expense/<int:expense_id>', views.UpdateEventExpense.as_view(),name='update-event-expense'),
     
     
     

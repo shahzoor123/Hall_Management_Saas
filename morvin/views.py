@@ -153,7 +153,7 @@ class Index(LoginRequiredMixin,TemplateView):
             all_months.append(i)
             total_events = len(all_months)
         
-        print(total_sale_this_year,total_events)
+
 
         context = {
             "expense": cleaned_expenses,
@@ -168,8 +168,8 @@ class Index(LoginRequiredMixin,TemplateView):
             "events_this_month": events_count_this_month,
             "events_this_year":events_count_this_year,
 
-            "total_events_this_month" : total_events,
-            "total_events_this_year" : total_sale_this_year,
+            # "total_events_this_month" : total_events,
+            # "total_events_this_year" : total_sale_this_year,
 
         }
         return render(request, self.template_name, context)
