@@ -31,6 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Index
     path('', views.Index.as_view(),name='index'),
+
     # Calendar
    
     # Chat

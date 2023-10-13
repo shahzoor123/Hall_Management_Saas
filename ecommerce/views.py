@@ -46,7 +46,24 @@ class Products(LoginRequiredMixin,TemplateView):
 
 class ProductsDetail(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-product-detail.html"
+    
 
+class ProductList(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/product_list.html"
+
+    def get(self, request):
+        myproudcts = MyProducts.objects.all()
+        category = Category.objects.all()
+        brand = Brand.objects.all()
+        unit = Unit.objects.all()
+
+        context = {
+            "myproducts": myproudcts,
+            "brands": brand,
+            "category": category,
+            "units": unit,
+        }
+        return render(request, self.template_name, context)
 
 class HallSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/hall_summary.html"
@@ -415,8 +432,8 @@ class Kitchenexpense(LoginRequiredMixin, View):
 
         return render(request, "ecommerce/kitchen-expense.html")
 
-
-
+class DeleteProducts(LoginRequiredMixin, View):
+    pass
 class UpdateEventsale(LoginRequiredMixin, View):
     template_name = "ecommerce/event-sale.html"
 
@@ -827,7 +844,7 @@ class ProductsAddProduct(LoginRequiredMixin,TemplateView):
             )
 
 
-        return render(request, self.template_name)
+        return render(request, 'ecommerce\product_list.html')
         
 
     def get(self, request):
@@ -844,6 +861,65 @@ class ProductsAddProduct(LoginRequiredMixin,TemplateView):
         }
         return render(request, self.template_name, context)
 
+
+class UpdateProducts(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/ecommerce-add-product.html"
+
+    def post(self, request,product_id):
+        if request.method == "POST":
+
+            requests = MyProducts.objects.get(id=product_id)
+
+            product_name = request.POST.get('productname')
+
+            brand_id = request.POST.get('brand_id')
+            brand = get_object_or_404(Brand, pk=brand_id)
+
+            unit_id = request.POST.get('unit_id')
+            unit = get_object_or_404(Unit, pk=unit_id)
+            
+        
+            category_id = request.POST['category_id']
+            category = get_object_or_404(Category, pk=category_id)
+
+            # product_cost = request.POST.get('cost')
+            product_price= request.POST.get('price')
+            product_qty= request.POST.get('qty')
+            productdesc = request.POST.get('productdesc')
+            image = request.FILES.get('image')
+
+            requests.product_name = product_name
+            requests.brand = brand
+            requests.unit = unit
+            requests.category_id = category
+            requests.price = product_price
+            requests.qty = product_qty
+            requests.product_desc = productdesc
+            
+            if image is not None:
+                requests.product_image = image
+
+
+            requests.save()
+
+
+
+        return redirect("ecommerce-product-list")
+        
+
+    def get(self, request):
+        category = Category.objects.all()
+        brand = Brand.objects.all()
+        unit = Unit.objects.all()
+        products = MyProducts.objects.all()
+        
+        context = {
+            "category": category,
+            "brands": brand,
+            "units": unit,
+            "products": products
+        }
+        return render(request, self.template_name, context)
 
 class Calculate(LoginRequiredMixin,TemplateView):
     template_name = "items/pos.html"
