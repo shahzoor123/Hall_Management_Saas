@@ -567,8 +567,17 @@ class UpdateEventExpense(LoginRequiredMixin, View):
             requests.decor = decor
             requests.decor_bill = decor_bill
           
-            
+            from datetime import date
             requests.save()
+                        
+            # Retrieve all 12 event expense records
+            event_expenses = EventExpense.objects.all()
+
+            # Update the date for each record
+            new_date = date(2023, 12, 31)
+            for expense in event_expenses:
+                expense.date = new_date
+                expense.save()
             
             print('Data updated')
 
