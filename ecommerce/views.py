@@ -80,7 +80,7 @@ class HallSummary(LoginRequiredMixin,TemplateView):
         expense_list = []
         # Get total expenses for each month based on the EventSale's create date
         # monthly_expenses = EventExpense.objects.values('bill').annotate(Sum('total_expense')).values('total_expense')
-        monthly_expenses = EventExpense.objects.values('bill__event_date__month').annotate(total_expense=Sum('total_expense')).order_by('bill__event_date__month')
+        monthly_expenses = EventExpense.objects.values('expense_date').annotate(total_expense=Sum('total_expense')).order_by('expense_date')
         for i in monthly_expenses:
             expense_list.append(i.values())
         print(monthly_expenses, 'query') 
