@@ -78,45 +78,33 @@ class HallSummary(LoginRequiredMixin,TemplateView):
 
        # montly expense
         expense_list = []
+        
         # Get total expenses for each month based on the EventSale's create date
-        # monthly_expenses = EventExpense.objects.values('bill').annotate(Sum('total_expense')).values('total_expense')
-        monthly_expenses = EventExpense.objects.values('bill__event_date__month').annotate(total_expense=Sum('total_expense')).order_by('bill__event_date__month')
-        for i in monthly_expenses:
-            expense_list.append(i.values())
-        print(monthly_expenses, 'query') 
-            
-        # print(expense_list)
-        result_list = [value for dict_values_obj in expense_list for value in dict_values_obj]
-        print(result_list, 'expenses')
+         # Query the database to get total sales for every month in the current year
+        monthly_expense = EventExpense.objects.filter(expense_date__year=current_date.year).annotate(month=ExtractMonth('expense_date')) \
+            .values('month') \
+            .annotate(total_expense=Sum('total_expense')) \
+            .order_by('month')
+        
+        month_expense_dict = {entry['month']: entry['total_expense'] for entry in monthly_expense}
+        
+           # Iterate through all 12 months
+        for month in range(1, 13):
+            # Check if the month is present in the dictionary
+            if month in month_expense_dict:
+                total_expense = month_expense_dict[month]
+            else:
+                total_expense = 0  # Set total expense to 0 for missing months
+            expense_list.append(total_expense)
 
-        cleaned_expenses = []
-                # Iterate through the list, skipping every other element (i.e., the month values)
-        for i in range(0, len(result_list), 2):
-            expense_value = result_list[i + 1]  # Get the expense value (skip the month)
-            cleaned_expenses.append(expense_value)
+        print(expense_list , 'expense')
 
-        print(cleaned_expenses)
-     
-        #  # Iterate through all 12 months
-        # for month in range(1, 13):
-        #     # Check if the month is present in the dictionary
-        #     if month in result_list:
-        #         total_sales = month_sales_dict[month]
-        #     else:
-        #         total_sales = 0  # Set total sales to 0 for missing months
-        #     every_month_sale.append(total_sales)
-
-       
 
         context = {
-       
-            
             "sale": every_month_sale,
-            "expense": cleaned_expenses,
-            
+            "expense": expense_list,
             "daily_sale" : 0,
-            "daily_expense":0,
-        
+            "daily_expense":0,  
         }
         
         return render(request, self.template_name, context)
@@ -567,19 +555,9 @@ class UpdateEventExpense(LoginRequiredMixin, View):
             requests.decor = decor
             requests.decor_bill = decor_bill
           
-            from datetime import date
             requests.save()
                         
-            # Retrieve all 12 event expense records
-            event_expenses = EventExpense.objects.all()
-
-            # Update the date for each record
-            new_date = date(2023, 12, 31)
-            for expense in event_expenses:
-                expense.date = new_date
-                expense.save()
-            
-            print('Data updated')
+      
 
         return redirect('event-expense') 
  
