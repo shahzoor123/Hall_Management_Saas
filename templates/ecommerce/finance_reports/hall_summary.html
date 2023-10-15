@@ -94,6 +94,12 @@
 
 <h1 hidden id="sale" data-my-variable="{{sale}}"></h1>
 <h1 hidden id="expense" data-my-variable="{{expense}}"></h1>
+
+<h1 hidden id="daily_sale" data-my-variable="{{daily_sale}}"></h1>
+<h1 hidden id="daily_expense" data-my-variable="{{daily_expense}}"></h1>
+
+
+
 <!-- End Page-content -->
 {% endblock content %} {% block extra_javascript %}
 
@@ -131,20 +137,28 @@ const dailySalesData = {
   'Dec': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51))
 };
 
-console.log(dailySalesData);
+
 
 
   // Get the values from the data attributes
   var montly_sale = document.getElementById("sale").getAttribute("data-my-variable");
   var montly_expense = document.getElementById("expense").getAttribute("data-my-variable");
 
+  var daily_sale = document.getElementById("daily_sale").getAttribute("data-my-variable");
+  var daily_expense = document.getElementById("daily_expense").getAttribute("data-my-variable");
 
+
+  console.log(daily_sale, 'sale');
+  console.log(daily_expense, 'expense');
 
   
   // // Parse the values as JSON arrays
   var totalSales = JSON.parse(montly_sale);
   var totalExpense = JSON.parse(montly_expense);
 
+  // var daily_SaleData = JSON.parse(daily_sale);
+
+  // console.log(daily_SalesData);
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -209,7 +223,7 @@ console.log(dailySalesData);
   const salesChartDaily = new Chart(salesChartDailyCtx, {
     type: 'bar',
     data: {
-      labels: days = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10', 'Day 11', 'Day 12', 'Day 13', 'Day 14', 'Day 15', 'Day 16', 'Day 17', 'Day 18', 'Day 19', 'Day 20', 'Day 21', 'Day 22', 'Day 23', 'Day 24', 'Day 25', 'Day 26', 'Day 27', 'Day 28', 'Day 29', 'Day 30'],
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10', 'Day 11', 'Day 12', 'Day 13', 'Day 14', 'Day 15', 'Day 16', 'Day 17', 'Day 18', 'Day 19', 'Day 20', 'Day 21', 'Day 22', 'Day 23', 'Day 24', 'Day 25', 'Day 26', 'Day 27', 'Day 28', 'Day 29', 'Day 30'],
       datasets: [{
         label: 'Monthly Expenses',
         data: dailySalesData[months[0]],
@@ -243,11 +257,6 @@ const dailyExpenseData = {
   'Nov': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
   'Dec': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51))
 };
-
-console.log(dailySalesData);
-
-
-
 
 
 

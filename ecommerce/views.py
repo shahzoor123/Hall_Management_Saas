@@ -23,6 +23,7 @@ from django.http import JsonResponse
 from items.models import Category
 from datetime import datetime
 from django.db.models.functions import ExtractMonth
+from django.db.models import Count
 
 current_date = datetime.now()
 
@@ -100,11 +101,52 @@ class HallSummary(LoginRequiredMixin,TemplateView):
         print(expense_list , 'expense')
 
 
+        # Define the months and days in each month
+        months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        # Initialize an empty dictionary to store the data
+        dailySalesData = {}
+
+        # Loop through each month and query the data
+        for i, month in enumerate(months):
+            days = days_in_month[i]
+            data = EventSale.objects.filter(event_date__month=i + 1).values('event_date').annotate(total_sales=Sum('total_amount')).order_by('event_date')
+            sales_data = [0] * days
+
+            for entry in data:
+                day = entry['event_date'].day
+                count = entry['total_sales']
+                sales_data[day - 1] = count
+
+            dailySalesData[month] = sales_data
+                
+        print(dailySalesData)
+        
+        
+        dailyExpenseData = {}
+         # Loop through each month and query the data
+        for i, month in enumerate(months):
+            days = days_in_month[i]
+            data = EventExpense.objects.filter(expense_date__month=i + 1).values('expense_date').annotate(total_Expense=Sum('total_expense')).order_by('expense_date')
+            Expense_data = [0] * days
+
+            for entry in data:
+                day = entry['expense_date'].day
+                count = entry['total_Expense']
+                Expense_data[day - 1] = count
+
+            dailyExpenseData[month] = Expense_data
+                
+        print(dailyExpenseData)
+
+
+
         context = {
             "sale": every_month_sale,
             "expense": expense_list,
-            "daily_sale" : 0,
-            "daily_expense":0,  
+            "daily_sale" : dailySalesData,
+            "daily_expense": dailyExpenseData,  
         }
         
         return render(request, self.template_name, context)
