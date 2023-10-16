@@ -60,26 +60,6 @@
               </div>
           </div>
       </div>
-      <div class="row">
-          <div class="col-md-6 col-sm-12">
-              <!-- Element 3 -->
-              <div class="card">
-                  <div class="card-body">
-                      <h4 class="header-title">Monthly Expense</h4>
-                      <canvas id="expensesChartMonthly"></canvas>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-              <!-- Element 4 -->
-              <div class="card">
-                  <div class="card-body">
-                      <h4 class="header-title">Daily Expense</h4>
-                      <canvas id="expensesChartDaily"></canvas>
-                  </div>
-              </div>
-          </div>
-      </div>
   </div>
   
           
@@ -93,10 +73,10 @@
 </div>
 
 <h1 hidden id="sale" data-my-variable="{{sale}}"></h1>
-<h1 hidden id="expense" data-my-variable="{{expense}}"></h1>
+<!-- <h1 hidden id="expense" data-my-variable="{{expense}}"></h1> -->
 
 <h1 hidden id="daily_sale" data-my-variable="{{daily_sale}}"></h1>
-<h1 hidden id="daily_expense" data-my-variable="{{daily_expense}}"></h1>
+<!-- <h1 hidden id="daily_expense" data-my-variable="{{daily_expense}}"></h1> -->
 
 
 
@@ -138,18 +118,14 @@
 // };
 
 
-
-
     // Get the values from the data attributes
     var montly_sale = document.getElementById("sale").getAttribute("data-my-variable");
-    var montly_expense = document.getElementById("expense").getAttribute("data-my-variable");
-
     var daily_sale = JSON.parse(document.getElementById("daily_sale").getAttribute("data-my-variable"));
-    var daily_expense = JSON.parse(document.getElementById("daily_expense").getAttribute("data-my-variable"));
+ 
 
 
     console.log(daily_sale, 'sale');
-    console.log(daily_expense, 'expense');
+
 
 
     // Define the desired number of days in a month
@@ -172,34 +148,20 @@
       dailySalesData[month] = transformedMonthData;
     }
 
-    // // Now, dailySalesData contains the transformed data
-    // console.log(dailySalesData, 'hi');
+   
 
-
-
-    
   
   // // Parse the values as JSON arrays
   var totalSales = JSON.parse(montly_sale);
-  var totalExpense = JSON.parse(montly_expense);
 
-  // var daily_SaleData = JSON.parse(daily_sale);
-
-  // console.log(daily_SalesData);
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   const salesData = Array.from({ length: 12 }, () => Math.floor(Math.random() * 1000));
-  const expensesData = Array.from({ length: 12 }, () => Math.floor(Math.random() * 500));
 
   const salesChartMonthlyCtx = document.getElementById('salesChartMonthly').getContext('2d');
 
   const salesChartDailyCtx = document.getElementById('salesChartDaily').getContext('2d');
-
-  const expensesChartMonthlyCtx = document.getElementById('expensesChartMonthly').getContext('2d');
-
-  const expensesChartDailyCtx = document.getElementById('expensesChartDaily').getContext('2d');
-
 
 
 
@@ -257,109 +219,6 @@
         backgroundColor: [
 
         'rgba(51, 255, 189, 0.5)'
-        ],
-        borderColor: [
-
-          'rgba(0, 0, 0, 0.5)'
-        ],
-        borderWidth: 2
-      }],
-    },
-  });
-
-  
-
-
-// const dailyExpenseData = {
-//   'Jan': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-//   'Feb': Array.from({ length: 28 }, () => Math.floor(Math.random() * 51)),
-//   'Mar': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-//   'Apr': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-//   'May': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-//   'Jun': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-//   'Jul': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-//   'Aug': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-//   'Sep': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-//   'Oct': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-//   'Nov': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-//   'Dec': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51))
-// };
-
-
-  // Initialize an empty object for the transformed data
-  var dailyExpenseData = {};
-
-  // Loop through the original data
-  for (var month in daily_expense) {
-    // Get the array for the current month from the original data
-    var originalMonthData = daily_expense[month];
-
-    // Create a new array for the desired number of days
-    var transformedMonthData = Array.from({ length: numberOfDays }, function (_, index) {
-      return originalMonthData[index] || 0;
-    });
-
-    // Add the transformed data to the result object
-    dailyExpenseData[month] = transformedMonthData;
-  }
-
-  // // Now, dailySalesData contains the transformed data
-  // console.log(dailySalesData, 'hi');
-
-
-
-
-  const expensesChartMonthly = new Chart(expensesChartMonthlyCtx, {
-    type: 'bar',
-    data: {
-      labels: months,
-      datasets: [{
-        label: 'Monthly Expenses',
-        data: totalExpense,
-        backgroundColor: [
-
-          'rgba(255, 87, 51, 0.5)'
-        ],
-        borderColor: [
-
-          'rgba(0, 0, 0, 0.5)'
-        ],
-        borderWidth: 2
-      }],
-    },
-    options: {
-      onClick: function (event, elements) {
-        if (elements.length > 0) {
-          const selectedIndex = elements[0].index;
-          console.log(selectedIndex);
-          const selectedMonth = months[selectedIndex];
-          updateExpenseChart(selectedMonth);
-        }
-      }
-    }
-  });
-
-  function updateExpenseChart(selectedMonth) {
-      // Get daily sales data for the selected month
-      const dailyData = dailyExpenseData[selectedMonth];
-
-      // Update the daily chart with the new data
-      expensesChartDaily.data.datasets[0].data = dailyData;
-      expensesChartDaily.update();
-    }
-
-
-  
-  const expensesChartDaily = new Chart(expensesChartDailyCtx, {
-    type: 'bar',
-    data: {
-      labels:['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10', 'Day 11', 'Day 12', 'Day 13', 'Day 14', 'Day 15', 'Day 16', 'Day 17', 'Day 18', 'Day 19', 'Day 20', 'Day 21', 'Day 22', 'Day 23', 'Day 24', 'Day 25', 'Day 26', 'Day 27', 'Day 28', 'Day 29', 'Day 30'],
-      datasets: [{
-        label: 'Monthly Expenses',
-        data: dailyExpenseData[months[0]],
-        backgroundColor: [
-
-          'rgba(255, 87, 51, 0.5)'
         ],
         borderColor: [
 

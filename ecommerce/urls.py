@@ -5,16 +5,18 @@ from ecommerce import views
 urlpatterns = [
     # Ecommerce
     
-    path('hall-summary', views.HallSummary.as_view(),name='hall-summary'),
-    path('hall-expense-summary', views.HallExpenseSummary.as_view(),name='hall-expense-summary'),
+    path('hall-sale-report', views.HallSaleSummary.as_view(),name='hall-sale-report'),
+    path('hall-expense-report', views.HallExpenseSummary.as_view(),name='hall-expense-report'),
     
-    path('kitchen-summary', views.KitchenSummary.as_view(),name='kitchen-summary'),
-    path('salaries-summary', views.SalariesSummary.as_view(),name='salaries-summary'),
+    path('kitchen-sale-report', views.KitchenSaleSummary.as_view(),name='kitchen-sale-report'),
+    path('kitchen-expense-report', views.KitchenExpenseSummary.as_view(),name='kitchen-expense-report'),
     
     
     path('ecommerce_product', views.Products.as_view(),name='ecommerce_product'),
     path('ecommerce_product_detail', views.ProductsDetail.as_view(),name='ecommerce_product_detail'),
     path('event-sale', views.Eventsale.as_view(),name='event-sale'),
+
+
     
     path('update-event-sale/<int:sale_id>', views.UpdateEventsale.as_view(),name='update-event-sale'),
     path('update-event-expense/<int:expense_id>', views.UpdateEventExpense.as_view(),name='update-event-expense'),

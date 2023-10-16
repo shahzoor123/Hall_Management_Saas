@@ -49,8 +49,8 @@ class ProductsDetail(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-product-detail.html"
 
 
-class HallSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/finance_reports/hall_summary.html"
+class HallSaleSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/finance_reports/hall_sale.html"
     
     def get(self, request):
 
@@ -74,8 +74,48 @@ class HallSummary(LoginRequiredMixin,TemplateView):
                 total_sales = 0  # Set total sales to 0 for missing months
             every_month_sale.append(total_sales)
 
-        # print(every_month_sale , 'sale')
+        # print(every_month_sale)
 
+        # Define the months and days in each month
+        months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        # Initialize an empty dictionary to store the data
+        dailySalesData = {}
+
+        # Loop through each month and query the data
+        for i, month in enumerate(months):
+            days = days_in_month[i]
+            data = EventSale.objects.filter(event_date__month=i + 1).values('event_date').annotate(total_sales=Sum('total_amount')).order_by('event_date')
+            sales_data = [0] * days
+
+
+            for entry in data:
+                # print(entry)
+                day = entry['event_date'].day
+                count = entry['total_sales']
+                sales_data[day - 1] = count
+           
+
+            dailySalesData[month] = sales_data
+                
+        # print(dailySalesData)
+
+
+        context = {
+            "sale": every_month_sale,
+            "daily_sale" : json.dumps(dailySalesData),
+        }
+        
+        return render(request, self.template_name, context)
+        
+
+
+    
+class HallExpenseSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/finance_reports/hall_expense.html"
+
+    def get(self, request):
 
        # montly expense
         expense_list = []
@@ -105,28 +145,7 @@ class HallSummary(LoginRequiredMixin,TemplateView):
         months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-        # Initialize an empty dictionary to store the data
-        dailySalesData = {}
-
-        # Loop through each month and query the data
-        for i, month in enumerate(months):
-            days = days_in_month[i]
-            data = EventSale.objects.filter(event_date__month=i + 1).values('event_date').annotate(total_sales=Sum('total_amount')).order_by('event_date')
-            sales_data = [0] * days
-
-
-            for entry in data:
-                # print(entry)
-                day = entry['event_date'].day
-                count = entry['total_sales']
-                sales_data[day - 1] = count
-           
-
-            dailySalesData[month] = sales_data
-                
-        # print(dailySalesData)
-        
-        
+ 
         dailyExpenseData = {}
          # Loop through each month and query the data
         for i, month in enumerate(months):
@@ -144,28 +163,21 @@ class HallSummary(LoginRequiredMixin,TemplateView):
         # print(dailyExpenseData)
 
 
-
         context = {
-            "sale": every_month_sale,
             "expense": expense_list,
-            "daily_sale" : json.dumps(dailySalesData),
             "daily_expense": json.dumps(dailyExpenseData),  
         }
         
         return render(request, self.template_name, context)
-        
+    
 
 
-    
-class HallExpenseSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/finance_reports/detail_finance_reports/days_report.html"
-
-class KitchenSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/finance_reports/kitchen_summary.html"
+class KitchenSaleSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/finance_reports/kitchen_sale.html"
     
     
-class SalariesSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/finance_reports/detail_finance_reports/salaries_summary.html"  
+class KitchenExpenseSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/finance_reports/kitchen_expense.html"  
     
     
     
