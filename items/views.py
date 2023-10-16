@@ -5,6 +5,8 @@ from .models import MyProducts, Deals
 from ecommerce.models import EventSale, Event
 import json
 from django.shortcuts import render , redirect,get_object_or_404
+from django.contrib import messages
+
 
 
 class Calculate(LoginRequiredMixin,TemplateView):
@@ -27,184 +29,179 @@ class Calculate(LoginRequiredMixin,TemplateView):
 
 def custom_menu(request):
         context = {}
-        if request.method == "POST":
-               
-
-                event_status = request.POST.get('status')
-                event_time = request.POST.get('event-time')
-
-                event_date = request.POST.get('event-date')
-                number_of_people = request.POST.get('no-of-people')
-                setup = request.POST.get('setup')
-
-                deal_number = request.POST.get('deals')
-
-                # deal_id = request.POST.get('deals')
-                # deal = Deals.objects.get(id=deal_id)
-
-                deal = request.POST.get('deals')
-                location = request.POST.get('location')
-
-            
-                customer_name = request.POST.get('customer-name')
-                customer_number = request.POST.get('customer-number')
-                per_head = request.POST.get('per-head')
-                per_head = float(per_head)
-
-                extra_charge = request.POST.get('extra-charges')
-                stage_charge = request.POST.get('stage-charges')
-                entry_charge = request.POST.get('entry-charges')
+        try:
+            if request.method == "POST":
                 
-                menu_amount = request.POST.get('menu-amount')
-                menu_amount = float(menu_amount)
-                food_menu = request.POST.get('food-menu')
-                print(food_menu)
 
-                gents = request.POST.get('gents')
-                ladies = request.POST.get('ladies')
+                    event_status = request.POST.get('status')
+                    event_time = request.POST.get('event-time')
 
-                details = request.POST.get('details')
-                received_ammount = request.POST.get('received-amount')
+                    event_date = request.POST.get('event-date')
+                    number_of_people = request.POST.get('no-of-people')
+                    setup = request.POST.get('setup')
 
-                request.session['deals'] = deal_number
-                total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) 
-                add_event_sale = EventSale.objects.create(
+                    deal_number = request.POST.get('deals')
+
+                    # deal_id = request.POST.get('deals')
+                    # deal = Deals.objects.get(id=deal_id)
+
+                    deal = request.POST.get('deals')
+                    location = request.POST.get('location')
+
+                
+                    customer_name = request.POST.get('customer-name')
+                    customer_number = request.POST.get('customer-number')
+                    per_head = request.POST.get('per-head')
+                    per_head = float(per_head)
+
+                    extra_charge = request.POST.get('extra-charges')
+                    stage_charge = request.POST.get('stage-charges')
+                    entry_charge = request.POST.get('entry-charges')
                     
-                    status=event_status,
-                    event_timing=event_time,
-                    event_date=event_date,
-                    no_of_people=number_of_people,
-                    setup=setup,
-                    deals=deal,
-                    customer_name=customer_name,
-                    customer_number=customer_number,
-                    per_head=per_head,
-                    extra_charges=extra_charge,
-                    stage_charges= stage_charge,
-                    entry_charges=entry_charge,
-                    location=location,
-                    gents=gents,
-                    ladies= ladies,
-                    total_menu= int(menu_amount),
-                    food_menu=food_menu,
-                    detials=details,
-                    total_amount= total ,
-                    recieved_amount=received_ammount, 
-                    remaining_amount = total - int(received_ammount)
-                )
+                    menu_amount = request.POST.get('menu-amount')
+                    menu_amount = float(menu_amount)
+                    food_menu = request.POST.get('food-menu')
+                    print(food_menu)
 
-                create_event = Event.objects.create(event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
-                
-                # Unfinish work
-                # st_list = food_menu.split(', ')
-                # product_list = []
-                # for i in range(len(st_list)):
-                #     if len(st_list[i]) == 0 or len(st_list[i]) < 1:
-                #         continue
-                #     item_qty = st_list[i].strip().split(' ')
-                #     if len(item_qty) == 0:
-                #         continue
-                #     else:
-                #         print(item_qty)
-                #         item = item_qty[0]
-                #         qty = int(item_qty[1].strip('()'))  # Convert the quantity to an integer
-                #         product_list.append([item, qty])
-                
+                    gents = request.POST.get('gents')
+                    ladies = request.POST.get('ladies')
 
-                # print(product_list)
+                    details = request.POST.get('details')
+                    received_ammount = request.POST.get('received-amount')
 
-                return redirect('event-sale')
+                    request.session['deals'] = deal_number
+                    total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) 
+                    add_event_sale = EventSale.objects.create(
+                        
+                        status=event_status,
+                        event_timing=event_time,
+                        event_date=event_date,
+                        no_of_people=number_of_people,
+                        setup=setup,
+                        deals=deal,
+                        customer_name=customer_name,
+                        customer_number=customer_number,
+                        per_head=per_head,
+                        extra_charges=extra_charge,
+                        stage_charges= stage_charge,
+                        entry_charges=entry_charge,
+                        location=location,
+                        gents=gents,
+                        ladies= ladies,
+                        total_menu= int(menu_amount),
+                        food_menu=food_menu,
+                        detials=details,
+                        total_amount= total ,
+                        recieved_amount=received_ammount, 
+                        remaining_amount = total - int(received_ammount)
+                    )
+
+                    create_event = Event.objects.create(event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
+                    messages.success(request, "Event added Successfully")
+                    return redirect('event-sale')
+        except:
+            
+            messages.error(request, "Invalid Form Submission,  Hint: Check for empty form fields, make sure to not add text in filed of number, remove for decimal number")
+            return redirect('calculate_menu')
 
 def item(request, deal_id):
         context = {}
-        if request.method == "POST":
-               
-
-                event_status = request.POST.get('status')
-                event_time = request.POST.get('event-time')
-
-                event_date = request.POST.get('event-date')
-                number_of_people = request.POST.get('no-of-people')
-                setup = request.POST.get('setup')
-
-                deal_number = request.POST.get('deals')
-
-                # deal_id = request.POST.get('deals')
-                # deal = Deals.objects.get(id=deal_id)
-
-                deal = request.POST.get('deals')
-                location = request.POST.get('location')
-            
-                customer_name = request.POST.get('customer-name')
-                customer_number = request.POST.get('customer-number')
-                per_head = request.POST.get('per-head')
-                per_head = float(per_head)
-
-                extra_charge = request.POST.get('extra-charges')
-                stage_charge = request.POST.get('stage-charges')
-                entry_charge = request.POST.get('entry-charges')
-
-                menu_amount = request.POST.get('menu-amount')
-                menu_amount = float(menu_amount)
-                food_menu = request.POST.get('food-menu')
-
-                gents = request.POST.get('gents')
-                ladies = request.POST.get('ladies')
-
+        try:
+            if request.method == "POST":
                 
-                details = request.POST.get('details')
-                received_ammount = request.POST.get('received-amount')
 
-                request.session['deals'] = deal_number
-                total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) 
-                add_event_sale = EventSale.objects.create(
+                    event_status = request.POST.get('status')
+                    event_time = request.POST.get('event-time')
+
+                    event_date = request.POST.get('event-date')
+                    number_of_people = request.POST.get('no-of-people')
+                    setup = request.POST.get('setup')
+
+                    deal_number = request.POST.get('deals')
+
+                    # deal_id = request.POST.get('deals')
+                    # deal = Deals.objects.get(id=deal_id)
+
+                    deal = request.POST.get('deals')
+                    location = request.POST.get('location')
+                
+                    customer_name = request.POST.get('customer-name')
+                    customer_number = request.POST.get('customer-number')
+                    per_head = request.POST.get('per-head')
+                    per_head = float(per_head)
+
+                    extra_charge = request.POST.get('extra-charges')
+                    stage_charge = request.POST.get('stage-charges')
+                    entry_charge = request.POST.get('entry-charges')
+
+                    menu_amount = request.POST.get('menu-amount')
+                    menu_amount = float(menu_amount)
+                    food_menu = request.POST.get('food-menu')
+
+                    gents = request.POST.get('gents')
+                    ladies = request.POST.get('ladies')
+
                     
-                    status=event_status,
-                    event_timing=event_time,
-                    event_date=event_date,
-                    no_of_people=number_of_people,
-                    setup=setup,
-                    deals=deal,
-                    customer_name=customer_name,
-                    customer_number=customer_number,
-                    per_head=per_head,
-                    extra_charges=extra_charge,
-                    total_menu = int(menu_amount),
-                    stage_charges= stage_charge,
-                    entry_charges=entry_charge,
-                    location = location,
-                    gents= gents,
-                    food_menu=food_menu,
-                    detials=details,
-                    total_amount= total ,
-                    recieved_amount=received_ammount, 
-                    remaining_amount = total - int(received_ammount)
-                )
-               
-                bill_num = request.session.get('bill-no')
-                deal_num = request.session.get('deals')
+                    details = request.POST.get('details')
+                    received_ammount = request.POST.get('received-amount')
+
+                    request.session['deals'] = deal_number
+                    total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) 
+                    add_event_sale = EventSale.objects.create(
+                        
+                        status=event_status,
+                        event_timing=event_time,
+                        event_date=event_date,
+                        no_of_people=number_of_people,
+                        setup=setup,
+                        deals=deal,
+                        customer_name=customer_name,
+                        customer_number=customer_number,
+                        per_head=per_head,
+                        extra_charges=extra_charge,
+                        total_menu = int(menu_amount),
+                        stage_charges= stage_charge,
+                        entry_charges=entry_charge,
+                        location = location,
+                        gents= gents,
+                        food_menu=food_menu,
+                        detials=details,
+                        total_amount= total ,
+                        recieved_amount=received_ammount, 
+                        remaining_amount = total - int(received_ammount)
+                    )
                 
+                    bill_num = request.session.get('bill-no')
+                    deal_num = request.session.get('deals')
+                    
+                    
+                    
+                    products = MyProducts.objects.all()
+                    deal = get_object_or_404(Deals, pk=deal_id)
+                    items = MyProducts.objects.filter(deals=deal)
+                                
+                    sale = EventSale.objects.filter(bill_no=bill_num)
                 
-                
-                products = MyProducts.objects.all()
-                deal = get_object_or_404(Deals, pk=deal_id)
-                items = MyProducts.objects.filter(deals=deal)
-                               
-                sale = EventSale.objects.filter(bill_no=bill_num)
+
+                    combined_data = zip(items, products)
             
-
-                combined_data = zip(items, products)
-        
-                
-                context = {
-                    'combined_data': combined_data,
-                    'sales' : sale,
-                }
-                # Render extras/pages/pages-invoice.html with the context
+                    
+                    context = {
+                        'combined_data': combined_data,
+                        'sales' : sale,
+                    }
+                    # Render extras/pages/pages-invoice.html with the context
 
 
-                create_event = Event.objects.create(event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
-                return render(request, 'extras/pages/pages-invoice.html', context)
+                    create_event = Event.objects.create(event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
+                    messages.success(request, "Event added Successfully")
+                    return redirect('event-sale')
+
+        except:
+            
+            messages.error(request, "Invalid Form Submission,  Hint: Check for empty form fields, make sure to not add text in filed of number, remove for decimal number")
+            return redirect('deals-calculator')
+        return render(request, 'items/deals-calculator.html', context)
         
         food_list = []
         products = MyProducts.objects.all()

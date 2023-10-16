@@ -17,7 +17,7 @@ class DealsAdmin(admin.ModelAdmin):
     list_display = ('code', 'get_menu_items', 'get_total_price')
 
     def get_menu_items(self, obj):
-        return ", ".join([item.name for item in obj.menu_items.all()])
+        return ", ".join([item.product_name for item in obj.menu_items.all()])
 
     get_menu_items.short_description = 'Menu Items'
 
