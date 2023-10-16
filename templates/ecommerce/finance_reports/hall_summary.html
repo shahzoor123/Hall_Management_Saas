@@ -122,35 +122,62 @@
 <script>
 
 
-const dailySalesData = {
-  'Jan': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Feb': Array.from({ length: 28 }, () => Math.floor(Math.random() * 51)),
-  'Mar': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Apr': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'May': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Jun': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Jul': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Aug': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Sep': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Oct': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Nov': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Dec': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51))
-};
+// const dailySalesData = {
+//   'Jan': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Feb': Array.from({ length: 28 }, () => Math.floor(Math.random() * 51)),
+//   'Mar': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Apr': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'May': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Jun': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Jul': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Aug': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Sep': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Oct': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Nov': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Dec': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51))
+// };
 
 
 
 
-  // Get the values from the data attributes
-  var montly_sale = document.getElementById("sale").getAttribute("data-my-variable");
-  var montly_expense = document.getElementById("expense").getAttribute("data-my-variable");
+    // Get the values from the data attributes
+    var montly_sale = document.getElementById("sale").getAttribute("data-my-variable");
+    var montly_expense = document.getElementById("expense").getAttribute("data-my-variable");
 
-  var daily_sale = document.getElementById("daily_sale").getAttribute("data-my-variable");
-  var daily_expense = document.getElementById("daily_expense").getAttribute("data-my-variable");
+    var daily_sale = JSON.parse(document.getElementById("daily_sale").getAttribute("data-my-variable"));
+    var daily_expense = JSON.parse(document.getElementById("daily_expense").getAttribute("data-my-variable"));
 
 
-  console.log(daily_sale, 'sale');
-  console.log(daily_expense, 'expense');
+    console.log(daily_sale, 'sale');
+    console.log(daily_expense, 'expense');
 
+
+    // Define the desired number of days in a month
+    var numberOfDays = 30; // Change this based on the actual number of days in a month
+
+    // Initialize an empty object for the transformed data
+    var dailySalesData = {};
+
+    // Loop through the original data
+    for (var month in daily_sale) {
+      // Get the array for the current month from the original data
+      var originalMonthData = daily_sale[month];
+
+      // Create a new array for the desired number of days
+      var transformedMonthData = Array.from({ length: numberOfDays }, function (_, index) {
+        return originalMonthData[index] || 0;
+      });
+
+      // Add the transformed data to the result object
+      dailySalesData[month] = transformedMonthData;
+    }
+
+    // // Now, dailySalesData contains the transformed data
+    // console.log(dailySalesData, 'hi');
+
+
+
+    
   
   // // Parse the values as JSON arrays
   var totalSales = JSON.parse(montly_sale);
@@ -243,20 +270,42 @@ const dailySalesData = {
   
 
 
-const dailyExpenseData = {
-  'Jan': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Feb': Array.from({ length: 28 }, () => Math.floor(Math.random() * 51)),
-  'Mar': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Apr': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'May': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Jun': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Jul': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Aug': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Sep': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Oct': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Nov': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
-  'Dec': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51))
-};
+// const dailyExpenseData = {
+//   'Jan': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Feb': Array.from({ length: 28 }, () => Math.floor(Math.random() * 51)),
+//   'Mar': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Apr': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'May': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Jun': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Jul': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Aug': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Sep': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Oct': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Nov': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51)),
+//   'Dec': Array.from({ length: 30 }, () => Math.floor(Math.random() * 51))
+// };
+
+
+  // Initialize an empty object for the transformed data
+  var dailyExpenseData = {};
+
+  // Loop through the original data
+  for (var month in daily_expense) {
+    // Get the array for the current month from the original data
+    var originalMonthData = daily_expense[month];
+
+    // Create a new array for the desired number of days
+    var transformedMonthData = Array.from({ length: numberOfDays }, function (_, index) {
+      return originalMonthData[index] || 0;
+    });
+
+    // Add the transformed data to the result object
+    dailyExpenseData[month] = transformedMonthData;
+  }
+
+  // // Now, dailySalesData contains the transformed data
+  // console.log(dailySalesData, 'hi');
+
 
 
 

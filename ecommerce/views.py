@@ -53,7 +53,7 @@ class HallSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/hall_summary.html"
     
     def get(self, request):
-    
+
         # Query the database to get total sales for every month in the current year
         monthly_sales = EventSale.objects.filter(event_date__year=current_date.year).annotate(month=ExtractMonth('event_date')) \
             .values('month') \
@@ -74,7 +74,7 @@ class HallSummary(LoginRequiredMixin,TemplateView):
                 total_sales = 0  # Set total sales to 0 for missing months
             every_month_sale.append(total_sales)
 
-        print(every_month_sale , 'sale')
+        # print(every_month_sale , 'sale')
 
 
        # montly expense
@@ -98,7 +98,7 @@ class HallSummary(LoginRequiredMixin,TemplateView):
                 total_expense = 0  # Set total expense to 0 for missing months
             expense_list.append(total_expense)
 
-        print(expense_list , 'expense')
+        # print(expense_list , 'expense')
 
 
         # Define the months and days in each month
@@ -114,14 +114,17 @@ class HallSummary(LoginRequiredMixin,TemplateView):
             data = EventSale.objects.filter(event_date__month=i + 1).values('event_date').annotate(total_sales=Sum('total_amount')).order_by('event_date')
             sales_data = [0] * days
 
+
             for entry in data:
+                # print(entry)
                 day = entry['event_date'].day
                 count = entry['total_sales']
                 sales_data[day - 1] = count
+           
 
             dailySalesData[month] = sales_data
                 
-        print(dailySalesData)
+        # print(dailySalesData)
         
         
         dailyExpenseData = {}
@@ -138,15 +141,15 @@ class HallSummary(LoginRequiredMixin,TemplateView):
 
             dailyExpenseData[month] = Expense_data
                 
-        print(dailyExpenseData)
+        # print(dailyExpenseData)
 
 
 
         context = {
             "sale": every_month_sale,
             "expense": expense_list,
-            "daily_sale" : dailySalesData,
-            "daily_expense": dailyExpenseData,  
+            "daily_sale" : json.dumps(dailySalesData),
+            "daily_expense": json.dumps(dailyExpenseData),  
         }
         
         return render(request, self.template_name, context)
