@@ -1,0 +1,2340 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$600000$TZ5BeMZMXiUz15GvDLoKay$7MgGi0mzSL5WeGB2rKB5t3Skbchm32e1bOENVXfwOkQ=",
+        "last_login": "2023-10-18T22:24:00.242Z",
+        "is_superuser": true,
+        "username": "sk",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-10-11T08:09:11.846Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "0vkh9b928tap09d5a6so2j9foo6q6lvf",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQBf-FsyGUUgo9evcbyMIuFjXQlDbRGP_dNulBrzPz3ps5WJfRrZVml5ANrGGnX-Yh3CnvAm-Qr4WHkpc5eb4n_LCVXwrS43y0fwcj1HFbQwTVR6MM9EqDQGMiyRZ6tKC7Dq0VQsXWWxnUxlA2HkOjdZCWIETb7aeVak0lO3pOaX6xQXy-n44_hw:1qsSki:4k2KBiKhotIdP0e2UiVrsCENT-fjR59c9_RjTYR8opQ",
+        "expire_date": "2023-10-30T18:55:44.012Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "fwivfl9c88a0rsku0wcxrnawlwm7354q",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQBf-FsyGUUgo9evcbyMIuFjXQlDbRGP_dNulBrzPz3ps5WJfRrZVml5ANrGGnX-Yh3CnvAm-Qr4WHkpc5eb4n_LCVXwrS43y0fwcj1HFbQwTVR6MM9EqDQGMiyRZ6tKC7Dq0VQsXWWxnUxlA2HkOjdZCWIETb7aeVak0lO3pOaX6xQXy-n44_hw:1qqUHV:KQCoCE177G2L2FgLEzqnUZyyB7I43C3ys0aEfMpHrTE",
+        "expire_date": "2023-10-25T08:09:25.878Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "gdw8tzo2ek4vrvumkk3s46toksusx1fd",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQBf-FsyGUUgo9evcbyMIuFjXQlDbRGP_dNulBrzPz3ps5WJfRrZVml5ANrGGnX-Yh3CnvAm-Qr4WHkpc5eb4n_LCVXwrS43y0fwcj1HFbQwTVR6MM9EqDQGMiyRZ6tKC7Dq0VQsXWWxnUxlA2HkOjdZCWIETb7aeVak0lO3pOaX6xQXy-n44_hw:1qqt5v:UqrGxSpUrjZymiFwkbpqZA8n-FT5SptsGrXG29rVlpk",
+        "expire_date": "2023-10-26T10:39:07.416Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "hc0366kod0tqjw1bgksmtz5986rimv6t",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQBf-FsyGUUgo9evcbyMIuFjXQlDbRGP_dNulBrzPz3ps5WJfRrZVml5ANrGGnX-Yh3CnvAm-Qr4WHkpc5eb4n_LCVXwrS43y0fwcj1HFbQwTVR6MM9EqDQGMiyRZ6tKC7Dq0VQsXWWxnUxlA2HkOjdZCWIETb7aeVak0lO3pOaX6xQXy-n44_hw:1qrbhh:p6qUqGwE0vcK6_unxxZYr6pg75u_vjoQ_QWUreha64w",
+        "expire_date": "2023-10-28T10:17:05.496Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "j93f9nw47khs7ul436kd9m04l27i80va",
+    "fields": {
+        "session_data": ".eJxVjDsOwyAQBe9CHSHAfFOm9xnQsgvBSYQlY1dR7h5bcpG0M_Pem0XY1hq3npc4EbsyyS6_LAE-czsEPaDdZ45zW5cp8SPhp-18nCm_bmf7d1Ch130NBbQrXntw2oIg70tWAzgKYI2hEITQZUhBod4ZKZkIpbWoQgYswbDPF-9wOEo:1qtExM:VyPtni2zoS1AKK-tHozKRM3p0HX7GrDn7qTZEel2D2g",
+        "expire_date": "2023-11-01T22:24:00.248Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "ui3pzlr0yzf6a7x4g5rrmfnk0h1erj4p",
+    "fields": {
+        "session_data": ".eJxVjMEOwiAQBf-FsyGUUgo9evcbyMIuFjXQlDbRGP_dNulBrzPz3ps5WJfRrZVml5ANrGGnX-Yh3CnvAm-Qr4WHkpc5eb4n_LCVXwrS43y0fwcj1HFbQwTVR6MM9EqDQGMiyRZ6tKC7Dq0VQsXWWxnUxlA2HkOjdZCWIETb7aeVak0lO3pOaX6xQXy-n44_hw:1qrHPu:U2DhGYrYFHhdCQc1WkjgjnKGJ46XkmwngtaXFadivVk",
+        "expire_date": "2023-10-27T12:37:22.374Z"
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 1,
+    "fields": {
+        "bill_no": -29894,
+        "sr": -29894,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "1992-12-26",
+        "event_date": "2023-10-22",
+        "no_of_people": 7872,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Use reason arm thought ok check stand. Since answer bar yeah. Those detail stand effect.Dream become yeah technology allow. Church position nearly avoid campaign.",
+        "customer_name": "Myself",
+        "stage_charges": 11841,
+        "entry_charges": 4651,
+        "gents": -23399,
+        "ladies": 24872,
+        "customer_number": -8809635684850756740,
+        "per_head": -20686,
+        "extra_charges": -12532,
+        "food_menu": "Medical could resource tough decision agency. Movement star party dog community responsibility a maybe.Herself imagine seek great whether. Though before interest shake build about.",
+        "detials": "Fall specific mother. Age allow education truth act each.",
+        "total_menu": 24206,
+        "payment_details": "Manager I field.\r\nChild from identify movie more argue exist. Suffer protect would idea religious seek. For maintain all activity even sea.",
+        "payment_count": -2791,
+        "total_amount": 25482,
+        "recieved_amount": -24150,
+        "remaining_amount": 11378
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 2,
+    "fields": {
+        "bill_no": 4722,
+        "sr": 4722,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "1984-12-19",
+        "event_date": "2023-07-23",
+        "no_of_people": 292,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Dinner different success whatever find. Perform teach story country turn media. Create nice put bit behind physical option. National cup decade glass value purpose report movie.",
+        "customer_name": "Reason ",
+        "stage_charges": 25795,
+        "entry_charges": 7418,
+        "gents": -19413,
+        "ladies": 27555,
+        "customer_number": 9112226814547522752,
+        "per_head": 1200,
+        "extra_charges": 3525,
+        "food_menu": "Single ",
+        "detials": "Fight single simple. Bit fear however green trial together. Policy form financial two good at others.\r\nEven foot rock. Head agency indeed weight.",
+        "total_menu": -22309,
+        "payment_details": "Loss lead state to same tough gun. Make scene bit my it single put. Resource fear talk others imagine.",
+        "payment_count": 11327,
+        "total_amount": 387138,
+        "recieved_amount": 29155,
+        "remaining_amount": 5490175
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 3,
+    "fields": {
+        "bill_no": -4055,
+        "sr": -4055,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "2014-12-13",
+        "event_date": "2023-06-30",
+        "no_of_people": 222,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Outside born resource travel by least again. Until concern reduce begin success include. Knowledge know full above long street.",
+        "customer_name": "Themselves",
+        "stage_charges": 23138,
+        "entry_charges": 16092,
+        "gents": 22983,
+        "ladies": 25535,
+        "customer_number": -5022230850347947756,
+        "per_head": 2222,
+        "extra_charges": 24510,
+        "food_menu": "Ago list different least notice employee term stay. Indicate draw adult line boy play. We if choice minute great article at go.",
+        "detials": "Collection respond eye all relate. Account letter they smile painting situation authority. Skin maybe above purpose key apply reflect. Instead player list condition morning.",
+        "total_menu": -7161,
+        "payment_details": "Usually allow their area myself.\r\nAnswer enjoy subject fine. Yourself civil baby without.\r\nForward community executive red level. Young two term hand. Police until style relate though even.",
+        "payment_count": 19963,
+        "total_amount": 557024,
+        "recieved_amount": -11338,
+        "remaining_amount": 9426
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 4,
+    "fields": {
+        "bill_no": -459,
+        "sr": -459,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "1995-04-24",
+        "event_date": "2023-05-05",
+        "no_of_people": -6940,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Both responsibility red ahead yet open set. Black growth future day.Office understand sit common oil behavior loss rock. Degree those behavior beat southern. Short author school shoulder.",
+        "customer_name": "Own",
+        "stage_charges": 9367,
+        "entry_charges": -25725,
+        "gents": 27515,
+        "ladies": 8828,
+        "customer_number": -726090650027867818,
+        "per_head": -23146,
+        "extra_charges": -22310,
+        "food_menu": "Through laugh individual physical hot. Lead become sell name nothing positive.",
+        "detials": "Act information action hand account eye left. Hear keep win despite. Clear always recognize cup.\r\nLeg evening them reveal. Attorney north describe radio arrive.",
+        "total_menu": 30450,
+        "payment_details": "Long though white not performance successful develop adult. Analysis particular particularly court resource step late.",
+        "payment_count": -3801,
+        "total_amount": 24113,
+        "recieved_amount": -24822,
+        "remaining_amount": 9108
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 5,
+    "fields": {
+        "bill_no": 12741,
+        "sr": 12741,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "2012-12-28",
+        "event_date": "2023-04-14",
+        "no_of_people": 6849,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Instead participant million decade nice modern. Hot special black fill.Card social him understand theory produce man. Force stand example no per attack. Record church detail important.",
+        "customer_name": "Admit",
+        "stage_charges": 12983,
+        "entry_charges": 17832,
+        "gents": 23258,
+        "ladies": 22975,
+        "customer_number": -720053325021110594,
+        "per_head": 22216,
+        "extra_charges": 14413,
+        "food_menu": "Grow technology artist role five history. Follow easy actually.Mention name necessary thousand significant hour occur. Air enough learn card. Along police purpose on during face.",
+        "detials": "Worry station opportunity former purpose. Professor hundred sort although long third. Fear doctor parent window small entire.\r\nSpeech give successful election high power.",
+        "total_menu": -25968,
+        "payment_details": "Visit perhaps well they teach. Only song collection accept bad wonder listen. Particularly exist social for reflect manager.",
+        "payment_count": 5681,
+        "total_amount": 23441,
+        "recieved_amount": -17948,
+        "remaining_amount": -14547
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 6,
+    "fields": {
+        "bill_no": 13563,
+        "sr": 13563,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "1987-10-22",
+        "event_date": "2023-03-30",
+        "no_of_people": 121,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Pm pattern fill policy body nature. Series community wear tree form deal stay choose. Chance couple letter amount cover investment.",
+        "customer_name": "Parent",
+        "stage_charges": 15719,
+        "entry_charges": 17506,
+        "gents": -19528,
+        "ladies": 31604,
+        "customer_number": -5208331764933577269,
+        "per_head": 2222,
+        "extra_charges": -30300,
+        "food_menu": "All policy commercial hope tax wonder since. Impact keep but against lose.",
+        "detials": "Hope hard goal degree note. Green system box. Until away degree military happy down.",
+        "total_menu": 28182,
+        "payment_details": "Carry not notice enjoy near maintain table. Language authority watch benefit side goal ahead.\r\nTotal budget at item mention organization. Near it order. Claim word use artist interesting.",
+        "payment_count": 21401,
+        "total_amount": 271787,
+        "recieved_amount": 11901,
+        "remaining_amount": -34908
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 7,
+    "fields": {
+        "bill_no": 18649,
+        "sr": 18649,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "1979-09-14",
+        "event_date": "2023-02-01",
+        "no_of_people": -1315,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Visit each value chair. None himself worker her skin entire question.Court whatever reason make live. You Mr court its when. Personal great main citizen.",
+        "customer_name": "Foot",
+        "stage_charges": 26037,
+        "entry_charges": 3296,
+        "gents": -31758,
+        "ladies": 19942,
+        "customer_number": -1879220553210081492,
+        "per_head": 8139,
+        "extra_charges": -19854,
+        "food_menu": "Only theory nice agency impact evidence. Officer matter of former cultural.Know push pressure Republican doctor attorney good statement. Consider TV final party our coach.",
+        "detials": "Speak because finally behavior spring animal somebody. Which summer although organization ago. Yard responsibility line leave low side board.\r\nIndividual eye sort usually wrong.",
+        "total_menu": 26419,
+        "payment_details": "Car item floor discover.\r\nSeveral evening happen then. No decision reduce choose past most.\r\nDesign material after plan or. Nation particularly fear list including who listen.",
+        "payment_count": 16385,
+        "total_amount": 23602,
+        "recieved_amount": 20918,
+        "remaining_amount": -20800
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 8,
+    "fields": {
+        "bill_no": 7741,
+        "sr": 7741,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "1999-09-22",
+        "event_date": "2023-01-23",
+        "no_of_people": 29616,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Plan billion measure argue coach relate son course. Partner simple light catch science poor. Throughout approach stop like major.",
+        "customer_name": "Young",
+        "stage_charges": -311,
+        "entry_charges": 28530,
+        "gents": 3391,
+        "ladies": 31806,
+        "customer_number": -7619787049935796929,
+        "per_head": 24185,
+        "extra_charges": 1497,
+        "food_menu": "Market behavior approach like. Pressure to community thing employee success north. Beautiful dinner tax item alone agree.Bad agreement rise deal. Hear black director listen.",
+        "detials": "Customer ten control human. Focus front firm financial. You Mr again create or usually.\r\nClaim no look medical agreement painting small. Here various now great. View nor score kitchen.",
+        "total_menu": 1393,
+        "payment_details": "East vote them example price parent picture. Support pay join lawyer area word.\r\nCommunity situation focus single keep. Standard response leg when doctor at.",
+        "payment_count": -18639,
+        "total_amount": 26673,
+        "recieved_amount": -28114,
+        "remaining_amount": 31579
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 9,
+    "fields": {
+        "bill_no": -28059,
+        "sr": -28059,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "1993-01-13",
+        "event_date": "2023-01-30",
+        "no_of_people": 4106,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Like behind language national show. Artist expect friend. Example section occur guy international. House shoulder wear street stage police lay article.",
+        "customer_name": "Drug",
+        "stage_charges": 17218,
+        "entry_charges": -30032,
+        "gents": 13611,
+        "ladies": 7957,
+        "customer_number": 2122746436641943671,
+        "per_head": -22591,
+        "extra_charges": -11702,
+        "food_menu": "Impact rest concern week drop series total. Something stand parent sometimes.Need million management ground feel chance side. Budget amount make. Will eye goal woman become.",
+        "detials": "Talk truth key action. Company institution face fight number. Employee half TV today husband.\r\nProfessor finally just Republican anything through. He report step after. Area charge detail.",
+        "total_menu": -21042,
+        "payment_details": "Poor garden guy ago season determine. Church arm star southern action read light west. Argue detail source add bring present themselves.",
+        "payment_count": 18614,
+        "total_amount": 17035,
+        "recieved_amount": -30083,
+        "remaining_amount": 32621
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 10,
+    "fields": {
+        "bill_no": 26141,
+        "sr": 26141,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "2018-05-28",
+        "event_date": "2023-10-11",
+        "no_of_people": -3223,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Control marriage test former so structure reality generation. Each debate law economy thank occur play.Above national unit prepare professor during new increase. Interest morning sport.",
+        "customer_name": "Five",
+        "stage_charges": 1143,
+        "entry_charges": -11098,
+        "gents": 19619,
+        "ladies": -27096,
+        "customer_number": -1937410701734513388,
+        "per_head": 3662,
+        "extra_charges": -5837,
+        "food_menu": "Would fill foot open especially other. Subject everybody it that.Main radio agency head man. Almost party quality these.",
+        "detials": "Go recent feeling area system. Own size stage kid allow change book. Bank physical ahead bad.",
+        "total_menu": -24826,
+        "payment_details": "Standard sound when whose. Right five build him.\r\nBudget as government available indeed senior notice. Beyond organization purpose.\r\nDrive hard yourself whose present perform.",
+        "payment_count": 12524,
+        "total_amount": 31730,
+        "recieved_amount": -15457,
+        "remaining_amount": 3759
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 11,
+    "fields": {
+        "bill_no": 6349,
+        "sr": 6349,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "2007-12-03",
+        "event_date": "2023-09-27",
+        "no_of_people": -11470,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Yard minute actually every through goal. Beautiful successful imagine none. Industry success government size study significant trade.",
+        "customer_name": "Relate",
+        "stage_charges": -17154,
+        "entry_charges": 10235,
+        "gents": -22467,
+        "ladies": 2843,
+        "customer_number": 6169437745959223041,
+        "per_head": 7893,
+        "extra_charges": -16452,
+        "food_menu": "Five sort husband purpose affect. Indeed ahead myself go professor. Wife close itself admit deal. Draw administration treatment everything go forget amount.",
+        "detials": "Western statement former community TV. Voice old attention fill they.\r\nDevelop compare smile become owner finally. Go future example order thing pretty strategy.",
+        "total_menu": 62,
+        "payment_details": "Level full ten theory whose some my leg. Account attention site firm especially.\r\nFall amount value sing kind character job. Some world law yourself.",
+        "payment_count": 29803,
+        "total_amount": 6217,
+        "recieved_amount": 28096,
+        "remaining_amount": -2520
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 12,
+    "fields": {
+        "bill_no": 176,
+        "sr": 176,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "2018-04-09",
+        "event_date": "2023-08-25",
+        "no_of_people": 205,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Accept would source. Decade today idea only someone account among. Agent born growth simple and.",
+        "customer_name": "Loss",
+        "stage_charges": 3128,
+        "entry_charges": 19051,
+        "gents": 28306,
+        "ladies": -4639,
+        "customer_number": 8319020756064563055,
+        "per_head": 1300,
+        "extra_charges": 5601,
+        "food_menu": "Most rise use church others. Science building wife past character. Pretty tough situation increase.Pretty cover stock imagine risk decade reach candidate. Remain toward serious never.",
+        "detials": "Try control thing eight themselves. Report purpose whom the nature.\r\nCommon yourself only people life join. Expect month world skill a action.",
+        "total_menu": -4778,
+        "payment_details": "Language part everyone apply situation home. Response street read man here mind fact.\r\nHouse ball her memory myself son. Value process necessary machine lot hear. Staff take city ahead.",
+        "payment_count": 16769,
+        "total_amount": 294280,
+        "recieved_amount": 5055,
+        "remaining_amount": -36336
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 13,
+    "fields": {
+        "bill_no": 5712,
+        "sr": 5712,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "2020-12-10",
+        "event_date": "2023-12-30",
+        "no_of_people": 150,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Really hour power training court common. Assume land cold. Lot other writer lead start box house amount.",
+        "customer_name": "Boy",
+        "stage_charges": 2725,
+        "entry_charges": 20532,
+        "gents": -27471,
+        "ladies": -30732,
+        "customer_number": 2317255923809,
+        "per_head": 109,
+        "extra_charges": 29198,
+        "food_menu": "Until whose main view me. Billion carry despite the mouth power every. Stand will case candidate cause audience network.",
+        "detials": "Prevent suffer end mission group consumer international. Lawyer American quality.\r\nDiscover practice specific. Fact leave relationship nor south personal popular own. Clear usually economy argue.",
+        "total_menu": -14011,
+        "payment_details": "Responsibility effect attorney large clear customer ground. Later become situation company final.\r\nAfter fire what reflect apply.",
+        "payment_count": 18685,
+        "total_amount": 68805,
+        "recieved_amount": -7977,
+        "remaining_amount": 257882864
+    }
+},
+{
+    "model": "ecommerce.eventsale",
+    "pk": 14,
+    "fields": {
+        "bill_no": 15563,
+        "sr": 15563,
+        "status": "Tentative ",
+        "event_timing": "Night ",
+        "booking_date": "2004-11-03",
+        "event_date": "2023-11-30",
+        "no_of_people": 116,
+        "location": "Hall",
+        "setup": "Delux",
+        "deals": "Personal simple defense spring story relationship move. Area close treatment. Here home out.Present book fund us. Ball plan nothing let present.",
+        "customer_name": "Cell",
+        "stage_charges": 23352,
+        "entry_charges": 20346,
+        "gents": 27644,
+        "ladies": 18950,
+        "customer_number": 4805281542235165633,
+        "per_head": 3030,
+        "extra_charges": 28866,
+        "food_menu": "Environment many image effect can. Cultural chance speak treatment office traditional.Reduce indicate why across. Note white rather cut let. Century interesting everything anything money.",
+        "detials": "Spring space stock military.\r\nMeet yourself rule. Opportunity something scene us.",
+        "total_menu": 5602,
+        "payment_details": "West tough up police watch sell would. Consumer accept inside service together site. Sister fear list TV wait free heavy. Here notice writer purpose just soldier.",
+        "payment_count": -4272,
+        "total_amount": 424044,
+        "recieved_amount": 22484,
+        "remaining_amount": 35370790
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 1,
+    "fields": {
+        "bill": 2,
+        "pakwan_bill": -26416,
+        "electicity": 20153,
+        "naan_qty": 11330,
+        "naan_bill": 0,
+        "cold_drink": -20714,
+        "cold_drink_bill": 0,
+        "water": 5840,
+        "water_bill": 0,
+        "bbq_kg_qty": 4387,
+        "bbq_price": 0,
+        "diesel_ltr": 31953,
+        "no_of_waiters": -32159,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": -25995,
+        "other_expense": 25860,
+        "other_expense_detals": "",
+        "setup_bill": 24899,
+        "decor": "",
+        "decor_bill": 10955,
+        "total_expense": 61409,
+        "expense_date": "2023-11-02"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 2,
+    "fields": {
+        "bill": 6,
+        "pakwan_bill": 30976,
+        "electicity": 12622,
+        "naan_qty": 23651,
+        "naan_bill": 0,
+        "cold_drink": 3928,
+        "cold_drink_bill": 0,
+        "water": 8262,
+        "water_bill": 0,
+        "bbq_kg_qty": 13988,
+        "bbq_price": 0,
+        "diesel_ltr": 26191,
+        "no_of_waiters": 30893,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": 10363,
+        "other_expense": 5863,
+        "other_expense_detals": "Central officer health which near occur research place.\r\nYeah entire strategy vote from. Development air property fish. Decide technology could about few year exist.",
+        "setup_bill": 17260,
+        "decor": "Home feel season college dark through alone. Land majority space modern.Herself prove against church live market politics. Stand should cover know majority possible how.",
+        "decor_bill": 21675,
+        "total_expense": 124950,
+        "expense_date": "2023-10-09"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 3,
+    "fields": {
+        "bill": 9,
+        "pakwan_bill": 268,
+        "electicity": 23530,
+        "naan_qty": 18869,
+        "naan_bill": 0,
+        "cold_drink": 3461,
+        "cold_drink_bill": 0,
+        "water": 21285,
+        "water_bill": 0,
+        "bbq_kg_qty": 11425,
+        "bbq_price": 0,
+        "diesel_ltr": 27229,
+        "no_of_waiters": 28405,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": 574,
+        "other_expense": 29579,
+        "other_expense_detals": "High sort arrive senior author medical remain. Suggest happen scene.\r\nVoice majority yourself player ten have. Today five whose throw quite. School actually instead mouth.",
+        "setup_bill": 32590,
+        "decor": "Room past interesting material. Ask while care blue final economy door treatment.Remain station author attorney. Somebody perhaps discover yet decade.",
+        "decor_bill": 12764,
+        "total_expense": 126534,
+        "expense_date": "2023-09-09"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 4,
+    "fields": {
+        "bill": 10,
+        "pakwan_bill": 17813,
+        "electicity": 16953,
+        "naan_qty": 13109,
+        "naan_bill": 0,
+        "cold_drink": 18555,
+        "cold_drink_bill": 0,
+        "water": 19279,
+        "water_bill": 0,
+        "bbq_kg_qty": 13230,
+        "bbq_price": 0,
+        "diesel_ltr": 6160,
+        "no_of_waiters": 22429,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": 23987,
+        "other_expense": 14113,
+        "other_expense_detals": "Indeed media manager claim power. List PM standard look between shoulder. Rise wish identify down summer.",
+        "setup_bill": -8058,
+        "decor": "Life anyone majority modern piece my cell training.Require computer nation. Store explain around determine yourself cost continue. Team option customer term rise.",
+        "decor_bill": 15279,
+        "total_expense": 86247,
+        "expense_date": "2023-08-09"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 5,
+    "fields": {
+        "bill": 5,
+        "pakwan_bill": -25176,
+        "electicity": 15820,
+        "naan_qty": 16193,
+        "naan_bill": 0,
+        "cold_drink": -3678,
+        "cold_drink_bill": 0,
+        "water": -6200,
+        "water_bill": 0,
+        "bbq_kg_qty": -31286,
+        "bbq_price": 0,
+        "diesel_ltr": 17063,
+        "no_of_waiters": -21539,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": 1813,
+        "other_expense": -266,
+        "other_expense_detals": "sas",
+        "setup_bill": -368,
+        "decor": "",
+        "decor_bill": 3133,
+        "total_expense": 12019,
+        "expense_date": "2023-07-09"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 7,
+    "fields": {
+        "bill": 9,
+        "pakwan_bill": -10135,
+        "electicity": -17282,
+        "naan_qty": 22855,
+        "naan_bill": 0,
+        "cold_drink": 17442,
+        "cold_drink_bill": 0,
+        "water": -27617,
+        "water_bill": 0,
+        "bbq_kg_qty": 24824,
+        "bbq_price": 0,
+        "diesel_ltr": -19764,
+        "no_of_waiters": -9295,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": 22158,
+        "other_expense": 28018,
+        "other_expense_detals": "Entire fly entire security. Bar unit reach involve everything lay skill. Current message test popular.\r\nThought political black mother during perform clearly. Cut tend wife possible this.",
+        "setup_bill": 26487,
+        "decor": "Beat herself avoid letter seek control stage. Bank such have approach.Party position half middle fact. Always forward soon consumer charge. Begin difficult clear wide kind house also.",
+        "decor_bill": 1109,
+        "total_expense": 30591,
+        "expense_date": "2023-06-09"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 8,
+    "fields": {
+        "bill": 1,
+        "pakwan_bill": 26827,
+        "electicity": 3319,
+        "naan_qty": 9109,
+        "naan_bill": 0,
+        "cold_drink": -8138,
+        "cold_drink_bill": 0,
+        "water": 11173,
+        "water_bill": 0,
+        "bbq_kg_qty": 5210,
+        "bbq_price": 0,
+        "diesel_ltr": 4934,
+        "no_of_waiters": 4145,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": -1414,
+        "other_expense": -21924,
+        "other_expense_detals": "Young anything knowledge allow her left build. Perform realize family yet. Economic art hour officer hold face theory.",
+        "setup_bill": 3885,
+        "decor": "Cell state lot so guess structure. Level test blood.Five image back form money tree care. Management local discuss cover.",
+        "decor_bill": 13711,
+        "total_expense": 29338,
+        "expense_date": "2023-03-09"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 9,
+    "fields": {
+        "bill": 7,
+        "pakwan_bill": 22164,
+        "electicity": 19458,
+        "naan_qty": -16263,
+        "naan_bill": 0,
+        "cold_drink": -17596,
+        "cold_drink_bill": 0,
+        "water": -9702,
+        "water_bill": 0,
+        "bbq_kg_qty": -13706,
+        "bbq_price": 0,
+        "diesel_ltr": -17484,
+        "no_of_waiters": -4358,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": 1960,
+        "other_expense": 16176,
+        "other_expense_detals": "Place agent receive trip really.\r\nOrder employee work particular. Source reduce two yes east. Enjoy everything over table out meet partner.\r\nTake performance not then. Hold because surface choose.",
+        "setup_bill": -1144,
+        "decor": "Leave ahead figure condition tough. Others citizen best of have box either.Particularly party imagine computer thank chair. New newspaper difference court. Fall six evidence note piece major.",
+        "decor_bill": 20375,
+        "total_expense": 61505,
+        "expense_date": "2023-04-09"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 11,
+    "fields": {
+        "bill": 12,
+        "pakwan_bill": 10110,
+        "electicity": 9414,
+        "naan_qty": 14442,
+        "naan_bill": 0,
+        "cold_drink": 5086,
+        "cold_drink_bill": 0,
+        "water": 25329,
+        "water_bill": 0,
+        "bbq_kg_qty": 22514,
+        "bbq_price": 0,
+        "diesel_ltr": 23771,
+        "no_of_waiters": 8757,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": 13514,
+        "other_expense": 28669,
+        "other_expense_detals": "Example shoulder act art life size rate.\r\nRepresent skin field enter.\r\nBefore in tell. Such feel contain across.",
+        "setup_bill": 21894,
+        "decor": "Must let perhaps current nearly themselves girl. Cold practice station member rather discover mind.Look last lay item. Line marriage hard find only nation. May ahead according each.",
+        "decor_bill": 12355,
+        "total_expense": 119727,
+        "expense_date": "2023-03-23"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 12,
+    "fields": {
+        "bill": 11,
+        "pakwan_bill": 13999,
+        "electicity": 28848,
+        "naan_qty": 29999,
+        "naan_bill": 0,
+        "cold_drink": 9554,
+        "cold_drink_bill": 0,
+        "water": 15392,
+        "water_bill": 0,
+        "bbq_kg_qty": 2625,
+        "bbq_price": 0,
+        "diesel_ltr": 3360,
+        "no_of_waiters": 14747,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": 1036,
+        "other_expense": 10361,
+        "other_expense_detals": "Doctor medical involve reach ago position. Stand role his from read.\r\nMonth check certainly store enjoy. Clear mission tough couple true how process.",
+        "setup_bill": 7280,
+        "decor": "Study carry prove force. Mean discuss since plant middle yes world who.Man drug game how our stay. Prepare data morning management.",
+        "decor_bill": 32439,
+        "total_expense": 97323,
+        "expense_date": "2023-02-09"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 13,
+    "fields": {
+        "bill": 14,
+        "pakwan_bill": 27425,
+        "electicity": 32103,
+        "naan_qty": 7611,
+        "naan_bill": 0,
+        "cold_drink": 5653,
+        "cold_drink_bill": 0,
+        "water": 25563,
+        "water_bill": 0,
+        "bbq_kg_qty": 28515,
+        "bbq_price": 0,
+        "diesel_ltr": 10850,
+        "no_of_waiters": 29137,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": 2852,
+        "other_expense": 4448,
+        "other_expense_detals": "Hundred price brother much street. Forward table school skin bring.\r\nAcross state training truth practice since. During whether mean but side. Strong car according standard all.",
+        "setup_bill": 21254,
+        "decor": "First reflect pass party able animal. Face training seem.Authority change answer decision place interesting. Police fine than buy run college. We dark another position threat camera.",
+        "decor_bill": 9063,
+        "total_expense": 107995,
+        "expense_date": "2023-01-09"
+    }
+},
+{
+    "model": "ecommerce.eventexpense",
+    "pk": 14,
+    "fields": {
+        "bill": 4,
+        "pakwan_bill": 232,
+        "electicity": 312,
+        "naan_qty": 123,
+        "naan_bill": 0,
+        "cold_drink": 312,
+        "cold_drink_bill": 0,
+        "water": 231,
+        "water_bill": 0,
+        "bbq_kg_qty": 2312,
+        "bbq_price": 0,
+        "diesel_ltr": 123,
+        "no_of_waiters": 123,
+        "waiters_bill": 0,
+        "stuff_bill": 0,
+        "dhobi": 312,
+        "other_expense": 321,
+        "other_expense_detals": "123",
+        "setup_bill": 23,
+        "decor": "23",
+        "decor_bill": 354,
+        "total_expense": 1677,
+        "expense_date": "2023-12-15"
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 1,
+    "fields": {
+        "bill": 3,
+        "date": "1980-03-21",
+        "payment_details": "Have wall gas each effect. Little fire police situation enjoy. Discussion behavior care ask.",
+        "mutton": "Mission always ability hand possible.",
+        "chicken": "Claim with find together.",
+        "beef": "Your cause drive word property marriage kid.",
+        "rice": "Film us support weight two side top.",
+        "dahi": "That top pay continue every.",
+        "doodh": "Visit over financial participant.",
+        "sabzi": "Enjoy resource family great front no.",
+        "fruits": "Detail upon or ground thousand to everything.",
+        "khoya_cream_paneer": "Practice teach recently car save.",
+        "dry_fruits": "Him everyone reduce skill bank.",
+        "oil": "Station popular note southern join raise seven.",
+        "other_items_bill": "State step miss establish include sign rate.",
+        "other_items_desc": "Purpose how to peace property wish.",
+        "total_bill": "Follow traditional animal state miss."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 2,
+    "fields": {
+        "bill": 8,
+        "date": "1995-02-25",
+        "payment_details": "Firm rule behavior among hundred. Usually operation watch meet case. Recognize ask toward produce lay glass tree.",
+        "mutton": "Job thousand western treatment test lay.",
+        "chicken": "Election apply key fire team. Soon yes born some.",
+        "beef": "Pull with national modern writer style allow six.",
+        "rice": "Issue certain as system similar white real.",
+        "dahi": "Career firm close question.",
+        "doodh": "Certainly feeling end manage cut pull.",
+        "sabzi": "Food price time possible since fire forget.",
+        "fruits": "Economic behind issue attorney life.",
+        "khoya_cream_paneer": "Change who us itself nearly.",
+        "dry_fruits": "Prove civil late new.",
+        "oil": "Air care party along through individual.",
+        "other_items_bill": "Treat environment specific city become send.",
+        "other_items_desc": "Offer avoid receive ability mouth food.",
+        "total_bill": "Design yes face put political."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 3,
+    "fields": {
+        "bill": 8,
+        "date": "1970-07-14",
+        "payment_details": "Focus several those step skill success mouth. Argue record work national receive natural dinner.\nMilitary car those play sport face weight. City detail prevent office table include.",
+        "mutton": "Oil pay much suggest cut eye dark south.",
+        "chicken": "Suffer ok letter hair whom room term.",
+        "beef": "Toward mean stuff finish operation their top.",
+        "rice": "Art board able nor.",
+        "dahi": "Everything such now around station sea.",
+        "doodh": "Fund cost this give.",
+        "sabzi": "But edge school crime focus.",
+        "fruits": "Response improve no price officer.",
+        "khoya_cream_paneer": "Officer throw them support.",
+        "dry_fruits": "Way opportunity adult month take down individual.",
+        "oil": "Order cover media analysis others gun age myself.",
+        "other_items_bill": "Later down surface chance continue edge within.",
+        "other_items_desc": "Each town test at language his among.",
+        "total_bill": "Determine career per become last happy."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 4,
+    "fields": {
+        "bill": 6,
+        "date": "2009-05-21",
+        "payment_details": "Police forget phone church stock take west cost. Outside sister test network and.\nRelate notice suddenly design. Require mind Mrs account produce create stop. Data yet civil lead to fund near.",
+        "mutton": "Provide eat close state.",
+        "chicken": "Mission way Democrat all argue vote.",
+        "beef": "Might late rather thus describe.",
+        "rice": "Interest industry its red.",
+        "dahi": "You exist old.",
+        "doodh": "Four another body and state gas.",
+        "sabzi": "Bill nice red statement.",
+        "fruits": "Reason ten movement.",
+        "khoya_cream_paneer": "Price people miss most.",
+        "dry_fruits": "One cut stop finally measure administration.",
+        "oil": "Future movement worry civil push once.",
+        "other_items_bill": "Happy challenge firm born score that.",
+        "other_items_desc": "Win understand record phone able wrong both.",
+        "total_bill": "Seek fish detail."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 5,
+    "fields": {
+        "bill": 4,
+        "date": "1994-07-15",
+        "payment_details": "Form century challenge summer. Still society beyond.\nTough another hope course structure son.",
+        "mutton": "Speech fight account heart position.",
+        "chicken": "Mother protect teacher.",
+        "beef": "Election poor team something chance away risk.",
+        "rice": "Summer dinner state difficult issue.",
+        "dahi": "Right too guy month her camera onto.",
+        "doodh": "Better break hundred answer.",
+        "sabzi": "Budget fight sport great participant approach.",
+        "fruits": "Manage nor sometimes several.",
+        "khoya_cream_paneer": "Once do among defense character.",
+        "dry_fruits": "Natural leader beat age yourself start wall use.",
+        "oil": "Model your factor TV boy official.",
+        "other_items_bill": "Factor system her now tend agree single.",
+        "other_items_desc": "Seem both space. Your day local arrive.",
+        "total_bill": "Better church land rich resource physical."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 6,
+    "fields": {
+        "bill": 2,
+        "date": "1998-03-20",
+        "payment_details": "Nice seem yard organization scientist. Health certainly individual charge run require.\nWhile should industry tough. Hospital sort color interesting bad.",
+        "mutton": "Some news level dinner work why stock move.",
+        "chicken": "Glass return house away professor.",
+        "beef": "Catch individual teacher success.",
+        "rice": "Relate chance citizen board through thus.",
+        "dahi": "Particular practice natural probably laugh.",
+        "doodh": "Pass hit leg thousand.",
+        "sabzi": "Read age everyone hear camera.",
+        "fruits": "Talk guess picture movie fight road.",
+        "khoya_cream_paneer": "Music radio cover.",
+        "dry_fruits": "College nearly arrive amount.",
+        "oil": "Night piece effect. Hand space up seek leader.",
+        "other_items_bill": "Hour nothing defense PM.",
+        "other_items_desc": "Challenge across seven change.",
+        "total_bill": "Smile check evening free."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 7,
+    "fields": {
+        "bill": 5,
+        "date": "2014-10-29",
+        "payment_details": "Goal only summer prepare fill color. The money piece. Side bring wrong performance.\nHead serious own forget fine enjoy. Where realize none list stage morning road identify.",
+        "mutton": "Success candidate line serve side.",
+        "chicken": "East baby brother agreement behind.",
+        "beef": "Collection window offer issue bring.",
+        "rice": "Forward major who sense table.",
+        "dahi": "Television could art.",
+        "doodh": "Into worker land through approach science cut.",
+        "sabzi": "Fall article experience image.",
+        "fruits": "Itself above where station help report.",
+        "khoya_cream_paneer": "Point common before again really.",
+        "dry_fruits": "Accept home ten commercial ground cultural.",
+        "oil": "Marriage something usually parent.",
+        "other_items_bill": "Full early rich give above.",
+        "other_items_desc": "Start expert similar.",
+        "total_bill": "Third owner administration what anyone travel."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 8,
+    "fields": {
+        "bill": 4,
+        "date": "1982-07-01",
+        "payment_details": "Sometimes green beyond speak. Art risk itself major because as act how. New impact time real. Peace child identify impact beautiful assume.\nCoach spend which professor. Need moment stay.",
+        "mutton": "Various participant exist at nearly attack.",
+        "chicken": "Accept sister southern color wind question use.",
+        "beef": "Hour matter million minute new since team.",
+        "rice": "Win customer machine little break school.",
+        "dahi": "Ten any leader.",
+        "doodh": "Decade lead experience government near.",
+        "sabzi": "Speech explain everyone very wonder ok.",
+        "fruits": "Dark up plan also car black.",
+        "khoya_cream_paneer": "Now year smile college culture likely.",
+        "dry_fruits": "Several southern western any between.",
+        "oil": "Machine machine meet rather military term.",
+        "other_items_bill": "Only single fill wide argue reality.",
+        "other_items_desc": "Choice meet indeed ago.",
+        "total_bill": "Relationship sign certainly scene put."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 9,
+    "fields": {
+        "bill": 3,
+        "date": "1996-09-13",
+        "payment_details": "Until church political set standard success appear later. Alone past remember meeting daughter sport. Nor free commercial authority deep pretty still.",
+        "mutton": "Plant say appear mind receive approach ball.",
+        "chicken": "Production him water view fight government deep.",
+        "beef": "Event radio degree individual play leave.",
+        "rice": "Increase section make many half hand.",
+        "dahi": "Film indicate type could yes among Republican.",
+        "doodh": "Mission try wish box staff send.",
+        "sabzi": "Real point debate civil ten.",
+        "fruits": "Model include center sea life ask.",
+        "khoya_cream_paneer": "Service story feeling view view bed.",
+        "dry_fruits": "Computer although box phone though.",
+        "oil": "Know else special it own door.",
+        "other_items_bill": "Happy another inside clear.",
+        "other_items_desc": "Require page large American arrive.",
+        "total_bill": "Church crime reveal."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 10,
+    "fields": {
+        "bill": 8,
+        "date": "2000-07-29",
+        "payment_details": "Relationship most begin successful. Doctor house image month.",
+        "mutton": "Against these different little must season.",
+        "chicken": "Amount really industry day course sort.",
+        "beef": "Save food positive whose war mind.",
+        "rice": "After be after. Early language should.",
+        "dahi": "Cause left somebody accept career movement cup.",
+        "doodh": "Voice society activity short.",
+        "sabzi": "Maybe woman man real.",
+        "fruits": "Alone explain money beyond.",
+        "khoya_cream_paneer": "Compare keep on fish concern style beat.",
+        "dry_fruits": "Interesting start culture national.",
+        "oil": "Else outside chance open.",
+        "other_items_bill": "Machine seek network. So pay couple.",
+        "other_items_desc": "Culture think rich if common talk fight.",
+        "total_bill": "Feel right go eye. Give see will able rather."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 11,
+    "fields": {
+        "bill": 12,
+        "date": "1970-04-19",
+        "payment_details": "Edge pay minute black say president. Catch before number blood leave public.",
+        "mutton": "Government cause agree far baby happen day miss.",
+        "chicken": "Entire ten around.",
+        "beef": "Pick cut argue piece good window their together.",
+        "rice": "Much industry maintain television seat we last.",
+        "dahi": "Report own play.",
+        "doodh": "Thing agency soon risk around.",
+        "sabzi": "Cell really race station anyone music.",
+        "fruits": "Although miss paper long.",
+        "khoya_cream_paneer": "Girl loss now possible dream movement.",
+        "dry_fruits": "Piece source by. Charge meet thousand computer.",
+        "oil": "Simply region total somebody production new.",
+        "other_items_bill": "Forward score give already break.",
+        "other_items_desc": "My by TV give front generation response staff.",
+        "total_bill": "Line hand color back issue million there about."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 12,
+    "fields": {
+        "bill": 12,
+        "date": "2005-01-02",
+        "payment_details": "Ground purpose street government cut radio kitchen. Us yet poor produce stuff type available record. World win owner television ten data hour however.",
+        "mutton": "See help model group and assume official.",
+        "chicken": "Trade many may memory activity.",
+        "beef": "Hot vote discuss strong their early week.",
+        "rice": "Production human where smile think.",
+        "dahi": "Group wide out create just. Member high probably.",
+        "doodh": "Fill plant summer prevent suffer meet late may.",
+        "sabzi": "Training which today suffer them home.",
+        "fruits": "Partner central realize development either.",
+        "khoya_cream_paneer": "Left carry anything knowledge.",
+        "dry_fruits": "Loss possible those expert work.",
+        "oil": "Particularly behavior field peace across.",
+        "other_items_bill": "Center simply response use sense.",
+        "other_items_desc": "White science develop say fish prevent yeah yeah.",
+        "total_bill": "Information artist bit hair race."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 13,
+    "fields": {
+        "bill": 13,
+        "date": "1991-07-25",
+        "payment_details": "Of thus must. Person eye design thousand hope purpose. Give current candidate serious want each. Amount number capital play push green floor.",
+        "mutton": "Realize become finish she.",
+        "chicken": "No enjoy piece know throughout practice.",
+        "beef": "House hospital TV now.",
+        "rice": "Loss office nation show term.",
+        "dahi": "Race professional rule across term.",
+        "doodh": "Whose audience true skin coach first music.",
+        "sabzi": "Guess it above short present charge attorney.",
+        "fruits": "View reason kind boy feeling get beautiful.",
+        "khoya_cream_paneer": "Yes try between personal threat short true.",
+        "dry_fruits": "Tree soon stand.",
+        "oil": "Wish find place.",
+        "other_items_bill": "Where then involve interesting hit hour go.",
+        "other_items_desc": "Seem side evidence sister so.",
+        "total_bill": "Tell parent edge various."
+    }
+},
+{
+    "model": "ecommerce.mykitchenexpense",
+    "pk": 14,
+    "fields": {
+        "bill": 13,
+        "date": "2020-11-10",
+        "payment_details": "Respond level event data carry available. Factor center price brother.\nYour trade interesting might population generation. Road security throughout Democrat less article.",
+        "mutton": "Choose notice necessary my enough tend.",
+        "chicken": "Speak do me thought director tonight affect.",
+        "beef": "Condition example manage agreement state.",
+        "rice": "Character second more establish drop.",
+        "dahi": "Determine top space reflect fight dark.",
+        "doodh": "Send election night southern rate.",
+        "sabzi": "Perhaps ahead she blood however.",
+        "fruits": "Minute sort employee cause crime physical main.",
+        "khoya_cream_paneer": "Hotel care seek write since.",
+        "dry_fruits": "Much edge beyond myself man.",
+        "oil": "Threat perform through his at director.",
+        "other_items_bill": "Base personal news person message instead.",
+        "other_items_desc": "Crime hear wall get mean six.",
+        "total_bill": "Close business despite let."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 1,
+    "fields": {
+        "event_title": "Daughter author down condition fact. A class their behind involve garden. Outside represent energy interest standard dream mouth. Both partner short brother into.",
+        "start_date": "1984-02-09",
+        "end_date": "1987-10-27",
+        "event_time": "Wrong art."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 2,
+    "fields": {
+        "event_title": "Child table federal. During maybe take but season agreement there. Entire floor administration always.",
+        "start_date": "2001-06-08",
+        "end_date": "2010-12-19",
+        "event_time": "Model."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 3,
+    "fields": {
+        "event_title": "Last must individual his money. At various career challenge natural him. Maybe the themselves level issue drug response yeah.\nSociety project fact sure artist early necessary.",
+        "start_date": "2003-03-11",
+        "end_date": "2013-08-07",
+        "event_time": "Support."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 4,
+    "fields": {
+        "event_title": "House own cover. Different open if identify white mind style.",
+        "start_date": "1985-06-17",
+        "end_date": "2012-03-30",
+        "event_time": "Physical."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 5,
+    "fields": {
+        "event_title": "Determine fish student industry from around stage.\nTell moment ago structure. Consumer nor might dinner table even radio.",
+        "start_date": "1976-09-18",
+        "end_date": "2007-01-24",
+        "event_time": "Public."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 6,
+    "fields": {
+        "event_title": "Local and still. Arm citizen late among yard especially discussion now. Significant home media around. Peace box group across by letter factor.",
+        "start_date": "1984-05-02",
+        "end_date": "1975-08-03",
+        "event_time": "Answer."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 7,
+    "fields": {
+        "event_title": "Sport candidate senior miss little decade. Church teacher deal lawyer yourself customer. Doctor always western floor.\nRelationship hospital safe how.\nSouthern interview reach success do history.",
+        "start_date": "2005-10-01",
+        "end_date": "2021-02-16",
+        "event_time": "Strong."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 8,
+    "fields": {
+        "event_title": "Admit piece college. Policy music professor yourself child writer value.\nWhatever throughout seek health for statement. Once who teacher he war personal inside. Pay over black wall young.",
+        "start_date": "2020-12-08",
+        "end_date": "1973-09-05",
+        "event_time": "Table."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 9,
+    "fields": {
+        "event_title": "Behind behavior country successful measure all military. Study later stock practice mother other. What rest seem high play including.",
+        "start_date": "1974-11-17",
+        "end_date": "2001-10-15",
+        "event_time": "Fear."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 10,
+    "fields": {
+        "event_title": "Have road way defense ability hand. Surface beyond thus. Art I anyone stand instead.\nGas before myself reduce tonight. Situation manage central significant forget.",
+        "start_date": "1970-04-02",
+        "end_date": "2019-11-16",
+        "event_time": "Until."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 11,
+    "fields": {
+        "event_title": "Real use especially. Particular wide think rather suggest class movement. Why everybody game fish identify.\nReduce game research easy into.",
+        "start_date": "1988-05-21",
+        "end_date": "2020-09-28",
+        "event_time": "Consider."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 12,
+    "fields": {
+        "event_title": "Hand back work very store use. Start the sometimes affect indicate authority player.",
+        "start_date": "1978-07-08",
+        "end_date": "1991-06-14",
+        "event_time": "Affect."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 13,
+    "fields": {
+        "event_title": "Bed church debate first. Page he of mouth individual benefit for. Total off continue range lot not.\nPrepare director impact meeting speak. Upon example provide include able.",
+        "start_date": "2001-12-22",
+        "end_date": "2019-09-29",
+        "event_time": "Cost turn."
+    }
+},
+{
+    "model": "ecommerce.event",
+    "pk": 14,
+    "fields": {
+        "event_title": "Member other nice production. Through report feel drive appear defense other sign.",
+        "start_date": "1980-07-29",
+        "end_date": "2018-08-27",
+        "event_time": "Couple."
+    }
+},
+{
+    "model": "sites.site",
+    "fields": {
+        "domain": "example.com",
+        "name": "example.com"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2023-10-11T08:24:27.218Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "10",
+        "object_repr": "26141",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Deals\", \"Customer name\", \"Food menu\", \"Payment details\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2023-10-11T08:25:15.144Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "9",
+        "object_repr": "-28059",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Customer name\", \"Food menu\", \"Detials\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2023-10-11T08:25:39.714Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "8",
+        "object_repr": "7741",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Customer name\", \"Food menu\", \"Detials\", \"Payment details\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2023-10-11T08:26:27.054Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "7",
+        "object_repr": "18649",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Deals\", \"Food menu\", \"Detials\", \"Payment details\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2023-10-11T08:26:37.573Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "6",
+        "object_repr": "13563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Customer name\", \"Payment details\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2023-10-11T08:28:57.528Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "5",
+        "object_repr": "12741",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Deals\", \"Customer name\", \"Food menu\", \"Detials\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2023-10-11T08:29:17.146Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "4",
+        "object_repr": "-459",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Deals\", \"Customer name\", \"Detials\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2023-10-11T08:29:32.551Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "3",
+        "object_repr": "-4055",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Payment details\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2023-10-11T08:29:51.581Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "2",
+        "object_repr": "4722",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Detials\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2023-10-11T08:30:30.373Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "1",
+        "object_repr": "-29894",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Deals\", \"Food menu\", \"Payment details\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+        "action_time": "2023-10-11T08:32:08.269Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "12",
+        "object_repr": "176",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Customer name\", \"Food menu\", \"Detials\", \"Payment details\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+        "action_time": "2023-10-11T08:32:20.743Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "11",
+        "object_repr": "6349",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Customer name\", \"Detials\", \"Payment details\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2023-10-11T08:33:11.615Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "14",
+        "object_repr": "15563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Deals\", \"Customer name\", \"Food menu\", \"Detials\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2023-10-11T08:33:20.904Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "13",
+        "object_repr": "-5712",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Event date\", \"Detials\", \"Payment details\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2023-10-11T11:10:07.104Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "14",
+        "object_repr": "15563",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2023-10-11T11:10:07.123Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "6",
+        "object_repr": "18649",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+        "action_time": "2023-10-11T11:11:52.869Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "10",
+        "object_repr": "26141",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+        "action_time": "2023-10-12T11:41:51.972Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "14",
+        "object_repr": "15563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Stage charges\", \"Gents\", \"Extra charges\", \"Total menu\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+        "action_time": "2023-10-12T11:46:10.650Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "14",
+        "object_repr": "15563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+        "action_time": "2023-10-12T11:46:28.333Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "13",
+        "object_repr": "-5712",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+        "action_time": "2023-10-12T11:46:38.250Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "12",
+        "object_repr": "176",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+        "action_time": "2023-10-12T11:46:46.729Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "11",
+        "object_repr": "6349",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+        "action_time": "2023-10-12T11:46:56.233Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "10",
+        "object_repr": "26141",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+        "action_time": "2023-10-12T11:47:05.555Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "9",
+        "object_repr": "-28059",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+        "action_time": "2023-10-12T11:47:22.986Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "8",
+        "object_repr": "7741",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+        "action_time": "2023-10-12T11:47:32.155Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "7",
+        "object_repr": "18649",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+        "action_time": "2023-10-12T11:47:38.852Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "6",
+        "object_repr": "13563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+        "action_time": "2023-10-12T11:47:45.239Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "5",
+        "object_repr": "12741",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+        "action_time": "2023-10-12T11:47:52.058Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "4",
+        "object_repr": "-459",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+        "action_time": "2023-10-12T11:47:57.679Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "3",
+        "object_repr": "-4055",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+        "action_time": "2023-10-12T11:48:17.265Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventsale"
+        ],
+        "object_id": "1",
+        "object_repr": "-29894",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Customer name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+        "action_time": "2023-10-14T10:26:27.344Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "13",
+        "object_repr": "15563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Diesel ltr\", \"No of waiters\", \"Other expense\", \"Other expense detals\", \"Setup bill\", \"Decor\", \"Decor bill\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+        "action_time": "2023-10-14T10:26:45.962Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "12",
+        "object_repr": "6349",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Naan qty\", \"Cold drink\", \"Water\", \"Diesel ltr\", \"No of waiters\", \"Other expense detals\", \"Setup bill\", \"Decor\", \"Decor bill\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+        "action_time": "2023-10-14T10:27:11.183Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "11",
+        "object_repr": "176",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Pakwan bill\", \"Electicity\", \"Naan qty\", \"Cold drink\", \"Water\", \"Bbq kg qty\", \"Diesel ltr\", \"Dhobi\", \"Other expense detals\", \"Setup bill\", \"Decor\", \"Decor bill\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+        "action_time": "2023-10-14T10:27:32.550Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "2",
+        "object_repr": "13563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Cold drink\", \"Bbq kg qty\", \"No of waiters\", \"Dhobi\", \"Other expense\", \"Other expense detals\", \"Setup bill\", \"Decor\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+        "action_time": "2023-10-14T10:27:55.593Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "3",
+        "object_repr": "-28059",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Electicity\", \"Cold drink\", \"Water\", \"Diesel ltr\", \"Dhobi\", \"Other expense\", \"Other expense detals\", \"Decor\", \"Decor bill\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+        "action_time": "2023-10-14T11:36:54.088Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "13",
+        "object_repr": "15563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+        "action_time": "2023-10-14T11:37:10.460Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "12",
+        "object_repr": "6349",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 39,
+    "fields": {
+        "action_time": "2023-10-14T11:37:20.141Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "11",
+        "object_repr": "176",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 40,
+    "fields": {
+        "action_time": "2023-10-14T11:37:30.484Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "9",
+        "object_repr": "18649",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Other expense detals\", \"Decor\", \"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 41,
+    "fields": {
+        "action_time": "2023-10-14T11:37:53.718Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "8",
+        "object_repr": "-29894",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Decor\", \"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 42,
+    "fields": {
+        "action_time": "2023-10-14T11:38:04.907Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "7",
+        "object_repr": "-28059",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Other expense detals\", \"Decor\", \"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 43,
+    "fields": {
+        "action_time": "2023-10-14T11:38:17.182Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "5",
+        "object_repr": "12741",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 44,
+    "fields": {
+        "action_time": "2023-10-14T11:38:33.254Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "4",
+        "object_repr": "26141",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Decor\", \"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 45,
+    "fields": {
+        "action_time": "2023-10-14T11:39:07.690Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "3",
+        "object_repr": "-28059",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 46,
+    "fields": {
+        "action_time": "2023-10-14T11:39:27.652Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "3",
+        "object_repr": "-28059",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 47,
+    "fields": {
+        "action_time": "2023-10-14T11:39:43.363Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "2",
+        "object_repr": "13563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 48,
+    "fields": {
+        "action_time": "2023-10-14T11:39:56.073Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "1",
+        "object_repr": "4722",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 49,
+    "fields": {
+        "action_time": "2023-10-14T12:10:05.249Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "4",
+        "object_repr": "26141",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Naan qty\", \"Water\", \"Diesel ltr\", \"Dhobi\", \"Other expense\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 50,
+    "fields": {
+        "action_time": "2023-10-14T12:12:20.003Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "14",
+        "object_repr": "-459",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 51,
+    "fields": {
+        "action_time": "2023-10-14T13:13:42.822Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "13",
+        "object_repr": "15563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 52,
+    "fields": {
+        "action_time": "2023-10-16T09:58:05.895Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "13",
+        "object_repr": "15563",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 53,
+    "fields": {
+        "action_time": "2023-10-16T11:01:05.594Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "1",
+        "object_repr": "4722",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 54,
+    "fields": {
+        "action_time": "2023-10-16T11:01:16.629Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "11",
+        "object_repr": "176",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 55,
+    "fields": {
+        "action_time": "2023-10-16T11:01:41.601Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "8",
+        "object_repr": "-29894",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 56,
+    "fields": {
+        "action_time": "2023-10-16T11:53:02.306Z",
+        "user": [
+            "sk"
+        ],
+        "content_type": [
+            "ecommerce",
+            "eventexpense"
+        ],
+        "object_id": "14",
+        "object_repr": "-459",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Expense date\"]}}]"
+    }
+}
+]
