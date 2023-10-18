@@ -14,9 +14,12 @@ urlpatterns = [
     
     path('ecommerce_product', views.Products.as_view(),name='ecommerce_product'),
     path('ecommerce_product_detail', views.ProductsDetail.as_view(),name='ecommerce_product_detail'),
+    path('product-list', views.ProductList.as_view(),name='ecommerce-product-list'),
     path('event-sale', views.Eventsale.as_view(),name='event-sale'),
     path('update-event-sale/<int:sale_id>', views.UpdateEventsale.as_view(),name='update-event-sale'),
-     path('delete-sale/<int:sale_id>/', views.delete_sale, name='delete-sale'),
+    path('update-product/<int:product_id>', views.UpdateProducts.as_view(),name='update-product'),
+    path('delete-product/<int:product_id>/', views.DeleteProducts, name='delete-product'),
+    path('delete-sale/<int:sale_id>/', views.delete_sale, name='delete-sale'),
     path('kitchen-sale', views.Kitchensale.as_view(),name='kitchen-sale'),
     path('kitchen-expense', views.Kitchenexpense.as_view(),name='kitchen-expense'),
     path('event-expense', views.Eventexpense.as_view(),name='event-expense'),
