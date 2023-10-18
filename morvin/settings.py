@@ -109,7 +109,7 @@ ITEM_FUNCTION_MODEL = 'ecommerce.EventSale'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'sk',
+        'NAME': 'hall_db',
     }
 }
 
