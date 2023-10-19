@@ -31,7 +31,7 @@ def order_slip(request, sale_id):
     
 
 class Invoice(LoginRequiredMixin,TemplateView):
-    template_name = "extras/pages/invoice.html"
+    template_name = "extras/invoice.html"
 
 def sale_invoice(request, sale_id):
     
