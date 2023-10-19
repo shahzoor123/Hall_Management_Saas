@@ -55,11 +55,13 @@
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fas fa-dollar-sign"></i>
-                            <span key="t-finance">Finance</span>
+                            <span key="t-finance">Finance Reports</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{% url 'hall-summary' %} " key="t-finance">Hall Report</a></li>
-                            <li><a href="{% url 'kitchen-summary' %} " key="t-finance">Kitchen Report</a></li>
+                            <li><a href="{% url 'hall-sale-report' %} " key="t-finance">Hall Sale </a></li>
+                            <li><a href="{% url 'hall-expense-report' %} " key="t-finance">Hall Expense </a></li>
+                            <li><a href="{% url 'kitchen-sale-report' %} " key="t-finance">Kitchen Sale </a></li>
+                            <li><a href="{% url 'kitchen-expense-report' %} " key="t-finance">Kitchen Expense </a></li>
                         </ul>
                     </li>
 

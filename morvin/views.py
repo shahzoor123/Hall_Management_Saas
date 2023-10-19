@@ -81,6 +81,29 @@ class Index(LoginRequiredMixin,TemplateView):
 
 
 
+
+        expense_list = []
+        # Get total expenses for each month based on the EventSale's create date
+        # monthly_expenses = EventExpense.objects.values('bill').annotate(Sum('total_expense')).values('total_expense')
+        monthly_expenses = EventExpense.objects.values('bill__event_date__month').annotate(total_expense=Sum('total_expense')).order_by('bill__event_date__month')
+        for i in monthly_expenses:
+            expense_list.append(i.values())
+        print(monthly_expenses, 'query') 
+            
+        # print(expense_list)
+        result_list = [value for dict_values_obj in expense_list for value in dict_values_obj]
+        print(result_list, 'expenses')
+
+        cleaned_expenses = []
+                # Iterate through the list, skipping every other element (i.e., the month values)
+        for i in range(0, len(result_list), 2):
+            expense_value = result_list[i + 1]  # Get the expense value (skip the month)
+            cleaned_expenses.append(expense_value)
+
+        print(cleaned_expenses)    
+
+
+
         # Get the total expense amount for each expense type
         expense_type_totals = (
             OtherExpense.objects.values('expense_type')
@@ -112,8 +135,30 @@ class Index(LoginRequiredMixin,TemplateView):
             print(line)
 
 
+        current_date = datetime.now()
+
+        all_months = []
+        all_sales_this_year = []
+        
+        events_this_month = EventSale.objects.filter(event_date__month=current_date.month)
+        events_this_year = EventSale.objects.filter(event_date__year=current_date.year)
+        
+        for j in events_this_year:  
+            all_sales_this_year.append(j)
+            total_sale_this_year = len(all_sales_this_year)
+            
+        
+        
+        for i in events_this_month:  
+            all_months.append(i)
+            total_events = len(all_months)
+        
+
 
         context = {
+            "expense": cleaned_expenses,
+            
+            
             "total_sales": total_sales,
             "total_expense": total_expenses,
             "fifty_sale": total_sales /2,
@@ -121,10 +166,16 @@ class Index(LoginRequiredMixin,TemplateView):
             "fifty_revenue": (total_sales - total_expenses)/2,
             "revenue": total_sales - total_expenses,
             "events_this_month": events_count_this_month,
-            "events_this_year":events_count_this_year
+            "events_this_year":events_count_this_year,
+
+            # "total_events_this_month" : total_events,
+            # "total_events_this_year" : total_sale_this_year,
 
         }
         return render(request, self.template_name, context)
+    
+    
+    
 class Calendar(LoginRequiredMixin,TemplateView):
     template_name = "calendar.html"
 

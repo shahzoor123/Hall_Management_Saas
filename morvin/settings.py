@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'generalExpense',
     'crispy_forms',
     'crispy_bootstrap4',
+    'django_seed',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -109,7 +110,7 @@ ITEM_FUNCTION_MODEL = 'ecommerce.EventSale'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'hall_db',
+        'NAME': 'hall_laptop_db',
     }
 }
 
