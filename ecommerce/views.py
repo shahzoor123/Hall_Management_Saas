@@ -68,30 +68,11 @@ class ProductList(LoginRequiredMixin,TemplateView):
         }
         return render(request, self.template_name, context)
 
-class HallSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/finance_reports/hall_summary.html"
+class HallSaleSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/finance_reports/hall_sale.html"
     
     def get(self, request):
-        all_months = []
-        all_sales_this_year = []
-        
-        events_this_month = EventSale.objects.filter(event_date__month=current_date.month)
-        events_this_year = EventSale.objects.filter(event_date__year=current_date.year)
-        
-        for j in events_this_year:  
-            all_sales_this_year.append(j)
-            total_sale_this_year = len(all_sales_this_year)
-        
-        
-        for i in events_this_month:  
-            all_months.append(i)
-            total_events = len(all_months)
-        
-        
-        
-        
-        # montly sales
-        
+
         # Query the database to get total sales for every month in the current year
         monthly_sales = EventSale.objects.filter(event_date__year=current_date.year).annotate(month=ExtractMonth('event_date')) \
             .values('month') \
@@ -112,63 +93,110 @@ class HallSummary(LoginRequiredMixin,TemplateView):
                 total_sales = 0  # Set total sales to 0 for missing months
             every_month_sale.append(total_sales)
 
+        # print(every_month_sale)
 
-       # montly expense
-        expense_list = []
-        # Get total expenses for each month based on the EventSale's create date
-        monthly_expenses = EventExpense.objects.values('bill').annotate(Sum('total_expense')).values('total_expense')
-        
-        for i in monthly_expenses:
-            expense_list.append(i.values())
+        # Define the months and days in each month
+        months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        # Initialize an empty dictionary to store the data
+        dailySalesData = {}
+
+        # Loop through each month and query the data
+        for i, month in enumerate(months):
+            days = days_in_month[i]
+            data = EventSale.objects.filter(event_date__month=i + 1).values('event_date').annotate(total_sales=Sum('total_amount')).order_by('event_date')
+            sales_data = [0] * days
+
+
+            for entry in data:
+                # print(entry)
+                day = entry['event_date'].day
+                count = entry['total_sales']
+                sales_data[day - 1] = count
            
-            
-        # print(expense_list)
-        result_list = [value for dict_values_obj in expense_list for value in dict_values_obj]
-     
-         # Iterate through all 12 months
-        for month in range(1, 13):
-            # Check if the month is present in the dictionary
-            if month in result_list:
-                total_sales = month_sales_dict[month]
-            else:
-                total_sales = 0  # Set total sales to 0 for missing months
-            every_month_sale.append(total_sales)
 
-        print(every_month_sale)
-       
-        
-      
-
-
-
+            dailySalesData[month] = sales_data
+                
+        # print(dailySalesData)
 
 
         context = {
-            # "total_events_this_month" : total_events,
-            # "total_events_this_year" : total_sale_this_year,
-            
             "sale": every_month_sale,
-            "expense": result_list,
-            
-            "daily_sale" : 0,
-            "daily_expense":0,
-            
-        
+            "daily_sale" : json.dumps(dailySalesData),
         }
+        
         return render(request, self.template_name, context)
         
 
 
     
 class HallExpenseSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/finance_reports/detail_finance_reports/days_report.html"
+    template_name = "ecommerce/finance_reports/hall_expense.html"
 
-class KitchenSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/finance_reports/kitchen_summary.html"
+    def get(self, request):
+
+       # montly expense
+        expense_list = []
+        
+        # Get total expenses for each month based on the EventSale's create date
+         # Query the database to get total sales for every month in the current year
+        monthly_expense = EventExpense.objects.filter(expense_date__year=current_date.year).annotate(month=ExtractMonth('expense_date')) \
+            .values('month') \
+            .annotate(total_expense=Sum('total_expense')) \
+            .order_by('month')
+        
+        month_expense_dict = {entry['month']: entry['total_expense'] for entry in monthly_expense}
+        
+           # Iterate through all 12 months
+        for month in range(1, 13):
+            # Check if the month is present in the dictionary
+            if month in month_expense_dict:
+                total_expense = month_expense_dict[month]
+            else:
+                total_expense = 0  # Set total expense to 0 for missing months
+            expense_list.append(total_expense)
+
+        # print(expense_list , 'expense')
+
+
+        # Define the months and days in each month
+        months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+ 
+        dailyExpenseData = {}
+         # Loop through each month and query the data
+        for i, month in enumerate(months):
+            days = days_in_month[i]
+            data = EventExpense.objects.filter(expense_date__month=i + 1).values('expense_date').annotate(total_Expense=Sum('total_expense')).order_by('expense_date')
+            Expense_data = [0] * days
+
+            for entry in data:
+                day = entry['expense_date'].day
+                count = entry['total_Expense']
+                Expense_data[day - 1] = count
+
+            dailyExpenseData[month] = Expense_data
+                
+        # print(dailyExpenseData)
+
+
+        context = {
+            "expense": expense_list,
+            "daily_expense": json.dumps(dailyExpenseData),  
+        }
+        
+        return render(request, self.template_name, context)
+    
+
+
+class KitchenSaleSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/finance_reports/kitchen_sale.html"
     
     
-class SalariesSummary(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/finance_reports/detail_finance_reports/salaries_summary.html"  
+class KitchenExpenseSummary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/finance_reports/kitchen_expense.html"  
     
   
     
@@ -461,10 +489,86 @@ class UpdateEventsale(LoginRequiredMixin, View):
             e_requests.save()
 
             
+        
+            
 
         return redirect('event-sale')
 
  
+ 
+ 
+ 
+ 
+
+class UpdateEventExpense(LoginRequiredMixin, View):
+    template_name = "ecommerce/event-expense.html"
+
+    
+    
+    def post(self, request, expense_id):
+        if request.method == "POST":
+            
+            requests = EventExpense.objects.get(id=expense_id)
+    
+            
+            bill = request.POST.get('bill-no')
+         
+            bill_number = get_object_or_404(EventExpense, pk=requests.id)
+            pakwan = int(request.POST.get('pakwan-bill'))
+
+            electicity = request.POST.get('electicity-bill')
+            naan =int(request.POST.get('naan-qty'))
+            
+        
+            drinks = int(request.POST.get('cold-drinks'))
+            drinks_type = request.POST.get('cold-drinks-type')
+
+
+            water = int(request.POST.get('water-bottles'))
+            water_type = request.POST.get('water-bottles-type')
+
+            bbq = int(request.POST.get('bbq-qty'))
+
+            diesel = request.POST.get('diesel-ltr')
+            no_of_waiters = request.POST.get('no-of-waiters')
+            dhobi = request.POST.get('dhobi')
+            stuff = request.POST.get('stuff')
+
+            other_expenses = request.POST.get('other-expense')
+
+            expense_details = request.POST.get('details')
+           
+            setup = request.POST.get('setup-bill')
+            decor = request.POST.get('decor')
+            decor_bill = request.POST.get('decor-bill')
+    
+
+           
+        
+            requests.electicity = electicity
+            requests.naan_qty = naan
+            requests.cold_drink_bill = drinks
+            requests.water = water
+            requests.bbq_kg_qty = bbq
+            requests.diesel_ltr = diesel
+            requests.no_of_waiters = no_of_waiters
+            requests.dhobi = dhobi
+            requests.other_expense = other_expenses
+            requests.other_expense_detals = expense_details
+            requests.setup_bill = setup
+            requests.decor = decor
+            requests.decor_bill = decor_bill
+          
+            requests.save()
+                        
+      
+
+        return redirect('event-expense') 
+ 
+ 
+   
+
+   
         
 
 class Eventexpense(LoginRequiredMixin,TemplateView):
@@ -634,6 +738,13 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             #     # Handle case where product is not found
             #     error_message = "Product not found"
             #     return render(request, 'add_event_expense.html', {'error_message': error_message})
+            
+            
+            
+            
+            
+            
+            
 
 class ProductsAddCategory(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-add-category.html"
