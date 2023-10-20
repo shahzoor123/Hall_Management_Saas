@@ -1096,4 +1096,35 @@ class Calendar(LoginRequiredMixin,TemplateView):
     
 
 def update_deal(request, pk):
-    return render(request, 'items/update_deals.html')
+    
+    print('i am active get update deals')
+    
+    food_list = []
+    products = MyProducts.objects.all()
+    deal = get_object_or_404(Deals, pk=pk)
+    items = MyProducts.objects.filter(deals=deal)
+    for item in items:
+        food_list.append(item.product_name)
+
+    food_menu = ', '.join(food_list)
+
+    sale = EventSale.objects.all()
+
+
+    deals = Deals.objects.all()
+
+    combined_data = zip(items, products)
+    
+
+    context = {
+                'combined_data': combined_data,
+                'items' : items,
+                'product': products,
+                'Deal_name' : deal,
+                'food_menu' : food_menu,
+                'sale' : sale,
+                'deal' : pk
+            }
+
+          
+    return render(request, 'items/update_deals.html' , context)
