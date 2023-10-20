@@ -68,6 +68,11 @@ class ProductList(LoginRequiredMixin,TemplateView):
         }
         return render(request, self.template_name, context)
 
+
+
+
+
+
 class HallSaleSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/hall_sale.html"
     
@@ -120,10 +125,14 @@ class HallSaleSummary(LoginRequiredMixin,TemplateView):
                 
         # print(dailySalesData)
 
+        # Sale Table
+        
+        all_sale = EventSale.objects.all()
 
         context = {
             "sale": every_month_sale,
             "daily_sale" : json.dumps(dailySalesData),
+            "sale_table" : all_sale
         }
         
         return render(request, self.template_name, context)
@@ -180,11 +189,14 @@ class HallExpenseSummary(LoginRequiredMixin,TemplateView):
             dailyExpenseData[month] = Expense_data
                 
         # print(dailyExpenseData)
+        
+        all_expense = EventExpense.objects.all()
 
-
+   
         context = {
             "expense": expense_list,
-            "daily_expense": json.dumps(dailyExpenseData),  
+            "daily_expense": json.dumps(dailyExpenseData),
+            "expense_table" : all_expense  
         }
         
         return render(request, self.template_name, context)
@@ -194,9 +206,35 @@ class HallExpenseSummary(LoginRequiredMixin,TemplateView):
 class KitchenSaleSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/kitchen_sale.html"
     
+    def get(self, request):
+              
+        all_kitchen_sale = MyKitchenexpense.objects.all()
+
+   
+        context = {
+         
+            "kitchen_sale_table" : all_kitchen_sale  
+        }
+        
+        return render(request, self.template_name, context)
+    
+    
+    
     
 class KitchenExpenseSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/kitchen_expense.html"  
+    
+    def get(self, request):
+              
+        all_kitchen_sale = MyKitchenexpense.objects.all()
+
+   
+        context = {
+         
+            "kitchen_sale_table" : all_kitchen_sale  
+        }
+        
+        return render(request, self.template_name, context)
     
   
     
