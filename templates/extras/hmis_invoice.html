@@ -40,13 +40,13 @@
                 }
             </style>
 
-                <div class="row justify-content-center no-page-break">
+                <div class="row justify-content-center no-page-break" >
                     <div class="col-xxl-9">
                         <div class="hstack gap-2 justify-content-end d-print-none mb-4">
                             <a href="javascript:window.print()" class="btn btn-success"><i class="ri-printer-line align-bottom me-1"></i> Print</a>
                             <button type="button" id="download-button" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i> Download</button>
                         </div>
-                        <div class="card overflow-hidden" id="invoice">
+                        <div class="card overflow-hidden" id="invoice" style="border: 3px solid rgb(2, 2, 2);">
                             <div class="invoice-effect-top position-absolute start-0">
                                 <!-- <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 764 182" width="764" height="182">
                                     <title>&lt;Group&gt;</title>
@@ -63,7 +63,7 @@
                                     </g>
                                 </svg> -->
                             </div>
-                            <div class="card-body z-1 position-relative">
+                            <div class="card-body z-1 position-relative" >
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
                                         <img src="{% static 'images/black.png' %}" class="card-logo" alt="logo light" height="32">
@@ -93,7 +93,8 @@
                                         <!--end col-->
                                         <div class="col-lg col-6">
                                             <p class="text-muted mb-2 text-uppercase">Payment Status</p>
-                                            <span class="badge bg-success-subtle text-success fs-xxs" id="payment-status">Paid</span>
+                                            <span class="badge bg-success-subtle text-success fs-xxs badge badge-soft-success font-size-12" id="payment-status">Paid</span>
+                                       
                                         </div>
                                         <!--end col-->
                                         <div class="col-lg col-6">
