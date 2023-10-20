@@ -1,0 +1,528 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Orders{% endblock title %}
+
+
+{% block extra_css %}
+     <!-- DataTables -->
+     <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+
+     <!-- Responsive datatable examples -->
+     <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock extra_css %}
+    
+{% block content %}
+        <div class="main-content">
+            <div class="page-content">
+                <!-- start page title -->
+                <div class="page-title-box">
+                    <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <div class="page-title">
+                                <h4>Products</h4>
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Hall</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Products</a></li>
+                                        <li class="breadcrumb-item active">List</li>
+                                    </ol>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="float-end d-none d-sm-block">
+                              <a href="" class="btn btn-success" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#add-expense-model"><i class="mdi mdi-plus me-2"></i>Add Product</a>
+                          </div>
+                      </div>
+                        <div class="col-sm-6">
+                            <div class="float-end d-none d-sm-block">
+                                <!-- <a href="" class="btn btn-success" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="mdi mdi-plus me-2"></i>Add Sale</a> -->
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- end page title -->    
+                <div class="container-fluid">
+                    <div class="page-content-wrapper">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                  {% include 'partials/alerts.html' %}
+                                    <div class="card-body">
+                                        <div>
+                                            <!-- <a href="javascript:void(0);" class="btn btn-success mb-2" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="mdi mdi-plus me-2"></i> Add Sale</a> -->
+                                        </div>
+                                        <ul class="nav nav-tabs nav-tabs-custom mb-4">
+                                            <li class="nav-item">
+                                                <a class="nav-link fw-bold p-3 active" href="#">All Products</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link p-3 fw-bold" href="#">Active</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link p-3 fw-bold" href="#">Unpaid</a>
+                                            </li>
+                                        </ul>
+                                        <div class="table-responsive">
+                                            <table class="table table-centered datatable dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                       
+                                                        <th>ID</th>
+                                                        <th>Product</th>
+                                                        <th>Category</th>
+                                                        <th>Brand</th>
+                                                        <th>Unit</th>
+                                                        <th>Price</th>
+                                                        <th>Stock Left</th>
+                                                        <th style="width: 120px;">Action</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for product in myproducts %}
+                                                    <tr>
+                                                        
+                                                        
+                                                        <td><a href="javascript: void(0);" class="text-dark fw-bold">{{product.id}}</a> </td>
+                                                        <td>
+                                                          {{product.product_name}}
+                                                        </td>
+                                                        <td>{{product.category_id}}</td>
+                                                        
+                                                        <td>
+                                                            {{product.brand}}
+                                                        </td>
+                                                        <td>
+                                                          {{product.unit}}
+                                                        </td>
+                                                          <td>
+                                                            {{product.price}}
+                                                          </td>
+                                                       
+                                                        <td>
+                                                          {{product.qty}}
+                                                        </td>
+                                                        
+                                                  
+                                                        <td id="tooltip-container1">
+                                                          <div class="d-flex">
+                                                            <a href="javascript:void(0);"  class="btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#product{{ product.id }}"  class="me-3 text-primary" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                                              <i class="mdi mdi-pencil font-size-18" class="modal-title mt-0" id="product{{product.id}}"></i>
+                                                            </a>
+                
+                                                              <a href="{% url 'delete-product' product.id %}" class="text-danger" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                                <i class="mdi mdi-trash-can font-size-18"></i>
+                                                              </a>
+                                                          </div>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                               
+                                                </tbody>
+
+
+                                                <!-- Small modal For edit -->
+                                                
+                                                <div class="modal fade" id="product{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="product{{product.id}}Title" aria-hidden="true">
+                                                  <div class="modal-dialog modal-dialog-scrollable">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <h5 class="modal-title mt-0" id="product{{product.id}}Title">Edit Product</h5>
+                                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                              </button>
+                                                          </div>
+                                                          
+                                                          <div class="modal-body">
+                                                            <form class="form" enctype="multipart/form-data" action="{% url 'update-product' product.id %}" method="POST">
+                                                              {% csrf_token %}
+                  
+                                    
+                                                                <!-- Form -->
+                                                                <div class="row mb-4">
+                                                                  <label for="" class="col-sm-3 col-form-label form-label">Product Name</label>
+                                                    
+                                                                  <div class="col-sm-9">
+                                                                    <!-- Input Group -->
+                                                                    <div class="input-group input-group-merge">
+                                                                        <input type="text" class="js-toggle-password form-control" name="productname" id="name" placeholder="name"
+                                                                        aria-label="" value="{{product.product_name}}">
+                                                    
+                                                                    </div>
+                                                                    <!-- End Input Group -->
+                                                                  </div>
+                                                                </div>
+                                                                <!-- End Form -->
+    
+                                                                <!-- Form -->
+                                                                <div class="row mb-4">
+                                                                  <label for="brand" class="col-sm-3 col-form-label form-label">Brand</label>
+                                                    
+                                                                  <div class="col-sm-9">
+                                                                    <!-- Input Group -->
+                                                    
+                                                    
+                                                                    <div class="input-group input-group-merge">
+                                                                        <select class="js-select form-select" autocomplete="off" name="brand_id">
+                                                                          <option value="{{product.brand_id}}">{{product.brand}}</option>
+                                                                          {% for brand in brands %}
+                                                                          <option value="{{brand.id}}">{{brand}}</option>
+                                                                          {% endfor %}
+                                                                        </select>
+                                                                    </div>                                                                         
+                                                                  </div>
+                                                                </div>
+                                                                <!-- End Form -->
+    
+                                                                <!-- Form -->
+                                                                <div class="row mb-4">
+                                                                  <label for="vehicalType" class="col-sm-3 col-form-label form-label">Unit</label>
+                                                    
+                                                                  <div class="col-sm-9">
+                                                                    <!-- Input Group -->
+                                                    
+                                                    
+                                                                    <div class="input-group input-group-merge">
+                                                                        <select class="js-select form-select" autocomplete="off" name="unit_id">
+                                                                          <option value="{{product.unit_id}}">{{product.unit}}</option>
+                                                                            {% for unit in units %}
+                                                                            <option value="{{unit.id}}">{{unit}}</option>
+                                                                            {% endfor %}
+                                                                        </select>
+                                                                    </div>                                                                         
+                                                                  </div>
+                                                                </div>
+                                                                <!-- End Form -->
+                  
+                                                                <!-- Form -->
+                                                                <div class="row mb-4">
+                                                                  <label for="vehicalType" class="col-sm-3 col-form-label form-label">Category</label>
+                                                    
+                                                                  <div class="col-sm-9">
+                                                                    <!-- Input Group -->
+                                                    
+                                                    
+                                                                    <div class="input-group input-group-merge">
+                                                                        <select class="js-select form-select" autocomplete="off" name="category_id">
+                                                                          <option value="{{product.category_id.id}}">{{product.category_id}}</option>
+                                                                          {% for cat in category %}
+                                                                          <option value="{{cat.id}}">{{cat}}</option>
+                                                                          {% endfor %}
+                                                                        </select>
+                                                                    </div>                                                                         
+                                                                  </div>
+                                                                </div>
+                                                                <!-- End Form -->
+                                                               
+                                                                <!-- Form -->
+                                                                <div class="row mb-4">
+                                                                  <label for="" class="col-sm-3 col-form-label form-label">Product Price</label>
+                                                    
+                                                                  <div class="col-sm-9">
+                                                                    <!-- Input Group -->
+                                                                    <div class="input-group input-group-merge">
+                                                                      <input id="price" name="price" type="number" class="form-control" placeholder="&#8360;" value="{{product.price}}">
+                                                    
+                                                                    </div>
+                                                                    <!-- End Input Group -->
+                                                                  </div>
+                                                                </div>
+                                                                <!-- End Form -->
+                                                    
+                                                                <!-- Form -->
+                                                                <div class="row mb-4">
+                                                                  <label for="" class="col-sm-3 col-form-label form-label">Stock Quantity</label>
+                                                    
+                                                                  <div class="col-sm-9">
+                                                                    <!-- Input Group -->
+                                                                    <div class="input-group input-group-merge">
+                                                                      <input id="qty" name="qty" type="number" class="form-control" value="{{product.qty}}">
+    
+                                                    
+                                                                    </div>
+                                                                    <!-- End Input Group -->
+                                                                  </div>
+                                                                </div>
+                                                                <!-- End Form -->
+    
+                                                                <!-- Form -->
+                                                                <div class="row mb-4">
+                                                                  <label for="dry-fruits" class="col-sm-3 col-form-label form-label">Description</label>
+                                                    
+                                                                  <div class="col-sm-9">
+                                                                    <!-- Input Group -->
+                                                                    <div class="input-group input-group-merge">
+                                                    
+                                                                      <textarea class="form-select" name="productdesc" id="" cols="90" rows="5" >{{product.product_desc}}</textarea>
+                                                    
+                                                                    </div>
+                                                                    <!-- End Input Group -->
+                                                                  </div>
+                                                                </div>
+                                                                <!-- End Form -->
+    
+                                                                <!-- Image Input Field -->
+                                                                <div class="row mb-4">
+                                                                  <label for="productImage" class="col-sm-3 col-form-label form-label">Product Image</label>
+                                                                  <label for="productImage" class="col-sm-3 col-form-label form-label">{{product.product_image}}</label>
+
+                                                                  <div class="col-sm-9">
+                                                                      <input type="file" id="productImage" name="image" accept="image/*">
+                                                                  </div>
+                                                                </div>
+                                                                <!-- End Image Input Field -->
+    
+                                                                <div class="modal-footer">
+                                                                  <button id="model-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                  <button id="save-btn" type="submit" class="btn btn-primary">Save changes</button>
+                                                                  </div>
+                                                              </form>
+                                                                  
+                                                      </div><!-- /.modal-content -->
+                                                  </div><!-- /.modal-dialog -->
+                                               
+                                            </div>
+                                        </div>
+
+                                <!-- /.modal-dialog -->
+
+                                {% endfor %}
+                                            </table>
+
+                                            <div class="modal fade" id="add-expense-model" tabindex="-1" role="dialog" aria-labelledby="add-expense-modelTitle" aria-hidden="true">
+                                              <div class="modal-dialog modal-dialog-scrollable">
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h5 class="modal-title mt-0" id="add-expense-modelTitle">Add Expense</h5>
+                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                          </button>
+                                                      </div>
+                                                      
+                                                      <div class="modal-body">
+                                                        <form class="form" enctype="multipart/form-data" action="{% url 'ecommerce_add_product' %}" method="POST">
+                                                          {% csrf_token %}
+              
+                                
+                                                            <!-- Form -->
+                                                            <div class="row mb-4">
+                                                              <label for="" class="col-sm-3 col-form-label form-label">Product Name</label>
+                                                
+                                                              <div class="col-sm-9">
+                                                                <!-- Input Group -->
+                                                                <div class="input-group input-group-merge">
+                                                                    <input type="text" class="js-toggle-password form-control" name="productname" id="name" placeholder="name"
+                                                                    aria-label="">
+                                                
+                                                                </div>
+                                                                <!-- End Input Group -->
+                                                              </div>
+                                                            </div>
+                                                            <!-- End Form -->
+
+                                                            <!-- Form -->
+                                                            <div class="row mb-4">
+                                                              <label for="vehicalType" class="col-sm-3 col-form-label form-label">Brand</label>
+                                                
+                                                              <div class="col-sm-9">
+                                                                <!-- Input Group -->
+                                                
+                                                
+                                                                <div class="input-group input-group-merge">
+                                                                    <select class="js-select form-select" autocomplete="off" name="brand_id">
+                                                                      <option>Select</option>
+                                                                      {% for brand in brands %}
+                                                                      <option value="{{brand.id}}">{{brand}}</option>
+                                                                      {% endfor %}
+                                                                    </select>
+                                                                </div>                                                                         
+                                                              </div>
+                                                            </div>
+                                                            <!-- End Form -->
+
+                                                            <!-- Form -->
+                                                            <div class="row mb-4">
+                                                              <label for="vehicalType" class="col-sm-3 col-form-label form-label">Unit</label>
+                                                
+                                                              <div class="col-sm-9">
+                                                                <!-- Input Group -->
+                                                
+                                                
+                                                                <div class="input-group input-group-merge">
+                                                                    <select class="js-select form-select" autocomplete="off" name="unit_id">
+                                                                      <option>Select</option>
+                                                                        {% for unit in units %}
+                                                                        <option value="{{unit.id}}">{{unit}}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>                                                                         
+                                                              </div>
+                                                            </div>
+                                                            <!-- End Form -->
+              
+                                                            <!-- Form -->
+                                                            <div class="row mb-4">
+                                                              <label for="vehicalType" class="col-sm-3 col-form-label form-label">Category</label>
+                                                
+                                                              <div class="col-sm-9">
+                                                                <!-- Input Group -->
+                                                
+                                                
+                                                                <div class="input-group input-group-merge">
+                                                                    <select class="js-select form-select" autocomplete="off" name="category_id">
+                                                                      <option>Select</option>
+                                                                      {% for cat in category %}
+                                                                      <option value="{{cat.id}}">{{cat}}</option>
+                                                                      {% endfor %}
+                                                                    </select>
+                                                                </div>                                                                         
+                                                              </div>
+                                                            </div>
+                                                            <!-- End Form -->
+                                                           
+                                                            <!-- Form -->
+                                                            <div class="row mb-4">
+                                                              <label for="" class="col-sm-3 col-form-label form-label">Product Price</label>
+                                                
+                                                              <div class="col-sm-9">
+                                                                <!-- Input Group -->
+                                                                <div class="input-group input-group-merge">
+                                                                  <input id="price" name="price" type="number" class="form-control" placeholder="&#8360;">
+                                                
+                                                                </div>
+                                                                <!-- End Input Group -->
+                                                              </div>
+                                                            </div>
+                                                            <!-- End Form -->
+                                                
+                                                            <!-- Form -->
+                                                            <div class="row mb-4">
+                                                              <label for="" class="col-sm-3 col-form-label form-label">Stock Quantity</label>
+                                                
+                                                              <div class="col-sm-9">
+                                                                <!-- Input Group -->
+                                                                <div class="input-group input-group-merge">
+                                                                  <input id="qty" name="qty" type="number" class="form-control" >
+
+                                                
+                                                                </div>
+                                                                <!-- End Input Group -->
+                                                              </div>
+                                                            </div>
+                                                            <!-- End Form -->
+
+                                                            <!-- Form -->
+                                                            <div class="row mb-4">
+                                                              <label for="dry-fruits" class="col-sm-3 col-form-label form-label">Description</label>
+                                                
+                                                              <div class="col-sm-9">
+                                                                <!-- Input Group -->
+                                                                <div class="input-group input-group-merge">
+                                                
+                                                                  <textarea class="form-select" name="productdesc" id="" cols="90" rows="5" ></textarea>
+                                                
+                                                                </div>
+                                                                <!-- End Input Group -->
+                                                              </div>
+                                                            </div>
+                                                            <!-- End Form -->
+
+                                                            <!-- Image Input Field -->
+                                                            <div class="row mb-4">
+                                                              <label for="productImage" class="col-sm-3 col-form-label form-label">Product Image</label>
+                                                              <div class="col-sm-9">
+                                                                  <input type="file" id="productImage" name="image" accept="image/*">
+                                                              </div>
+                                                            </div>
+                                                            <!-- End Image Input Field -->
+
+                                                            <div class="modal-footer">
+                                                              <button id="model-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                              <button id="save-btn" type="submit" class="btn btn-primary">Save changes</button>
+                                                              </div>
+                                                          </form>
+                                                              
+                                                  </div><!-- /.modal-content -->
+                                              </div><!-- /.modal-dialog -->
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- end row -->
+                    </div>
+                </div> <!-- container-fluid -->
+            </div>
+          
+         
+            <!-- End Page-content -->
+
+
+{% endblock content %}
+
+{% block extra_javascript %}
+
+
+    <!-- Required datatable js -->
+  
+    <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    
+    <!-- Responsive examples -->
+    <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'js/pages/ecommerce-datatables.init.js' %}"></script>
+
+    <script>
+      function saveChanges() {
+        // Get form values
+        var form = document.getElementById('sale-form');
+        var billNo = form.elements['bill-no'].value;
+        var serialNo = form.elements['serial-no'].value;
+        var status = form.elements['status'].value;
+        var eventTiming = form.elements['event-timing'].value;
+        var eventDate = form.elements['event-date'].value;
+        var numberOfPeople = form.elements['no-of-people'].value;
+        var setup = form.elements['setup'].value;
+        var deals = form.elements['deals'].value;
+        var customerName = form.elements['customer-name'].value;
+        var customerNumber = form.elements['customer-number'].value;
+        var perHead = form.elements['per-head'].value;
+        var extraCharges = form.elements['extra-charges'].value;
+        var foodMenu = form.elements['food-menu'].value;
+        var details = form.elements['details'].value;
+        var receivedAmount = form.elements['received-amount'].value;
+      
+        // Construct URL with query parameters
+        var url = "{% url 'calculate_menu' %}?" +
+          "billNo=" + encodeURIComponent(billNo) +
+          "&serialNo=" + encodeURIComponent(serialNo) +
+          "&status=" + encodeURIComponent(status) +
+          "&eventTiming=" + encodeURIComponent(eventTiming) +
+          "&eventDate=" + encodeURIComponent(eventDate) +
+          "&numberOfPeople=" + encodeURIComponent(numberOfPeople) +
+          "&setup=" + encodeURIComponent(setup) +
+          "&deals=" + encodeURIComponent(deals) +
+          "&customerName=" + encodeURIComponent(customerName) +
+          "&customerNumber=" + encodeURIComponent(customerNumber) +
+          "&perHead=" + encodeURIComponent(perHead) +
+          "&extraCharges=" + encodeURIComponent(extraCharges) +
+          "&foodMenu=" + encodeURIComponent(foodMenu) +
+          "&details=" + encodeURIComponent(details) +
+          "&receivedAmount=" + encodeURIComponent(receivedAmount);
+      
+        // Redirect to the constructed URL
+        window.location.href = url;
+      }
+      
+      
+       
+      
+    </script>
+    
+ 
+{% endblock extra_javascript %}

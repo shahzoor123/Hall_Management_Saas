@@ -1,7 +1,3 @@
-
-
-
-
 """
 Django settings for morvin project.
 
@@ -30,9 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-()(=*r-un(n3kppp*h-)o(z8c2j9)73sfm7v-=7o75f*sj$!i2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
@@ -44,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dbbackup',
+    "django_apscheduler",
     'django_filters',
     'ecommerce',
     'e_mail',
@@ -64,6 +61,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
 ]
 
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR  / 'backups'}
+
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -79,7 +81,7 @@ ROOT_URLCONF = 'morvin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'DIRS': [os.path.join(BASE_DIR, "../templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -98,40 +100,14 @@ ITEM_FUNCTION_MODEL = 'ecommerce.EventSale'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'hall_laptop_db',
-    }
-}
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'hall',
-#         'USER': 'postgres',
-#         'PASSWORD': 'admin',
-#         'HOST': 'localhost',  # Set the hostname or IP address of your PostgreSQL server
-#         'PORT': '5432',       # Set the port number of your PostgreSQL server
-#     }
-# }
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'HOST': "db.vvmxvtvmocwshytaqfsw.supabase.co",
-#         'NAME': "postgres",
-#         'USER': "postgres",
-#         'PASSWORD': "saas12345!@#$%",
-#         'PORT': "5432",
-#     }
-# }
 
 
-# DATABASES['default'] = dj_database_url.config()
+
+
+
+# Database
 
 
 # Password validation
@@ -186,6 +162,12 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
 
+# Messages
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -253,4 +235,4 @@ ACCOUNT_SIGNUP_REDIRECT_URL = "account_logout"
 
 LOGIN_URL = "account/login"
 
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATICFILES_DIRS = os.path.join(BASE_DIR, '../static'),

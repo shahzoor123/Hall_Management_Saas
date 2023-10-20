@@ -96,7 +96,7 @@
                                             <div class="card-body">
                                                 <div class="product-img">
                                                     <div class="product-ribbon  bg-primary">
-                                                        25% Off
+                                                        {{product.qty}} stock
                                                     </div>
                                                     <img src="{{ product.product_image.url }}" alt=""
                                                         class="img-fluid mx-auto d-block">
@@ -104,7 +104,7 @@
                                                 <br>
                                                 <div class="text-center">
                                                     <a href="" class="text-dark">
-                                                        <h5 class="font-size-18"><strong>{{product.name}}</strong></h5>
+                                                        <h5 class="font-size-18"><strong>{{product.product_name}}</strong></h5>
                                                     </a>
                                                     <h4 class="mt-3 mb-0">&#8360; {{product.price}} </h4>
 

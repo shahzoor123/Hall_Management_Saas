@@ -43,6 +43,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card">
+                                  {% include "partials/alerts.html" %}
                                     <div class="card-body">
                                         <div>
                                             <!-- <a href="javascript:void(0);" class="btn btn-success mb-2" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="mdi mdi-plus me-2"></i> Add Sale</a> -->
@@ -59,6 +60,7 @@
                                             </li>
                                         </ul>
                                         <div class="table-responsive">
+
                                             <table class="table table-centered datatable dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead class="thead-light">
                                                     <tr>
@@ -123,6 +125,7 @@
                                                         <td>
                                                             <a href="{% url 'sale-invoice' sale.id %}" class="btn btn-light btn-rounded">Invoice <i class="mdi mdi-download ml-2"></i></a>
                                                         </td>
+                                                      
                                                         <td id="tooltip-container1">
                                                           <div class="d-flex">
                                                             <a href="javascript:void(0);"  class="btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#sale{{ sale.id }}"  class="me-3 text-primary" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">

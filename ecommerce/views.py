@@ -23,7 +23,9 @@ from django.http import JsonResponse
 from items.models import Category
 from datetime import datetime
 from django.db.models.functions import ExtractMonth
-from django.db.models import Count
+from django.contrib import messages
+from django.db import IntegrityError
+
 
 current_date = datetime.now()
 
@@ -47,6 +49,28 @@ class Products(LoginRequiredMixin,TemplateView):
 
 class ProductsDetail(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-product-detail.html"
+    
+
+class ProductList(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/product_list.html"
+
+    def get(self, request):
+        myproudcts = MyProducts.objects.all()
+        category = Category.objects.all()
+        brand = Brand.objects.all()
+        unit = Unit.objects.all()
+
+        context = {
+            "myproducts": myproudcts,
+            "brands": brand,
+            "category": category,
+            "units": unit,
+        }
+        return render(request, self.template_name, context)
+
+
+
+
 
 
 class HallSaleSummary(LoginRequiredMixin,TemplateView):
@@ -101,10 +125,14 @@ class HallSaleSummary(LoginRequiredMixin,TemplateView):
                 
         # print(dailySalesData)
 
+        # Sale Table
+        
+        all_sale = EventSale.objects.all()
 
         context = {
             "sale": every_month_sale,
             "daily_sale" : json.dumps(dailySalesData),
+            "sale_table" : all_sale
         }
         
         return render(request, self.template_name, context)
@@ -161,11 +189,14 @@ class HallExpenseSummary(LoginRequiredMixin,TemplateView):
             dailyExpenseData[month] = Expense_data
                 
         # print(dailyExpenseData)
+        
+        all_expense = EventExpense.objects.all()
 
-
+   
         context = {
             "expense": expense_list,
-            "daily_expense": json.dumps(dailyExpenseData),  
+            "daily_expense": json.dumps(dailyExpenseData),
+            "expense_table" : all_expense  
         }
         
         return render(request, self.template_name, context)
@@ -175,12 +206,37 @@ class HallExpenseSummary(LoginRequiredMixin,TemplateView):
 class KitchenSaleSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/kitchen_sale.html"
     
+    def get(self, request):
+              
+        all_kitchen_sale = MyKitchenexpense.objects.all()
+
+   
+        context = {
+         
+            "kitchen_sale_table" : all_kitchen_sale  
+        }
+        
+        return render(request, self.template_name, context)
+    
+    
+    
     
 class KitchenExpenseSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/kitchen_expense.html"  
     
+    def get(self, request):
+              
+        all_kitchen_sale = MyKitchenexpense.objects.all()
+
+   
+        context = {
+         
+            "kitchen_sale_table" : all_kitchen_sale  
+        }
+        
+        return render(request, self.template_name, context)
     
-    
+  
     
           
 
@@ -206,76 +262,21 @@ class Eventsale(LoginRequiredMixin, View):
         }
         return render(request, self.template_name, context)
     
-    
-    # def post(self, request):
-    #     if request.method == "POST":
-    #         bill_number = request.POST.get('bill-no')
-    #         serial = request.POST.get('serial-no')
-
-    #         event_status = request.POST.get('status')
-    #         event_time = request.POST.get('event-time')
-
-    #         event_date = request.POST.get('event-date')
-    #         number_of_people = request.POST.get('no-of-people')
-    #         setup = request.POST.get('setup')
-
-    #         deals = request.POST.get('deals')
-    #         customer_name = request.POST.get('customer-name')
-            
-    #         stage_charge = request.POST.get('stage-charges')
-    #         entry_charge = request.POST.get('entry-charges')
-            
-    #         customer_number = request.POST.get('customer-number')
-    #         per_head = request.POST.get('per-head')
-
-    #         extra_charge = request.POST.get('extra-charges')
-           
-    #         food_menu = request.POST.get('food-menu')
-    #         details = request.POST.get('details')
-    #         received_ammount = request.POST.get('received-amount')
-
-            
-    #         add_event_sale = EventSale.objects.create(
-    #             bill_no=bill_number,
-    #             sr=serial,
-    #             status=event_status,
-    #             event_timing=event_time,
-    #             event_date=event_date,
-    #             no_of_people=number_of_people,
-    #             setup=setup,
-    #             customer_name=customer_name,
-    #             customer_number=customer_number,
-    #             per_head=per_head,
-    #             extra_charges=extra_charge,
-    #             stage_charges= stage_charge,
-    #             entry_charges=entry_charge,
-    #             food_menu=food_menu,
-    #             detials=details,
-    #             total_amount = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) ,
-    #             recieved_amount = received_ammount, 
-    #             remaining_amount = total_amount - received_ammount 
-    #         )
-    #     print('Posted')
-    #     return render(request, 'items/deals-calculator')
-
-
-            # x = 'Deal1'
-            # if x == 'Deal1':
-            #     deal = Deals.objects.get(id=1)
-            #     items = x.menu_items.all()
-            #     context = {
-            #         'items' : items
-            #     }
-            #     calc_get_function = Calculate()
-
-            #     return  calc_get_function.get_context_data(request, context)   
-
 
 def delete_sale(request, sale_id):
     
     sales = get_object_or_404(EventSale, pk=sale_id)
+    event = get_object_or_404(Event, pk=sales.id)
+    # print(event.id)
     if sales is not None:
-        sales.delete()
+        try:
+            sales.delete()
+            event.delete()
+        except IntegrityError as e:
+            error_message = str(e)
+            if "Cannot delete some instances of model 'EventSale'" in error_message:
+                messages.error(request, "Cannot delete due to related objects. Hint: Check for any expense relatd to sale you are deleting, Delete them first. ")
+    else:
         return redirect("event-sale")
 
     sale = EventSale.objects.all()
@@ -312,54 +313,7 @@ class Kitchensale(LoginRequiredMixin, View):
         }
         return render(request, self.template_name, context)
     
-    
-    # def post(self, request):
-    #     if request.method == "POST":
-    #         bill_number = request.POST.get('bill-no')
-    #         serial = request.POST.get('serial-no')
-
-    #         event_status = request.POST.get('status')
-    #         event_time = request.POST.get('event-time')
-
-    #         event_date = request.POST.get('event-date')
-    #         number_of_people = request.POST.get('no-of-people')
-    #         setup = request.POST.get('setup')
-
-    #         deals = request.POST.get('deals')
-    #         customer_name = request.POST.get('customer-name')
-    #         customer_number = request.POST.get('customer-number')
-    #         per_head = request.POST.get('per-head')
-
-    #         extra_charge = request.POST.get('extra-charges')
-           
-    #         food_menu = request.POST.get('food-menu')
-    #         details = request.POST.get('details')
-    #         received_ammount = request.POST.get('received-amount')
-
-            
-    #         add_event_sale = EventSale.objects.create(
-    #             bill_no=bill_number,
-    #             sr=serial,
-    #             status=event_status,
-    #             event_timing=event_time,
-    #             event_date=event_date,
-    #             no_of_people=number_of_people,
-    #             setup=setup,
-    #             customer_name=customer_name,
-    #             customer_number=customer_number,
-    #             per_head=per_head,
-    #             extra_charges=extra_charge,
-    #             stage_charges= stage_charge,
-    #             entry_charges=entry_charge,
-    #             food_menu=food_menu,
-    #             detials=details,
-    #             total_amount= (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) ,
-    #             recieved_amount=received_ammount, 
-    #             remaining_amount = total_amount - received_ammount
-    #         )
-    #     print('Posted')
-        # return render(request, 'items/deals-calculator')
-
+  
 class Kitchenexpense(LoginRequiredMixin, View):
     template_name = "ecommerce/kitchen-expense.html"
 
@@ -441,7 +395,27 @@ class Kitchenexpense(LoginRequiredMixin, View):
 
         return render(request, "ecommerce/kitchen-expense.html")
 
+def DeleteProducts(request, product_id):
+        
+    product = get_object_or_404(MyProducts, pk=product_id)
+    # print(event.id)
+    if product is not None:
+        product.delete()
+        return redirect("ecommerce-product-list")
 
+    
+    category = Category.objects.all()
+    brand = Brand.objects.all()
+    unit = Unit.objects.all()
+    products = MyProducts.objects.all()
+    
+    context = {
+        "category": category,
+        "brands": brand,
+        "units": unit,
+        "products": products
+    }
+    return render(request, "ecommerce/product_list.html", context = context)
 
 class UpdateEventsale(LoginRequiredMixin, View):
     template_name = "ecommerce/event-sale.html"
@@ -468,6 +442,8 @@ class UpdateEventsale(LoginRequiredMixin, View):
     
     def post(self, request, sale_id):
         if request.method == "POST":
+
+            # Updating Sales
             requests = EventSale.objects.get(id=sale_id)
 
             bill_number = request.POST.get('bill-no')
@@ -541,6 +517,15 @@ class UpdateEventsale(LoginRequiredMixin, View):
 
             requests.total_amount = total
             requests.save()
+
+            # Updating Events
+            e_requests = Event.objects.get(id=sale_id)
+            e_requests.event_title = customer_name
+            e_requests.start_date = event_date
+            e_requests.end_date = event_date
+            e_requests.event_time = event_time
+            e_requests.save()
+
             
         
             
@@ -658,7 +643,8 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             water = int(request.POST.get('water-bottles'))
             water_type = request.POST.get('water-bottles-type')
 
-            bbq = int(request.POST.get('bbq-qty'))
+            bbqs = int(request.POST.get('bbq-qty'))
+            bbq_type = request.POST.get('bbq-type')
 
             diesel = request.POST.get('diesel-ltr')
             no_of_waiters = request.POST.get('no-of-waiters')
@@ -684,11 +670,20 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             if drinks_type == 'Cold Drinks 1.5L':
                 drink = MyProducts.objects.get(product_name='Cold Drinks 1.5L')
 
+
             elif drinks_type == "Cold Drinks Tin":
                 drink = MyProducts.objects.get(product_name='Cold Drinks Tin')
+                
+
+            
+            elif drinks_type == "Cold Drinks 2.5L":
+                drink = MyProducts.objects.get(product_name='Cold Drinks 2.5L')
+                
+
 
             else:
                 drink = ''
+                
             
             if not drink == '' :
                 drink = drink.price * drinks
@@ -710,8 +705,27 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             if not bottles == '' :
                 bottles = bottles.price * water
             
-            bbqs = MyProducts.objects.get(product_name="BBQ")
-            bbq_price = bbq * bbqs.price
+            # bbqs = MyProducts.objects.get(product_name="BBQ")
+            # bbq_price = bbq * bbqs.price
+
+            bbq = 0
+            if bbq_type == 'Reshmi Kabab':
+                bbq = MyProducts.objects.get(product_name='Reshmi Kabab')
+
+            elif bbq_type == "Chicken Achar Boti":
+                bbq = MyProducts.objects.get(product_name='Chicken Achari Boti')
+
+            elif bbq_type == "Seekh Kabab":
+                bbq = MyProducts.objects.get(product_name='Seekh kabab')
+
+            elif bbq_type == "Malai Boti":
+                bbq = MyProducts.objects.get(product_name='Malai Boti')
+
+            else:
+                bbq = 0
+            
+            if not bbq == 0 :
+                bbq = bbqs * bbq.price
 
             wait = MyProducts.objects.get(product_name="Waiters")
             waiters = wait.price * int(no_of_waiters)
@@ -720,7 +734,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             naan_price = int(naan_price)
             drink = int(drink)
             bottles = int(bottles)
-            bbq_price = int(bbq_price)
+            bbq_price = int(bbq)
             diesel = int(diesel)
             waiters = int(waiters)
             stuff = int(stuff)
@@ -732,31 +746,30 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
 
             total = pakwan + naan_price + bottles + drink + bbq_price + diesel + waiters + stuff + dhobi + other_expenses + setup + decor_bill
-           
 
 
             add_event_expense = EventExpense.objects.create(
                     bill=bill_number,
-                    pakwan_bill=pakwan,
-                    electicity = electicity,
-                    naan_qty =  naan,
-                    cold_drink= drinks,
-                    water = water,
-                    bbq_kg_qty=bbq,
-                    naan_bill=naan_price,
-                    cold_drink_bill=drink,
-                    water_bill=bottles,
-                    bbq_price=bbq_price,
-                    diesel_ltr=diesel,
-                    no_of_waiters= no_of_waiters,
-                    waiters_bill=waiters,
-                    stuff_bill=stuff,
-                    dhobi=dhobi,
-                    other_expense= other_expenses,
-                    setup_bill=setup,
-                    decor= decor,
-                    decor_bill=decor_bill,
-                    total_expense = total
+                    pakwan_bill=str(pakwan),
+                    electicity = str(electicity),
+                    naan_qty =  str(naan),
+                    cold_drink= str(drinks),
+                    water = str(water),
+                    bbq_kg_qty=str(bbq),
+                    naan_bill=str(naan_price),
+                    cold_drink_bill=str(drink),
+                    water_bill=str(bottles),
+                    bbq_price=str(bbq_price),
+                    diesel_ltr=str(diesel),
+                    no_of_waiters= str(no_of_waiters),
+                    waiters_bill=str(waiters),
+                    stuff_bill=str(stuff),
+                    dhobi=str(dhobi),
+                    other_expense= str(other_expenses),
+                    setup_bill=str(setup),
+                    decor= str(decor),
+                    decor_bill=str(decor_bill),
+                    total_expense = str(total)
                 )
             return render(request, 'ecommerce/event-expense.html')
             # except MyProducts.DoesNotExist:
@@ -826,10 +839,19 @@ class ProductsAddBrand(LoginRequiredMixin,TemplateView):
 
             desc = request.POST.get('desc')
 
-            Brand.objects.create(
-                name= name,
-                desc = desc
-            )
+            if Brand.objects.filter(name=name).exists():
+                messages.error(request, "That Brand already Exists")
+                return redirect('ecommerce_add_brand')
+            
+            else:
+
+                Brand.objects.create(
+                    name= name,
+                    desc = desc
+                )
+            
+            messages.success(request, "Brand Successfully Added")
+            return redirect('ecommerce_add_brand')
         return render(request, self.template_name)
 
 
@@ -864,39 +886,49 @@ class ProductsAddProduct(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-add-product.html"
 
     def post(self, request):
-        if request.method == "POST":
-            product_name = request.POST.get('productname')
+        try:
+            if request.method == "POST":
+                product_name = request.POST.get('productname')
 
-            brand_id = request.POST.get('brand_id')
-            brand = get_object_or_404(Brand, pk=brand_id)
+                brand_id = request.POST.get('brand_id')
+                brand = get_object_or_404(Brand, pk=brand_id)
 
-            unit_id = request.POST.get('unit_id')
-            unit = get_object_or_404(Unit, pk=unit_id)
+                unit_id = request.POST.get('unit_id')
+                unit = get_object_or_404(Unit, pk=unit_id)
+                
             
-        
-            category_id = request.POST['category_id']
-            category = get_object_or_404(Category, pk=category_id)
+                category_id = request.POST['category_id']
+                category = get_object_or_404(Category, pk=category_id)
 
-            product_cost = request.POST.get('cost')
-            product_price= request.POST.get('price')
-            product_qty= request.POST.get('qty')
-            productdesc = request.POST.get('productdesc')
+                # product_cost = request.POST.get('cost')
+                product_price= request.POST.get('price')
+                product_qty= request.POST.get('qty')
+                productdesc = request.POST.get('productdesc')
+                image = request.FILES.get('image')
+                if MyProducts.objects.filter(product_name = product_name).exists():
+                    messages.error(request, "Product Already Exists")
+                    return redirect('ecommerce-product-list')
+                else:
+                    MyProducts.objects.create(
+                        product_name= product_name,
+                        brand = brand,
+                        unit = unit,
+                        category_id = category,
+                        # cost= product_cost,
+                        price = product_price,
+                        qty=product_qty,
+                        product_desc = productdesc,
+                        product_image = image
 
+                    )
+                    messages.success(request, "Product Added Successfully")
+                    return redirect('ecommerce-product-list')
 
-            MyProducts.objects.create(
-                product_name= product_name,
-                brand = brand,
-                unit = unit,
-                category_id = category,
-                cost= product_cost,
-                price = product_price,
-                qty=product_qty,
-                product_desc = productdesc
-
-            )
-
-
-        return render(request, self.template_name)
+        except:
+            
+            messages.error(request, "Invalid Form Submission,  Hint: Check for empty form fields, make sure to upload product image")
+            return redirect('ecommerce-product-list')
+        return render(request, 'ecommerce/product_list.html')
         
 
     def get(self, request):
@@ -913,6 +945,65 @@ class ProductsAddProduct(LoginRequiredMixin,TemplateView):
         }
         return render(request, self.template_name, context)
 
+
+class UpdateProducts(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/ecommerce-add-product.html"
+
+    def post(self, request,product_id):
+        if request.method == "POST":
+
+            requests = MyProducts.objects.get(id=product_id)
+
+            product_name = request.POST.get('productname')
+
+            brand_id = request.POST.get('brand_id')
+            brand = get_object_or_404(Brand, pk=brand_id)
+
+            unit_id = request.POST.get('unit_id')
+            unit = get_object_or_404(Unit, pk=unit_id)
+            
+        
+            category_id = request.POST['category_id']
+            category = get_object_or_404(Category, pk=category_id)
+
+            # product_cost = request.POST.get('cost')
+            product_price= request.POST.get('price')
+            product_qty= request.POST.get('qty')
+            productdesc = request.POST.get('productdesc')
+            image = request.FILES.get('image')
+
+            requests.product_name = product_name
+            requests.brand = brand
+            requests.unit = unit
+            requests.category_id = category
+            requests.price = product_price
+            requests.qty = product_qty
+            requests.product_desc = productdesc
+            
+            if image is not None:
+                requests.product_image = image
+
+
+            requests.save()
+
+
+
+        return redirect("ecommerce-product-list")
+        
+
+    def get(self, request):
+        category = Category.objects.all()
+        brand = Brand.objects.all()
+        unit = Unit.objects.all()
+        products = MyProducts.objects.all()
+        
+        context = {
+            "category": category,
+            "brands": brand,
+            "units": unit,
+            "products": products
+        }
+        return render(request, self.template_name, context)
 
 class Calculate(LoginRequiredMixin,TemplateView):
     template_name = "items/pos.html"
@@ -974,7 +1065,6 @@ class Calendar(LoginRequiredMixin,TemplateView):
             create_event = Event.objects.create(event_title=event_name,start_date=event_start_date,end_date=event_end_date,event_time=event_timing)
             
             
-            print('Posted')      
 
         return render(request, 'calendar.html')
 
@@ -997,7 +1087,6 @@ class Calendar(LoginRequiredMixin,TemplateView):
         
         
         event_json = json.dumps(event_list)
-        print(event_json)
         
         context = {
             "events" : event_json,
@@ -1007,5 +1096,35 @@ class Calendar(LoginRequiredMixin,TemplateView):
     
 
 def update_deal(request, pk):
-    print(pk)
-    return render(request, 'items/update_deals.html')
+    
+    print('i am active get update deals')
+    
+    food_list = []
+    products = MyProducts.objects.all()
+    deal = get_object_or_404(Deals, pk=pk)
+    items = MyProducts.objects.filter(deals=deal)
+    for item in items:
+        food_list.append(item.product_name)
+
+    food_menu = ', '.join(food_list)
+
+    sale = EventSale.objects.all()
+
+
+    deals = Deals.objects.all()
+
+    combined_data = zip(items, products)
+    
+
+    context = {
+                'combined_data': combined_data,
+                'items' : items,
+                'product': products,
+                'Deal_name' : deal,
+                'food_menu' : food_menu,
+                'sale' : sale,
+                'deal' : pk
+            }
+
+          
+    return render(request, 'items/pos.html' , context)
