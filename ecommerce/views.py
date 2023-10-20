@@ -1127,4 +1127,4 @@ def update_deal(request, pk):
             }
 
           
-    return render(request, 'items/update_deals.html' , context)
+    return render(request, 'items/pos.html' , context)
