@@ -468,7 +468,7 @@ class UpdateEventsale(LoginRequiredMixin, View):
             details = request.POST.get('details')
             received_ammount = request.POST.get('received-amount')
 
-            total= (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charges)) 
+            total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charges)) 
             
 
             payments_details = ''
@@ -511,11 +511,12 @@ class UpdateEventsale(LoginRequiredMixin, View):
 
             requests.food_menu = food_menu
             requests.details = details
-           
-            requests.recieved_amount = requests.recieved_amount + int(received_ammount)
-            requests.remaining_amount = int(requests.total_amount)  - int(requests.recieved_amount)
-
+            new_rec_amount = requests.recieved_amount + int(received_ammount)
+            requests.recieved_amount = new_rec_amount
             requests.total_amount = total
+
+            requests.remaining_amount = int(total)  - int(new_rec_amount)
+
             requests.save()
 
             # Updating Events
