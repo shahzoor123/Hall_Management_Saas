@@ -56,8 +56,7 @@
       <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
         <div class="mdc-card">
           {% include "partials/alerts.html" %}
-
-
+          
           <form action="POST" id="pos-form">
 
             <fieldset>
@@ -98,7 +97,7 @@
                       <tr>
                         <!-- <th class="py-1 px-2 text-center">{{ dish.id }}</th> -->
                         
-                        <th class="py-1 px-2 text-center">{{ dish.name }}</th>
+                        <th class="py-1 px-2 text-center">{{ dish.product_name }}</th>
                         <th><input type="number" id="positive-integer-input" class="item-qty form-control center" data-price="{{ price.price }}" min="1" value="0" style="width: 100px; border-radius: 10px;"></th>
                         <span hidden class="subtotal">0.00</span>
                         <th class="py-1 px-2 text-center">{{ price.price }}</th>

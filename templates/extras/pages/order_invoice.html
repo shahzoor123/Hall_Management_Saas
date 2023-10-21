@@ -44,20 +44,7 @@
         </div>
         <div class="card overflow-hidden" id="invoice" style="border: 3px solid rgb(2, 2, 2);">
             <div class="invoice-effect-top position-absolute start-0">
-                <!-- <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 764 182" width="764" height="182">
-                    <title>&lt;Group&gt;</title>
-                    <g id="&lt;Group&gt;">
-                        <g id="&lt;Group&gt;">
-                            <path id="&lt;Path&gt;" style="fill: var(--tb-light);" d="m-6.6 177.4c17.5 0.1 35.1 0 52.8-0.4 286.8-6.6 537.6-77.8 700.3-184.6h-753.1z" />
-                        </g>
-                        <g id="&lt;Group&gt;">
-                            <path id="&lt;Path&gt;" style="fill: var(--tb-secondary);" d="m-6.6 132.8c43.5 2.1 87.9 2.7 132.9 1.7 246.9-5.6 467.1-59.2 627.4-142.1h-760.3z" />
-                        </g>
-                        <g id="&lt;Group&gt;" style="opacity: .5">
-                            <path id="&lt;Path&gt;" style="fill: var(--tb-primary);" d="m-6.6 87.2c73.2 7.4 149.3 10.6 227.3 8.8 206.2-4.7 393.8-42.8 543.5-103.6h-770.8z" />
-                        </g>
-                    </g>
-                </svg> -->
+               
             </div>
             <div class="card-body z-1 position-relative">
                 <div class="d-flex">
@@ -71,39 +58,14 @@
                         <h6 class="mb-0"><span class="text-muted fw-normal">Contact No: </span><span id="contact-no">+92 313 8240960</span></h6>
                     </div>
                 </div>
+                
                 <div class="mt-5 pt-4">
                     <div class="row g-3">
-                        <div class="col-lg col-6">
-                            <p class="text-muted mb-2 text-uppercase">Invoice No {{sale.id}}</p>
+                        <div class="col-lg col-2">
+                            <strong>Order slip Invoice : </strong>{{sale.id}}
                             
                         </div>
-                        <!--end col-->
-                        <div class="col-lg col-6">
-                            <p class="text-muted mb-2 text-uppercase">Event Date</p>
-                            <h5 class="fs-md mb-0"><span id="invoice-date">{{sale.event_date}}</span></h5>
-                        </div>
-                        <div class="col-lg col-6">
-                            <p class="text-muted mb-2 text-uppercase">Event Timing</p>
-                            <h5 class="fs-md mb-0"><span id="invoice-due-date">{{sale.event_timing}}</span></h5>
-                        </div>
-                        <!--end col-->
-                        <div class="col-lg col-6">
-                            <p class="text-muted mb-2 text-uppercase">Payment Status</p>
-                            <span class="badge bg-success-subtle text-success fs-xxs badge badge-soft-success font-size-12" id="payment-status">{{status}}</span>
-                       
-                        </div>
-                        <!--end col-->
-                        <div class="col-lg col-6">
-                            <p class="text-muted mb-2 text-uppercase">Total Amount</p>
-                            <h5 class="fs-md mb-0">$<span id="total-amount">2,050.18</span></h5>
-                        </div>
-                        <!--end col-->
-                    </div><!--end row-->
-                </div>
-
-                <div class="mt-4 pt-2">
-                    <div class="row g-3">
-                        <div class="col-3">
+                        <div class="col-4">
                             <address>
                                 <strong>Customer Details:</strong><br>
                                 Customer Name : <strong>{{sale.customer_name}}</strong><br>
@@ -112,7 +74,7 @@
                             </address>
                         </div>
                         <!--end col-->
-                        <div class="col-3">
+                        <div class="col-4">
                             <address>
                                 <strong>Event Details:</strong><br>
                                 Day/Night : <strong>{{sale.event_timing}}</strong><br>
@@ -122,58 +84,33 @@
 
                             </address>
                         </div>
-                        <div class="col-3">
-                            <address>
-                                <strong>Event Details:</strong><br>
-                                Number of People : <strong>{{sale.no_of_people}}</strong><br>
-                                Charges per Head : <strong>{{sale.per_head}}</strong><br>
-                            </address>
-                        </div>
-
-                        <div class="col-3">
-                            <address>
-                                <strong>Venue Details:</strong><br>
-                                Hall/Lawn/Outside: <strong>{{sale.location}}</strong><br>
-                                Gents: <strong>{{sale.gents}}</strong><br>
-                                Ladies: <strong>{{sale.ladies}}</strong> <br>
-
-
-                            </address>
-                        </div>
-                        
                         <!--end col-->
                     </div><!--end row-->
                 </div>
+
                 
                 <div class="table-responsive mt-4">
-                    <table class="table table-borderless text-center table-nowrap align-middle mb-0">
+                    <table class="table table-borderless text-center table-nowrap align-middle mb-0" >
                         <thead>
                             <tr class="table-light">
-                                <th scope="col" style="width: 50px;">#</th>
-                                <th scope="col">Product Details</th>
-                                <th scope="col">Rate</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col" class="text-end">Amount</th>
+                                <th scope="col" style="width: 50px;">ID</th>
+                                <th scope="col">Food menu</th>
+                                <th scope="col">QTY</th>
+                
                             </tr>
                         </thead>
-                        <tbody id="products-list">
-                            {% for item in food_menu %}
-                            <tr>
-                                
-                                <th scope="row">01</th>
-                                <td class="text-start">
-                                    <span class="fw-medium">{{item}}</span>
-                                </td>
-                                <td>$161.25</td>
-                                <td>03</td>
-                                <td class="text-end">$483.75</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
+                        {% for item, qty in menu.items %}
+                        <tr>
+                            <td class="text-end">01</td>
+                            <td class="text-mid">{{item}}</td>
+                            <td class="text-center">{{qty}}</td>
+                           
+                        </tr>
+                       {% endfor %}
                     </table><!--end table-->
                 </div>
 
-                <div class="border-top border-top-dashed mt-2" id="products-list-total">
+                <!-- <div class="border-top border-top-dashed mt-2" id="products-list-total">
                     <table class="table table-borderless table-nowrap align-middle mb-0 ms-auto" style="width:250px; float: right;">
                         <tbody>
                             <tr>
@@ -181,34 +118,36 @@
                                 <td class="text-end">PKR {{sub_total}}</td>
                             </tr>
                             <tr>
-                                <td>Estimated Tax <small class="text-muted">(18%)</small></td>
+                                <td>Extra Charges</td>
                                 <td class="text-end">PKR {{extra}}</td>
                             </tr>
                             <tr>
                                 <td>Cash Received </td>
                                 <td class="text-end">PKR {{sale.recieved_amount}}</td>
                             </tr>
-                            <tr>
-                                <td>Balance Due  </td>
-                                <td class="text-end">PKR {{sale.remaining_amount}}</td>
-                            </tr>
-                          
                             <tr class="border-top border-top-dashed fs-15">
                                 <th scope="row">Total Amount</th>
                                 <th class="text-end">PKR {{sale.total_amount}}</th>
                             </tr>
+
+                            <tr >
+                                <th>Balance Due  </th>
+                                <th class="text-end">PKR {{sale.remaining_amount}}</th>
+                            </tr>
+                          
+                           
                             
                         </tbody>
-                    </table>
+                    </table> -->
                     <!--end table-->
                  
-                </div>
-                <div style="margin: 30px;" >
+                <!-- </div> -->
+                <!-- <div style="margin: 30px;" >
                     <span><strong>Note:</strong> Extra charges are added, When
                         special or custom arrangements are
                         requested. Extra Charges incudes <br>
                         (Stage charges, Couple Entry Charges and other special arrangements) </span>
-                </div>
+                </div> -->
               
    <!-- <div class="mt-3">
                                     <h6 class="text-muted text-uppercase fw-semibold mb-3">Payment Details:</h6>
@@ -237,23 +176,7 @@
                                 </div> -->
                             </div>
                             
-                            <!-- <div class="invoice-effect-top position-absolute end-0" style="transform: rotate(180deg); bottom: -80px;">
-                                <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 764 182" width="764" height="182">
-                                    <title>&lt;Group&gt;</title>
-                                    <g id="&lt;Group&gt;">
-                                        <g id="&lt;Group&gt;">
-                                            <path id="&lt;Path&gt;" style="fill: var(--tb-light);" d="m-6.6 177.4c17.5 0.1 35.1 0 52.8-0.4 286.8-6.6 537.6-77.8 700.3-184.6h-753.1z" />
-                                        </g>
-                                        <g id="&lt;Group&gt;">
-                                            <path id="&lt;Path&gt;" style="fill: var(--tb-secondary);" d="m-6.6 132.8c43.5 2.1 87.9 2.7 132.9 1.7 246.9-5.6 467.1-59.2 627.4-142.1h-760.3z" />
-                                        </g>
-                                        <g id="&lt;Group&gt;" style="opacity: .5">
-                                            <path id="&lt;Path&gt;" style="fill: var(--tb-primary);" d="m-6.6 87.2c73.2 7.4 149.3 10.6 227.3 8.8 206.2-4.7 393.8-42.8 543.5-103.6h-770.8z" />
-                                        </g>
-                                    </g>
-                                </svg>
-                                
-                            </div> -->
+                      
                             
                         </div>
                         <!--end card-->
@@ -267,3 +190,6 @@
 
 
 {% endblock content %}
+
+
+

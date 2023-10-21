@@ -27,11 +27,11 @@ def order_slip(request, sale_id):
         'sale': sale,
         'menu': my_menu
     }
-    return render(request, 'extras/pages/pages-invoice.html', context)
+    return render(request, 'extras/pages/order_invoice.html', context)
     
 
 class Invoice(LoginRequiredMixin,TemplateView):
-    template_name = "extras/invoice.html"
+    template_name = "extras/sale_invoice.html"
 
 def sale_invoice(request, sale_id):
     
@@ -66,7 +66,7 @@ def sale_invoice(request, sale_id):
         'sub_total' : sale.total_amount - total_extra_charges
     }
 
-    return render(request, 'extras/pages/invoice.html', context)
+    return render(request, 'extras/pages/sale_invoice.html', context)
 
 
 class Details(LoginRequiredMixin,TemplateView):

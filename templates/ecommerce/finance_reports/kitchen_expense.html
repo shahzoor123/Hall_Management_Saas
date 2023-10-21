@@ -72,7 +72,7 @@
                     <tbody>
 
                       {% for i in kitchen_sale_table %}
-                      <tr>
+                      <tr class="sale-row">
                           <td>{{i.bill}}</td>
                           <td>{{i.payment_details}}</td>
                           <td>{{i.mutton}}</td>
@@ -84,13 +84,73 @@
                       {% endfor %}
     
                     </tbody>
+                    <tr  id="grand-total-row">
+                      <td><Strong>Grand Total -></Strong></td>
+                      <td></td>
+                      <td></td>
+                   
+                      <td><strong></strong></td>
+                      <td><strong></strong></td>
+                      <td ><strong ></strong></td>
+                  </tr>
                 </table>
             </div>
         </div>
     </div> <!-- end col -->
 </div> <!-- end row -->
-          
-          </div>
+<script>
+  // Function to calculate grand totals
+  function calculateGrandTotals() {
+    let totalReceived = 0;
+    let totalRemaining = 0;
+    let grandTotal = 0; // Use a separate variable for the grand total
+
+    const saleRows = document.getElementsByClassName("sale-row");
+
+    for (let i = 0; i < saleRows.length; i++) {
+      const cells = saleRows[i].getElementsByTagName("td");
+      if (cells.length === 8) {
+        const total = parseFloat(cells[5].textContent);
+        const receivedAmount = parseFloat(cells[6].textContent);
+        const remainingAmount = parseFloat(cells[7].textContent);
+
+        grandTotal += total; // Calculate the grand total for the "Total" column
+        totalReceived += receivedAmount;
+        totalRemaining += remainingAmount;
+      }
+    }
+    // Update the grand total row
+    const grandTotalRow = document.getElementById("grand-total-row");
+    grandTotalRow.getElementsByTagName("td")[5].textContent = totalReceived;
+    grandTotalRow.getElementsByTagName("td")[5].style.fontWeight = "bold";
+    grandTotalRow.getElementsByTagName("td")[6].textContent = totalReceived;
+    grandTotalRow.getElementsByTagName("td")[6].style.fontWeight = "bold";
+    grandTotalRow.getElementsByTagName("td")[7].textContent = totalRemaining;
+    grandTotalRow.getElementsByTagName("td")[7].style.fontWeight = "bold";
+
+  }
+
+  // Function to create a MutationObserver
+  function createMutationObserver() {
+    const tableBody = document.querySelector("table tbody");
+    const observer = new MutationObserver(function (mutationsList) {
+      // Recalculate grand totals when a mutation is observed
+      calculateGrandTotals();
+    });
+
+    // Configure and start the observer
+    const config = { childList: true, subtree: true };
+    observer.observe(tableBody, config);
+  }
+
+  // Call the function to calculate grand totals initially
+  calculateGrandTotals();
+
+  // Call the function to create the MutationObserver
+  createMutationObserver();
+</script>
+
+</div>
         </div> 
       
       </div>
