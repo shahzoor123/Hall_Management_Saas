@@ -599,7 +599,7 @@ class UpdateEventExpense(LoginRequiredMixin, View):
           
             requests.save()
                         
-      
+        print("i updated the expense")
 
         return redirect('event-expense') 
  
@@ -627,7 +627,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
 
     def post(self, request):
-        if request.method == "POST":
+            
             bill = request.POST.get('bill-no')
             bill_number = get_object_or_404(EventSale, pk=bill)
             pakwan = int(request.POST.get('pakwan-bill'))
@@ -668,16 +668,16 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
             drink = 0
             if drinks_type == 'Cold Drinks 1.5L':
-                drink = MyProducts.objects.get(product_name='Cold Drinks 1.5L')
+                drink = MyProducts.objects.get(product_name='Cold_Drinks_1.5L')
 
 
             elif drinks_type == "Cold Drinks Tin":
-                drink = MyProducts.objects.get(product_name='Cold Drinks Tin')
+                drink = MyProducts.objects.get(product_name='Cold_Drinks_Tin')
                 
 
             
             elif drinks_type == "Cold Drinks 2.5L":
-                drink = MyProducts.objects.get(product_name='Cold Drinks 2.5L')
+                drink = MyProducts.objects.get(product_name='Cold_Drinks_2.5L')
                 
 
 
@@ -691,13 +691,13 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             
             bottles = 0
             if water_type == 'Water 1.5L':
-                bottles = MyProducts.objects.get(product_name='Water 1.5L')
+                bottles = MyProducts.objects.get(product_name='Water_1.5L')
 
             elif water_type == "Water 500ML":
-                bottles = MyProducts.objects.get(product_name='Water 500ML')
+                bottles = MyProducts.objects.get(product_name='Water_500ML')
 
             elif water_type == "Water 300ML":
-                bottles = MyProducts.objects.get(product_name='Water 300ML')
+                bottles = MyProducts.objects.get(product_name='Water_300ML')
 
             else:
                 bottles = ''
@@ -710,16 +710,16 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
             bbq = 0
             if bbq_type == 'Reshmi Kabab':
-                bbq = MyProducts.objects.get(product_name='Reshmi Kabab')
+                bbq = MyProducts.objects.get(product_name='Reshmi_Kabab')
 
             elif bbq_type == "Chicken Achar Boti":
-                bbq = MyProducts.objects.get(product_name='Chicken Achari Boti')
+                bbq = MyProducts.objects.get(product_name='Chicken_Achari_Boti')
 
             elif bbq_type == "Seekh Kabab":
-                bbq = MyProducts.objects.get(product_name='Seekh kabab')
+                bbq = MyProducts.objects.get(product_name='Seekh_kabab')
 
             elif bbq_type == "Malai Boti":
-                bbq = MyProducts.objects.get(product_name='Malai Boti')
+                bbq = MyProducts.objects.get(product_name='Malai_Boti')
 
             else:
                 bbq = 0
@@ -771,6 +771,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                     decor_bill=str(decor_bill),
                     total_expense = str(total)
                 )
+            print("i added the expense")
             return render(request, 'ecommerce/event-expense.html')
             # except MyProducts.DoesNotExist:
             #     # Handle case where product is not found
