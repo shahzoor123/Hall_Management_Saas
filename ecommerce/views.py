@@ -25,7 +25,7 @@ from datetime import datetime
 from django.db.models.functions import ExtractMonth
 from django.contrib import messages
 from django.db import IntegrityError
-
+from django.db import transaction
 
 current_date = datetime.now()
 
@@ -625,7 +625,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
         }
         return render(request, self.template_name, context)
 
-
+    @transaction.atomic
     def post(self, request):
         if request.method == "POST":
             bill = request.POST.get('bill-no')
@@ -668,16 +668,16 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
             drink = 0
             if drinks_type == 'Cold Drinks 1.5L':
-                drink = MyProducts.objects.get(product_name='Cold Drinks 1.5L')
+                drink = MyProducts.objects.get(product_name='Cold_Drinks_1.5L')
 
 
             elif drinks_type == "Cold Drinks Tin":
-                drink = MyProducts.objects.get(product_name='Cold Drinks Tin')
+                drink = MyProducts.objects.get(product_name='Cold_Drinks_Tin')
                 
 
             
             elif drinks_type == "Cold Drinks 2.5L":
-                drink = MyProducts.objects.get(product_name='Cold Drinks 2.5L')
+                drink = MyProducts.objects.get(product_name='Cold_Drinks_2.5L')
                 
 
 
@@ -691,13 +691,13 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             
             bottles = 0
             if water_type == 'Water 1.5L':
-                bottles = MyProducts.objects.get(product_name='Water 1.5L')
+                bottles = MyProducts.objects.get(product_name='Water_1.5L')
 
             elif water_type == "Water 500ML":
-                bottles = MyProducts.objects.get(product_name='Water 500ML')
+                bottles = MyProducts.objects.get(product_name='Water_500ML')
 
             elif water_type == "Water 300ML":
-                bottles = MyProducts.objects.get(product_name='Water 300ML')
+                bottles = MyProducts.objects.get(product_name='Water_300ML')
 
             else:
                 bottles = ''
@@ -710,16 +710,16 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
             bbq = 0
             if bbq_type == 'Reshmi Kabab':
-                bbq = MyProducts.objects.get(product_name='Reshmi Kabab')
+                bbq = MyProducts.objects.get(product_name='Reshmi_Kabab')
 
             elif bbq_type == "Chicken Achar Boti":
-                bbq = MyProducts.objects.get(product_name='Chicken Achari Boti')
+                bbq = MyProducts.objects.get(product_name='Chicken_Achari_Boti')
 
             elif bbq_type == "Seekh Kabab":
-                bbq = MyProducts.objects.get(product_name='Seekh kabab')
+                bbq = MyProducts.objects.get(product_name='Seekh_Kabab')
 
             elif bbq_type == "Malai Boti":
-                bbq = MyProducts.objects.get(product_name='Malai Boti')
+                bbq = MyProducts.objects.get(product_name='Malai_Boti')
 
             else:
                 bbq = 0
@@ -746,7 +746,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
 
             total = pakwan + naan_price + bottles + drink + bbq_price + diesel + waiters + stuff + dhobi + other_expenses + setup + decor_bill
-
+            print(total, naan_price, bbq_price, bottles, drink)
 
             add_event_expense = EventExpense.objects.create(
                     bill=bill_number,
@@ -771,7 +771,8 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                     decor_bill=str(decor_bill),
                     total_expense = str(total)
                 )
-            return render(request, 'ecommerce/event-expense.html')
+            print('data added')
+            return redirect('event-expense')
             # except MyProducts.DoesNotExist:
             #     # Handle case where product is not found
             #     error_message = "Product not found"
