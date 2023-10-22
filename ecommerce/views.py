@@ -25,7 +25,7 @@ from datetime import datetime
 from django.db.models.functions import ExtractMonth
 from django.contrib import messages
 from django.db import IntegrityError
-
+from django.db import transaction
 
 current_date = datetime.now()
 
@@ -468,7 +468,7 @@ class UpdateEventsale(LoginRequiredMixin, View):
             details = request.POST.get('details')
             received_ammount = request.POST.get('received-amount')
 
-            total= (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charges)) 
+            total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charges)) 
             
 
             payments_details = ''
@@ -511,11 +511,12 @@ class UpdateEventsale(LoginRequiredMixin, View):
 
             requests.food_menu = food_menu
             requests.details = details
-           
-            requests.recieved_amount = requests.recieved_amount + int(received_ammount)
-            requests.remaining_amount = int(requests.total_amount)  - int(requests.recieved_amount)
-
+            new_rec_amount = requests.recieved_amount + int(received_ammount)
+            requests.recieved_amount = new_rec_amount
             requests.total_amount = total
+
+            requests.remaining_amount = int(total)  - int(new_rec_amount)
+
             requests.save()
 
             # Updating Events
@@ -625,7 +626,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
         }
         return render(request, self.template_name, context)
 
-
+    @transaction.atomic
     def post(self, request):
             
             bill = request.POST.get('bill-no')
@@ -746,7 +747,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
 
             total = pakwan + naan_price + bottles + drink + bbq_price + diesel + waiters + stuff + dhobi + other_expenses + setup + decor_bill
-
+            print(total, naan_price, bbq_price, bottles, drink)
 
             add_event_expense = EventExpense.objects.create(
                     bill=bill_number,
@@ -771,8 +772,8 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                     decor_bill=str(decor_bill),
                     total_expense = str(total)
                 )
-            print("i added the expense")
-            return render(request, 'ecommerce/event-expense.html')
+            print('data added')
+            return redirect('event-expense')
             # except MyProducts.DoesNotExist:
             #     # Handle case where product is not found
             #     error_message = "Product not found"
