@@ -548,12 +548,12 @@ class UpdateEventExpense(LoginRequiredMixin, View):
         if request.method == "POST":
             
             requests = EventExpense.objects.get(id=expense_id)
-    
+
             
-            bill = request.POST.get('bill-no')
-         
-            bill_number = get_object_or_404(EventExpense, pk=requests.id)
-            pakwan = int(request.POST.get('pakwan-bill'))
+            bill = request.POST.get('bill')
+            print(bill)
+            bill_number = get_object_or_404(EventSale, bill_no=int(bill))
+            pakwan = int(request.POST.get('pakhwan'))
 
             electicity = request.POST.get('electicity-bill')
             naan =int(request.POST.get('naan-qty'))
@@ -566,7 +566,8 @@ class UpdateEventExpense(LoginRequiredMixin, View):
             water = int(request.POST.get('water-bottles'))
             water_type = request.POST.get('water-bottles-type')
 
-            bbq = int(request.POST.get('bbq-qty'))
+            bbqs = int(request.POST.get('bbq-qty'))
+            bbq_type = request.POST.get('bbq-type')
 
             diesel = request.POST.get('diesel-ltr')
             no_of_waiters = request.POST.get('no-of-waiters')
@@ -575,28 +576,121 @@ class UpdateEventExpense(LoginRequiredMixin, View):
 
             other_expenses = request.POST.get('other-expense')
 
-            expense_details = request.POST.get('details')
+            expense_details = request.POST.get('expense-details')
            
             setup = request.POST.get('setup-bill')
-            decor = request.POST.get('decor')
+            decor = request.POST.get('decore-details')
             decor_bill = request.POST.get('decor-bill')
-    
+            print(decor)
 
+            # try:
+            nan = MyProducts.objects.get(product_name='Naan')
+            naan_price = nan.price * naan
+
+
+
+
+            drink = 0
+            if drinks_type == 'Cold Drinks 1.5L':
+                drink = MyProducts.objects.get(product_name='Cold_Drinks_1.5L')
+
+
+            elif drinks_type == "Cold Drinks Tin":
+                drink = MyProducts.objects.get(product_name='Cold_Drinks_Tin')
+                
+
+            
+            elif drinks_type == "Cold Drinks 2.5L":
+                drink = MyProducts.objects.get(product_name='Cold_Drinks_2.5L')
+                
+
+
+            else:
+                drink = 0
+
+            if not drink == 0 :
+                drink = drink.price * drinks
+
+            
+            bottles = 0
+            if water_type == 'Water 1.5L':
+                bottles = MyProducts.objects.get(product_name='Water_1.5L')
+
+            elif water_type == "Water 500ML":
+                bottles = MyProducts.objects.get(product_name='Water_500ML')
+
+            elif water_type == "Water 300ML":
+                bottles = MyProducts.objects.get(product_name='Water_300ML')
+
+            else:
+                bottles = 0
+            
+            if not bottles == 0 :
+                bottles = bottles.price * water
+            
+            # bbqs = MyProducts.objects.get(product_name="BBQ")
+            # bbq_price = bbq * bbqs.price
+
+            bbq = 0
+            if bbq_type == 'Reshmi Kabab':
+                bbq = MyProducts.objects.get(product_name='Reshmi_Kabab')
+
+            elif bbq_type == "Chicken Achar Boti":
+                bbq = MyProducts.objects.get(product_name='Chicken_Achari_Boti')
+
+            elif bbq_type == "Seekh Kabab":
+                bbq = MyProducts.objects.get(product_name='Seekh_Kabab')
+
+            elif bbq_type == "Malai Boti":
+                bbq = MyProducts.objects.get(product_name='Malai_Boti')
+
+            else:
+                bbq = 0
+            
            
+            if not bbq == 0 :
+                bbq = bbqs * bbq.price
+
+            wait = MyProducts.objects.get(product_name="Waiters")
+            waiters = wait.price * int(no_of_waiters)
+
+            pakwan = int(pakwan)
+            electicity = int(electicity)
+            naan_price = int(naan_price)
+            drink = int(drink)
+            bottles = int(bottles)
+            bbq_price = int(bbq)
+            diesel = int(diesel)
+            waiters = int(waiters)
+            stuff = int(stuff)
+            dhobi = int(dhobi)
+            other_expenses = int(other_expenses)
+            setup = int(setup)
+            decor_bill = int(decor_bill)
+            # print(pakwan, naan_price, drink, bottles, bbq_price, diesel, waiters, stuff, dhobi, other_expenses, setup, decor_bill)
+
+
+            total = pakwan + electicity + naan_price + bottles + drink + bbq_price + diesel + waiters + stuff + dhobi + other_expenses + setup + decor_bill
         
             requests.electicity = electicity
             requests.naan_qty = naan
-            requests.cold_drink_bill = drinks
+            requests.naan_bill = naan_price
+            requests.cold_drink = drinks
+            requests.cold_drink_bill = drink
             requests.water = water
-            requests.bbq_kg_qty = bbq
+            requests.water_bill = bottles
+            requests.bbq_kg_qty = bbqs
+            requests.bbq_price = bbq
             requests.diesel_ltr = diesel
             requests.no_of_waiters = no_of_waiters
+            requests.waiters_bill = waiters
             requests.dhobi = dhobi
             requests.other_expense = other_expenses
             requests.other_expense_detals = expense_details
             requests.setup_bill = setup
             requests.decor = decor
             requests.decor_bill = decor_bill
+            requests.total_expense = total
           
             requests.save()
                         
@@ -657,7 +751,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             expense_details = request.POST.get('expense-details')
            
             setup = request.POST.get('setup-bill')
-            decor = request.POST.get('decore-details')
+            decor_details = request.POST.get('decore-details')
             decor_bill = request.POST.get('decor-bill')
     
             # try:
@@ -747,7 +841,6 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
 
             total = pakwan + naan_price + bottles + drink + bbq_price + diesel + waiters + stuff + dhobi + other_expenses + setup + decor_bill
-            print(total, naan_price, bbq_price, bottles, drink)
 
             add_event_expense = EventExpense.objects.create(
                     bill=bill_number,
@@ -756,19 +849,22 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                     naan_qty =  str(naan),
                     cold_drink= str(drinks),
                     water = str(water),
-                    bbq_kg_qty=str(bbq),
+                    bbq_kg_qty=str(bbqs),
                     naan_bill=str(naan_price),
                     cold_drink_bill=str(drink),
+                    cold_drink_type = drinks_type,
                     water_bill=str(bottles),
+                    water_bottles_type=water_type,
                     bbq_price=str(bbq_price),
+                    bbq_type = bbq_type,
                     diesel_ltr=str(diesel),
                     no_of_waiters= str(no_of_waiters),
                     waiters_bill=str(waiters),
                     stuff_bill=str(stuff),
                     dhobi=str(dhobi),
-                    other_expense= str(other_expenses),
+                    other_expense_detals= expense_details,
                     setup_bill=str(setup),
-                    decor= str(decor),
+                    decor= decor_details,
                     decor_bill=str(decor_bill),
                     total_expense = str(total)
                 )

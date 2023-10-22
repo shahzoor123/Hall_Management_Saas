@@ -93,17 +93,26 @@ class EventExpense(models.Model):
     bill = models.ForeignKey(EventSale, on_delete=models.PROTECT)
     pakwan_bill = models.IntegerField(default=0, blank=True)
     electicity = models.IntegerField(default=0, blank=True)
+
+    # Naan
     naan_qty = models.IntegerField(default=0, blank=True)
     naan_bill = models.IntegerField(default=0, blank=True, editable=False)
+
+    # Cold Drinks
     cold_drink = models.IntegerField(default=0, blank=True)
     cold_drink_bill = models.IntegerField(default=0, blank=True, editable=False)
+    cold_drink_type = models.CharField(max_length=30, blank=True)
+
+    # Water
     water = models.IntegerField(default=0, blank=True)
     water_bill = models.IntegerField(default=0, blank=True, editable=False)
+    water_bottles_type = models.CharField(max_length=30, blank=True)
+
+    # BBQ
     bbq_kg_qty = models.IntegerField(default=0, blank=True)
-    # products = Products.objects.filter(code='BBQ')
-    # bbq_product = products.first()
-    # bbq_price = bbq_product.price * bbq_kg_qty
     bbq_price = models.IntegerField(default=0, blank=True, editable=False)
+    bbq_type = models.CharField(max_length=30, blank=True)
+
     diesel_ltr = models.IntegerField(default=0, blank=True)
     no_of_waiters = models.IntegerField(default=0, blank=True)
     waiters_bill = models.IntegerField(default=0, blank=True, editable=False)
