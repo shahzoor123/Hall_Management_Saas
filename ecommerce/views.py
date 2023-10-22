@@ -1079,9 +1079,10 @@ class Calendar(LoginRequiredMixin,TemplateView):
         sale = EventSale.objects.all()
         events = Event.objects.all()
         
-        serialized_event = serialize('json', events)
+        serialized_event = serialize('json', sale)
         
         data = json.loads(serialized_event)
+        
         
         for i in data:
             event_list.append(i['fields'])

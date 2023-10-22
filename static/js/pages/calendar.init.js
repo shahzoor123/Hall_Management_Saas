@@ -29,9 +29,8 @@
 
       var formattedEvents = serializedEvents.map(function (event) {
           return {
-              title: event.fields.event_title,
-              start: event.fields.start_date,
-              end: event.fields.end_date
+              title: event.fields.customer_name,
+              start: event.fields.event_date,
           };
       });
 
