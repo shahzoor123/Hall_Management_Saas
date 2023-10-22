@@ -1,13 +1,13 @@
 $(document).ready(function () {
     $("#datatable").DataTable({
-      paging: false, // Disable pagination
+      paging: true, // Disable pagination
     });
   
     $("#datatable-buttons")
       .DataTable({
         lengthChange: !1,
         buttons: ["copy", "excel", "pdf", "colvis"],
-        paging: false, // Disable pagination
+        paging: true, // Disable pagination
       })
       .buttons()
       .container()

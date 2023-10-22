@@ -1,1 +1,10 @@
-$(document).ready(function(){$(".datatable").DataTable(),$(".dataTables_length select").addClass("form-select form-select-sm")});
+$(document).ready(function() {
+    $('#myDataTable').DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        info: true,
+        responsive: true,
+        pageLength: 8 
+    });
+});
