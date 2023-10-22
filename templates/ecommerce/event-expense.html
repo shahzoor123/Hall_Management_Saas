@@ -58,7 +58,7 @@
                                             </li>
                                         </ul>
                                         <div class="table-responsive">
-                                            <table class="table table-centered datatable dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <table id="myDataTable" class="table table-centered datatable dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th style="width: 20px;">
@@ -514,6 +514,11 @@
                                 {% endfor %}
                               </table>
 
+
+
+
+
+
                               <div class="modal fade" id="add-expense-model" tabindex="-1" role="dialog" aria-labelledby="add-expense-modelTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                     <div class="modal-content">
@@ -539,6 +544,7 @@
                                                       <select class="js-select form-select" autocomplete="off" name="bill-no">
                                                         <option>Select</option>
                                                         {% for event in events %}
+                                                        {{event}}
                                                         <option value="{{ event.id }}" data-pakwan-bill="{{ event.total_menu }}">{{ event.customer_name }}_bill_{{ event.id }}</option>
                                                         {% endfor %}
                                                     </select>
@@ -562,7 +568,7 @@
                                                   <div class="col-sm-9">
                                                     <!-- Input Group -->
                                                     <div class="input-group input-group-merge">
-                                                      <input type="number" class="js-toggle-password form-control" name="pakwan-bill" id="pakhwan" placeholder="0"
+                                                      <input type="number" class="js-toggle-password form-control" name="pakwan-bill" id="pakwan" placeholder="0"
                                                         aria-label="">
                                     
                                                     </div>
@@ -877,30 +883,31 @@
 {% block extra_javascript %}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-      var selectElement = document.querySelector('select[name="bill-no"]');
+  document.addEventListener('DOMContentLoaded', function () {
+    var selectElement = document.querySelector('select[name="bill-no"]');
 
-      var pakwanBillInput = document.querySelector('input[name="pakwan-bill"]');
 
-      var pakwanBillInput = document.getElementById("pakhwan");
+    var pakwan = document.getElementById("pakwan");
 
+
+    selectElement.addEventListener('change', function () {
+      var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+      var pakwanBill = selectedOption.getAttribute('data-pakwan-bill');
+      
+      console.log(pakwanBill)
+
+
+      if (pakwanBill !== null) {
+
+        pakwan.value = pakwanBill;
   
-      selectElement.addEventListener('change', function() {
-          var selectedOption = selectElement.options[selectElement.selectedIndex];
-          var pakwanBill = selectedOption.getAttribute('data-pakwan-bill');
-
-          if (pakwanBill !== null) {
-              pakwanBillInput.value = pakwanBill;
-          } else {
-
-
-              console.log('else')
-
-              pakwanBillInput.value = ''; // Clear the input if no data found
-          }
-      });
+      } else {
+        pakwanBillInput.value = ''; // Clear the input if no data found
+      }
+    });
   });
-  </script>
+</script>
   
 
     <!-- Required datatable js -->
@@ -911,7 +918,7 @@
 
     
     <!-- Responsive examples -->
-    <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+     <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
     <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
 
     <script src="{% static 'js/pages/ecommerce-datatables.init.js' %}"></script>
