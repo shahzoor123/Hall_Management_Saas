@@ -635,7 +635,7 @@ class UpdateEventExpense(LoginRequiredMixin, View):
             if bbq_type == 'Reshmi Kabab':
                 bbq = MyProducts.objects.get(product_name='Reshmi_Kabab')
 
-            elif bbq_type == "Chicken Achar Boti":
+            elif bbq_type == "Chicken Achari Boti":
                 bbq = MyProducts.objects.get(product_name='Chicken_Achari_Boti')
 
             elif bbq_type == "Seekh Kabab":
@@ -675,10 +675,13 @@ class UpdateEventExpense(LoginRequiredMixin, View):
             requests.electicity = electicity
             requests.naan_qty = naan
             requests.naan_bill = naan_price
+            requests.cold_drink_type = drinks_type
             requests.cold_drink = drinks
             requests.cold_drink_bill = drink
+            requests.water_bottles_type = water_type
             requests.water = water
             requests.water_bill = bottles
+            requests.bbq_type = bbq_type
             requests.bbq_kg_qty = bbqs
             requests.bbq_price = bbq
             requests.diesel_ltr = diesel
@@ -807,7 +810,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             if bbq_type == 'Reshmi Kabab':
                 bbq = MyProducts.objects.get(product_name='Reshmi_Kabab')
 
-            elif bbq_type == "Chicken Achar Boti":
+            elif bbq_type == "Chicken Achari Boti":
                 bbq = MyProducts.objects.get(product_name='Chicken_Achari_Boti')
 
             elif bbq_type == "Seekh Kabab":
