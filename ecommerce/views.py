@@ -694,7 +694,7 @@ class UpdateEventExpense(LoginRequiredMixin, View):
           
             requests.save()
                         
-      
+        print("i updated the expense")
 
         return redirect('event-expense') 
  
@@ -722,7 +722,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
     @transaction.atomic
     def post(self, request):
-        if request.method == "POST":
+            
             bill = request.POST.get('bill-no')
             bill_number = get_object_or_404(EventSale, pk=bill)
             pakwan = int(request.POST.get('pakwan-bill'))
@@ -811,7 +811,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                 bbq = MyProducts.objects.get(product_name='Chicken_Achari_Boti')
 
             elif bbq_type == "Seekh Kabab":
-                bbq = MyProducts.objects.get(product_name='Seekh_Kabab')
+                bbq = MyProducts.objects.get(product_name='Seekh_kabab')
 
             elif bbq_type == "Malai Boti":
                 bbq = MyProducts.objects.get(product_name='Malai_Boti')
