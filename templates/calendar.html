@@ -49,10 +49,10 @@
                     <div class="col-xl-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <button type="button" class="btn font-16 btn-primary waves-effect waves-light w-100"
-                                    id="btn-new-event" data-bs-toggle="modal" data-bs-target="#event-modal">
+                                <!-- <button type="button" class="btn font-16 btn-primary waves-effect waves-light w-100"
+                                    id="btn-new-event" data-bs-toggle="modal" >
                                     Create New Event
-                                </button>
+                                </button> -->
                                 <div id="external-events">
                                     <br>
                                     <p class="text-muted">Drag and drop your event or click in the calendar</p>
@@ -120,12 +120,12 @@
 
                                             </div>
                                             <div class="col-12">
-                                                <div class="mb-3">
+                                                <!-- <div class="mb-3">
                                                     <label id="location" class="form-label">Event Location</label>
                                                     <input class="form-control" placeholder="Lawn Or Hall" type="text"
                                                         name="location" id="location" value="">
 
-                                                </div>
+                                                </div> -->
                                                 <div class="col-12">
                                                     <div class="mb-3">
                                                         <label id="customer-name" class="form-label">Event
@@ -138,11 +138,11 @@
                                                     <!-- end col-->
                                                     <!-- end col-->
                                                 </div>
-                                                <div class="col-12 text-end">
+                                                <!-- <div class="col-12 text-end">
                                                     <button type="submit" class="btn btn-danger" id="btn-save-event">Delete</button>
                                                      <button type="button" class="btn btn-info" id="btn-save-event">Clear</button>
                                                     <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
-                                                </div>
+                                                </div> -->
                                                 <!-- end row-->
                                 </form>
 
@@ -164,6 +164,7 @@
     <script>
 
         var serializedEvents = JSON.parse('{{ serialized_events|safe }}');
+
         
 
 

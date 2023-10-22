@@ -25,12 +25,11 @@
 
       var events = document.getElementById("h1");
       var value = events.dataset.myVariable;
-      console.log(value);
 
       var formattedEvents = serializedEvents.map(function (event) {
           return {
-              title: event.fields.customer_name,
-              start: event.fields.event_date,
+              title: event.fields.event_title,
+              start: event.fields.start_date,
           };
       });
 
@@ -51,12 +50,11 @@
 
           eventClick: function (e) {
             a.modal("show");
-            n.removeClass("was-validated");
-            n[0].reset();
             l = e.event;
-            v("#event-title").val(l.title);
-            v("#start_date").val(l.start.toISOString().split('T')[0]); // Set the start date
-            v("#end_date").val(l.end.toISOString().split('T')[0]); // Set the end date
+            console.log(l)
+            v("#customer-name").val(l.fields.event_title);
+            v("#event-date").val(l.start_date.toISOString().split('T')[0]); // Set the start date
+            v("#event_timing").val(l.end.toISOString().split('T')[0]); // Set the end date
             v("#event-time").val(l.start.toISOString().split('T')[1].slice(0, 5)); // Set the event time
             i = null;
             t.text("Edit Event");
