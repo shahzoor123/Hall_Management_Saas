@@ -30,6 +30,7 @@
           return {
               title: event.fields.event_title,
               start: event.fields.start_date,
+             
           };
       });
 
@@ -50,15 +51,21 @@
 
           eventClick: function (e) {
             a.modal("show");
+          
             l = e.event;
-            console.log(l)
-            v("#customer-name").val(l.fields.event_title);
-            v("#event-date").val(l.start_date.toISOString().split('T')[0]); // Set the start date
-            v("#event_timing").val(l.end.toISOString().split('T')[0]); // Set the end date
-            v("#event-time").val(l.start.toISOString().split('T')[1].slice(0, 5)); // Set the event time
-            i = null;
-            t.text("Edit Event");
-            i = null;
+
+            var customerName = l.title;
+            var eventDate = l.start.toISOString().split('T')[0];
+            var eventTime= l.start.toISOString().split('T')[1].slice(0, 5); // Access the title of the clicked event
+
+            console.log(customerName);
+            console.log(eventDate);
+            console.log(eventTime);
+
+            v("#Customer_Name").val(customerName);
+            v("#Event_Date").val(eventDate); // Set the start date
+            // v("#end_date").val(l.end.toISOString().split('T')[0]); // Set the end date
+            v("#event-time").val(eventTime); // Set the event time
         },
         
           dateClick: function (e) {
