@@ -1201,32 +1201,77 @@ def update_deal(request, pk):
     
     print('i am active get update deals')
     
-    food_list = []
-    products = MyProducts.objects.all()
-    deal = get_object_or_404(Deals, pk=pk)
-    items = MyProducts.objects.filter(deals=deal)
-    for item in items:
-        food_list.append(item.product_name)
-
-    food_menu = ', '.join(food_list)
-
-    sale = EventSale.objects.all()
-
-
-    deals = Deals.objects.all()
-
-    combined_data = zip(items, products)
+    food_menu = []
     
+    eventsale = EventSale.objects.filter(id=pk) 
+    
+    for i in eventsale:
+        food_menu.append(i.food_menu)
 
+    
+        # Remove any leading/trailing whitespace and the trailing comma
+    cleaned_data = food_menu[0].strip().rstrip(', ')
+
+    # Split the cleaned string into individual items
+    items = cleaned_data.split(', ')
+
+    # Initialize an empty dictionary to store the product information
+    product_data = {}
+
+    # Iterate through the items and extract product name and quantity
+    for item in items:
+        name, quantity = map(str.strip, item.split('('))
+        quantity = int(quantity.rstrip(')'))
+        product_data[name] = quantity
+
+    # Convert the dictionary to JSON
+    json_data = json.dumps(product_data)
+
+    print(json_data)
+    
+    # Parse the JSON data back to a Python dictionary
+    product_data = json.loads(json_data)
+
+    # Initialize a dictionary to store product names and their prices
+    product_prices = {}
+
+    # Iterate through the product names and retrieve their prices
+    for product_name, quantity in product_data.items():
+        product = MyProducts.objects.filter(product_name=f"{product_name}").first()
+        if product:
+            price = product.price
+            product_prices[product_name] = {
+                "name": product_name,
+                "quantity": quantity,
+                "price": price
+            }
+        else:
+            # Handle the case where a product is not found
+            product_prices[product_name] = {
+                "quantity": quantity,
+                "price": None
+            }
+
+    # Convert the product prices to JSON
+    json_product_prices = json.dumps(product_prices)
+
+    print(json_product_prices)
+    
+    products = MyProducts.objects.filter(status=1)
+    product_json = []
+    for product in products:
+        product_json.append({'id': product.id, 'name': product.product_name, 'price': float(product.price)})
+
+
+    all_products = MyProducts.objects.filter(status=1)
     context = {
-                'combined_data': combined_data,
-                'items' : items,
-                'product': products,
-                'Deal_name' : deal,
-                'food_menu' : food_menu,
-                'sale' : sale,
-                'deal' : pk
+
+                'products': all_products,
+                'product_json': json_product_prices,
+                'food_menu' : json.dumps(food_menu),
+                'myproducts': json.dumps(product_json),
+
             }
 
           
-    return render(request, 'items/pos.html' , context)
+    return render(request, 'items/update_deals.html' , context)

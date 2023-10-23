@@ -1,5 +1,4 @@
-{% extends 'partials/primary_base.html' %}
-
+{% extends 'partials/base.html' %}
 {% load static %}
 
 {% block title %}Add Product{% endblock title %}
@@ -15,9 +14,6 @@
 
 <!-- dropzone css -->
 <link href="{% static  'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
-
-
-
 
 {% endblock extra_css %}
 
@@ -46,25 +42,47 @@
         </div>
       </div>
     </div>
-
-
-
-
     <!-- end page title -->
     <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
 
       <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+        {% include "partials/alerts.html" %}
         <div class="mdc-card">
-          {% include "partials/alerts.html" %}
-          
+
           <form action="POST" id="pos-form">
 
             <fieldset>
-              <legend>{{Deal_name}}</legend>
+              <legend>Add Products</legend>
               <div class="row align-items-end">
 
+                <div class="col-lg-6 col-md-5 col-sm-12">
+                  <div class="form-group mb-3">
+                    <label for="product-id">Select Product</label>
 
 
+                    <select multiple="multiple" id="product-id" type="search"
+                      class="form-select form-select-sm select2">
+                      <option value="" disabled selected></option>
+                      {% for product in products %}
+                      <option value="{{ product.pk }}">{{ product.product_name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-5 col-md-12">
+                  <div class="form-group mb-3">
+                    <label for="product-qty">Qty</label>
+                    <input style="height: 38px;" type="number" class="form-control form-control-sm text-center"
+                      step="any" id="product-qty" value="1">
+                  </div>
+
+                </div>
+                <div class="col-lg-2 col-md-2 col-md-12">
+                  <div class="form-group mb-3">
+                    <button style="height: 38px;" class="btn btn-light btn-sm bg-gradient border  text-start"
+                      type="button" id="add_item"><i class="mdi mdi-plus"></i> Add Item</button>
+                  </div>
+                </div>
 
 
               </div>
@@ -72,45 +90,74 @@
             <fieldset>
 
               <div class="d-flex w-100" id="POS-field">
-                <div class="col-9 bg-gradient ">
-                  <table class="table">
+                <style>
+                  /* Add your custom styles here */
+                  .bg-gradient {
+                    /* Add your background gradient styles here */
+                    background-color: rgb(239, 239, 239);
+                    border-radius: 20px;
+                  }
+
+                  .table {
+                    /* Add your table styles here */
+                    border-collapse: collapse;
+                    width: 100%;
+                    border: 2px solid #000000;
+                    border-radius: 10px;
+                  }
+
+                  th,
+                  td {
+                    /* Add your header and cell styles here */
+                    padding: 8px;
+
+                    border-bottom: 1px solid #ddd;
+                  }
+
+                  th {
+                    background-color: #333;
+                    color: rgb(10, 10, 10);
+                    text-align: center;
+                  }
+
+                  tbody tr:nth-child(even) {
+                    /* Add your alternate row styles here */
+                    background-color: #f2f2f2;
+                    text-align: center;
+                  }
+
+                  /* Add more custom styles as needed */
+                </style>
+
+                <div class="col-9 bg-gradient">
+                  <table class="table" id="data-table">
                     <colgroup>
-                      <col width="20%">
                       <col width="5%">
-                      <col width="10%">
+                      <col width="5%">
+                      <col width="5%">
                       <col width="10%">
                       <col width="10%">
                     </colgroup>
                     <thead>
-                      <tr class="bg-dark bg-gradient  text-light">
-                        <!-- <th class="py-1 px-2 text-center  ">No</th> -->
-                        <th class="py-1 px-2 text-center  ">Product</th>
-                        <th class="py-1 px-2 text-center  ">QTY</th>
-                        <th class="py-1 px-2 text-center  ">Price</th>
-                        <th class="py-1 px-2 text-center  ">Total</th>
-
+                      <tr class="bg-dark bg-gradient bg-opacity-50 text-light">
+                        <th class="py-1 px-2">No</th>
+                        <th class="py-1 px-2">QTY</th>
+                        <th class="py-1 px-2">Product</th>
+                        <th class="py-1 px-2">Price</th>
+                        <th class="py-1 px-2">Total</th>
                       </tr>
                     </thead>
                     <tbody>
 
-                      {% for dish, price in combined_data %}
-                      <tr>
-                        <!-- <th class="py-1 px-2 text-center">{{ dish.id }}</th> -->
-                        
-                        <th class="py-1 px-2 text-center">{{ dish.product_name }}</th>
-                        <th><input type="number" id="positive-integer-input" class="item-qty form-control center" data-price="{{ price.price }}" min="1" value="0" style="width: 100px; border-radius: 10px;"></th>
-                        <span hidden class="subtotal">0.00</span>
-                        <th class="py-1 px-2 text-center">{{ price.price }}</th>
-                        <td class="py-1 px-2 text-center total-value">0.00</td> <!-- Add a new 'td' for the total value -->
-                      </tr>
-                    {% endfor %}
-                
-
-
-
                     </tbody>
                   </table>
                 </div>
+
+
+
+
+
+
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
@@ -119,50 +166,58 @@
                         <form action="#">
                           <div class="mb-4">
                             <label class="form-label">Sub Total</label>
-                            <div class="input-group " id="datepicker1">
-                              <input type="text" class="form-control" name="sub-total" id="subtotal" value="0.00" readonly>
+                            <div class="input-group " id="subtotal">
+                              <input type="number" class="form-control " name="sub_total" value="0">
+
+                              <span class="input-group-text" id="sub_total">0.00</span>
                             </div><!-- input-group -->
                           </div>
                           <div class="mb-4">
                             <label class="form-label">Number of Peoplee</label>
-                            <div class="input-group" id="no-of-people1">
-                              <input type="number" class="form-control" min="1" id="no-of-people" value="1">
-
+                            <div class="input-group">
+                              <input type="number" class="form-control" id="no-of-people" min="0" name="tax" value="1">
+                              <span class="input-group-text">0</span>
                             </div><!-- input-group -->
                           </div>
                           <div class="mb-4">
                             <label class="form-label">Hall Charges</label>
-                            <div class="input-group" id="datepicker3">
-                              <input type="number" class="form-control" min="1" id="hall-charges" value="0">
-
+                            <div class="input-group">
+                              <input type="number" class="form-control" id="hall-charges" step="any" name="hall"
+                                value="0">
+                              <span class="input-group-text">0</span>
                             </div><!-- input-group -->
                           </div>
                           <div class="mb-4">
                             <label class="form-label">Menu/head</label>
-                            <div class="input-group" id="datepicker3">
-                              <input type="text" id="per-head" class="form-control" value="0.00" readonly>
+                            <div class="input-group">
+                              <input type="number" class="form-control" id="per-head" name="tax_amount" value="0">
+                              <span class="input-group-text" id="tax_amount">0.00</span>
                             </div><!-- input-group -->
                           </div>
                           <div class="mb-4">
                             <label class="form-label">Grand Total</label>
-
+                            <input type="hidden" name="grand_total" value="0">
+                            <input type="hidden" name="tendered_amount" value="0">
+                            <input type="hidden" name="amount_change" value="0">
+                            <input type="hidden" name="grand_total" value="0">
+                            <input type="hidden" name="grand_total" value="0">
                             <div class="input-group" id="datepicker3">
-
-                              <input type="text" class="form-control" id="grand-total" value="0.00" readonly>
-
+                              <input type="text" class="form-control" data-date-container='#datepicker3'
+                                data-date-format="dd M, yyyy" data-date-multidate="true">
+                              <span class="input-group-text" id="grand_total">0.00</span>
                             </div><!-- input-group -->
                           </div>
 
                           <div class="row row-cols-4">
                             <div class="col-md-1 text-end">
                               <!-- <button class="btn btn-primary btn-sm " type="button" id="check_out"> Checkout</button> -->
-                              <a class="btn btn-primary btn-sm " data-bs-toggle="modal"
+                              <a href="#" class="btn btn-primary btn-sm " data-bs-toggle="#"
                                 data-bs-target="#exampleModalScrollable" data-bs-container="#tooltip-container1"
-                                data-bs-toggle="tooltip" data-bs-placement="top" onclick="populateNumOfPeople()"> Checkout </a>
+                                data-bs-toggle="tooltip" data-bs-placement="top" onclick="populateNumOfPeople()"> Save
+                              </a>
 
                             </div>
                           </div>
-
 
                         </form>
                       </div>
@@ -185,10 +240,11 @@
 
                 <div class="modal-body">
 
-                  <form class="form" id="sale-form" enctype="multipart/form-data" action="" method="POST">
+                  <form class="form" id="sale-form" enctype="multipart/form-data" action="{% url 'custom-menu' %}"
+                    method="POST">
                     {% csrf_token %}
 
-                   
+
                     <!-- Form -->
                     <div class="row mb-4">
                       <label for="" class="col-sm-3 col-form-label form-label">Status</label>
@@ -304,11 +360,11 @@
                         <div class="input-group input-group-merge">
 
 
-                        
 
-                          <input type="text" class="form-control" autocomplete="off" value="{{Deal_name}}" readonly>
 
-                          <input type="hidden" class="form-control" autocomplete="off" name="deals" value="{{Deal_name}}">
+                          <input type="text" class="form-control" autocomplete="off" value="Custom Deal" readonly>
+
+                          <input type="hidden" class="form-control" autocomplete="off" name="deals" value="Custom Deal">
 
                         </div>
                         <!-- End Input Group -->
@@ -329,6 +385,7 @@
                     </div>
                     <!-- End Form -->
 
+
                     <!-- Form -->
                     <div class="row mb-4">
                       <label for="" class="col-sm-3 col-form-label form-label">Customer number</label>
@@ -340,6 +397,20 @@
                             placeholder="Customer number" aria-label="">
 
                         </div>
+                        <!-- End Input Group -->
+                      </div>
+                    </div>
+                    <!-- End Form -->
+
+
+                    <!-- Form -->
+                    <div class="row mb-4">
+                      <label for="" class="col-sm-3 col-form-label form-label">Menu Amount</label>
+
+                      <div class="col-sm-9">
+                        <!-- Input Group -->
+                        <input type="text" class="js-toggle-password form-control" name="menu-amount" id="menu-amount"
+                          placeholder="Menu Amount" aria-label="">
                         <!-- End Input Group -->
                       </div>
                     </div>
@@ -383,75 +454,62 @@
                     <!-- Form -->
                     <div class="row mb-4">
                       <label for="" class="col-sm-3 col-form-label form-label">Stage Charges</label>
-        
+
                       <div class="col-sm-9">
                         <!-- Input Group -->
                         <div class="input-group input-group-merge">
                           <input type="number" class="js-toggle-password form-control" name="stage-charges" id=""
                             placeholder="Stage Charges" aria-label="" value="0">
                         </div>
-        
+
                         <!-- End Input Group -->
                       </div>
                     </div>
                     <!-- End Form -->
-                    
+
                     <!-- Form -->
-                <div class="row mb-4">
-                  <label for="" class="col-sm-3 col-form-label form-label">Menu Amount</label>
-
-                  <div class="col-sm-9">
-                    <!-- Input Group -->
-                    <input type="text" class="js-toggle-password form-control" name="menu-amount" id="menu-amount"
-                      placeholder="Menu Amount" aria-label="">
-                    <!-- End Input Group -->
-                  </div>
-                </div>
-                <!-- End Form -->
-
-                     <!-- Form -->
-                     <div class="row mb-4">
+                    <div class="row mb-4">
                       <label for="" class="col-sm-3 col-form-label form-label">Couple Entry Charges</label>
-        
+
                       <div class="col-sm-9">
                         <!-- Input Group -->
                         <div class="input-group input-group-merge">
                           <input type="number" class="js-toggle-password form-control" name="entry-charges" id=""
                             placeholder="Entry Charges" aria-label="" value="0">
                         </div>
-        
+
                         <!-- End Input Group -->
                       </div>
                     </div>
                     <!-- End Form -->
 
-                     <!-- Form -->
-                     <div class="row mb-4">
+                    <!-- Form -->
+                    <div class="row mb-4">
                       <label for="" class="col-sm-3 col-form-label form-label">Gents</label>
-        
+
                       <div class="col-sm-9">
                         <!-- Input Group -->
                         <div class="input-group input-group-merge">
                           <input type="number" class="js-toggle-password form-control" name="gents" id=""
                             placeholder="Number of Gents" aria-label="" value="0">
                         </div>
-        
+
                         <!-- End Input Group -->
                       </div>
                     </div>
                     <!-- End Form -->
 
-                     <!-- Form -->
-                     <div class="row mb-4">
+                    <!-- Form -->
+                    <div class="row mb-4">
                       <label for="" class="col-sm-3 col-form-label form-label">Ladies</label>
-        
+
                       <div class="col-sm-9">
                         <!-- Input Group -->
                         <div class="input-group input-group-merge">
                           <input type="number" class="js-toggle-password form-control" name="ladies" id=""
                             placeholder="Number of ladies" aria-label="" value="0">
                         </div>
-        
+
                         <!-- End Input Group -->
                       </div>
                     </div>
@@ -463,9 +521,9 @@
                       <div class="col-sm-9">
                         <!-- Input Group -->
                         <div class="input-group input-group-merge">
-                          <input type="text" class="js-toggle-password form-control" id="menuDisplay" 
-                            aria-label="" readonly>
-                          <input type="hidden" class="js-toggle-password form-control" name="food-menu" id="menuInput" 
+                          <input type="text" class="js-toggle-password form-control" id="menuDisplay" aria-label=""
+                            readonly>
+                          <input type="hidden" class="js-toggle-password form-control" name="food-menu" id="menuInput"
                             aria-label="">
                         </div>
                         <!-- End Input Group -->
@@ -513,175 +571,244 @@
                   </form>
                 </div>
 
-
+              
 
               </div>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div>
       </div>
-    </div>
-    <noscript id="item-clone">
+      <noscript id="item-clone">
 
-      <tr>
-        <td class="px-2 py-1 text-center">
-          <button class="btn btn-sm btn-outline-danger rounded-0 rem-item" type="button"><i
-              class="mdi mdi-close"></i></button>
-        </td>
-        <td class="px-2 py-1">
-          <input type="hidden" name="product_id[]">
-          <input type="hidden" name="price[]">
-          <input type="number" name="qty[]" min="0" class="form-control form-control-sm rounded-0 text-center">
-        </td>
-        <td class="px-2 py-1 product_name text-start"></td>
-        <td class="px-2 py-1 product_price text-end"></td>
-        <td class="px-2 py-1 product_total text-end"></td>
-      </tr>
-    </noscript>
+        <tr>
+          <td class="px-2 py-1 text-center">
+            <button class="btn btn-sm btn-outline-danger rounded-0 rem-item" type="button"><i
+                class="mdi mdi-close"></i></button>
+          </td>
+          <td class="px-2 py-1">
+            <input type="hidden" name="product_id[]">
+            <input type="hidden" name="price[]">
+            <input type="number" name="qty[]" min="0"
+              class="form-control item-qty form-control-sm rounded-0 text-center">
+          </td>
+          <td class="px-2 py-1 product_name text-start"></td>
+          <td class="px-2 py-1 product_price text-end"></td>
+          <td class="px-2 py-1 product_total text-end"></td>
+        </tr>
+      </noscript>
 
-    {% endblock content %}
-    {% block extra_javascript %}
+      {% endblock content %}
+      {% block extra_javascript %}
+      <script>
+        var product_json = '{{ myproducts }}'
 
-    <!-- For positive integer -->
-
-
-
-
-    <!-- For item total -->
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      var itemQtyList = [];
-    
-      $('.item-qty').on('input', function () {
-        var quantity = parseFloat($(this).val());
-        var price = parseFloat($(this).data('price'));
-        var dishCode = $(this).data('dish-name');
-        var subtotal = (quantity * price).toFixed(2);
-    
-        $(this).closest('tr').find('.subtotal').text(subtotal);
-    
-        var total = (quantity * price).toFixed(2);
-        $(this).closest('tr').find('.total-value').text(total);
-    
-        // Update the quantity in the itemQtyList array
-        var itemIndex = itemQtyList.findIndex(item => item.dishCode === dishCode);
-        if (itemIndex !== -1) {
-          itemQtyList[itemIndex].quantity = quantity;
+        if (product_json == "" || product_json == "{}") {
+          product_json = {}
         } else {
-          itemQtyList.push({ dishCode: dishCode, quantity: quantity });
+          product_json = product_json.replaceAll('&quot;', '"')
+          product_json = $.parseJSON(product_json)
         }
-        console.log(itemQtyList);
-      });
-    
- 
-    </script>
-    
+        var prod_arr = {}
+        if (Object.keys(product_json).length > 0) {
+          Object.keys(product_json).map(k => {
+            prod_arr[product_json[k].id] = product_json[k]
+          })
+        }
+
+        function calc() {
+          var sub_total = 0;
+          var grand_total = 0;
+          $('#POS-field table tbody tr').each(function () {
+            price = $(this).find('[name="price[]"]').val()
+            qty = $(this).find('[name="qty[]"]').val()
+            qty = qty > 0 ? qty : 0
+            total = parseFloat(price) * parseFloat(qty)
+            $(this).find('.product_total').text(parseFloat(total).toLocaleString('en-US'))
+            sub_total += parseFloat(total)
+          })
+          tax2 = $('[name="tax"]').val()
+          hall = $('[name="hall"]').val()
+
+          tax = sub_total / tax2;
+          var hall = parseFloat(hall);
+          var perhead_charges = (tax + hall);
+          var total = tax2 * perhead_charges;
+
+          var tax_amount2 = parseFloat(tax);
+
+          $('#tax_amount').text(parseFloat(tax_amount2))
+          $('[name="tax_amount"]').val(parseFloat(tax_amount2))
+          $('#grand_total').text(parseFloat(tax2 * perhead_charges).toLocaleString('en-US'))
+          $('[name="grand_total"]').val(parseFloat(tax2 * perhead_charges))
+          $('#sub_total').text(parseFloat(sub_total).toLocaleString('en-US'))
+          $('[name="sub_total"]').val(parseFloat(sub_total))
 
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        function updateTotals() {
-          let subtotal = 0;
-          const quantityInputs = document.querySelectorAll(".item-qty");
-          const subtotalElements = document.querySelectorAll(".subtotal");
-          const hallChargesInput = document.getElementById("hall-charges");
-          const noOfPeopleInput = document.getElementById("no-of-people");
+        }
+        $(function () {
+          $('#product-id').select2({
+            theme: "classic",
+            width: '100%',
 
-          quantityInputs.forEach((input, index) => {
-            const price = parseFloat(input.dataset.price);
-            const quantity = parseInt(input.value, 10);
-            const subtotalValue = (price * quantity).toFixed(2);
-            subtotalElements[index].value = subtotalValue;
-            subtotal += parseFloat(subtotalValue);
+          })
+
+         
+
+          $(document).ready(function () {
+
+
+            var productData = JSON.parse('{{ product_json|escapejs }}');
+            
+            console.log(productData);
+
+            var qty = 1; // You can set the default quantity here
+
+            for (var product in productData) {
+              var productInfo = productData[product];
+              console.log(productInfo);
+
+              // Create a new row for each product
+              var tr = $($('noscript#item-clone').html()).clone();
+              tr.find('[name="qty[]"]').val(productInfo.quantity);
+              tr.find('[name="product_id[]"]').val(product);
+              tr.find('[name="price[]"]').val(productInfo.price);
+              tr.find('.product_name').text(productInfo.name);
+              tr.find('.product_price').text(parseFloat(productInfo.price).toLocaleString('en-US'));
+              tr.find('.product_total').text(parseFloat(productInfo.price * qty).toLocaleString('en-US'));
+
+              // Add the row to the table
+              $('#POS-field table tbody').append(tr);
+              calc(); // Update calculations
+
+              tr.find('[name="qty[]"]').on('input keypress keyup keydown', function () {
+                calc();
+              });
+
+              tr.find('.rem-item').click(function () {
+                if (confirm("Are you sure to remove " + productInfo.name + " product from the list?")) {
+                  tr.remove();
+                  calc(); // Update calculations
+                }
+              });
+            }
           });
 
-          const hallCharges = parseFloat(hallChargesInput.value);
-          const noOfPeople = parseInt(noOfPeopleInput.value, 10);
-          const perHead = (subtotal / noOfPeople).toFixed(2);
 
-          // Display Subtotal, Grand Total, and Per Head values
-          document.getElementById("subtotal").value = subtotal.toFixed(2);
-          const grandTotal = (subtotal + (hallCharges * noOfPeople)).toFixed(2);
-          document.getElementById("grand-total").value = grandTotal;
-          document.getElementById("per-head").value = perHead;
+
+
+
+
+
+          $('#add_item').click(function () {
+            var id = $('#product-id').val()
+            var qty = $('#product-qty').val()
+            console.log(id, qty)
+            if (id == '' || qty == '' || id == null || qty == null) {
+              alert("Product and Quantity Field is required!")
+              return false
+            }
+            if (!!prod_arr[id]) {
+              if ($('#POS-field table tbody input[name="product_id[]"][value="' + id + '"]').length > 0) {
+                alert('Item Already in the List.')
+                return false;
+              }
+              data = prod_arr[id]
+              var tr = $($('noscript#item-clone').html()).clone()
+              tr.find('[name="qty[]"]').val(qty)
+              tr.find('[name="product_id[]"]').val(id)
+              tr.find('[name="price[]"]').val(data.price)
+              tr.find('.product_name').text(data.name)
+              tr.find('.product_price').text(parseFloat(data.price).toLocaleString('en-US'))
+              tr.find('.product_total').text(parseFloat(data.price * qty).toLocaleString('en-US'))
+              $('#POS-field table tbody').append(tr)
+              $('#product-id').val('').trigger('change')
+              $('#product-qty').val(1)
+              calc()
+              tr.find('[name="qty[]"]').on('input keypress keyup keydown', function () {
+                calc()
+              })
+              tr.find('.rem-item').click(function () {
+                if (confirm("Are you sure to remove " + data.name + " product form list?") == true) {
+                  tr.remove()
+                  calc()
+                }
+              })
+            } else {
+              alert("Undefined Product");
+            }
+          });
+
+
+
+
+          $('[name="tax"]').on('input keypress keydown keyup', function () {
+            calc()
+          })
+
+          $('[id="hall-charges"]').on('input keypress keydown keyup', function () {
+            calc()
+          })
+        })
+
+        function populateNumOfPeople() {
+          // Get the value from the "Number of People" input in the first form
+          const numberOfPeopleInput = document.getElementById('no-of-people');
+          const numOfPeopleValue = numberOfPeopleInput.value;
+
+          // Set the value in the "Number of people" input field in the second form
+          const numOfPeopleInputForm2 = document.querySelector('form#sale-form [name="no-of-people"]');
+          numOfPeopleInputForm2.value = numOfPeopleValue;
+
+          // Get values from the first form
+          const hallChargesInput = document.getElementById('hall-charges');
+          const menuPerHeadInput = document.getElementById('per-head');
+
+
+          // Get the value of the sub_total input in Form 1
+          const subTotalInput = document.querySelector('input[name="sub_total"]');
+          const subTotalValue = subTotalInput.value;
+
+          // Set the value of the menu-amount input in Form 2
+          const menuAmountInput = document.querySelector('input[name="menu-amount"]');
+          menuAmountInput.value = subTotalValue;
+
+
+          // Calculate per head value
+          const perHeadValue = parseFloat(hallChargesInput.value) + parseFloat(menuPerHeadInput.value);
+
+          // Set values in the second form
+          const perHeadInputForm2 = document.querySelector('form#sale-form [name="per-head"]');
+          numOfPeopleInputForm2.value = numberOfPeopleInput.value;
+          perHeadInputForm2.value = Math.round(perHeadValue);
+
+          var menu = "";
+
+          // Iterate through table rows
+          $('#data-table tbody tr').each(function (index, row) {
+            var qty = $(row).find('.item-qty').val();
+            var productName = $(row).find('.product_name').text();
+
+            // Append product name and quantity to the menu string
+            menu += `${productName} (${qty}), `;
+          });
+
+          // Set the menu string to the input fields in Form 2
+          $('#menuDisplay').val(menu);
+          $('#menuInput').val(menu);
+
         }
+      </script>
+      <!-- twitter-bootstrap-wizard js -->
+      <script src="{% static  'libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
 
-        const quantityInputs = document.querySelectorAll(".item-qty");
-        quantityInputs.forEach((input) => {
-          input.addEventListener("input", updateTotals);
-        });
+      <script src="{% static  'libs/twitter-bootstrap-wizard/prettify.js' %}"></script>
 
-        const hallChargesInput = document.getElementById("hall-charges");
-        const noOfPeopleInput = document.getElementById("no-of-people");
-        hallChargesInput.addEventListener("input", updateTotals);
-        noOfPeopleInput.addEventListener("input", updateTotals);
-      });
+      <!-- select 2 plugin -->
+      <script src="{% static  'libs/select2/dist/js/select2.min.js' %}"></script>
 
-      function populateNumOfPeople() {
-        // Get the value from the "Number of People" input in the first form
-        const numberOfPeopleInput = document.getElementById('no-of-people');
-        const numOfPeopleValue = numberOfPeopleInput.value;
+      <!-- dropzone plugin -->
+      <script src="{% static  'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
 
-        // Set the value in the "Number of people" input field in the second form
-        const numOfPeopleInputForm2 = document.querySelector('form#sale-form [name="no-of-people"]');
-        numOfPeopleInputForm2.value = numOfPeopleValue;
-
-        // Get values from the first form
-      const hallChargesInput = document.getElementById('hall-charges');
-      const menuPerHeadInput = document.getElementById('per-head');
-
-
-   // Get the value of the sub-total input in Form 1
-   const subTotalInput = document.querySelector('input[name="sub-total"]');
-   const subTotalValue = subTotalInput.value;
-
-   // Set the value of the menu-amount input in Form 2
-   const menuAmountInput = document.querySelector('input[name="menu-amount"]');
-   menuAmountInput.value = subTotalValue;
-
-    
-      // Calculate per head value
-      const perHeadValue = (parseFloat(hallChargesInput.value) + parseFloat(menuPerHeadInput.value));
-
-      // Set values in the second form
-      const perHeadInputForm2 = document.querySelector('form#sale-form [name="per-head"]');
-      numOfPeopleInputForm2.value = numberOfPeopleInput.value;
-      perHeadInputForm2.value = perHeadValue.toFixed(2);
-        
-      const products = [];
-      const quantityInputs = document.querySelectorAll('.item-qty');
-    
-      quantityInputs.forEach(input => {
-        const quantity = parseInt(input.value);
-        if (quantity > 0) {
-          const product = input.closest('tr').querySelector('.py-1.px-2.text-center').textContent;
-          products.push(`${product} (${quantity})`);
-        }
-      });
-    
-      // Set the gathered product and quantity information in the "Food menu" input field in form 2
-      const menuDisplay = document.getElementById('menuDisplay');
-      const menuInput = document.getElementById('menuInput');
-    
-      menuDisplay.value = products.join(', ');
-      menuInput.value = products.join(', ');
-            
-      }
-      
-    </script>
-
-    <!-- twitter-bootstrap-wizard js -->
-    <script src="{% static  'libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
-
-    <script src="{% static  'libs/twitter-bootstrap-wizard/prettify.js' %}"></script>
-
-    <!-- select 2 plugin -->
-    <script src="{% static  'libs/select2/dist/js/select2.min.js' %}"></script>
-
-    <!-- dropzone plugin -->
-    <script src="{% static  'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
-
-    <!-- init js -->
-    <script src="{% static  'js/pages/ecommerce-add-product.init.js' %}"></script>
-    {% endblock extra_javascript %}
+      <!-- init js -->
+      <script src="{% static  'js/pages/ecommerce-add-product.init.js' %}"></script>
+      {% endblock extra_javascript %}
