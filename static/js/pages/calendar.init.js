@@ -29,7 +29,7 @@
           return {
               title: event.fields.event_title,
               start: event.fields.start_date,
-             
+      
           };
       });
 
@@ -51,17 +51,36 @@
           eventClick: function (e) {
             a.modal("show");
 
-            var events = document.getElementById("h1");
-            var value = events.dataset.myVariable;
-      
-            console.log(value);
-          
+            
+            var value = serializedEvents;
+
+            console.log(typeof(value));
             l = e.event;
 
             var customerName = l.title;
             var eventDate = l.start.toISOString().split('T')[0];
-            var eventTime= value.toISOString().split('T')[1].slice(0, 5); // Access the title of the clicked event
+            var eventTime = 'Night'; // Access the title of the clicked event
 
+
+
+            
+                    // Search for the event with a matching 'customerName'
+            var eventTime = null;
+            for (var i = 0; i < value.length; i++) {
+                var event = value[i].fields;
+                if (event.event_title === customerName) {
+                  eventTime = event.event_time;
+                  break;
+                }
+              }
+              
+              if (eventTime !== null) {
+                console.log("Event time for " + customerName + ": " + eventTime);
+              } else {
+                console.log("Event not found for customer: " + customerName);
+              }
+                    
+      
             console.log(customerName);
             console.log(eventDate);
             console.log(eventTime);
