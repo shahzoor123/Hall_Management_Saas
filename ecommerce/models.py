@@ -91,6 +91,7 @@ class EventSale(models.Model):
 
 class EventExpense(models.Model):
     bill = models.ForeignKey(EventSale, on_delete=models.PROTECT)
+    customer_name = models.CharField(max_length=50, blank=True)
     pakwan_bill = models.IntegerField(default=0, blank=True)
     electicity = models.IntegerField(default=0, blank=True)
 

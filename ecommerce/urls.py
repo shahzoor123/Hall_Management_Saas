@@ -26,6 +26,16 @@ urlpatterns = [
     
     path('update-product/<int:product_id>', views.UpdateProducts.as_view(),name='update-product'),
     path('delete-product/<int:product_id>/', views.DeleteProducts, name='delete-product'),
+    path('delete-unit/<int:unit_id>/', views.DeleteUnit, name='delete-unit'),
+    path('update-unit/<int:unit_id>/', views.UpdateUnit.as_view(), name='update-unit'),
+    path('update-category/<int:category_id>/', views.UpdateCategory.as_view(), name='update-category'),
+    path('delete-category/<int:category_id>/', views.DeleteCategory, name='delete-category'),
+    path('update-brand/<int:brand_id>/', views.UpdateBrand.as_view(), name='update-brand'),
+    path('delete-brand/<int:brand_id>/', views.DeleteBrand, name='delete-brand'),  
+    path('delete-expense/<int:expense_id>/', views.DeleteExpense, name='delete-expense'),   
+
+
+
     path('delete-sale/<int:sale_id>/', views.delete_sale, name='delete-sale'),
     path('kitchen-sale', views.Kitchensale.as_view(),name='kitchen-sale'),
     path('kitchen-expense', views.Kitchenexpense.as_view(),name='kitchen-expense'),
