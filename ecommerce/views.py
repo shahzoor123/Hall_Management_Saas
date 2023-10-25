@@ -714,22 +714,68 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
     def get(self, request):
         expense = EventExpense.objects.all()
+        
         events = EventSale.objects.all()
-        # for i in get_eventsale:
-        #     print(i.recieved_amount)
-        # if amount == 0:
-        #     payment_status = 'Unpaid'
+
+        # if len(expense):
+        total_expenses = EventExpense.objects.aggregate(
+            total_deisel = Sum('diesel_ltr'),
+            total_electricity = Sum('electicity'),
+            total_pakwan=Sum('pakwan_bill'),
+            total_naan=Sum('naan_bill'),
+            total_cold_drink=Sum('cold_drink_bill'),
+            total_water=Sum('water_bill'),
+            total_bbq_price=Sum('bbq_price'),
+            total_waiters_bill=Sum('waiters_bill'),
+            total_stuff_bill=Sum('stuff_bill'),
+            total_dhobi=Sum('dhobi'),
+            total_other_expense=Sum('other_expense'),
+            total_setup_bill=Sum('setup_bill'),
+            total_decore_bill=Sum('decor_bill'),
+            total_expense=Sum('total_expense')
+        )
+
+        # Access the sums for each field
+        total_pakwan = total_expenses['total_pakwan']
+        total_naan = total_expenses['total_naan']
+        total_cold_drink = total_expenses['total_cold_drink']
+        total_water = total_expenses['total_water']
+        total_bbq_price = total_expenses['total_bbq_price']
+        total_waiters_bill = total_expenses['total_waiters_bill']
+        total_stuff_bill = total_expenses['total_stuff_bill']
+        total_dhobi = total_expenses['total_dhobi']
+        total_other_expense = total_expenses['total_other_expense']
+        total_setup_bill = total_expenses['total_setup_bill']
+        total_decore_bill = total_expenses['total_decore_bill']
+        total_total_expense = total_expenses['total_expense']
+        total_electricity = total_expenses['total_electricity']
+        total_diesel = total_expenses['total_deisel']
         context = {
             "expenses": expense,
-            "events": events
+            "events": events,
+            "electricity": total_electricity,
+            "diesel": total_diesel,
+            "pakwan": total_pakwan,
+            "naan": total_naan,
+            'cold_drink': total_cold_drink, 
+            "water": total_water,
+            "bbq": total_bbq_price,
+            "waiters": total_waiters_bill,
+            "stuff": total_stuff_bill,
+            "dhobi": total_dhobi,
+            "other_expenses": total_other_expense,
+            "setup": total_setup_bill,
+            "decor": total_decore_bill,
+            "total": total_total_expense,
+            "len_expense" : len(expense)
         }
         return render(request, self.template_name, context)
 
     @transaction.atomic
     def post(self, request):
-        try: 
+        # try: 
             bill = request.POST.get('bill-no')
-            bill_number = get_object_or_404(EventSale, bill_no=int(bill))
+            bill_number = get_object_or_404(EventSale, pk=bill)
             customer_name = bill_number.customer_name
             pakwan = int(request.POST.get('pakwan-bill'))
 
@@ -817,7 +863,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                 bbq = MyProducts.objects.get(product_name='Chicken_Achari_Boti')
 
             elif bbq_type == "Seekh Kabab":
-                bbq = MyProducts.objects.get(product_name='Seekh_kabab')
+                bbq = MyProducts.objects.get(product_name='Seekh_Kabab')
 
             elif bbq_type == "Malai Boti":
                 bbq = MyProducts.objects.get(product_name='Malai_Boti')
@@ -875,6 +921,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                         waiters_bill=str(waiters),
                         stuff_bill=str(stuff),
                         dhobi=str(dhobi),
+                        other_expense = other_expenses,
                         other_expense_detals= expense_details,
                         setup_bill=str(setup),
                         decor= decor_details,
@@ -884,9 +931,9 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                 messages.success(request, "Expense Added Successfully")
                 return redirect('event-expense')
 
-        except:
-            messages.error(request, "Invalid form! Please check form submission again.")
-            return redirect('event-expense')
+        # except:
+        #     messages.error(request, "Invalid form! Please check form submission again.")
+        #     return redirect('event-expense')
             
             
             
