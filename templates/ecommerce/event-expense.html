@@ -192,7 +192,7 @@
                                                       <select class="js-select form-select" autocomplete="off" name="bill">
                                                         <option value="{{expense.bill}}">bill_{{ expense.bill }}</option>
                                                         {% for event in events %}
-                                                        <option value="{{ event.id }}">{{ event.customer_name }}_bill</option>
+                                                        <option value="{{ event.id }}" data-pakhwan-bill="{{ event.total_menu }}">{{ event.customer_name }}_bill</option>
                                                         {% endfor %}
                                                     </select>
                                                         
@@ -211,7 +211,7 @@
                                                     <!-- Input Group -->
                                                     <div class="input-group input-group-merge">
                                                       <input type="number" class="js-toggle-password form-control" name="pakhwan" id="pakhwan" placeholder="0"
-                                                        aria-label="" value="{{expense.pakwan_bill}}">
+                                                        aria-label="" value="{{expense.pakwan_bill}}" >
                                     
                                                     </div>
                                     
@@ -889,6 +889,8 @@
 
     var pakwan = document.getElementById("pakwan");
 
+    var pakhwan = document.getElementById("pakhwan");
+
 
     selectElement.addEventListener('change', function () {
       var selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -906,6 +908,36 @@
         pakwanBillInput.value = ''; // Clear the input if no data found
       }
     });
+    
+  });
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var selectElement = document.querySelector('select[name="bill"]');
+
+
+    var pakwan = document.getElementById("pakhwan");
+
+   
+
+
+    selectElement.addEventListener('change', function () {
+      var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+      var pakwanBill = selectedOption.getAttribute('data-pakhwan-bill')
+      
+      console.log(pakwanBill)
+
+
+      if (pakwanBill !== null) {
+
+        pakwan.value = pakwanBill;
+  
+      } else {
+        pakwanBillInput.value = ''; // Clear the input if no data found
+      }
+    });
+    
   });
 </script>
   

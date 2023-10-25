@@ -163,20 +163,20 @@
                     <div class="card">
                       <div class="card-body calc">
 
-                        <form action="#">
+                        <form action="#" style="text-align: center;">
                           <div class="mb-4">
                             <label class="form-label">Sub Total</label>
                             <div class="input-group " id="subtotal">
                               <input type="number" class="form-control " name="sub_total" value="0">
 
-                              <span class="input-group-text" id="sub_total">0.00</span>
+
                             </div><!-- input-group -->
                           </div>
                           <div class="mb-4">
-                            <label class="form-label">Number of Peoplee</label>
+                            <label class="form-label">Number of People</label>
                             <div class="input-group">
                               <input type="number" class="form-control" id="no-of-people" min="0" name="tax" value="1">
-                              <span class="input-group-text">0</span>
+
                             </div><!-- input-group -->
                           </div>
                           <div class="mb-4">
@@ -184,7 +184,7 @@
                             <div class="input-group">
                               <input type="number" class="form-control" id="hall-charges" step="any" name="hall"
                                 value="0">
-                              <span class="input-group-text">0</span>
+
                             </div><!-- input-group -->
                           </div>
                           <div class="mb-4">
@@ -202,8 +202,8 @@
                             <input type="hidden" name="grand_total" value="0">
                             <input type="hidden" name="grand_total" value="0">
                             <div class="input-group" id="datepicker3">
-                              <input type="text" class="form-control" data-date-container='#datepicker3'
-                                data-date-format="dd M, yyyy" data-date-multidate="true">
+                              <input type="text" class="form-control">
+
                               <span class="input-group-text" id="grand_total">0.00</span>
                             </div><!-- input-group -->
                           </div>
@@ -211,10 +211,7 @@
                           <div class="row row-cols-4">
                             <div class="col-md-1 text-end">
                               <!-- <button class="btn btn-primary btn-sm " type="button" id="check_out"> Checkout</button> -->
-                              <a href="#" class="btn btn-primary btn-sm " data-bs-toggle="#"
-                                data-bs-target="#exampleModalScrollable" data-bs-container="#tooltip-container1"
-                                data-bs-toggle="tooltip" data-bs-placement="top" onclick="populateNumOfPeople()"> Save
-                              </a>
+                              <a class="btn btn-primary btn-sm" onclick="CollectUpdateData()"> Save </a>
 
                             </div>
                           </div>
@@ -571,7 +568,7 @@
                   </form>
                 </div>
 
-              
+
 
               </div>
             </div><!-- /.modal-content -->
@@ -652,14 +649,17 @@
 
           })
 
-         
+
 
           $(document).ready(function () {
 
 
             var productData = JSON.parse('{{ product_json|escapejs }}');
-            
+
+            var ammounts = JSON.parse('{{ ammounts }}');
+
             console.log(productData);
+            console.log(ammounts[0]);
 
             var qty = 1; // You can set the default quantity here
 
@@ -690,6 +690,14 @@
                   calc(); // Update calculations
                 }
               });
+              // Get the value from the "Number of People" input in the first form
+              const numberOfPeopleInput = document.getElementById('no-of-people');
+              numberOfPeopleInput.value = ammounts[0];
+
+              // Get values from the first form
+              const hallChargesInput = document.getElementById('hall-charges');
+              hallChargesInput.value = ammounts[1];
+
             }
           });
 
@@ -750,6 +758,107 @@
           })
         })
 
+        function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === name + '=') {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        }
+
+
+
+        function CollectUpdateData() {
+
+          var menu = "";
+
+          // Iterate through table rows
+          $('#data-table tbody tr').each(function (index, row) {
+            var qty = $(row).find('.item-qty').val();
+            var productName = $(row).find('.product_name').text();
+            var productprice = $(row).find('.product_price').text();
+
+            var allvalues = "";
+            // Get the value of the sub_total input in Form 1
+            const subTotalInput = document.querySelector('input[name="sub_total"]');
+            // console.log(subTotalInput.value);
+            // Get the value from the "Number of People" input in the first form
+            const numberOfPeopleInput = document.getElementById('no-of-people');
+            // console.log(numberOfPeopleInput.value);
+
+            // Get values from the first form
+            const hallChargesInput = document.getElementById('hall-charges');
+            // console.log(hallChargesInput.value);
+
+            // Set the value of the menu-amount input in Form 2
+            const menuAmountInput = document.getElementById("per-head");
+            // console.log(menuAmountInput.value);
+
+            menu += `${productName} (${qty}), `;
+            // console.log(menu)
+            // Append product name and quantity to the menu string
+            allvalues += `menu : ${menu} values : ${subTotalInput.value} ${numberOfPeopleInput.value} ${hallChargesInput.value} ${parseInt(menuAmountInput.value)} `;
+            console.log(allvalues)
+
+
+            var pkValue = '{{ pk }}'; // this is comming from django which is a primary key
+
+            var x = parseInt(pkValue);
+
+
+            const url = `ecommerce/update_food_menu/${pkValue}`;
+
+            console.log('Request URL:', url);
+
+
+
+            console.log(typeof (pkValue));
+
+            const csrfToken = getCookie('csrftoken');
+
+            fetch(url, {
+
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': csrfToken,// Include a function to get the CSRF token from cookies
+              },
+              body: new URLSearchParams({ allvalues }).toString(),
+            })
+              .then(response => {
+                if (response.ok) {
+                  return response.json();
+                } else {
+                  console.error('Error:', response.status, response.statusText);
+                }
+              })
+              .then(data => {
+                console.log(data);  // Handle the response from Django
+              })
+              .catch(error => {
+                console.error('Fetch error:', error);
+              });
+
+          });
+
+          // Set the menu string to the input fields in Form 2
+          $('#menuDisplay').val(menu);
+          $('#menuInput').val(menu);
+
+
+        }
+
+
+
+
         function populateNumOfPeople() {
           // Get the value from the "Number of People" input in the first form
           const numberOfPeopleInput = document.getElementById('no-of-people');
@@ -774,27 +883,14 @@
 
 
           // Calculate per head value
-          const perHeadValue = parseFloat(hallChargesInput.value) + parseFloat(menuPerHeadInput.value);
+          const perHeadValue = parseInt(hallChargesInput.value) + parseInt(menuPerHeadInput.value);
 
           // Set values in the second form
           const perHeadInputForm2 = document.querySelector('form#sale-form [name="per-head"]');
           numOfPeopleInputForm2.value = numberOfPeopleInput.value;
           perHeadInputForm2.value = Math.round(perHeadValue);
 
-          var menu = "";
 
-          // Iterate through table rows
-          $('#data-table tbody tr').each(function (index, row) {
-            var qty = $(row).find('.item-qty').val();
-            var productName = $(row).find('.product_name').text();
-
-            // Append product name and quantity to the menu string
-            menu += `${productName} (${qty}), `;
-          });
-
-          // Set the menu string to the input fields in Form 2
-          $('#menuDisplay').val(menu);
-          $('#menuInput').val(menu);
 
         }
       </script>

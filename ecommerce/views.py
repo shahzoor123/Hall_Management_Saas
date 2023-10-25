@@ -1197,81 +1197,108 @@ class Calendar(LoginRequiredMixin,TemplateView):
         return render(request, 'calendar.html', {'serialized_events': serialized_event,'event_sale' : sale})
     
 
-def update_deal(request, pk):
-    
-    print('i am active get update deals')
-    
-    food_menu = []
-    
-    eventsale = EventSale.objects.filter(id=pk) 
-    
-    for i in eventsale:
-        food_menu.append(i.food_menu)
 
+class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
+    template_name = "items/update_deals.html"
     
+
+    def get(self, request, pk):
+
+        print('i am active get update deals')
+        
+        food_menu = []
+        ammounts = []
+        
+        
+        eventsale = EventSale.objects.filter(id=pk) 
+        
+        for i in eventsale:
+            food_menu.append(i.food_menu)
+            ammounts.append(i.no_of_people)
+            ammounts.append(i.stage_charges)
+        print(ammounts,'f1')    
+
+        
         # Remove any leading/trailing whitespace and the trailing comma
-    cleaned_data = food_menu[0].strip().rstrip(', ')
+        cleaned_data = food_menu[0].strip().rstrip(', ')
 
-    # Split the cleaned string into individual items
-    items = cleaned_data.split(', ')
+        # Split the cleaned string into individual items
+        items = cleaned_data.split(', ')
 
-    # Initialize an empty dictionary to store the product information
-    product_data = {}
+        # Initialize an empty dictionary to store the product information
+        product_data = {}
 
-    # Iterate through the items and extract product name and quantity
-    for item in items:
-        name, quantity = map(str.strip, item.split('('))
-        quantity = int(quantity.rstrip(')'))
-        product_data[name] = quantity
+        # Iterate through the items and extract product name and quantity
+        for item in items:
+            name, quantity = map(str.strip, item.split('('))
+            quantity = int(quantity.rstrip(')'))
+            product_data[name] = quantity
 
-    # Convert the dictionary to JSON
-    json_data = json.dumps(product_data)
+        # Convert the dictionary to JSON
+        json_data = json.dumps(product_data)
 
-    print(json_data)
+        print(json_data)
+        
+        # Parse the JSON data back to a Python dictionary
+        product_data = json.loads(json_data)
+
+        # Initialize a dictionary to store product names and their prices
+        product_prices = {}
+
+        # Iterate through the product names and retrieve their prices
+        for product_name, quantity in product_data.items():
+            product = MyProducts.objects.filter(product_name=f"{product_name}").first()
+            if product:
+                price = product.price
+                product_prices[product_name] = {
+                    "name": product_name,
+                    "quantity": quantity,
+                    "price": price
+                }
+            else:
+                # Handle the case where a product is not found
+                product_prices[product_name] = {
+                    "quantity": quantity,
+                    "price": None
+                }
+
+        # Convert the product prices to JSON
+        json_product_prices = json.dumps(product_prices)
+
+        print(json_product_prices)
+        
+        products = MyProducts.objects.filter(status=1)
+        product_json = []
+        for product in products:
+            product_json.append({'id': product.id, 'name': product.product_name, 'price': float(product.price)})
+
+
+        all_products = MyProducts.objects.filter(status=1)
+        
     
-    # Parse the JSON data back to a Python dictionary
-    product_data = json.loads(json_data)
+        
+        context = {
 
-    # Initialize a dictionary to store product names and their prices
-    product_prices = {}
+                    'products': all_products,
+                    'product_json': json_product_prices,
+                    'food_menu' : json.dumps(food_menu),
+                    'myproducts': json.dumps(product_json),
+                    'ammounts' : ammounts,
+                    'pk' : pk
 
-    # Iterate through the product names and retrieve their prices
-    for product_name, quantity in product_data.items():
-        product = MyProducts.objects.filter(product_name=f"{product_name}").first()
-        if product:
-            price = product.price
-            product_prices[product_name] = {
-                "name": product_name,
-                "quantity": quantity,
-                "price": price
-            }
+                }
+
+            
+        return render(request, 'items/update_deals.html' , context)
+    
+    
+    
+    def post(self, request, pk):
+        
+        if request.method == 'POST':
+            data = request.POST.get('allvalues', '')
+            # Process and store data as needed
+            print(data)
+            return JsonResponse({'message': 'Data received successfully'})
         else:
-            # Handle the case where a product is not found
-            product_prices[product_name] = {
-                "quantity": quantity,
-                "price": None
-            }
-
-    # Convert the product prices to JSON
-    json_product_prices = json.dumps(product_prices)
-
-    print(json_product_prices)
-    
-    products = MyProducts.objects.filter(status=1)
-    product_json = []
-    for product in products:
-        product_json.append({'id': product.id, 'name': product.product_name, 'price': float(product.price)})
-
-
-    all_products = MyProducts.objects.filter(status=1)
-    context = {
-
-                'products': all_products,
-                'product_json': json_product_prices,
-                'food_menu' : json.dumps(food_menu),
-                'myproducts': json.dumps(product_json),
-
-            }
-
-          
-    return render(request, 'items/update_deals.html' , context)
+            return JsonResponse({'error': 'Invalid request method'}, status=400)
