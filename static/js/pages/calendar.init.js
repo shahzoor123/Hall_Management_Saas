@@ -23,14 +23,13 @@
           }
       );
 
-      var events = document.getElementById("h1");
-      var value = events.dataset.myVariable;
+ 
 
       var formattedEvents = serializedEvents.map(function (event) {
           return {
               title: event.fields.event_title,
               start: event.fields.start_date,
-             
+      
           };
       });
 
@@ -51,13 +50,37 @@
 
           eventClick: function (e) {
             a.modal("show");
-          
+
+            
+            var value = serializedEvents;
+
+            console.log(typeof(value));
             l = e.event;
 
             var customerName = l.title;
             var eventDate = l.start.toISOString().split('T')[0];
-            var eventTime= l.start.toISOString().split('T')[1].slice(0, 5); // Access the title of the clicked event
+            var eventTime = 'Night'; // Access the title of the clicked event
 
+
+
+            
+                    // Search for the event with a matching 'customerName'
+            var eventTime = null;
+            for (var i = 0; i < value.length; i++) {
+                var event = value[i].fields;
+                if (event.event_title === customerName) {
+                  eventTime = event.event_time;
+                  break;
+                }
+              }
+              
+              if (eventTime !== null) {
+                console.log("Event time for " + customerName + ": " + eventTime);
+              } else {
+                console.log("Event not found for customer: " + customerName);
+              }
+                    
+      
             console.log(customerName);
             console.log(eventDate);
             console.log(eventTime);
@@ -65,7 +88,7 @@
             v("#Customer_Name").val(customerName);
             v("#Event_Date").val(eventDate); // Set the start date
             // v("#end_date").val(l.end.toISOString().split('T')[0]); // Set the end date
-            v("#event-time").val(eventTime); // Set the event time
+            v("#Event_Time").val(eventTime); // Set the event time
         },
         
           dateClick: function (e) {

@@ -131,7 +131,7 @@
                                                         <label id="customer-name" class="form-label">Event
                                                             Timing</label>
                                                         <input class="form-control" placeholder="Day Or Night"
-                                                            type="text" name="event_timing" id="event-time" required
+                                                            type="text" name="event_timing" id="Event_Time" required
                                                             value="">
 
                                                     </div>
@@ -160,12 +160,10 @@
     </div>
   
                 <!-- end modal-->
-    <h1 id="h1" data-my-variable="{{serialized_events}}"></h1>
+
     <script>
 
         var serializedEvents = JSON.parse('{{ serialized_events|safe }}');
-
-        
 
 
     </script>
