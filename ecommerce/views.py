@@ -1561,7 +1561,7 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
             
             print(menu)
         
-            return JsonResponse({'message': 'Data received successfully'})
+            return redirect ("update-event-sale")
         except json.JSONDecodeError:
             # Handle JSON decoding errors
             return JsonResponse({'error': 'Invalid JSON data'}, status=400)
