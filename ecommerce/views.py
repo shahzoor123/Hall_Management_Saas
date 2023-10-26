@@ -468,8 +468,9 @@ class UpdateEventsale(LoginRequiredMixin, View):
             details = request.POST.get('details')
             received_ammount = request.POST.get('received-amount')
 
+            print(number_of_people, per_head)
             total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charges)) 
-            
+            print(total)
 
             payments_details = ''
             if not received_ammount == "0":
@@ -1554,14 +1555,14 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
             
 
             per_head = int(hallCharges) + menuAmount
-
+            eventsale.per_head = per_head
             eventsale.total_amount = (int(numberOfPeople) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charge)) 
             
             eventsale.save()
             
             print(menu)
         
-            return redirect ("update-event-sale")
+            return redirect ("event-sale")
         except json.JSONDecodeError:
             # Handle JSON decoding errors
             return JsonResponse({'error': 'Invalid JSON data'}, status=400)
