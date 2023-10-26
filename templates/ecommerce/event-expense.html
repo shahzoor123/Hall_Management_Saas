@@ -9,6 +9,8 @@
 
      <!-- Responsive datatable examples -->
      <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+
+    
 {% endblock extra_css %}
     
 {% block content %}
@@ -23,7 +25,7 @@
                                 <h4>Orders</h4>
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Hall</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Expenses</a></li>
                                         <li class="breadcrumb-item active">Orders</li>
                                     </ol>
                             </div>
@@ -42,6 +44,8 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card">
+                                {% include 'partials/alerts.html' %}
+
                                     <div class="card-body">
                                         <!-- <div>
                                             <a href="javascript:void(0);" class="btn btn-success mb-2" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#add-expense-model"><i class="mdi mdi-plus me-2"></i> Add Expense</a>
@@ -61,13 +65,7 @@
                                             <table id="myDataTable" class="table table-centered datatable dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th style="width: 20px;">
-                                                            <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="ordercheck" onchange="checkAll(this)" name="chk[]">
-                                                                <label class="form-check-label" for="ordercheck">&nbsp;</label>
-                                                            </div>
-                                                        </th>
-                                                        <th>Bill ID</th>
+                                                        <th>Customer Name</th>
                                                         <th>Pakwan Bill</th>
                                                         <th>Diesel</th>
                                                         <th>Electicity Bill</th>
@@ -86,17 +84,12 @@
                                                         <th style="width: 120px;">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody >
                                                     {% for expense in expenses %}
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" id="ordercheck1">
-                                                                <label class="form-check-label" for="ordercheck1">&nbsp;</label>
-                                                            </div>
-                                                        </td>
+                                                    <tr class="text-center">
                                                         
-                                                        <td><a href="javascript: void(0);" class="text-dark fw-bold">{{expense.bill}}</a> </td>
+                                                        
+                                                        <td><a href="javascript: void(0);" class="text-dark fw-bold">{{expense.customer_name}}</a> </td>
                                                         <td>
                                                             {{expense.pakwan_bill}}
                                                         </td>
@@ -139,6 +132,7 @@
                                                         <td>
                                                           {{expense.total_expense}}
                                                         </td>
+                                                        
                                                         <!-- <td>
                                                             <button class="btn btn-light btn-rounded">Invoice <i class="mdi mdi-download ml-2"></i></button>
                                                         </td> -->
@@ -148,9 +142,11 @@
                                                               <i class="mdi mdi-pencil font-size-18" class="modal-title mt-0" id="expense{{expense.id}}"></i>
                                                             </a>
                 
-                                                              <!-- <a href="#" class="text-danger" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                                                <i class="mdi mdi-trash-can font-size-18"></i>
-                                                              </a> -->
+                                                            <a href="{% url 'delete-expense' expense.id %}" class="text-danger"
+                                                            data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            title="Delete">
+                                                            <i class="mdi mdi-trash-can font-size-18"></i>
+                                                          </a>
                                                             
                                                           </div>
                                                         </td>
@@ -512,6 +508,26 @@
                                   
                                 </div><!-- /.modal -->
                                 {% endfor %}
+                                {% if len_expense %}
+                                <tr style="background: #F1EFEF; font-weight: bold; text-align: center;">
+                                <td>Total: </td>
+                                <td>{{pakwan}}</td>
+                                <td>{{diesel}}</td>
+                                <td>{{electricity}}</td>
+                                <td>{{naan}}</td>
+                                <td>{{water}}</td>
+                                <td>{{cold_drink}}</td>
+                                <td>{{dhobi}}</td>
+                                <td>{{other_expenses}}</td>
+                                <td>{{waiters}}</td>
+                                <td>{{bbq}}</td>
+                                <td>{{stuff}}</td>
+                                <td>{{setup}}</td>
+                                <td>{{decor}}</td>
+                                <td>{{total}}</td>
+                                <td></td>
+                              </tr>
+                              {% endif %}
                               </table>
 
 

@@ -1,0 +1,330 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Orders{% endblock title %}
+
+
+{% block extra_css %}
+<!-- DataTables -->
+<link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+  type="text/css" />
+
+<!-- Responsive datatable examples -->
+<link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet"
+  type="text/css" />
+{% endblock extra_css %}
+
+{% block content %}
+<div class="main-content">
+  <div class="page-content">
+    <!-- start page title -->
+    <div class="page-title-box">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-sm-6">
+            <div class="page-title">
+              <h4>Products</h4>
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Hall</a></li>
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Units</a></li>
+                <li class="breadcrumb-item active">List</li>
+              </ol>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="float-end d-none d-sm-block">
+              <a href="" class="btn btn-success" class="btn btn-primary btn-sm waves-effect waves-light"
+                data-bs-toggle="modal" data-bs-target="#add-expense-model"><i class="mdi mdi-plus me-2"></i>Add
+                Category</a>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="float-end d-none d-sm-block">
+              <!-- <a href="" class="btn btn-success" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="mdi mdi-plus me-2"></i>Add Sale</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end page title -->
+    <div class="container-fluid">
+      <div class="page-content-wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              {% include 'partials/alerts.html' %}
+              <div class="card-body">
+                <div>
+                  <!-- <a href="javascript:void(0);" class="btn btn-success mb-2" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"><i class="mdi mdi-plus me-2"></i> Add Sale</a> -->
+                </div>
+                <ul class="nav nav-tabs nav-tabs-custom mb-4">
+                  <li class="nav-item">
+                    <a class="nav-link fw-bold p-3 active" href="#">All Categories</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link p-3 fw-bold" href="#">Active</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link p-3 fw-bold" href="#">Unpaid</a>
+                  </li>
+                </ul>
+                <div class="table-responsive">
+                  <table id="myDataTable" class="table table-centered datatable dt-responsive nowrap "
+                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead class="thead-light">
+                      <tr>
+                        
+                        <th>ID</th>
+                        <th>Category Name</th>
+                        <th>Category Description</th>
+                        <th style="width: 120px;">Action</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for cat in category %}
+                      <tr>
+                        <
+
+                        <td><a href="javascript: void(0);" class="text-dark fw-bold">{{cat.id}}</a> </td>
+                        <td>
+                          {{cat.name}}
+                        </td>
+                        <td>{{cat.description}}</td>
+
+
+
+                        <td id="tooltip-container1">
+                          <div class="d-flex">
+                            <a href="javascript:void(0);" class="btn-sm waves-effect waves-light" data-bs-toggle="modal"
+                              data-bs-target="#cat{{ cat.id }}" class="me-3 text-primary"
+                              data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top"
+                              title="Edit">
+                              <i class="mdi mdi-pencil font-size-18" class="modal-title mt-0"
+                                id="cat{{cat.id}}"></i>
+                            </a>
+
+                            <a href="{% url 'delete-category' cat.id %}" class="text-danger"
+                              data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top"
+                              title="Delete">
+                              <i class="mdi mdi-trash-can font-size-18"></i>
+                            </a>
+                          </div>
+                        </td>
+
+                      </tr>
+
+       
+
+
+                    <!-- Small modal For edit -->
+
+                    <div class="modal fade" id="cat{{cat.id}}" tabindex="-1" role="dialog"
+                      aria-labelledby="cat{{cat.id}}Title" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title mt-0" id="cat{{cat.id}}Title">Edit Category</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                            <form class="form" enctype="multipart/form-data"
+                              action="{% url 'update-category' cat.id %}" method="POST">
+                              {% csrf_token %}
+
+
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">Category Name</label>
+
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <input type="text" class="js-toggle-password form-control" name="categoryname"
+                                      id="name" placeholder="category name" aria-label="" value="{{cat.name}}">
+
+                                  </div>
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+
+                              <!-- Form -->
+                              <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label form-label">description</label>
+
+                                <div class="col-sm-9">
+                                  <!-- Input Group -->
+                                  <div class="input-group input-group-merge">
+                                    <input type="text" class="js-toggle-password form-control" name="categorydesc"
+                                      id="desc" placeholder="category description" aria-label="" value="{{cat.description}}">
+
+                                  </div>
+                                  <!-- End Input Group -->
+                                </div>
+                              </div>
+                              <!-- End Form -->
+
+                              
+
+                              <div class="modal-footer">
+                                <button id="model-btn" type="button" class="btn btn-secondary"
+                                  data-bs-dismiss="modal">Close</button>
+                                <button id="save-btn" type="submit" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </form>
+
+                          </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+
+                      </div>
+                    </div>
+
+                    <!-- /.modal-dialog -->
+
+                    {% endfor %}
+
+                    </tbody>
+                  </table>
+
+                  <div class="modal fade" id="add-expense-model" tabindex="-1" role="dialog"
+                    aria-labelledby="add-expense-modelTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title mt-0" id="add-expense-modelTitle">Add Category</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                          </button>
+                        </div>
+
+                        <div class="modal-body">
+                          <form class="form" enctype="multipart/form-data" action="{% url 'ecommerce_add_category' %}"
+                            method="POST">
+                            {% csrf_token %}
+
+
+                            <!-- Form -->
+                            <div class="row mb-4">
+                              <label for="" class="col-sm-3 col-form-label form-label">Category Name</label>
+
+                              <div class="col-sm-9">
+                                <!-- Input Group -->
+                                <div class="input-group input-group-merge">
+                                  <input type="text" class="js-toggle-password form-control" name="categoryname"
+                                    id="name" placeholder="category name" aria-label="" value="{{cat.name}}">
+
+                                </div>
+                                <!-- End Input Group -->
+                              </div>
+                            </div>
+                            <!-- End Form -->
+
+                            <!-- Form -->
+                            <div class="row mb-4">
+                              <label for="" class="col-sm-3 col-form-label form-label">description</label>
+
+                              <div class="col-sm-9">
+                                <!-- Input Group -->
+                                <div class="input-group input-group-merge">
+                                  <input type="text" class="js-toggle-password form-control" name="categorydesc"
+                                    id="desc" placeholder="category description" aria-label="" value="{{cat.description}}">
+
+                                </div>
+                                <!-- End Input Group -->
+                              </div>
+                            </div>
+                            <!-- End Form -->
+
+                            <div class="modal-footer">
+                              <button id="model-btn" type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                              <button id="save-btn" type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </form>
+
+                        </div><!-- /.modal-content -->
+                      </div><!-- /.modal-dialog -->
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- end row -->
+          </div>
+        </div> <!-- container-fluid -->
+      </div>
+
+
+      <!-- End Page-content -->
+
+
+      {% endblock content %}
+
+      {% block extra_javascript %}
+
+
+      <!-- Required datatable js -->
+
+      <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+      <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+
+      <!-- Responsive examples -->
+      <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+      <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+      <script src="{% static 'js/pages/ecommerce-datatables.init.js' %}"></script>
+
+      <script>
+        function saveChanges() {
+          // Get form values
+          var form = document.getElementById('sale-form');
+          var billNo = form.elements['bill-no'].value;
+          var serialNo = form.elements['serial-no'].value;
+          var status = form.elements['status'].value;
+          var eventTiming = form.elements['event-timing'].value;
+          var eventDate = form.elements['event-date'].value;
+          var numberOfPeople = form.elements['no-of-people'].value;
+          var setup = form.elements['setup'].value;
+          var deals = form.elements['deals'].value;
+          var customerName = form.elements['customer-name'].value;
+          var customerNumber = form.elements['customer-number'].value;
+          var perHead = form.elements['per-head'].value;
+          var extraCharges = form.elements['extra-charges'].value;
+          var foodMenu = form.elements['food-menu'].value;
+          var details = form.elements['details'].value;
+          var receivedAmount = form.elements['received-amount'].value;
+
+          // Construct URL with query parameters
+          var url = "{% url 'calculate_menu' %}?" +
+            "billNo=" + encodeURIComponent(billNo) +
+            "&serialNo=" + encodeURIComponent(serialNo) +
+            "&status=" + encodeURIComponent(status) +
+            "&eventTiming=" + encodeURIComponent(eventTiming) +
+            "&eventDate=" + encodeURIComponent(eventDate) +
+            "&numberOfPeople=" + encodeURIComponent(numberOfPeople) +
+            "&setup=" + encodeURIComponent(setup) +
+            "&deals=" + encodeURIComponent(deals) +
+            "&customerName=" + encodeURIComponent(customerName) +
+            "&customerNumber=" + encodeURIComponent(customerNumber) +
+            "&perHead=" + encodeURIComponent(perHead) +
+            "&extraCharges=" + encodeURIComponent(extraCharges) +
+            "&foodMenu=" + encodeURIComponent(foodMenu) +
+            "&details=" + encodeURIComponent(details) +
+            "&receivedAmount=" + encodeURIComponent(receivedAmount);
+
+          // Redirect to the constructed URL
+          window.location.href = url;
+        }
+
+
+
+
+      </script>
+
+
+      {% endblock extra_javascript %}

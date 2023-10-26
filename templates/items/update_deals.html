@@ -805,24 +805,32 @@
             menu += `${productName} (${qty}), `;
             // console.log(menu)
             // Append product name and quantity to the menu string
-            allvalues += `menu : ${menu} values : ${subTotalInput.value} ${numberOfPeopleInput.value} ${hallChargesInput.value} ${parseInt(menuAmountInput.value)} `;
-            console.log(allvalues)
+            // allvalues += `${menu} values : ${subTotalInput.value} ${numberOfPeopleInput.value} ${hallChargesInput.value} ${parseInt(menuAmountInput.value)} `;
+            // console.log(allvalues)
+
+                        // Initialize an object to store menu and values
+            var dataObject = {
+                menu: menu,
+                values: {
+                    subTotal: subTotalInput.value,
+                    numberOfPeople: numberOfPeopleInput.value,
+                    hallCharges: hallChargesInput.value,
+                    menuAmount: parseInt(menuAmountInput.value)
+                }
+            };
+
+            
+            // Convert the data object to a JSON string
+            var jsonData = JSON.stringify(dataObject);
 
 
             var pkValue = '{{ pk }}'; // this is comming from django which is a primary key
-
-            var x = parseInt(pkValue);
-
-
             const url = `ecommerce/update_food_menu/${pkValue}`;
-
             console.log('Request URL:', url);
-
-
-
             console.log(typeof (pkValue));
-
             const csrfToken = getCookie('csrftoken');
+            console.log(jsonData);
+
 
             fetch(url, {
 
@@ -831,7 +839,7 @@
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'X-CSRFToken': csrfToken,// Include a function to get the CSRF token from cookies
               },
-              body: new URLSearchParams({ allvalues }).toString(),
+              body: jsonData,
             })
               .then(response => {
                 if (response.ok) {
