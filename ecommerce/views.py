@@ -1535,7 +1535,9 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
             print(data)
             
             eventsale = EventSale.objects.get(id=pk) 
-            
+
+            extra_charge = eventsale.extra_charges
+            entry_charge = eventsale.entry_charges
             
             menu = data["menu"]
             subTotal = data["values"]["subTotal"]
@@ -1549,6 +1551,8 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
             eventsale.food_menu = menu
             eventsale.no_of_people = numberOfPeople
             eventsale.stage_charges = hallCharges
+
+            eventsale.total_amount = (int(numberOfPeople) * int(menuAmount)) + (int(extra_charge) + int(hallCharges) + int(entry_charge)) 
             
             eventsale.save()
             
