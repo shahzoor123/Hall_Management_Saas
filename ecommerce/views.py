@@ -1530,7 +1530,7 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
         # Retrieve JSON data from the POST request
         try:
             # Process and store data as needed
-            data = json.loads(request.body.decode("utf-8"))
+            data = json.loads(request.body)
             
             print(data)
             
@@ -1538,21 +1538,24 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
 
             extra_charge = eventsale.extra_charges
             entry_charge = eventsale.entry_charges
+            stage_charges = eventsale.stage_charges
             
             menu = data["menu"]
             subTotal = data["values"]["subTotal"]
             numberOfPeople = data['values']["numberOfPeople"]
-            hallCharges = data["values"]['hallCharges']
+            hallCharges = data["values"]["hallCharges"]
             menuAmount = data["values"]["menuAmount"]
             
-            print(subTotal,numberOfPeople,hallCharges,menuAmount)
+            # print(subTotal,numberOfPeople,hallCharges,menuAmount)
             
 
             eventsale.food_menu = menu
             eventsale.no_of_people = numberOfPeople
-            eventsale.stage_charges = hallCharges
+            
 
-            eventsale.total_amount = (int(numberOfPeople) * int(menuAmount)) + (int(extra_charge) + int(hallCharges) + int(entry_charge)) 
+            per_head = int(hallCharges) + menuAmount
+
+            eventsale.total_amount = (int(numberOfPeople) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charge)) 
             
             eventsale.save()
             

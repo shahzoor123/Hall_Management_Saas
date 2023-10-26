@@ -779,6 +779,7 @@
         function CollectUpdateData() {
 
           var menu = "";
+          var dataObjects = [];
 
           // Iterate through table rows
           $('#data-table tbody tr').each(function (index, row) {
@@ -787,29 +788,35 @@
             var productprice = $(row).find('.product_price').text();
 
             var allvalues = "";
-            // Get the value of the sub_total input in Form 1
-            const subTotalInput = document.querySelector('input[name="sub_total"]');
-            // console.log(subTotalInput.value);
-            // Get the value from the "Number of People" input in the first form
-            const numberOfPeopleInput = document.getElementById('no-of-people');
-            // console.log(numberOfPeopleInput.value);
-
-            // Get values from the first form
-            const hallChargesInput = document.getElementById('hall-charges');
-            // console.log(hallChargesInput.value);
-
-            // Set the value of the menu-amount input in Form 2
-            const menuAmountInput = document.getElementById("per-head");
-            // console.log(menuAmountInput.value);
-
-            menu += `${productName} (${qty}), `;
+    
+            var menuItem = `${productName} (${qty}), `;
+            menu += menuItem;
             // console.log(menu)
             // Append product name and quantity to the menu string
             // allvalues += `${menu} values : ${subTotalInput.value} ${numberOfPeopleInput.value} ${hallChargesInput.value} ${parseInt(menuAmountInput.value)} `;
             // console.log(allvalues)
 
-                        // Initialize an object to store menu and values
-            var dataObject = {
+
+          });
+
+           // Get the value of the sub_total input in Form 1
+          const subTotalInput = document.querySelector('input[name="sub_total"]');
+          // console.log(subTotalInput.value);
+          // Get the value from the "Number of People" input in the first form
+          const numberOfPeopleInput = document.getElementById('no-of-people');
+          // console.log(numberOfPeopleInput.value);
+
+          // Get values from the first form
+          const hallChargesInput = document.getElementById('hall-charges');
+          // console.log(hallChargesInput.value);
+
+          // Set the value of the menu-amount input in Form 2
+          const menuAmountInput = document.getElementById("per-head");
+          // console.log(menuAmountInput.value);
+
+          // Initialize an object to store menu and values
+          
+          dataObject = {
                 menu: menu,
                 values: {
                     subTotal: subTotalInput.value,
@@ -818,6 +825,8 @@
                     menuAmount: parseInt(menuAmountInput.value)
                 }
             };
+
+            dataObjects.push(dataObject);
 
             
             // Convert the data object to a JSON string
@@ -829,7 +838,7 @@
             console.log('Request URL:', url);
             console.log(typeof (pkValue));
             const csrfToken = getCookie('csrftoken');
-            console.log(jsonData);
+            console.log(jsonData , 'f1');
 
 
             fetch(url, {
@@ -854,8 +863,6 @@
               .catch(error => {
                 console.error('Fetch error:', error);
               });
-
-          });
 
           // Set the menu string to the input fields in Form 2
           $('#menuDisplay').val(menu);
