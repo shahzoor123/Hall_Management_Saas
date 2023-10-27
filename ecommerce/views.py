@@ -768,7 +768,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             "setup": total_setup_bill,
             "decor": total_decore_bill,
             "total": total_total_expense,
-            "len_expense" : len(expense)
+            # "len_expense" : len(expense)
         }
         return render(request, self.template_name, context)
 
@@ -1556,8 +1556,10 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
 
             per_head = int(hallCharges) + menuAmount
             eventsale.per_head = per_head
-            eventsale.total_amount = (int(numberOfPeople) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charge)) 
-            
+            total = (int(numberOfPeople) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charge)) 
+            eventsale.remaining_amount = total - int(eventsale.recieved_amount)
+            eventsale.total_amount = total
+            eventsale.total_menu = subTotal
             eventsale.save()
             
             print(menu)
