@@ -768,7 +768,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
             "setup": total_setup_bill,
             "decor": total_decore_bill,
             "total": total_total_expense,
-            "len_expense" : len(expense)
+            # "len_expense" : len(expense)
         }
         return render(request, self.template_name, context)
 
