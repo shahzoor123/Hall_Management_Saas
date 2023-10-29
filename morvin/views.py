@@ -12,6 +12,9 @@ from django.shortcuts import render
 from ecommerce.models import Event
 from generalExpense.models import Salary, OtherExpense, DailyExpenses, ConstructionAndRepair
 from django.db.models.functions import ExtractMonth
+from django.core.serializers import serialize
+import json
+from django.utils import timezone
 
 class Index(LoginRequiredMixin,TemplateView):
     template_name = "index.html"
@@ -88,11 +91,11 @@ class Index(LoginRequiredMixin,TemplateView):
         monthly_expenses = EventExpense.objects.values('bill__event_date__month').annotate(total_expense=Sum('total_expense')).order_by('bill__event_date__month')
         for i in monthly_expenses:
             expense_list.append(i.values())
-        print(monthly_expenses, 'query') 
+        # print(monthly_expenses, 'query') 
             
         # print(expense_list)
         result_list = [value for dict_values_obj in expense_list for value in dict_values_obj]
-        print(result_list, 'expenses')
+        # print(result_list, 'expenses')
 
         cleaned_expenses = []
                 # Iterate through the list, skipping every other element (i.e., the month values)
@@ -100,7 +103,7 @@ class Index(LoginRequiredMixin,TemplateView):
             expense_value = result_list[i + 1]  # Get the expense value (skip the month)
             cleaned_expenses.append(expense_value)
 
-        print(cleaned_expenses)    
+        # print(cleaned_expenses)    
 
 
 
@@ -130,7 +133,7 @@ class Index(LoginRequiredMixin,TemplateView):
             report.append(f"Daily Expenses of the month {month} is {total_amount}k")
 
         # Print or return the report as needed
-        print("Report is")
+        # print("Report is")
         for line in report:
             print(line)
 
@@ -150,17 +153,89 @@ class Index(LoginRequiredMixin,TemplateView):
             all_sales_this_year.append(j)
             total_sale_this_year = len(all_sales_this_year)
             
-        print(total_sale_this_year)    
+        # print(total_sale_this_year)    
 
         for i in events_this_month:  
             all_months.append(i)
             total_events = len(all_months)
 
-        print(total_events)
+        # print(total_events)
+
+
+        # Montly Sales Charts
+
+          # Query the database to get total sales for every month in the current year
+        monthly_sales = EventSale.objects.filter(event_date__year=current_date.year).annotate(month=ExtractMonth('event_date')) \
+            .values('month') \
+            .annotate(total_sales=Sum('total_amount')) \
+            .order_by('month')
+            
+        month_sales_dict = {entry['month']: entry['total_sales'] for entry in monthly_sales}
+
+         # Initialize a list to store total sales for every month
+        every_month_sale = []
+
+        # Iterate through all 12 months
+        for month in range(1, 13):
+            # Check if the month is present in the dictionary
+            if month in month_sales_dict:
+                total_sales = month_sales_dict[month]
+            else:
+                total_sales = 0  # Set total sales to 0 for missing months
+            every_month_sale.append(total_sales)
+
+        # print(every_month_sale)
+        
+        
+        
+        # calender
+        
+        event_list = []
+        
+        sale = EventSale.objects.all()
+        events = Event.objects.all()
+        
+        serialized_event = serialize('json',events)
+        
+        data = json.loads(serialized_event)
+        
+        
+        for i in data:
+            event_list.append(i['fields'])
+            
+        
+        
+        event_json = json.dumps(event_list)
+        
+        
+        
+        
+        
+        
+        
+        # Upcomming events
+            
+            # Get the current date
+        current_date = timezone.now().date()
+        
+        # Calculate the date 5 days from now
+        end_date = current_date + timezone.timedelta(days=8)
+        
+        # Query the database for events within the next 5 days
+        events = EventSale.objects.filter(event_date__range=[current_date, end_date])
+    
+        for i in events:
+            print(i.customer_name,i.event_date)
+        
 
         context = {
             "expense": cleaned_expenses,
             
+            'upcoming_events': events,
+            
+            "events" : event_json,
+            "event_sale" : sale,
+            'serialized_events': serialized_event,
             
             "total_sales": total_sales,
             "total_expense": total_expenses,
@@ -171,9 +246,13 @@ class Index(LoginRequiredMixin,TemplateView):
             "events_this_month": events_count_this_month,
             "events_this_year":events_count_this_year,
 
+            "sale": every_month_sale,
+
             
             "total_events_this_month" : total_events,
             "total_events_this_year" : total_sale_this_year,
+            
+            
 
         }
         return render(request, self.template_name, context)

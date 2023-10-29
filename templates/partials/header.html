@@ -31,28 +31,28 @@
                     <div class="topbar-social-icon me-3 d-none d-md-block">
                         <ul class="list-inline title-tooltip m-0">
                             <li class="list-inline-item">
-                                <a href="{% url 'email_inbox' %}" data-bs-toggle="tooltip" data-placement="top" title="Email">
-                                 <i class="mdi mdi-email-outline"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="{% url 'chat' %}" data-bs-toggle="tooltip" data-placement="top" title="Chat">
-                                 <i class="mdi mdi-tooltip-outline"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
                                 <a href="{% url 'calendar' %}" data-bs-toggle="tooltip" data-placement="top" title="Calendar">
                                  <i class="mdi mdi-calendar"></i>
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="{% url 'pages_invoice' %}" data-bs-toggle="tooltip" data-placement="top" title="Printer">
-                                 <i class="mdi mdi-printer"></i>
+                                <a href="{% url 'event-expense' %}" data-bs-toggle="tooltip" data-placement="top" title="Expense">
+                                 <i class="mdi mdi-credit-card-outline"></i>
                                 </a>
                             </li>
+                            <li class="list-inline-item">
+                                <a href="{% url 'event-sale' %}" data-bs-toggle="tooltip" data-placement="top" title="Sale">
+                                 <i class="mdi mdi-cash-multiple"></i>
+                                </a>
+                            </li>
+                           
+                         
+                       
                         </ul>
                     </div>
                 </div>
+              
+                  
                  <!-- Search input -->
                  <div class="search-wrap" id="search-wrap">
                     <div class="search-bar">
@@ -62,44 +62,46 @@
                         </a>
                     </div>
                 </div>
+               
+                 
                 <div class="d-flex">
                     <div class="dropdown d-none d-lg-inline-block">
                         <button type="button" class="btn header-item toggle-search noti-icon waves-effect" data-target="#search-wrap">
                             <i class="mdi mdi-magnify"></i>
                         </button>
                     </div>
-                    <div class="dropdown d-inline-block">
+                    <!-- <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img id="header-lang-img" src="{% static 'images/flags/us.jpg' %}" alt="Header Language" height="16" class="d-block">
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
 
-                            <!-- item-->
+                           
                             <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="en">
                                 <img src="{% static 'images/flags/us.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
                             </a>
-                            <!-- item-->
+                           
                             <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
                                 <img src="{% static 'images/flags/spain.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
                             </a>
 
-                            <!-- item-->
+                           
                             <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="gr">
                                 <img src="{% static 'images/flags/germany.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
                             </a>
 
-                            <!-- item-->
+                           
                             <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="it">
                                 <img src="{% static 'images/flags/italy.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
                             </a>
 
-                            <!-- item-->
+                           
                             <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru">
                                 <img src="{% static 'images/flags/russia.jpg' %}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="dropdown d-none d-lg-inline-block ms-1">
                         <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                             <i class="mdi mdi-fullscreen"></i>
@@ -216,11 +218,23 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="dropdown d-inline-block">
+                    <!-- <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
                             <i class="mdi mdi-cog-outline font-size-20"></i>
                         </button>
+                    </div> -->
+                    <div class="form-check form-switch mb-3" style="margin-top: 10px;">
+                        <input style="margin-top: 18px;" class="form-check-input theme-choice" type="checkbox" id="light-mode-switch" checked>
                     </div>
+                    <div class="color-mode" id="color-mode">
+                        <div class="form-check form-switch " style="margin-top: 10px;">
+                            <input style="margin-top: 18px;" class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch" id="light-mode-switch" data-bsStyle="{% static 'css/bootstrap-dark.min.css' %}" data-appStyle="{% static 'css/app-dark.min.css' %}" >
+                        </div>
+                    </div>
+                  
+                
+                
+                 
             
                 </div>
             </div>

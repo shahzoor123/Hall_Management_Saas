@@ -8,6 +8,29 @@
 <!-- plugin css -->
 <link href="{% static 'libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet"
     type="text/css" />
+
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+
+
+
+
+
+
+<style>
+    /* Increase the height of #statistics-charts on screens >= 1800px */
+    @media (min-width: 1800px) {
+        #statistics-charts {
+            margin-top: 300px;
+            height: 300px;
+            /* Increase the height as needed */
+        }
+
+        .mt-33 {
+            height: 260px;
+            /* Increase the height as needed */
+        }
+    }
+</style>
 {% endblock extra_css %}
 
 {% block content %}
@@ -29,7 +52,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="float-end d-none d-sm-block">
-                            <a href="" class="btn btn-success">Add Widget</a>
+                            <!-- <a href="" class="btn btn-success">Add Widget</a> -->
                         </div>
                     </div>
                 </div>
@@ -42,8 +65,8 @@
                     <div class="col-xl-8">
                         <div class="card">
                             {% include 'partials/alerts.html' %}
-                            <div class="card-body" >
-                                <h4 class="header-title mb-4 float-sm-start">Quick Summary</h4>
+                            <div class="card-body">
+                                <h4 class="header-title mb-4 float-sm-start">Monthly Sales</h4>
 
                                 <!-- <div class="float-sm-end">
                                     <ul class="nav nav-pills">
@@ -65,13 +88,19 @@
 
                                 <div class="row align-items-center">
                                     <div class="col-xl-9">
-                                        <div>
-                                            <div id="stacked-column-chart" class="apex-charts" dir="ltr"></div>
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <canvas id="salesChartMonthly"></canvas>
+                                                
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-3" >
-                                        <div class="dash-info-widget mt-4 mt-lg-0 py-4 px-3 rounded" style="background-color: #d4d4d4;">
+
+
+                                    <div class="col-xl-3">
+                                        <div class="dash-info-widget mt-4 mt-lg-0 py-4 px-3 rounded">
                                             <div class="media dash-main-border pb-2 mt-2">
                                                 <div class="avatar-sm mb-3 mt-2">
                                                     <span class="avatar-title   ">
@@ -87,7 +116,8 @@
                                                         {{fifty_sale}}</h4>
                                                     {% endif %}
                                                     <p class="text-muted">
-                                                        Sales <a href="#" class="text-success">Withdraw <i
+                                                        Sales <a href="{% url 'event-sale' %}"
+                                                            class="text-success">Withdraw <i
                                                                 class="mdi mdi-arrow-right"></i></a>
                                                     </p>
                                                 </div>
@@ -105,11 +135,13 @@
 
 
                                                     <p class="text-muted">
-                                                        Expenses <a href="#" class="text-danger">Pay <i
+                                                        Expenses <a href="{% url 'event-expense' %}"
+                                                            class="text-danger">Pay <i
                                                                 class="mdi mdi-arrow-right"></i></a>
                                                     </p>
                                                 </div>
                                             </div>
+
                                             <div class="media mt-4">
                                                 <div class="avatar-sm mb-2 mt-2">
                                                     <span class="avatar-title ">
@@ -126,7 +158,8 @@
                                                         {{fifty_revenue}}</h4>
                                                     {% endif %}
                                                     <p class="text-muted mb-0">
-                                                        Gross Revenue <a href="#" class="text-success">View <i
+                                                        Gross Revenue <a href="{% url 'event-sale' %}"
+                                                            class="text-success">View <i
                                                                 class="mdi mdi-arrow-right"></i></a>
                                                     </p>
                                                 </div>
@@ -160,9 +193,9 @@
 
                                             </p>
                                             <div class="progress mt-3" style="height: 4px;">
-                                                <div id="month-progressBar" class="progress-bar progress-bar bg-success" role="progressbar"
-                                                    style="width: 80%;" aria-valuenow="80" aria-valuemin="0"
-                                                    aria-valuemax="80"></div>
+                                                <div id="month-progressBar" class="progress-bar progress-bar bg-success"
+                                                    role="progressbar" style="width: 80%;" aria-valuenow="80"
+                                                    aria-valuemin="0" aria-valuemax="80"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -188,7 +221,8 @@
 
                                             </p>
                                             <div class="progress mt-3" style="height: 4px;">
-                                                <div id="yearly-progressBar" class="progress-bar progress-bar bg-success" role="progressbar"
+                                                <div id="yearly-progressBar"
+                                                    class="progress-bar progress-bar bg-success" role="progressbar"
                                                     style="width: 80%;" aria-valuenow="80" aria-valuemin="0"
                                                     aria-valuemax="80"></div>
                                             </div>
@@ -231,7 +265,7 @@
                                     <h4>&#8360; 14,235</h4>
                                     <div class="media-body ps-3">
                                         <div class="dropdown">
-                                            <button class="btn btn-light btn-sm dropdown-toggle" type="button"
+                                            <!-- <button class="btn btn-light btn-sm dropdown-toggle" type="button"
                                                 id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">
                                                 Today<i class="mdi mdi-chevron-down ms-1"></i>
@@ -240,15 +274,18 @@
                                                 <a class="dropdown-item" href="#">Yesterday</a>
                                                 <a class="dropdown-item" href="#">Last Week</a>
                                                 <a class="dropdown-item" href="#">Last Month</a>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
-                                <div style="height: 50px;"></div>
-                                <div class="mt-3">
-                                   
+
+                                <div class="mt-33">
+
                                     <div id="stastics-chartss"></div>
                                 </div>
+
+
+
                             </div>
                         </div>
                     </div>
@@ -257,109 +294,9 @@
                     <div class="col-xl-4">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title mb-4">Expense List</h4>
+                                <h4 class="header-title mb-4">Upcoming Events</h4>
                                 <ul class="list-unstyled activity-wid mb-0">
-                                    <li class="activity-list activity-border">
-                                        <div class="activity-icon avatar-sm">
-                                            <img src="/static/images/users/avatar-7.jpg"
-                                                class="avatar-sm rounded-circle" alt="" />
-                                        </div>
-                                        <div class="media">
-                                            <div class="me-3">
-                                                <h5 class="font-size-15 mb-1">Your Manager Posted</h5>
-                                                <p class="text-muted font-size-14 mb-0">James Raphael</p>
-                                            </div>
-
-                                            <div class="media-body">
-                                                <div class="text-end d-none d-md-block">
-                                                    <p class="text-muted font-size-13 mt-2 pt-1 mb-0"><i
-                                                            class="mdi mdi-timer-outline font-size-15 text-primary"></i>
-                                                        3 days</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="activity-list activity-border">
-                                        <div class="activity-icon avatar-sm">
-                                            <span class="avatar-title bg-soft-primary text-primary rounded-circle">
-                                                <i class="ti-shopping-cart font-size-16"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media">
-                                            <div class="me-3">
-                                                <h5 class="font-size-15 mb-1">You have 5 pending order.</h5>
-                                                <p class="text-muted font-size-14 mb-0">America</p>
-                                            </div>
-
-                                            <div class="media-body">
-                                                <div class="text-end d-none d-md-block">
-                                                    <p class="text-muted font-size-13 mt-2 pt-1 mb-0"><i
-                                                            class="mdi mdi-timer-outline font-size-15 text-primary"></i>
-                                                        1 day</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="activity-list activity-border">
-                                        <div class="activity-icon avatar-sm">
-                                            <span class="avatar-title bg-soft-success text-success rounded-circle">
-                                                <i class="ti-user font-size-16"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media">
-                                            <div class="me-3">
-                                                <h5 class="font-size-15 mb-1">New Order Received</h5>
-                                                <p class="text-muted font-size-14 mb-0">Thank You</p>
-                                            </div>
-
-                                            <div class="media-body">
-                                                <div class="text-end d-none d-md-block">
-                                                    <p class="text-muted font-size-13 mt-2 pt-1 mb-0"><i
-                                                            class="mdi mdi-timer-outline font-size-15 text-primary"></i>
-                                                        Today</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="activity-list activity-border">
-                                        <div class="activity-icon avatar-sm">
-                                            <img src="/static/images/users/avatar-7.jpg"
-                                                class="avatar-sm rounded-circle" alt="" />
-                                        </div>
-                                        <div class="media">
-                                            <div class="me-3">
-                                                <h5 class="font-size-15 mb-1">Your Manager Posted</h5>
-                                                <p class="text-muted font-size-14 mb-0">James Raphael</p>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="text-end d-none d-md-block">
-                                                    <p class="text-muted font-size-13 mt-2 pt-1 mb-0"><i
-                                                            class="mdi mdi-timer-outline font-size-15 text-primary"></i>
-                                                        3 days</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="activity-list activity-border">
-                                        <div class="activity-icon avatar-sm">
-                                            <span class="avatar-title bg-soft-primary text-primary rounded-circle">
-                                                <i class="ti-shopping-cart font-size-16"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media">
-                                            <div class="me-3">
-                                                <h5 class="font-size-15 mb-1">You have 1 pending order.</h5>
-                                                <p class="text-muted font-size-14 mb-0">Dubai</p>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="text-end d-none d-md-block">
-                                                    <p class="text-muted font-size-13 mt-2 pt-1 mb-0"><i
-                                                            class="mdi mdi-timer-outline font-size-15 text-primary"></i>
-                                                        1 day</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {% for event in upcoming_events %}
                                     <li class="activity-list">
                                         <div class="activity-icon avatar-sm">
                                             <span class="avatar-title bg-soft-success text-success rounded-circle">
@@ -368,18 +305,19 @@
                                         </div>
                                         <div class="media">
                                             <div class="me-3">
-                                                <h5 class="font-size-15 mb-1">New Order Received</h5>
-                                                <p class="text-muted font-size-14 mb-0">Thank You</p>
+                                                <h5 class="font-size-15 mb-1">{{event.customer_name}}</h5>
+                                                <p class="text-muted font-size-14 mb-0">{{event.location}}</p>
                                             </div>
                                             <div class="media-body">
                                                 <div class="text-end d-none d-md-block">
                                                     <p class="text-muted font-size-13 mt-2 pt-1 mb-0"><i
                                                             class="mdi mdi-timer-outline font-size-15 text-primary"></i>
-                                                        Today</p>
+                                                        {{event.event_date}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -405,152 +343,43 @@
                                                 <h5 class="font-size-18 mb-1">USD 84,265.45</h5>
                                             </div>
                                         </div>
+                                        <hr>
+                                        <h4 class="header-title mb-4">Expense Heads</h4>
+                                        <div class="col-md-6 dash-goal" style="padding: 20px; ">
+                                            <div class="mt-4 mt-sm-0">
+
+
+                                                <canvas id="expense-heads"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 dash-goal" style="padding: 30px;">
+                                            <div class="mt-4 mt-sm-0">
+                                                <div id="list-chart-3" class="apex-charts" dir="ltr"></div>
+
+                                                <p class="text-muted mb-2 mt-2 pt-1">Earning Goal:</p>
+                                                <h5 class="font-size-18 mb-1">USD 84,265.45</h5>
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-4">Brands and Sponsers</h4>
-                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                    <div class="carousel-indicators">
-                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                    </div>
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <div class="row align-items-center mb-5">
-                                                <div class="col-md-4">
-                                                    <img src="/static/images/product/Logo.png" class="img-fluid me-3" alt="" />
-                                                </div>
-                                                <div class="col-md-7 offset-md-1">
-                                                    <div class="mt-4 mt-sm-0">
-                                                        <p class="text-muted mb-2">Sultanat Marquee &</p>
-                                                        <h5 class="text-primary">event Complex</h5>
-                                                        <div class="row no-gutters mt-4">
-                                                            <div class="col-4">
-                                                                <div class="mt-1">
-                                                                    <h4>2021</h4>
-                                                                    <p class="text-muted mb-1">Since</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div class="mt-1">
-                                                                    <h4>1</h4>
-                                                                    <p class="text-muted mb-1">Branches</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div class="mt-4 pt-1">
-                                                                    <a href="" class="btn btn-primary btn-sm">Buy Now</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <div class="row align-items-center mb-5">
-                                                <div class="col-md-4">
-                                                    <img src="/static/images/product/Logo.png" class="img-fluid me-3" alt="" />
-                                                </div>
-                                                <div class="col-md-7 offset-md-1">
-                                                    <div class="mt-4 mt-sm-0">
-                                                        <p class="text-muted mb-2">Sultanat Marquee &</p>
-                                                        <h5 class="text-primary">event Complex</h5>
-                                                        <div class="row no-gutters mt-4">
-                                                            <div class="col-4">
-                                                                <div class="mt-1">
-                                                                    <h4>2021</h4>
-                                                                    <p class="text-muted mb-1">Since</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div class="mt-1">
-                                                                    <h4>1</h4>
-                                                                    <p class="text-muted mb-1">Branches</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div class="mt-4 pt-1">
-                                                                    <a href="" class="btn btn-primary btn-sm">Buy Now</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <div class="row align-items-center mb-5">
-                                                <div class="col-md-4">
-                                                    <img src="/static/images/product/Logo.png" class="img-fluid me-3" alt="" />
-                                                </div>
-                                                <div class="col-md-7 offset-md-1">
-                                                    <div class="mt-4 mt-sm-0">
-                                                        <p class="text-muted mb-2">Sultanat Marquee &</p>
-                                                        <h5 class="text-primary">event Complex</h5>
-                                                        <div class="row no-gutters mt-4">
-                                                            <div class="col-4">
-                                                                <div class="mt-1">
-                                                                    <h4>2021</h4>
-                                                                    <p class="text-muted mb-1">Since</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div class="mt-1">
-                                                                    <h4>1</h4>
-                                                                    <p class="text-muted mb-1">Branches</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div class="mt-4 pt-1">
-                                                                    <a href="" class="btn btn-primary btn-sm">Buy Now</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="col-xl-4">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title mb-4">Sales by State</h4>
-                                <div id="world-map-markers" style="height: 230px;"></div>
-                                <div class="px-4 py-3 mt-4">
-                                    <p class="mb-1">USA <span class="float-right">75%</span></p>
-                                    <div class="progress mt-2" style="height: 6px;">
-                                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar"
-                                            style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="75">
-                                        </div>
-                                    </div>
-                                    <p class="mt-3 mb-1">Russia <span class="float-right">55%</span></p>
-                                    <div class="progress mt-2" style="height: 6px;">
-                                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar"
-                                            style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="55">
-                                        </div>
-                                    </div>
-                                    <p class="mt-3 mb-1">Australia <span class="float-right">85%</span></p>
-                                    <div class="progress mt-2" style="height: 6px;">
-                                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar"
-                                            style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="85">
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id='calendar' style="width: 650px;padding: 30px;" ></div>
+                                <!-- Other content here -->
                             </div>
                         </div>
                     </div>
+                
+                 
                 </div>
                 <div class="row">
-                   
+
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
@@ -634,6 +463,7 @@
                 </div>
             </div>
         </div>
+        <h1 hidden id="sale" data-my-variable="{{sale}}"></h1>
         <!-- container-fluid -->
     </div>
 </div>
@@ -641,35 +471,151 @@
 <h1 hidden id="expense" data-my-variable="{{expense}}"></h1>
 
 
+
+<script>
+
+    var serializedEvents = JSON.parse('{{ serialized_events|safe }}');
+
+
+</script>
+
+
 <!-- End Page-content -->
 {% endblock content %}
 {% block extra_javascript %}
 <!-- apexcharts -->
-<script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+
 <!-- Plugins js-->
 <script src="{% static 'libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
 <script src="{% static 'libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js' %}"></script>
 
+ 
+
+
+<script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+<!-- <script src="{% static 'js/pages/dashboard.init.js' %}"></script> -->
+<script src="{% static 'libs/chart.js/dist/Chart.bundle.min.js' %}"></script>
+<script src="{% static 'js/pages/chartjs.init.js' %}"></script>
+<script src="{% static 'libs/chartist/dist/chartist.min.js' %}"></script>
+<script src="{% static 'libs/chartist-plugin-tooltips-updated/dist/chartist-plugin-tooltip.min.js' %}"></script>
+<script src="{% static 'js/pages/chart.js' %}"></script>
+
 <script src="{% static 'js/pages/dashboard.init.js' %}"></script>
+
+
 
 <!-- Apex chart -->
 
 <script>
 
-var montly_expense = document.getElementById("expense").getAttribute("data-my-variable");
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'bootstrap',
+        initialView: 'dayGridMonth',
+        events: [
+        {
+            title: 'Event 1',
+            start: '2023-10-10',
+            color: 'red' // Set the color of this event to red
+        },
+        {
+            title: 'Event 2',
+            start: '2023-10-15',
+            color: 'blue' // Set the color of this event to blue
+        },
+        // Add more events here
+    ]
+      });
+      calendar.render();
+    });
 
-var totalExpense = JSON.parse(montly_expense);
+  </script>
 
-console.log(totalExpense)
 
+<script>
+
+    var montly_sale = document.getElementById("sale").getAttribute("data-my-variable");
+
+    // // Parse the values as JSON arrays
+    var totalSales = JSON.parse(montly_sale);
+
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const salesChartMonthlyCtx = document.getElementById('salesChartMonthly').getContext('2d');
+
+    const expenseHeadsCtx = document.getElementById('expense-heads').getContext('2d');
+
+    const salesChartMonthly = new Chart(salesChartMonthlyCtx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Monthly Sales',
+
+                data: totalSales,
+                backgroundColor: [
+
+                    'rgba(51, 255, 189, 0.5)'
+                ],
+                borderColor: [
+
+                    'rgba(0, 0, 0, 0.5)'
+                ],
+                borderWidth: 2
+
+            }],
+        },
+    });
+
+    const heads = ['Jan', 'Feb', 'Mar'];
+    const expenseHeads = new Chart(expenseHeadsCtx, {
+        type: 'doughnut',
+        data: {
+            labels: heads,
+            datasets: [{
+                label: 'Monthly Sales',
+                data: totalSales,
+                backgroundColor: [
+
+                    '#e2e8f0',
+                    '#525CE9',
+                    '#23c58f',
+
+
+                ],
+                hoverBackgroundColor: ['lightcoral', 'lightblue', 'lightgreen', 'lightyellow', 'mediumpurple'],
+                innerRadius: 10, // Adjust the inner radius as needed
+                outerRadius: 100, // Adjust the outer radius to 50 pixels
+                borderWidth: 0
+            }],
+        },
+
+    });
+
+
+
+
+
+
+
+
+    var montly_expense = document.getElementById("expense").getAttribute("data-my-variable");
+
+    var totalExpense = JSON.parse(montly_expense);
+
+    console.log(totalExpense)
+
+    // Create the chart options
     var options1 = {
-        chart: { type: "area", height: 80, sparkline: { enabled: !0 } },
+        chart: { type: "area", sparkline: { enabled: true } },
         series: [{ data: totalExpense }],
         stroke: { curve: "smooth", width: 2 },
         colors: ["#525ce5"],
         tooltip: {
-            fixed: { enabled: !1 },
-            x: { show: !1 },
+            fixed: { enabled: false },
+            x: { show: false },
             y: {
                 title: {
                     formatter: function (e) {
@@ -677,10 +623,56 @@ console.log(totalExpense)
                     },
                 },
             },
-            marker: { show: !1 },
+            marker: { show: false },
         },
     };
-    new ApexCharts(document.querySelector("#stastics-chartss"), options1).render();
+
+    // Function to set the chart height based on screen width
+    function setChartHeight(chart) {
+        var chartHeight = window.innerWidth >= 1800 ? 250 : 80;
+        chart.updateOptions({
+            chart: {
+                height: chartHeight
+            }
+        });
+    }
+
+    // Create and render the chart
+    var chart = new ApexCharts(document.querySelector("#stastics-chartss"), options1);
+
+    chart.render();
+
+    // Call the setChartHeight function initially
+    setChartHeight(chart);
+
+    // Update the chart height when the window is resized
+    window.addEventListener('resize', function () {
+        setChartHeight(chart);
+    });
+
+
+    var options2 = {
+        chart: { type: "doughnut", sparkline: { enabled: true } },
+        series: [{ data: totalExpense }],
+        stroke: { curve: "smooth", width: 2 },
+        colors: ["#525ce5"],
+        tooltip: {
+            fixed: { enabled: false },
+            x: { show: false },
+            y: {
+                title: {
+                    formatter: function (e) {
+                        return "";
+                    },
+                },
+            },
+            marker: { show: false },
+        },
+    };
+
+
+    // Create and render the chart
+    var chart1 = new ApexCharts(document.querySelector("#expense-heads"), options2);
 </script>
 
 
