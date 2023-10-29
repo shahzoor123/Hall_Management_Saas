@@ -1559,10 +1559,8 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
 
             per_head = int(hallCharges) + menuAmount
             eventsale.per_head = per_head
-            total = (int(numberOfPeople) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charge)) 
-            eventsale.remaining_amount = total - int(eventsale.recieved_amount)
-            eventsale.total_amount = total
-            eventsale.total_menu = subTotal
+            eventsale.total_amount = (int(numberOfPeople) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charge)) 
+            
             eventsale.save()
             
             print(menu)

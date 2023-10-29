@@ -139,6 +139,9 @@ class Index(LoginRequiredMixin,TemplateView):
 
         all_months = []
         all_sales_this_year = []
+        total_sale_this_year = 0
+        total_events = 0
+        
         
         events_this_month = EventSale.objects.filter(event_date__month=current_date.month)
         events_this_year = EventSale.objects.filter(event_date__year=current_date.year)
@@ -147,13 +150,38 @@ class Index(LoginRequiredMixin,TemplateView):
             all_sales_this_year.append(j)
             total_sale_this_year = len(all_sales_this_year)
             
-        
-        
+        print(total_sale_this_year)    
+
         for i in events_this_month:  
             all_months.append(i)
             total_events = len(all_months)
-        
 
+        print(total_events)
+
+
+        # Montly Sales Charts
+
+          # Query the database to get total sales for every month in the current year
+        monthly_sales = EventSale.objects.filter(event_date__year=current_date.year).annotate(month=ExtractMonth('event_date')) \
+            .values('month') \
+            .annotate(total_sales=Sum('total_amount')) \
+            .order_by('month')
+            
+        month_sales_dict = {entry['month']: entry['total_sales'] for entry in monthly_sales}
+
+         # Initialize a list to store total sales for every month
+        every_month_sale = []
+
+        # Iterate through all 12 months
+        for month in range(1, 13):
+            # Check if the month is present in the dictionary
+            if month in month_sales_dict:
+                total_sales = month_sales_dict[month]
+            else:
+                total_sales = 0  # Set total sales to 0 for missing months
+            every_month_sale.append(total_sales)
+
+        # print(every_month_sale)
 
         context = {
             "expense": cleaned_expenses,
@@ -168,6 +196,9 @@ class Index(LoginRequiredMixin,TemplateView):
             "events_this_month": events_count_this_month,
             "events_this_year":events_count_this_year,
 
+            "sale": every_month_sale,
+
+            
             "total_events_this_month" : total_events,
             "total_events_this_year" : total_sale_this_year,
 
