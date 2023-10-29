@@ -139,6 +139,9 @@ class Index(LoginRequiredMixin,TemplateView):
 
         all_months = []
         all_sales_this_year = []
+        total_sale_this_year = 0
+        total_events = 0
+        
         
         events_this_month = EventSale.objects.filter(event_date__month=current_date.month)
         events_this_year = EventSale.objects.filter(event_date__year=current_date.year)
@@ -147,13 +150,13 @@ class Index(LoginRequiredMixin,TemplateView):
             all_sales_this_year.append(j)
             total_sale_this_year = len(all_sales_this_year)
             
-        
-        
+        print(total_sale_this_year)    
+
         for i in events_this_month:  
             all_months.append(i)
             total_events = len(all_months)
-        
 
+        print(total_events)
 
         context = {
             "expense": cleaned_expenses,
@@ -168,6 +171,7 @@ class Index(LoginRequiredMixin,TemplateView):
             "events_this_month": events_count_this_month,
             "events_this_year":events_count_this_year,
 
+            
             "total_events_this_month" : total_events,
             "total_events_this_year" : total_sale_this_year,
 
