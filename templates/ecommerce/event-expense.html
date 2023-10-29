@@ -508,6 +508,7 @@
                                   
                                 </div><!-- /.modal -->
                                 {% endfor %}
+                                {% if len_expense %}
                                 <tr style="background: #F1EFEF; font-weight: bold; text-align: center;">
                                 <td>Total: </td>
                                 <td>{{pakwan}}</td>
@@ -526,6 +527,7 @@
                                 <td>{{total}}</td>
                                 <td></td>
                               </tr>
+                              {% endif %}
                               </table>
 
 
