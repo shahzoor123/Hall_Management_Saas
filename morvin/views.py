@@ -212,7 +212,7 @@ class Index(LoginRequiredMixin,TemplateView):
         
         
         
-        no_envent = 0
+        no_envent = -1
         # Upcomming events
             
             # Get the current date
