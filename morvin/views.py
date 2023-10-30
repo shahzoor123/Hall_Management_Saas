@@ -10,7 +10,7 @@ from datetime import datetime
 from django.db.models import Count
 from django.shortcuts import render
 from ecommerce.models import Event
-from generalExpense.models import Salary, OtherExpense, DailyExpenses, ConstructionAndRepair
+from generalExpense.models import Salary, OtherExpense, DailyExpenses, ConstructionAndRepair, VendorsList
 from django.db.models.functions import ExtractMonth
 from django.core.serializers import serialize
 import json
@@ -194,6 +194,8 @@ class Index(LoginRequiredMixin,TemplateView):
         
         sale = EventSale.objects.all()
         events = Event.objects.all()
+        vendors = VendorsList.objects.all()
+
         
         serialized_event = serialize('json',events)
         
@@ -258,6 +260,7 @@ class Index(LoginRequiredMixin,TemplateView):
             
             "total_events_this_month" : total_events,
             "total_events_this_year" : total_sale_this_year,
+            "vendors": vendors
             
             
 
