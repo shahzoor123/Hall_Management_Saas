@@ -148,6 +148,7 @@
                         <span key="t-email">Deals</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{% url 'admin:index' %}">Create Deal</a></li>
                         <li><a href="{% url 'calculate_menu' %}">Custom Deal</a></li>
                         {% for d in deals %}
                         <li><a href="{% url 'deals-calculator' d.pk %}">{{ d.code }}</a></li>

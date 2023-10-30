@@ -10,7 +10,7 @@ from datetime import datetime
 from django.db.models import Count
 from django.shortcuts import render
 from ecommerce.models import Event
-from generalExpense.models import Salary, OtherExpense, DailyExpenses, ConstructionAndRepair
+from generalExpense.models import Salary, OtherExpense, DailyExpenses, ConstructionAndRepair, VendorsList
 from django.db.models.functions import ExtractMonth
 from django.core.serializers import serialize
 import json
@@ -20,9 +20,12 @@ class Index(LoginRequiredMixin,TemplateView):
     template_name = "index.html"
 
     def get(self, request):
-        # Getting Total number of Sales in the current month and year
+        
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ 
 
-            # Get the current month and year
+# Getting Total number of Sales in the current month and year
+     
+        # Get the current month and year
         today = datetime.now()
         current_month = today.month
         current_year = today.year
@@ -83,30 +86,6 @@ class Index(LoginRequiredMixin,TemplateView):
             print(line)
 
 
-
-
-        expense_list = []
-        # Get total expenses for each month based on the EventSale's create date
-        # monthly_expenses = EventExpense.objects.values('bill').annotate(Sum('total_expense')).values('total_expense')
-        monthly_expenses = EventExpense.objects.values('bill__event_date__month').annotate(total_expense=Sum('total_expense')).order_by('bill__event_date__month')
-        for i in monthly_expenses:
-            expense_list.append(i.values())
-        # print(monthly_expenses, 'query') 
-            
-        # print(expense_list)
-        result_list = [value for dict_values_obj in expense_list for value in dict_values_obj]
-        # print(result_list, 'expenses')
-
-        cleaned_expenses = []
-                # Iterate through the list, skipping every other element (i.e., the month values)
-        for i in range(0, len(result_list), 2):
-            expense_value = result_list[i + 1]  # Get the expense value (skip the month)
-            cleaned_expenses.append(expense_value)
-
-        # print(cleaned_expenses)    
-
-
-
         # Get the total expense amount for each expense type
         expense_type_totals = (
             OtherExpense.objects.values('expense_type')
@@ -136,7 +115,72 @@ class Index(LoginRequiredMixin,TemplateView):
         # print("Report is")
         for line in report:
             print(line)
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
 
+
+        # Area Chart
+
+
+
+        # expense_list = []
+        # # Get total expenses for each month based on the EventSale's create date
+        # # monthly_expenses = EventExpense.objects.values('bill').annotate(Sum('total_expense')).values('total_expense')
+        # monthly_expenses = EventExpense.objects.values('bill__event_date__month').annotate(total_expense=Sum('total_expense')).order_by('bill__event_date__month')
+        
+        # print(monthly_expenses)
+        
+        # for i in monthly_expenses:
+        #     expense_list.append(i.values())
+        # # print(monthly_expenses, 'query') 
+            
+        # # print(expense_list)
+        # result_list = [value for dict_values_obj in expense_list for value in dict_values_obj]
+        # # print(result_list, 'expenses')
+
+        # cleaned_expenses = []
+        #         # Iterate through the list, skipping every other element (i.e., the month values)
+        # for i in range(0, len(result_list), 2):
+        #     expense_value = result_list[i + 1]  # Get the expense value (skip the month)
+        #     cleaned_expenses.append(expense_value)
+
+        # # print(cleaned_expenses) 
+        
+        current_date = datetime.now()   
+        
+        # Get the current month and year
+        today = datetime.now()
+        current_month = today.month
+        current_year = today.year
+        
+        # Get the current year
+        current_year = datetime.now().year
+        
+        expense_list = []
+        
+        # Get total expenses for each month based on the EventSale's create date
+         # Query the database to get total sales for every month in the current year
+        monthly_expense = EventExpense.objects.filter(expense_date__year=current_date.year).annotate(month=ExtractMonth('expense_date')) \
+            .values('month') \
+            .annotate(total_expense=Sum('total_expense')) \
+            .order_by('month')
+        
+        month_expense_dict = {entry['month']: entry['total_expense'] for entry in monthly_expense}
+        
+           # Iterate through all 12 months
+        for month in range(1, 13):
+            # Check if the month is present in the dictionary
+            if month in month_expense_dict:
+                total_expense = month_expense_dict[month]
+            else:
+                total_expense = 0  # Set total expense to 0 for missing months
+            expense_list.append(total_expense)
+
+        # print(expense_list , 'expense')
+    
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
+
+        # Dashboard cards 
 
         current_date = datetime.now()
 
@@ -163,6 +207,13 @@ class Index(LoginRequiredMixin,TemplateView):
 
 
         # Montly Sales Charts
+        
+        
+        
+        
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      
+
+
 
           # Query the database to get total sales for every month in the current year
         monthly_sales = EventSale.objects.filter(event_date__year=current_date.year).annotate(month=ExtractMonth('event_date')) \
@@ -186,14 +237,20 @@ class Index(LoginRequiredMixin,TemplateView):
 
         # print(every_month_sale)
         
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      
+
+
         
         
         # calender
+        
         
         event_list = []
         
         sale = EventSale.objects.all()
         events = Event.objects.all()
+        vendors = VendorsList.objects.all()
+
         
         serialized_event = serialize('json',events)
         
@@ -209,13 +266,15 @@ class Index(LoginRequiredMixin,TemplateView):
         
         
         
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\              
         
         
-        
-        
+       
         # Upcomming events
-            
-            # Get the current date
+        
+        
+        no_envent = -1    
+        # Get the current date
         current_date = timezone.now().date()
         
         # Calculate the date 5 days from now
@@ -223,19 +282,56 @@ class Index(LoginRequiredMixin,TemplateView):
         
         # Query the database for events within the next 5 days
         events = EventSale.objects.filter(event_date__range=[current_date, end_date])
-    
+        
+        # print(len(events))
+        
         for i in events:
-            print(i.customer_name,i.event_date)
+            pass
+            # print(i.customer_name,i.event_date)
+
+        if len(events) == 0:
+            no_envent = 0
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\        
+        
+        
+        
+        # Pie Chart For Expenses Breakdown
+        
+        pie_list = []
+        
+        event_expense = EventExpense.objects.filter(expense_date__year=current_year, expense_date__month=current_month).aggregate(total_expense=Sum('total_expense'))
+            
+        print(event_expense['total_expense'])
         
 
         context = {
-            "expense": cleaned_expenses,
             
+            # sk
+            "month_event_expense" : event_expense['total_expense'],
+            
+            
+            "expense": expense_list,
+        
+            'no_event' : no_envent,
             'upcoming_events': events,
             
             "events" : event_json,
             "event_sale" : sale,
             'serialized_events': serialized_event,
+            
+            "sale": every_month_sale,
+
+            
+            "total_events_this_month" : total_events,
+            "total_events_this_year" : total_sale_this_year,
+            
+            # sk end
+            
+            
+            
+            #  hb
             
             "total_sales": total_sales,
             "total_expense": total_expenses,
@@ -245,13 +341,9 @@ class Index(LoginRequiredMixin,TemplateView):
             "revenue": total_sales - total_expenses,
             "events_this_month": events_count_this_month,
             "events_this_year":events_count_this_year,
-
-            "sale": every_month_sale,
-
+            "vendors": vendors
             
-            "total_events_this_month" : total_events,
-            "total_events_this_year" : total_sale_this_year,
-            
+            # hb end
             
 
         }

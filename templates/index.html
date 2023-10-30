@@ -6,31 +6,15 @@
 
 {% block extra_css %}
 <!-- plugin css -->
-<link href="{% static 'libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet"
-    type="text/css" />
+<link href="{% static 'libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet" type="text/css" />
+
+
+<link href="{% static 'css/Dashboardcss/style.css' %}" rel="stylesheet" type="text/css" />
+
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
 
 
-
-
-
-
-<style>
-    /* Increase the height of #statistics-charts on screens >= 1800px */
-    @media (min-width: 1800px) {
-        #statistics-charts {
-            margin-top: 300px;
-            height: 300px;
-            /* Increase the height as needed */
-        }
-
-        .mt-33 {
-            height: 260px;
-            /* Increase the height as needed */
-        }
-    }
-</style>
 {% endblock extra_css %}
 
 {% block content %}
@@ -257,12 +241,11 @@
 
 
 
-
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title mb-4">Expense Stastics</h4>
                                 <div class="media">
-                                    <h4>&#8360; 14,235</h4>
+                                    <h6>Current Year</h6>
                                     <div class="media-body ps-3">
                                         <div class="dropdown">
                                             <!-- <button class="btn btn-light btn-sm dropdown-toggle" type="button"
@@ -296,6 +279,12 @@
                             <div class="card-body">
                                 <h4 class="header-title mb-4">Upcoming Events</h4>
                                 <ul class="list-unstyled activity-wid mb-0">
+                                    {% if no_event == 0 %}
+                                        <div id="no-event">
+                                            <h4>No Event in Upcoming 6 Days</h4>
+                                        </div>
+
+                                    {% else %}    
                                     {% for event in upcoming_events %}
                                     <li class="activity-list">
                                         <div class="activity-icon avatar-sm">
@@ -318,13 +307,14 @@
                                         </div>
                                     </li>
                                     {% endfor %}
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4">
-                        <div class="card">
-                            <div class="card-body">
+                    <div class="col-xl-4" >
+                        <div class="card" >
+                            <div class="card-body" >
                                 <h4 class="header-title mb-4">Earning Goal</h4>
                                 <div class="mt-2 text-center">
                                     <div class="row">
@@ -345,19 +335,16 @@
                                         </div>
                                         <hr>
                                         <h4 class="header-title mb-4">Expense Heads</h4>
-                                        <div class="col-md-6 dash-goal" style="padding: 20px; ">
+                                        <div class="col-md-6 dash-goal" >
                                             <div class="mt-4 mt-sm-0">
 
 
                                                 <canvas id="expense-heads"></canvas>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 dash-goal" style="padding: 30px;">
+                                        <div class="col-md-6 dash-goal" >
                                             <div class="mt-4 mt-sm-0">
-                                                <div id="list-chart-3" class="apex-charts" dir="ltr"></div>
-
-                                                <p class="text-muted mb-2 mt-2 pt-1">Earning Goal:</p>
-                                                <h5 class="font-size-18 mb-1">USD 84,265.45</h5>
+                                               <img src="{% static 'images/legend.png' %}" id="legend">
                                             </div>
                                         </div>
                                     </div>
@@ -367,10 +354,14 @@
                         </div>
 
                     </div>
+                    <style>
+
+                  
+                    </style>
                     <div class="col-xl-4">
-                        <div class="card">
+                        <div class="card calender-card">
                             <div class="card-body">
-                                <div id='calendar' style="width: 650px;padding: 30px;" ></div>
+                                <div id='calendar' ></div>
                                 <!-- Other content here -->
                             </div>
                         </div>
@@ -388,71 +379,27 @@
                                     <table class="table table-centered table-nowrap mb-0">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Product</th>
+                                                
+                                                <th>Vendor Name</th>
 
-                                                <th>Customer</th>
-                                                <th>Price</th>
-                                                <th>Invoice</th>
-                                                <th>Status</th>
+                                                <th>Contact Number</th>
+                                                <th>Vender For</th>
+                                                <th>Remarks</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for vendor in vendors %}
                                             <tr>
-                                                <td>#2356</td>
-                                                <td><img src="/static/images/product/img-7.png" width="42" class="me-3"
-                                                        alt="" />Green Chair</td>
-                                                <td>Kenneth Gittens</td>
-                                                <td>$200.00</td>
-                                                <td>42</td>
-                                                <td><span
+                                                <td>{{vendor.vendor_name}}</td>
+                                                <td>{{vendor.contact_number}}</td>
+                                                <td>{{vendor.vendor_for}}</td>
+                                                <td>{{vendor.remarks}}</td>
+                                                <!-- <td><span
                                                         class="badge badge-pill badge-soft-primary font-size-13">Pending</span>
-                                                </td>
+                                                </td> -->
                                             </tr>
-                                            <tr>
-                                                <td>#2564</td>
-                                                <td><img src="/static/images/product/img-8.png" width="42" class="me-3"
-                                                        alt="" />Office Chair</td>
-                                                <td>Alfred Gordon</td>
-                                                <td>$242.00</td>
-                                                <td>54</td>
-                                                <td><span
-                                                        class="badge badge-pill badge-soft-success font-size-13">Active</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>#2125</td>
-                                                <td><img src="/static/images/product/img-10.png" width="42" class="me-3"
-                                                        alt="" />Gray Chair</td>
-                                                <td>Keena Reyes</td>
-                                                <td>$320.00</td>
-                                                <td>65</td>
-                                                <td><span
-                                                        class="badge badge-pill badge-soft-success font-size-13">Active</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>#8587</td>
-                                                <td><img src="/static/images/product/img-11.png" width="42" class="me-3"
-                                                        alt="" />Steel Chair</td>
-                                                <td>Timothy Zuniga</td>
-                                                <td>$342.00</td>
-                                                <td>52</td>
-                                                <td><span
-                                                        class="badge badge-pill badge-soft-primary font-size-13">Pending</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>#2354</td>
-                                                <td><img src="/static/images/product/img-12.png" width="42" class="me-3"
-                                                        alt="" />Home Chair</td>
-                                                <td>Joann Wiliams</td>
-                                                <td>$320.00</td>
-                                                <td>25</td>
-                                                <td><span
-                                                        class="badge badge-pill badge-soft-primary font-size-13">Pending</span>
-                                                </td>
-                                            </tr>
+                                            {% endfor %}
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -469,12 +416,14 @@
 </div>
 
 <h1 hidden id="expense" data-my-variable="{{expense}}"></h1>
+<h1 hidden id="month_event_expense" data-my-variable="{{month_event_expense}}"></h1>
 
 
 
 <script>
 
     var serializedEvents = JSON.parse('{{ serialized_events|safe }}');
+    
 
 
 </script>
@@ -502,178 +451,19 @@
 
 <script src="{% static 'js/pages/dashboard.init.js' %}"></script>
 
+<script src="{% static 'js/Dashboardjs/main.js' %}"></script>
+
 
 
 <!-- Apex chart -->
 
 <script>
 
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        themeSystem: 'bootstrap',
-        initialView: 'dayGridMonth',
-        events: [
-        {
-            title: 'Event 1',
-            start: '2023-10-10',
-            color: 'red' // Set the color of this event to red
-        },
-        {
-            title: 'Event 2',
-            start: '2023-10-15',
-            color: 'blue' // Set the color of this event to blue
-        },
-        // Add more events here
-    ]
-      });
-      calendar.render();
-    });
+    var serializedEvents = JSON.parse('{{ serialized_events|safe }}');
 
-  </script>
-
-
-<script>
-
-    var montly_sale = document.getElementById("sale").getAttribute("data-my-variable");
-
-    // // Parse the values as JSON arrays
-    var totalSales = JSON.parse(montly_sale);
-
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-    const salesChartMonthlyCtx = document.getElementById('salesChartMonthly').getContext('2d');
-
-    const expenseHeadsCtx = document.getElementById('expense-heads').getContext('2d');
-
-    const salesChartMonthly = new Chart(salesChartMonthlyCtx, {
-        type: 'bar',
-        data: {
-            labels: months,
-            datasets: [{
-                label: 'Monthly Sales',
-
-                data: totalSales,
-                backgroundColor: [
-
-                    'rgba(51, 255, 189, 0.5)'
-                ],
-                borderColor: [
-
-                    'rgba(0, 0, 0, 0.5)'
-                ],
-                borderWidth: 2
-
-            }],
-        },
-    });
-
-    const heads = ['Jan', 'Feb', 'Mar'];
-    const expenseHeads = new Chart(expenseHeadsCtx, {
-        type: 'doughnut',
-        data: {
-            labels: heads,
-            datasets: [{
-                label: 'Monthly Sales',
-                data: totalSales,
-                backgroundColor: [
-
-                    '#e2e8f0',
-                    '#525CE9',
-                    '#23c58f',
-
-
-                ],
-                hoverBackgroundColor: ['lightcoral', 'lightblue', 'lightgreen', 'lightyellow', 'mediumpurple'],
-                innerRadius: 10, // Adjust the inner radius as needed
-                outerRadius: 100, // Adjust the outer radius to 50 pixels
-                borderWidth: 0
-            }],
-        },
-
-    });
-
-
-
-
-
-
-
-
-    var montly_expense = document.getElementById("expense").getAttribute("data-my-variable");
-
-    var totalExpense = JSON.parse(montly_expense);
-
-    console.log(totalExpense)
-
-    // Create the chart options
-    var options1 = {
-        chart: { type: "area", sparkline: { enabled: true } },
-        series: [{ data: totalExpense }],
-        stroke: { curve: "smooth", width: 2 },
-        colors: ["#525ce5"],
-        tooltip: {
-            fixed: { enabled: false },
-            x: { show: false },
-            y: {
-                title: {
-                    formatter: function (e) {
-                        return "";
-                    },
-                },
-            },
-            marker: { show: false },
-        },
-    };
-
-    // Function to set the chart height based on screen width
-    function setChartHeight(chart) {
-        var chartHeight = window.innerWidth >= 1800 ? 250 : 80;
-        chart.updateOptions({
-            chart: {
-                height: chartHeight
-            }
-        });
-    }
-
-    // Create and render the chart
-    var chart = new ApexCharts(document.querySelector("#stastics-chartss"), options1);
-
-    chart.render();
-
-    // Call the setChartHeight function initially
-    setChartHeight(chart);
-
-    // Update the chart height when the window is resized
-    window.addEventListener('resize', function () {
-        setChartHeight(chart);
-    });
-
-
-    var options2 = {
-        chart: { type: "doughnut", sparkline: { enabled: true } },
-        series: [{ data: totalExpense }],
-        stroke: { curve: "smooth", width: 2 },
-        colors: ["#525ce5"],
-        tooltip: {
-            fixed: { enabled: false },
-            x: { show: false },
-            y: {
-                title: {
-                    formatter: function (e) {
-                        return "";
-                    },
-                },
-            },
-            marker: { show: false },
-        },
-    };
-
-
-    // Create and render the chart
-    var chart1 = new ApexCharts(document.querySelector("#expense-heads"), options2);
 </script>
+
+
 
 
 {% endblock extra_javascript %}

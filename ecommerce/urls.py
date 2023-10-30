@@ -53,6 +53,7 @@ urlpatterns = [
     path('update_food_menu/<int:pk>', views.UpdateFoodMenu.as_view(), name='update-deals'),
   
     
+    
    
     
 ]

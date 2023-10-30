@@ -69,3 +69,10 @@ class OtherExpense(models.Model):
     on_date = models.DateField()
     expense_by = models.CharField(max_length=50)
 
+
+class VendorsList(models.Model):
+    vendor_name = models.CharField(max_length=120)
+    contact_number = models.BigIntegerField(default=0)
+    vendor_for = models.CharField(max_length=50)
+    remarks = models.TextField(blank=True)
+    
