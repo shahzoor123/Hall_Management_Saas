@@ -1,0 +1,87 @@
+
+
+
+
+
+/* Increase the height of #statistics-charts on screens >= 1800px */
+@media (max-width: 1800px) {
+
+  #legend{
+    width: 150px;
+  }
+  
+
+
+}
+
+/* Media Quaries */
+
+/* Increase the height of #statistics-charts on screens >= 1800px */
+@media (min-width: 1800px) {
+  #statistics-charts {
+      margin-top: 300px;
+      height: 300px;
+      /* Increase the height as needed */
+  }
+
+  .mt-33 {
+      height: 260px;
+      /* Increase the height as needed */
+  }
+}
+
+#no-event {
+  height: 410px;
+  padding: 100px;
+ 
+}
+#no-event h4{
+  color: rgb(115, 115, 115);
+
+  text-align: center;
+ 
+}
+
+
+
+
+  /* Increase the height of #statistics-charts on screens >= 1800px */
+@media (min-width: 1800px) {
+      #no-event {
+  height: 510px;
+  padding: 100px;
+ 
+}
+  
+
+}
+
+
+/* Increase the height of #statistics-charts on screens >= 1800px */
+@media (max-width: 1800px) {
+  #calendar{
+      width: 400px;
+      height: 400px;
+      
+ 
+      /* Increase the height as needed */
+  }
+  .calender-card{
+      height: 450px;
+  }
+
+
+
+}
+
+
+  /* Increase the height of #statistics-charts on screens >= 1800px */
+  @media (min-width: 1800px) {
+  #calendar{
+      width: 650px;
+      padding: 30px;
+      /* Increase the height as needed */
+  }
+  
+
+}
