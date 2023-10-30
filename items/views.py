@@ -207,7 +207,7 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
                     recieved_amount=received_ammount, 
                     remaining_amount = total - int(received_ammount)
                 )
-        
+                create_event = Event.objects.create(event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
                 messages.success(request, "Event added Successfully")
                 return redirect('event-sale')
             except:
