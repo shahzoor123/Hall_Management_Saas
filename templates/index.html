@@ -257,7 +257,6 @@
 
 
 
-
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title mb-4">Expense Stastics</h4>
@@ -569,18 +568,17 @@
 
     var serializedEvents = JSON.parse('{{ serialized_events|safe }}');
 
-    console.log(serializedEvents)
+    
+    var formattedEvents = serializedEvents.map(function (event) {
+          return {
+              title: event.fields.event_title,
+              start: event.fields.start_date,
+      
+          };
+      });
+
 
     document.addEventListener('DOMContentLoaded', function() {
-
-    var formattedEvents = serializedEvents.map(function (event) {
-    return {
-        title: event.fields.event_title,
-        start: event.fields.start_date,
-
-    };
-    });
-
       var calendarEl = document.getElementById('calendar');
       
       var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -629,14 +627,14 @@
         },
     });
 
-    const heads = ['Construction and repairs', 'Daily expenses', 'Other expenses', 'Salaries', 'Event expens'];
+    const heads = ['Construction and repairs', 'Daily expensess' , 'Other expenses', 'Salaries', 'Event expense'];
     const expenseHeads = new Chart(expenseHeadsCtx, {
         type: 'doughnut',
         data: {
             labels: heads,
             datasets: [{
-                label: 'Monthly Expense',
-                data: [10,20,50,90,200],
+                label: 'Monthly Sales',
+                data: [10,20,30,100,200,],
                 backgroundColor: [
 
                     '#e2e8f0',
