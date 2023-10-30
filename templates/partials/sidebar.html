@@ -91,12 +91,15 @@
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="dripicons-mail"></i>
-                            <span key="t-email">Email</span>
+                            <span key="t-email">General Expenses</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{% url 'email_inbox' %}" key="t-inbox">Inbox</a></li>
-                            <li><a href="{% url 'email_read' %}" key="t-read-email">Email Read</a></li>
-                            <li><a href="{% url 'email_compose' %}" key="t-email-compose">Email Compose</a></li>
+                            <li><a href="{% url 'daily_expenses' %}" key="t-email-compose">Daily Expenses</a></li>
+                            <li><a href="{% url 'other_expenses' %}" key="t-email-compose">Other Expenses</a></li>
+                            <li><a href="{% url 'salaries' %}" key="t-email-compose">Salary Expenses</a></li>
+                            <li><a href="{% url 'constraction_and_repairs' %}" key="t-inbox">Contraction</a></li>
+                            <li><a href="{% url 'constraction_and_repairs' %}" key="t-read-email">Repairs</a></li>
+
                         </ul>
                     </li>
 

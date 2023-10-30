@@ -48,7 +48,6 @@ urlpatterns = [
     path('ecommerce_add_brand', views.ProductsAddBrand.as_view(),name='ecommerce_add_brand'),
     path('ecommerce_add_unit', views.ProductsAddUnit.as_view(),name='ecommerce_add_unit'),
 
-
     # path('ecommerce_add_product', views.ProductsAddProduct.as_view(),name='ecommerce_add_product'),
     path('calendar/', views.Calendar.as_view(),name='calendar'),
     path('update_food_menu/<int:pk>', views.UpdateFoodMenu.as_view(), name='update-deals'),

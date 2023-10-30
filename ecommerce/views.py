@@ -49,7 +49,10 @@ class Products(LoginRequiredMixin,TemplateView):
 
 class ProductsDetail(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-product-detail.html"
-    
+
+
+
+
 
 class ProductList(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/product_list.html"

@@ -15,6 +15,8 @@ class Salary(models.Model):
     details = models.CharField(max_length=300, blank=True)
     amount = models.IntegerField(default=0)
     on_date = models.DateField()
+    expense_by = models.CharField(max_length=50)
+
 
 
 class DailyExpenses(models.Model):
@@ -38,6 +40,8 @@ class DailyExpenses(models.Model):
     details = models.CharField(max_length=300, blank=True)
     amount = models.IntegerField(default=0)
     on_date = models.DateField()
+    expense_by = models.CharField(max_length=50)
+
 
 class ConstructionAndRepair(models.Model):
     
@@ -45,6 +49,7 @@ class ConstructionAndRepair(models.Model):
     details = models.CharField(max_length=300, blank=True)
     amount = models.IntegerField(default=0)
     on_date = models.DateField()
+    expense_by = models.CharField(max_length=50)
 
 class OtherExpense(models.Model):
     
@@ -62,3 +67,5 @@ class OtherExpense(models.Model):
     details = models.CharField(max_length=300, blank=True)
     amount = models.IntegerField(default=0)
     on_date = models.DateField()
+    expense_by = models.CharField(max_length=50)
+

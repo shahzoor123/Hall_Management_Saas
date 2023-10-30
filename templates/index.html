@@ -9,19 +9,28 @@
 <link href="{% static 'libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet"
     type="text/css" />
 
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+
+
+
+
+
+
 <style>
-  /* Increase the height of #statistics-charts on screens >= 1800px */
-  @media (min-width: 1800px) {
-            #statistics-charts {
-                margin-top: 300px;
-                height: 300px; /* Increase the height as needed */
-            }
-            .mt-33 {
-                height: 260px; /* Increase the height as needed */
-            }
+    /* Increase the height of #statistics-charts on screens >= 1800px */
+    @media (min-width: 1800px) {
+        #statistics-charts {
+            margin-top: 300px;
+            height: 300px;
+            /* Increase the height as needed */
         }
 
-</style>    
+        .mt-33 {
+            height: 260px;
+            /* Increase the height as needed */
+        }
+    }
+</style>
 {% endblock extra_css %}
 
 {% block content %}
@@ -52,11 +61,11 @@
         <!-- end page title -->
         <div class="container-fluid">
             <div class="page-content-wrapper">
-                <div class="row" >
-                    <div class="col-xl-8" >
+                <div class="row">
+                    <div class="col-xl-8">
                         <div class="card">
                             {% include 'partials/alerts.html' %}
-                            <div class="card-body" >
+                            <div class="card-body">
                                 <h4 class="header-title mb-4 float-sm-start">Monthly Sales</h4>
 
                                 <!-- <div class="float-sm-end">
@@ -81,16 +90,17 @@
                                     <div class="col-xl-9">
                                         <div class="card">
                                             <div class="card-body">
-                                          
+
                                                 <canvas id="salesChartMonthly"></canvas>
+                                                
                                             </div>
                                         </div>
                                     </div>
 
-                                    
 
-                                    <div class="col-xl-3" >
-                                        <div class="dash-info-widget mt-4 mt-lg-0 py-4 px-3 rounded"  >
+
+                                    <div class="col-xl-3">
+                                        <div class="dash-info-widget mt-4 mt-lg-0 py-4 px-3 rounded">
                                             <div class="media dash-main-border pb-2 mt-2">
                                                 <div class="avatar-sm mb-3 mt-2">
                                                     <span class="avatar-title   ">
@@ -106,7 +116,8 @@
                                                         {{fifty_sale}}</h4>
                                                     {% endif %}
                                                     <p class="text-muted">
-                                                        Sales <a href="{% url 'event-sale' %}" class="text-success">Withdraw <i
+                                                        Sales <a href="{% url 'event-sale' %}"
+                                                            class="text-success">Withdraw <i
                                                                 class="mdi mdi-arrow-right"></i></a>
                                                     </p>
                                                 </div>
@@ -124,7 +135,8 @@
 
 
                                                     <p class="text-muted">
-                                                        Expenses <a href="{% url 'event-expense' %}" class="text-danger">Pay <i
+                                                        Expenses <a href="{% url 'event-expense' %}"
+                                                            class="text-danger">Pay <i
                                                                 class="mdi mdi-arrow-right"></i></a>
                                                     </p>
                                                 </div>
@@ -146,7 +158,8 @@
                                                         {{fifty_revenue}}</h4>
                                                     {% endif %}
                                                     <p class="text-muted mb-0">
-                                                        Gross Revenue <a href="{% url 'event-sale' %}" class="text-success">View <i
+                                                        Gross Revenue <a href="{% url 'event-sale' %}"
+                                                            class="text-success">View <i
                                                                 class="mdi mdi-arrow-right"></i></a>
                                                     </p>
                                                 </div>
@@ -159,7 +172,7 @@
                     </div>
 
                     <div class="col-xl-4">
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-xl-6 col-md-6">
                                 <div class="card">
                                     <div class="card-body">
@@ -180,9 +193,9 @@
 
                                             </p>
                                             <div class="progress mt-3" style="height: 4px;">
-                                                <div id="month-progressBar" class="progress-bar progress-bar bg-success" role="progressbar"
-                                                    style="width: 80%;" aria-valuenow="80" aria-valuemin="0"
-                                                    aria-valuemax="80"></div>
+                                                <div id="month-progressBar" class="progress-bar progress-bar bg-success"
+                                                    role="progressbar" style="width: 80%;" aria-valuenow="80"
+                                                    aria-valuemin="0" aria-valuemax="80"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -208,7 +221,8 @@
 
                                             </p>
                                             <div class="progress mt-3" style="height: 4px;">
-                                                <div id="yearly-progressBar" class="progress-bar progress-bar bg-success" role="progressbar"
+                                                <div id="yearly-progressBar"
+                                                    class="progress-bar progress-bar bg-success" role="progressbar"
                                                     style="width: 80%;" aria-valuenow="80" aria-valuemin="0"
                                                     aria-valuemax="80"></div>
                                             </div>
@@ -244,7 +258,7 @@
 
 
 
-                        <div class="card"  >
+                        <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title mb-4">Expense Stastics</h4>
                                 <div class="media">
@@ -264,14 +278,14 @@
                                         </div>
                                     </div>
                                 </div>
-                             
-                                <div class="mt-33" >
-                                   
-                                    <div id="stastics-chartss" ></div>
+
+                                <div class="mt-33">
+
+                                    <div id="stastics-chartss"></div>
                                 </div>
 
-                                
-                                
+
+
                             </div>
                         </div>
                     </div>
@@ -280,9 +294,15 @@
                     <div class="col-xl-4">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title mb-4">Expense List</h4>
+                                <h4 class="header-title mb-4">Upcoming Events</h4>
                                 <ul class="list-unstyled activity-wid mb-0">
-                                   
+                                    {% if no_event == 0 %}
+                                        <div id="no-event">
+                                            <h4>No Event in Upcoming 6 Days</h4>
+                                        </div>
+
+                                    {% else %}    
+                                    {% for event in upcoming_events %}
                                     <li class="activity-list">
                                         <div class="activity-icon avatar-sm">
                                             <span class="avatar-title bg-soft-success text-success rounded-circle">
@@ -291,18 +311,20 @@
                                         </div>
                                         <div class="media">
                                             <div class="me-3">
-                                                <h5 class="font-size-15 mb-1">New Order Received</h5>
-                                                <p class="text-muted font-size-14 mb-0">Thank You</p>
+                                                <h5 class="font-size-15 mb-1">{{event.customer_name}}</h5>
+                                                <p class="text-muted font-size-14 mb-0">{{event.location}}</p>
                                             </div>
                                             <div class="media-body">
                                                 <div class="text-end d-none d-md-block">
                                                     <p class="text-muted font-size-13 mt-2 pt-1 mb-0"><i
                                                             class="mdi mdi-timer-outline font-size-15 text-primary"></i>
-                                                        Today</p>
+                                                        {{event.event_date}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
+                                    {% endfor %}
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -328,54 +350,95 @@
                                                 <h5 class="font-size-18 mb-1">USD 84,265.45</h5>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-4">Expense Heads</h4>
-                                <div class="card">
-                                    <div class="card-body" >
-                                  
-                                        <canvas id="expense-heads"></canvas>
-                                    </div>
-                                </div>
+                                        <hr>
+                                        <h4 class="header-title mb-4">Expense Heads</h4>
+                                        <div class="col-md-6 dash-goal" style="padding: 20px; ">
+                                            <div class="mt-4 mt-sm-0">
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mb-4">Sales by State</h4>
-                                <div id="world-map-markers" style="height: 230px;"></div>
-                                <div class="px-4 py-3 mt-4">
-                                    <p class="mb-1">USA <span class="float-right">75%</span></p>
-                                    <div class="progress mt-2" style="height: 6px;">
-                                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar"
-                                            style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="75">
+
+                                                <canvas id="expense-heads"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 dash-goal" style="padding: 30px;">
+                                            <div class="mt-4 mt-sm-0">
+                                                <div id="list-chart-3" class="apex-charts" dir="ltr"></div>
+
+                                                <p class="text-muted mb-2 mt-2 pt-1">Earning Goal:</p>
+                                                <h5 class="font-size-18 mb-1">USD 84,265.45</h5>
+                                            </div>
                                         </div>
                                     </div>
-                                    <p class="mt-3 mb-1">Russia <span class="float-right">55%</span></p>
-                                    <div class="progress mt-2" style="height: 6px;">
-                                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar"
-                                            style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="55">
-                                        </div>
-                                    </div>
-                                    <p class="mt-3 mb-1">Australia <span class="float-right">85%</span></p>
-                                    <div class="progress mt-2" style="height: 6px;">
-                                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar"
-                                            style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="85">
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                    <style>
+
+                        #no-event {
+                            height: 410px;
+                            padding: 100px;
+                           
+                        }
+                        #no-event h4{
+                            color: rgb(115, 115, 115);
+                          
+                            text-align: center;
+                           
+                        }
+                            /* Increase the height of #statistics-charts on screens >= 1800px */
+                            @media (min-width: 1800px) {
+                                #no-event {
+                            height: 510px;
+                            padding: 100px;
+                           
+                        }
+                            
+                        
+                        }
+                        
+                        
+                        /* Increase the height of #statistics-charts on screens >= 1800px */
+                        @media (max-width: 1800px) {
+                            #calendar{
+                                width: 400px;
+                                height: 430px;
+                                
+                           
+                                /* Increase the height as needed */
+                            }
+                            .calender-card{
+                                height: 470px;
+                            }
+                    
+                    
+                        
+                        }
+                            /* Increase the height of #statistics-charts on screens >= 1800px */
+                            @media (min-width: 1800px) {
+                            #calendar{
+                                width: 650px;
+                                padding: 30px;
+                                /* Increase the height as needed */
+                            }
+                            
+                        
+                        }
+                    </style>
+                    <div class="col-xl-4">
+                        <div class="card calender-card">
+                            <div class="card-body">
+                                <div id='calendar' ></div>
+                                <!-- Other content here -->
+                            </div>
+                        </div>
+                    </div>
+                
+                 
                 </div>
                 <div class="row">
-                   
+
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
@@ -467,6 +530,15 @@
 <h1 hidden id="expense" data-my-variable="{{expense}}"></h1>
 
 
+
+<script>
+
+    var serializedEvents = JSON.parse('{{ serialized_events|safe }}');
+
+
+</script>
+
+
 <!-- End Page-content -->
 {% endblock content %}
 {% block extra_javascript %}
@@ -475,6 +547,8 @@
 <!-- Plugins js-->
 <script src="{% static 'libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
 <script src="{% static 'libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js' %}"></script>
+
+ 
 
 
 <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script>
@@ -487,73 +561,98 @@
 
 <script src="{% static 'js/pages/dashboard.init.js' %}"></script>
 
+
+
 <!-- Apex chart -->
 
+<script>
 
+    var serializedEvents = JSON.parse('{{ serialized_events|safe }}');
+
+    console.log(serializedEvents)
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+    var formattedEvents = serializedEvents.map(function (event) {
+    return {
+        title: event.fields.event_title,
+        start: event.fields.start_date,
+
+    };
+    });
+
+      var calendarEl = document.getElementById('calendar');
+      
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'bootstrap',
+        initialView: 'dayGridMonth',
+        events: formattedEvents,
+      });
+      calendar.render();
+    });
+
+  </script>
 
 
 <script>
 
-var montly_sale = document.getElementById("sale").getAttribute("data-my-variable");
+    var montly_sale = document.getElementById("sale").getAttribute("data-my-variable");
 
- // // Parse the values as JSON arrays
- var totalSales = JSON.parse(montly_sale);
+    // // Parse the values as JSON arrays
+    var totalSales = JSON.parse(montly_sale);
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-const salesChartMonthlyCtx = document.getElementById('salesChartMonthly').getContext('2d');
+    const salesChartMonthlyCtx = document.getElementById('salesChartMonthly').getContext('2d');
 
-const expenseHeadsCtx = document.getElementById('expense-heads').getContext('2d');
+    const expenseHeadsCtx = document.getElementById('expense-heads').getContext('2d');
 
-const salesChartMonthly = new Chart(salesChartMonthlyCtx, {
-    type: 'bar',
-    data: {
-      labels: months,
-      datasets: [{
-        label: 'Monthly Sales',
+    const salesChartMonthly = new Chart(salesChartMonthlyCtx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Monthly Sales',
 
-        data : totalSales,
-        backgroundColor: [
+                data: totalSales,
+                backgroundColor: [
 
-          'rgba(51, 255, 189, 0.5)'
-        ],
-        borderColor: [
+                    'rgba(51, 255, 189, 0.5)'
+                ],
+                borderColor: [
 
-          'rgba(0, 0, 0, 0.5)'
-        ],
-        borderWidth: 2
+                    'rgba(0, 0, 0, 0.5)'
+                ],
+                borderWidth: 2
 
-      }],
-    },
-  });
+            }],
+        },
+    });
+
+    const heads = ['Construction and repairs', 'Daily expenses', 'Other expenses', 'Salaries', 'Event expens'];
+    const expenseHeads = new Chart(expenseHeadsCtx, {
+        type: 'doughnut',
+        data: {
+            labels: heads,
+            datasets: [{
+                label: 'Monthly Expense',
+                data: [10,20,50,90,200],
+                backgroundColor: [
+
+                    '#e2e8f0',
+                    '#525CE9',
+                    '#23c58f',
 
 
-  const expenseHeads = new Chart(expenseHeadsCtx, {
-    type: 'doughnut',
-    data: {
-      labels: months,
-      datasets: [{
-        label: 'Monthly Sales',
+                ],
+                hoverBackgroundColor: ['lightcoral', 'lightblue', 'lightgreen', 'lightyellow', 'mediumpurple'],
+                innerRadius: 10, // Adjust the inner radius as needed
+                outerRadius: 100, // Adjust the outer radius to 50 pixels
+                borderWidth: 0
+            }],
+        },
 
-        data : totalSales,
-        backgroundColor: [
-        'black',
-        'blue',
-        'red',
-        'black',
-        'black',
-        'black',
-         
-        ],
-        borderColor: [
-
-          'rgba(0, 0, 0, 0.5)'
-        ],
-        borderWidth: 2
-
-      }],
-    },
-  });
+    });
 
 
 
@@ -561,78 +660,79 @@ const salesChartMonthly = new Chart(salesChartMonthlyCtx, {
 
 
 
-var montly_expense = document.getElementById("expense").getAttribute("data-my-variable");
 
-var totalExpense = JSON.parse(montly_expense);
+    var montly_expense = document.getElementById("expense").getAttribute("data-my-variable");
 
-console.log(totalExpense)
+    var totalExpense = JSON.parse(montly_expense);
 
-     // Create the chart options
-        var options1 = {
-            chart: { type: "area", sparkline: { enabled: true } },
-            series: [{ data: totalExpense }],
-            stroke: { curve: "smooth", width: 2 },
-            colors: ["#525ce5"],
-            tooltip: {
-                fixed: { enabled: false },
-                x: { show: false },
-                y: {
-                    title: {
-                        formatter: function (e) {
-                            return "";
-                        },
+    console.log(totalExpense)
+
+    // Create the chart options
+    var options1 = {
+        chart: { type: "area", sparkline: { enabled: true } },
+        series: [{ data: totalExpense }],
+        stroke: { curve: "smooth", width: 2 },
+        colors: ["#525ce5"],
+        tooltip: {
+            fixed: { enabled: false },
+            x: { show: false },
+            y: {
+                title: {
+                    formatter: function (e) {
+                        return "";
                     },
                 },
-                marker: { show: false },
             },
-        };
+            marker: { show: false },
+        },
+    };
 
-        // Function to set the chart height based on screen width
-        function setChartHeight(chart) {
-            var chartHeight = window.innerWidth >= 1800 ? 250 : 80;
-            chart.updateOptions({
-                chart: {
-                    height: chartHeight
-                }
-            });
-        }
-
-        // Create and render the chart
-        var chart = new ApexCharts(document.querySelector("#stastics-chartss"), options1);
-        
-        chart.render();
-
-        // Call the setChartHeight function initially
-        setChartHeight(chart);
-
-        // Update the chart height when the window is resized
-        window.addEventListener('resize', function () {
-            setChartHeight(chart);
+    // Function to set the chart height based on screen width
+    function setChartHeight(chart) {
+        var chartHeight = window.innerWidth >= 1800 ? 250 : 80;
+        chart.updateOptions({
+            chart: {
+                height: chartHeight
+            }
         });
+    }
+
+    // Create and render the chart
+    var chart = new ApexCharts(document.querySelector("#stastics-chartss"), options1);
+
+    chart.render();
+
+    // Call the setChartHeight function initially
+    setChartHeight(chart);
+
+    // Update the chart height when the window is resized
+    window.addEventListener('resize', function () {
+        setChartHeight(chart);
+    });
 
 
-        var options2 = {
-            chart: { type: "doughnut", sparkline: { enabled: true } },
-            series: [{ data: totalExpense }],
-            stroke: { curve: "smooth", width: 2 },
-            colors: ["#525ce5"],
-            tooltip: {
-                fixed: { enabled: false },
-                x: { show: false },
-                y: {
-                    title: {
-                        formatter: function (e) {
-                            return "";
-                        },
+    var options2 = {
+        chart: { type: "doughnut", sparkline: { enabled: true } },
+        series: [{ data: totalExpense }],
+        stroke: { curve: "smooth", width: 2 },
+        colors: ["#525ce5"],
+        tooltip: {
+            fixed: { enabled: false },
+            x: { show: false },
+            y: {
+                title: {
+                    formatter: function (e) {
+                        return "";
                     },
                 },
-                marker: { show: false },
             },
-        };
+            marker: { show: false },
+        },
+    };
 
 
-         // Create and render the chart
-        var chart1 = new ApexCharts(document.querySelector("#expense-heads"), options2);
+    // Create and render the chart
+    var chart1 = new ApexCharts(document.querySelector("#expense-heads"), options2);
 </script>
 
 
