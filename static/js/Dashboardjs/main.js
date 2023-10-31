@@ -1,5 +1,5 @@
 
-
+// Calender
     
 var formattedEvents = serializedEvents.map(function (event) {
         return {
@@ -23,6 +23,8 @@ var formattedEvents = serializedEvents.map(function (event) {
 
 
 
+
+// Sales bar chart
 
 var montly_sale = document.getElementById("sale").getAttribute("data-my-variable");
 
@@ -57,14 +59,33 @@ const salesChartMonthly = new Chart(salesChartMonthlyCtx, {
     },
 });
 
-const heads = ['Construction and repairs', 'Daily expensess' , 'Other expenses', 'Salaries', 'Event expense'];
+
+
+
+
+// Expense heads Pie Chart
+
+var expense_heads = document.getElementById("expense_heads").getAttribute("data-my-variable");
+
+console.log(expense_heads)
+// Split the string into an array of substrings using a comma as the delimiter
+var expense_headsArray = expense_heads.split(",");
+
+// Use map() to convert the substrings to integers using parseInt()
+var expense_headsIntegers = expense_headsArray.map(function (str) {
+    return parseInt(str, 10) || 10000; // Use 10 for decimal base
+});
+
+console.log(expense_headsIntegers);
+
+// const heads = ['Construction and repairs', 'Daily expensess' , 'Other expenses', 'Salaries', 'Event expense'];
 const expenseHeads = new Chart(expenseHeadsCtx, {
-    type: 'doughnut',
+    type: 'pie',
     data: {
         // labels: heads,
         datasets: [{
-            label: 'Monthly Sales',
-            data: [10,20,30,100,200,],
+            // label: 'Monthly Sales',
+            data: expense_headsIntegers,
             backgroundColor: [
 
                 '#99CCCC',
@@ -76,8 +97,8 @@ const expenseHeads = new Chart(expenseHeadsCtx, {
 
             ],
             hoverBackgroundColor: ['lightcoral'],
-            innerRadius: 10, // Adjust the inner radius as needed
-            outerRadius: 100, // Adjust the outer radius to 50 pixels
+            innerRadius: .1, // Adjust the inner radius as needed
+            outerRadius: .1, // Adjust the outer radius to 50 pixels
             borderWidth: 0
         }],
     },
@@ -87,7 +108,7 @@ const expenseHeads = new Chart(expenseHeadsCtx, {
 
 
 
-
+// Area Chart For Expense
 
 
 
@@ -141,25 +162,3 @@ window.addEventListener('resize', function () {
 });
 
 
-var options2 = {
-    chart: { type: "doughnut", sparkline: { enabled: true } },
-    series: [{ data: totalExpense }],
-    stroke: { curve: "smooth", width: 2 },
-    colors: ["#525ce5"],
-    tooltip: {
-        fixed: { enabled: false },
-        x: { show: false },
-        y: {
-            title: {
-                formatter: function (e) {
-                    return "";
-                },
-            },
-        },
-        marker: { show: false },
-    },
-};
-
-
-// Create and render the chart
-var chart1 = new ApexCharts(document.querySelector("#expense-heads"), options2);

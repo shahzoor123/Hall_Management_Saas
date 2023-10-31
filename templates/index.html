@@ -245,7 +245,7 @@
                             <div class="card-body">
                                 <h4 class="header-title mb-4">Expense Stastics</h4>
                                 <div class="media">
-                                    <h4>&#8360; 14,235</h4>
+                                    <h6>Current Year</h6>
                                     <div class="media-body ps-3">
                                         <div class="dropdown">
                                             <!-- <button class="btn btn-light btn-sm dropdown-toggle" type="button"
@@ -314,7 +314,7 @@
                     </div>
                     <div class="col-xl-4" >
                         <div class="card" >
-                            <div class="card-body" >
+                            <div class="card-body" id="pie-chart">
                                 <h4 class="header-title mb-4">Earning Goal</h4>
                                 <div class="mt-2 text-center">
                                     <div class="row">
@@ -416,12 +416,15 @@
 </div>
 
 <h1 hidden id="expense" data-my-variable="{{expense}}"></h1>
+<h1 hidden id="expense_heads" data-my-variable="{{expense_heads}}"></h1>
+
 
 
 
 <script>
 
     var serializedEvents = JSON.parse('{{ serialized_events|safe }}');
+    
 
 
 </script>

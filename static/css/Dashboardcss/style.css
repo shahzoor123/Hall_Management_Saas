@@ -1,6 +1,14 @@
 
 
+@media (min-width: 1800px) {
 
+  
+#pie-chart{
+    height: 600px;
+    background-color: none;
+}
+
+}
 
 
 /* Increase the height of #statistics-charts on screens >= 1800px */

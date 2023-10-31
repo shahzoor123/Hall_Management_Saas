@@ -60,5 +60,7 @@ urlpatterns = [
     path('accounts/password/change/', login_required(MyPasswordChangeView.as_view()), name="account_change_password"),
     #Custum set password done page redirect
     path('accounts/password/set/', login_required(MyPasswordSetView.as_view()), name="account_set_password"),
+    
+   
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
