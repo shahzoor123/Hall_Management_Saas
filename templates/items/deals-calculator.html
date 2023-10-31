@@ -133,7 +133,7 @@
                           <div class="mb-4">
                             <label class="form-label">Hall Charges</label>
                             <div class="input-group" id="datepicker3">
-                              <input type="number" class="form-control" min="1" id="hall-charges" value="0">
+                              <input type="number" class="form-control" min="1" name="hall-charges" id="hall-charges" value="0">
 
                             </div><!-- input-group -->
                           </div>
@@ -362,7 +362,18 @@
                     <!-- End Form -->
 
                     <!-- Form -->
+                       <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Menu Amount</label>
 
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <input type="text" class="js-toggle-password form-control" name="menu-amount" id="menu-amount"
+                      placeholder="Menu Amount" aria-label="">
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
 
                     <!-- Form -->
                     <div class="row mb-4">
@@ -396,14 +407,19 @@
                     </div>
                     <!-- End Form -->
                     
-                    <!-- Form -->
+                 
+
+                <!-- Form -->
                 <div class="row mb-4">
-                  <label for="" class="col-sm-3 col-form-label form-label">Menu Amount</label>
+                  <label for="" class="col-sm-3 col-form-label form-label">Hall Charges</label>
 
                   <div class="col-sm-9">
                     <!-- Input Group -->
-                    <input type="text" class="js-toggle-password form-control" name="menu-amount" id="menu-amount"
-                      placeholder="Menu Amount" aria-label="">
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="hall" id="hall"
+                        placeholder="Hall Charges" aria-label="">
+                    </div>
+
                     <!-- End Input Group -->
                   </div>
                 </div>
@@ -629,6 +645,8 @@
 
         // Get values from the first form
       const hallChargesInput = document.getElementById('hall-charges');
+      const hallChargesValue = hallChargesInput.value
+
       const menuPerHeadInput = document.getElementById('per-head');
 
 
@@ -648,6 +666,11 @@
       const perHeadInputForm2 = document.querySelector('form#sale-form [name="per-head"]');
       numOfPeopleInputForm2.value = numberOfPeopleInput.value;
       perHeadInputForm2.value = perHeadValue.toFixed(2);
+
+        // Get the value from the "Number of People" input in the first form
+        const hallChargesForm = document.querySelector('form#sale-form [name="hall"]');
+        
+        hallChargesForm.value = hallChargesValue
         
       const products = [];
       const quantityInputs = document.querySelectorAll('.item-qty');

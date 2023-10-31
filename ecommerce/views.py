@@ -466,6 +466,7 @@ class UpdateEventsale(LoginRequiredMixin, View):
             extra_charge = request.POST.get('extra-charges')
             stage_charges = request.POST.get('stage-charges')
             entry_charges = request.POST.get('entry-charges')
+            hall_charges = request.POST.get('hall-charges')
 
             food_menu = request.POST.get('food-menu')
             details = request.POST.get('details')
@@ -510,7 +511,7 @@ class UpdateEventsale(LoginRequiredMixin, View):
             requests.extra_charges = extra_charge
             requests.stage_charges = stage_charges
             requests.entry_charges = entry_charges
-
+            requests.hall_charges = hall_charges
             
 
             requests.food_menu = food_menu
@@ -1451,8 +1452,7 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
         for i in eventsale:
             food_menu.append(i.food_menu)
             ammounts.append(i.no_of_people)
-            print(i.per_head,i.total_menu,i.no_of_people)
-            ammounts.append(int(i.per_head)-int(i.total_menu)//int(i.no_of_people))
+            ammounts.append(i.hall_charges)
         # print(ammounts,'f1')    
 
         
@@ -1561,7 +1561,7 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
             per_head = int(hallCharges) + menuAmount
             eventsale.per_head = per_head
             eventsale.total_amount = (int(numberOfPeople) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charge)) 
-            
+            eventsale.hall_charges = hallCharges
             eventsale.save()
             
             print(menu)
