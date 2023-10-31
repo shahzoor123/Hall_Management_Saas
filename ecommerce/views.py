@@ -1451,7 +1451,8 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
         for i in eventsale:
             food_menu.append(i.food_menu)
             ammounts.append(i.no_of_people)
-            ammounts.append(i.stage_charges)
+            print(i.per_head,i.total_menu,i.no_of_people)
+            ammounts.append(int(i.per_head)-int(i.total_menu)//int(i.no_of_people))
         # print(ammounts,'f1')    
 
         
