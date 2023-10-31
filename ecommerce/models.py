@@ -150,6 +150,7 @@ class MyKitchenexpense(models.Model):
     
 
     bill = models.ForeignKey(EventSale, on_delete=models.PROTECT)
+    customer_name = models.CharField(max_length=50)
     date = models.DateField()
     payment_details = models.TextField(max_length=300)
     mutton = models.CharField(max_length=50)

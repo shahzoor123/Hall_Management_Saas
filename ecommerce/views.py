@@ -380,6 +380,7 @@ class Kitchenexpense(LoginRequiredMixin, View):
                 total=int(mutton) + int(chicken) + int(beef) + int(rice) + int(rice) + int(dahi) + int(doodh) + int(sabzi) + int(fruits) + int(khoya_paneer) + int(oil) + int(other) + int(dry)
                 add_kitchen_expense = MyKitchenexpense.objects.create(
                     bill=event_sale,  # Use the EventSale object
+                    customer_name = event_sale.customer_name,
                     date=date,
                     payment_details=payment,
                     mutton=mutton,
@@ -398,7 +399,127 @@ class Kitchenexpense(LoginRequiredMixin, View):
                     total_bill= total
                 )
 
+        return redirect('kitchen-expense')
+
+class KitchenexpenseUpdate(LoginRequiredMixin, View):
+    template_name = "ecommerce/kitchen-expense.html"
+
+    def get(self, request):
+        sale = EventSale.objects.all()
+        deals = Deals.objects.all()
+        kitchen_expense = MyKitchenexpense.objects.all()
+        total_sales = EventSale.objects.aggregate(total_sales=Sum('total_amount'))['total_sales']
+        total_expenses = EventExpense.objects.aggregate(total_expenses=Sum('total_expense'))['total_expenses']
+
+        total_sales = total_sales or 0
+        total_expenses = total_expenses or 0
+
+       
+
+
+        context = {
+            "sales": sale,
+            
+            "deals": deals,
+
+            "kitchen_expense" : kitchen_expense
+        }
+        return render(request, self.template_name, context)
+    
+    def post(self, request,kitchen_expense_id):
+        if request.method == "POST":
+            requests = MyKitchenexpense.objects.get(id=kitchen_expense_id)
+
+            print("I am here")
+            bill_num = request.POST.get('bill')
+            payment = request.POST.get('payment-details')
+
+            date = request.POST.get('date')
+            mutton = request.POST.get('mutton')
+
+            chicken = request.POST.get('chicken')
+            beef = request.POST.get('beef')
+            rice = request.POST.get('rice')
+
+            dahi = request.POST.get('dahi')
+            doodh = request.POST.get('doodh')
+            sabzi = request.POST.get('sabzi')
+            fruits = request.POST.get('fruits')
+
+            khoya_paneer = request.POST.get('khoya-paneer')
+            dry = request.POST.get('dry-fruits')
+            oil = request.POST.get('oil')
+            other = request.POST.get('other-items-bill')
+            other_desc = request.POST.get('other-items-desc')
+
+            
+            # Fetch the EventSale object based on the provided bill_num
+            try:
+                event_sale = EventSale.objects.get(id=bill_num)
+            except EventSale.DoesNotExist:
+                # Handle the case where the EventSale with the given ID doesn't exist
+                # You can return an error message or redirect to an error page
+                pass
+            else:
+                # Create the Kitchenexpense object using the EventSale object
+                total=int(mutton) + int(chicken) + int(beef) + int(rice) + int(rice) + int(dahi) + int(doodh) + int(sabzi) + int(fruits) + int(khoya_paneer) + int(oil) + int(other) + int(dry)
+                
+                requests.bill=event_sale,  # Use the EventSale object
+                requests.customer_name = event_sale.customer_name,
+                requests.date=date,
+                requests.payment_details=payment,
+                requests.mutton=mutton,
+                requests.chicken=chicken,
+                requests.beef=beef,
+                requests.rice=rice,
+                requests.dahi=dahi,
+                requests.doodh=doodh,
+                requests.sabzi=sabzi,
+                requests.fruits=fruits,
+                requests.dry_fruits = dry,
+                requests.khoya_cream_paneer=khoya_paneer,
+                requests.oil=oil,
+                requests.other_items_bill=other,
+                requests.other_items_desc=other_desc,
+                requests.total_bill= total
+                requests.save()
+
+                return redirect('kitchen-expense')
+                
+
         return render(request, "ecommerce/kitchen-expense.html")
+
+def delete_kitchen_expense(request, kitchen_expense_id):
+    
+
+    expense = get_object_or_404(MyKitchenexpense, pk=kitchen_expense_id)
+    # print(event.id)
+    if expense is not None:
+        try:
+            expense.delete()
+            messages.success(request, "Deleted Successfully")
+            return redirect("kitchen-expense")
+
+
+        except IntegrityError as e:
+            error_message = str(e)
+            if "Cannot delete some instances of model 'EventSale'" in error_message:
+                messages.error(request, "Cannot delete due to related objects. Hint: Check for any expense relatd to sale you are deleting, Delete them first. ")
+    else:
+        return redirect("kitchen-expense")
+
+    sale = EventSale.objects.all()
+    deals = Deals.objects.all()
+    kitchen_expense = MyKitchenexpense.objects.all()
+    context = {
+            "sales": sale,
+            
+            "deals": deals,
+
+            "kitchen_expense" : kitchen_expense
+        }
+    
+    return render(request, 'ecommerce/kitchen-expense.html', context=context)
 
 def DeleteProducts(request, product_id):
         

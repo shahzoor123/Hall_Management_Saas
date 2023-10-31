@@ -48,14 +48,14 @@ class Index(LoginRequiredMixin,TemplateView):
         total_expenses = 0
 
         # Getting Total Sales and Expense
-        total_sales = EventSale.objects.aggregate(total_sales=Sum('total_amount'))['total_sales']
+        total_sale = EventSale.objects.aggregate(total_sales=Sum('total_amount'))['total_sales']
         expenses = EventExpense.objects.aggregate(total_expenses=Sum('total_expense'))['total_expenses']
         if expenses is None:
             expenses = 0
 
         total_expenses += expenses 
 
-        total_sales = total_sales or 0
+        total_sale = total_sale or 0
         total_expenses = total_expenses or 0
 
         # Get the total salary amount for each employee type
@@ -348,7 +348,7 @@ class Index(LoginRequiredMixin,TemplateView):
             
             #  hb
             
-            "total_sales": total_sales,
+            "total_sales": total_sale,
             "total_expense": total_expenses,
             "fifty_sale": total_sales /2,
             "user": request.user,
