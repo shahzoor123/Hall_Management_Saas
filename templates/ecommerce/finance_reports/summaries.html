@@ -1,0 +1,277 @@
+{% extends 'partials/base.html' %} {% load static %} {% block title%}Dashboard{% endblock title %} {% block extra_css %}
+<!-- plugin css -->
+<link href="{% static 'libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet"
+  type="text/css" />
+<link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"
+  type="text/css" />
+<link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet"
+  type="text/css" />
+
+<!-- Responsive datatable examples -->
+<link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet"
+  type="text/css" />
+
+
+
+{% endblock extra_css %} {% block content %}
+
+
+
+<div class="main-content">
+  <div class="page-content">
+    <!-- start page title -->
+    <div class="page-title-box">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-sm-6">
+            <div class="page-title">
+              <h4>Finance Dashboard</h4>
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                  <a href="javascript: void(0);">Hall</a>
+                </li>
+                <li class="breadcrumb-item">
+                  <a href="javascript: void(0);">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Home</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end page title -->
+
+
+
+
+
+    <div class="container_fluid">
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="header-title">Summary</h4>
+          
+              <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
+                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                  <tr>
+                    <th>Month</th>
+                    <th>Status</th>
+                    <th>Mutton</th>
+                    <th>Chicken</th>
+                    <th>Date</th>
+                    <th>Total Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                 
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+                  <tr class="sale-row">
+                    <td>{{i.bill}}</td>
+                    <td>{{i.payment_details}}</td>
+                    <td>{{i.mutton}}</td>
+                    <td>{{i.chicken}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.total_bill}}</td>
+                  </tr>
+         
+
+           
+
+                </tbody>
+                <tr id="grand-total-row">
+                  <td><Strong>Grand Total -></Strong></td>
+                  <td></td>
+                  <td></td>
+
+                  <td><strong></strong></td>
+                  <td><strong></strong></td>
+                  <td><strong></strong></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div> <!-- end col -->
+      </div> <!-- end row -->
+      <script>
+        // Function to calculate grand total for the "Total Amount" column
+        function calculateGrandTotal() {
+          let grandTotal = 0;
+
+          const totalAmountCells = document.querySelectorAll("table tbody .sale-row td:nth-child(6)");
+
+          totalAmountCells.forEach((cell) => {
+            const total = parseFloat(cell.textContent);
+            grandTotal += total;
+          });
+
+          // Update the grand total row
+          const grandTotalRow = document.getElementById("grand-total-row");
+          grandTotalRow.getElementsByTagName("td")[5].textContent = grandTotal;
+          grandTotalRow.getElementsByTagName("td")[5].style.fontWeight = "bold";
+        }
+
+        // Function to create a MutationObserver
+        function createMutationObserver() {
+          const tableBody = document.querySelector("table tbody");
+          const observer = new MutationObserver(function (mutationsList) {
+            // Recalculate grand total when a mutation is observed
+            calculateGrandTotal();
+          });
+
+          // Configure and start the observer
+          const config = { childList: true, subtree: true };
+          observer.observe(tableBody, config);
+        }
+
+        // Call the function to calculate the grand total initially
+        calculateGrandTotal();
+
+        // Call the function to create the MutationObserver
+        createMutationObserver();
+      </script>
+
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<h1 hidden id="sale" data-my-variable="{{sale}}"></h1>
+<!-- <h1 hidden id="expense" data-my-variable="{{expense}}"></h1> -->
+
+<h1 hidden id="daily_sale" data-my-variable="{{daily_sale}}"></h1>
+<!-- <h1 hidden id="daily_expense" data-my-variable="{{daily_expense}}"></h1> -->
+
+
+
+<!-- End Page-content -->
+{% endblock content %} {% block extra_javascript %}
+
+
+<!-- apexcharts -->
+<!-- <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script> -->
+<!-- Plugins js-->
+<script src="{% static 'libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+<script src="{% static 'libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js' %}"></script>
+
+
+
+<!-- Required datatable js -->
+<script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<!-- Buttons examples -->
+<script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'libs/jszip/dist/jszip.min.js' %}"></script>
+<script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+<script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+<script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+<!-- Responsive examples -->
+<script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+<!-- Datatable init js -->
+<!-- <script src="{% static 'js/pages/report_datatables.init.js' %}"></script> -->
+
+
+
+
+{% endblock extra_javascript %}

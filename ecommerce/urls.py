@@ -11,6 +11,8 @@ urlpatterns = [
     path('kitchen-sale-report', views.KitchenSaleSummary.as_view(),name='kitchen-sale-report'),
     path('kitchen-expense-report', views.KitchenExpenseSummary.as_view(),name='kitchen-expense-report'),
     
+    path('summaries', views.Summary.as_view(),name='summaries'),
+    
     
     path('ecommerce_product', views.Products.as_view(),name='ecommerce_product'),
     path('ecommerce_product_detail', views.ProductsDetail.as_view(),name='ecommerce_product_detail'),

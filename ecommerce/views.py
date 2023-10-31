@@ -239,7 +239,9 @@ class KitchenExpenseSummary(LoginRequiredMixin,TemplateView):
         
         return render(request, self.template_name, context)
     
-  
+
+class Summary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/finance_reports/summaries.html"
     
           
 
