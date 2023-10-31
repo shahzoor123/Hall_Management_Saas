@@ -1,13 +1,16 @@
 {
-    "builds": [{
+    "builds": [
+      {
         "src": "morvin/wsgi.py",
-        "use": "@ardnt/vercel-python-wsgi",
+        "use": "python3.9",
         "config": { "maxLambdaSize": "15mb" }
-    }],
+      }
+    ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "morvin/wsgi.py"
-        }
+      {
+        "src": "/(.*)",
+        "dest": "morvin/wsgi.py"
+      }
     ]
-}
+  }
+  
