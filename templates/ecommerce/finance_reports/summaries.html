@@ -61,15 +61,13 @@
                     <th>Month</th>
                     <th>Event Sale</th>
                     <th>Event Expense</th>
+                    <th>Event Profit</th>
                     <th>Kitchen Sale</th>
                     <th>Kitchen Expense</th>
-                    <th>k</th>
-                    <th>T</th>
-                    <th>c</th>
-                    <th>d</th>
-                    <th>m</th>
-                    <th>n</th>
-                    <th>i</th>
+                    <th>Kitchen Profit</th>
+                    <th>Gross Profit</th>
+                    <th>Net Profit</th>
+
                    
                   </tr>
                 </thead>
@@ -86,9 +84,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+                   
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -100,9 +96,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+                  
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -114,9 +108,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+                  
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -128,9 +120,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+                
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -142,9 +132,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+                 
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -156,9 +144,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+                
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -170,9 +156,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+                
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -184,9 +168,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+            
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -198,9 +180,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+              
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -212,9 +192,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+              
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -226,9 +204,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+             
                   </tr>
                   <tr class="sale-row">
                     <td>{{i.bill}}</td>
@@ -240,9 +216,7 @@
                     <td>{{i.chicken}}</td>
                     <td>{{i.date}}</td>
                     <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+             
                   </tr>
          
 
@@ -259,9 +233,7 @@
                   <td><strong></strong></td>
                   <td><strong></strong></td>
                   <td><strong></strong></td>
-                  <td><strong></strong></td>
-                  <td><strong></strong></td>
-                  <td><strong></strong></td>
+             
                 </tr>
               </table>
             </div>
@@ -282,8 +254,8 @@
 
           // Update the grand total row
           const grandTotalRow = document.getElementById("grand-total-row");
-          grandTotalRow.getElementsByTagName("td")[11].textContent = grandTotal;
-          grandTotalRow.getElementsByTagName("td")[11].style.fontWeight = "bold";
+          grandTotalRow.getElementsByTagName("td")[8].textContent = grandTotal;
+          grandTotalRow.getElementsByTagName("td")[8].style.fontWeight = "bold";
         }
 
         // Function to create a MutationObserver

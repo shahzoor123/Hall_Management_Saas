@@ -300,6 +300,10 @@ class Index(LoginRequiredMixin,TemplateView):
         # Pie Chart For Expenses Breakdown
         
         pie_list = []
+        
+        first_value = 1
+        
+        pie_list.append(first_value)
 
         construction = ConstructionAndRepair.objects.filter(on_date__year=current_year, on_date__month=current_month).aggregate(amount=Sum('amount'))
         pie_list.append(construction['amount'])
