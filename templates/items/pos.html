@@ -178,7 +178,7 @@
                                         <div class="mb-4">
                                             <label class="form-label">Hall Charges</label>
                                             <div class="input-group">
-                                                <input type="number" class="form-control" id="hall-charges" step="any" name="hall" value="0">
+                                                <input type="number" class="form-control" id="hall-charges" step="any" name="hall-charges" value="0">
                                                 <span class="input-group-text">0</span>
                                             </div><!-- input-group -->
                                         </div>
@@ -426,7 +426,21 @@
                 <!-- End Form -->
 
                 <!-- Form -->
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Hall Charges</label>
 
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="hall" id="hall"
+                        placeholder="Hall Charges" aria-label="">
+                    </div>
+
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
 
                 <!-- Form -->
                 <div class="row mb-4">
@@ -695,6 +709,7 @@
         // Get the value from the "Number of People" input in the first form
         const numberOfPeopleInput = document.getElementById('no-of-people');
         const numOfPeopleValue = numberOfPeopleInput.value;
+        
 
         // Set the value in the "Number of people" input field in the second form
         const numOfPeopleInputForm2 = document.querySelector('form#sale-form [name="no-of-people"]');
@@ -702,6 +717,8 @@
 
         // Get values from the first form
       const hallChargesInput = document.getElementById('hall-charges');
+      const hallChargesValue = hallChargesInput.value
+
       const menuPerHeadInput = document.getElementById('per-head');
 
 
@@ -715,13 +732,20 @@
 
 
       // Calculate per head value
-      const perHeadValue = parseFloat(hallChargesInput.value) + parseFloat(menuPerHeadInput.value);
+      const perHeadValue = parseFloat(hallChargesValue) + parseFloat(menuPerHeadInput.value);
 
       // Set values in the second form
       const perHeadInputForm2 = document.querySelector('form#sale-form [name="per-head"]');
       numOfPeopleInputForm2.value = numberOfPeopleInput.value;
       perHeadInputForm2.value = Math.round(perHeadValue);
-        
+      
+        // Get the value from the "Number of People" input in the first form
+      const hallChargesForm = document.querySelector('form#sale-form [name="hall"]');
+      hallValue = hallChargesValue
+      hallChargesForm.value = hallValue
+
+
+
       var menu = "";
         
      // Iterate through table rows

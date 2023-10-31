@@ -46,6 +46,7 @@ class EventSale(models.Model):
     customer_name = models.CharField(max_length=200)
     stage_charges = models.IntegerField(null=True, default=0)
     entry_charges = models.IntegerField(null=True, default=0)
+    hall_charges = models.IntegerField(null=True, default=0)
 
     gents = models.IntegerField(default=0)
     ladies = models.IntegerField(default=0)

@@ -52,6 +52,7 @@ def custom_menu(request):
                     customer_name = request.POST.get('customer-name')
                     customer_number = request.POST.get('customer-number')
                     per_head = request.POST.get('per-head')
+                    hall = request.POST.get('hall')
                     per_head = float(per_head)
 
                     extra_charge = request.POST.get('extra-charges')
@@ -85,6 +86,7 @@ def custom_menu(request):
                         extra_charges=extra_charge,
                         stage_charges= stage_charge,
                         entry_charges=entry_charge,
+                        hall_charges = hall,
                         location=location,
                         gents=gents,
                         ladies= ladies,
@@ -170,11 +172,10 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
                 extra_charge = request.POST.get('extra-charges')
                 stage_charge = request.POST.get('stage-charges')
                 entry_charge = request.POST.get('entry-charges')
-
+                hall = request.POST.get('hall')
                 menu_amount = request.POST.get('menu-amount')
                 menu_amount = float(menu_amount)
                 food_menu = request.POST.get('food-menu')
-
                 gents = request.POST.get('gents')
                 ladies = request.POST.get('ladies')
 
@@ -197,6 +198,7 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
                     per_head=per_head,
                     extra_charges=extra_charge,
                     total_menu = int(menu_amount),
+                    hall_charges = int(hall),
                     stage_charges= stage_charge,
                     entry_charges=entry_charge,
                     location = location,
