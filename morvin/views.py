@@ -278,7 +278,7 @@ class Index(LoginRequiredMixin,TemplateView):
         current_date = timezone.now().date()
         
         # Calculate the date 5 days from now
-        end_date = current_date + timezone.timedelta(days=8)
+        end_date = current_date + timezone.timedelta(days=4)
         
         # Query the database for events within the next 5 days
         events = EventSale.objects.filter(event_date__range=[current_date, end_date])
@@ -300,16 +300,31 @@ class Index(LoginRequiredMixin,TemplateView):
         # Pie Chart For Expenses Breakdown
         
         pie_list = []
-        
+
+        construction = ConstructionAndRepair.objects.filter(on_date__year=current_year, on_date__month=current_month).aggregate(amount=Sum('amount'))
+        pie_list.append(construction['amount'])
+
+        dailyexpense = DailyExpenses.objects.filter(on_date__year=current_year, on_date__month=current_month).aggregate(amount=Sum('amount'))
+        pie_list.append(dailyexpense['amount'])
+
+        otherexpense = OtherExpense.objects.filter(on_date__year=current_year, on_date__month=current_month).aggregate(amount=Sum('amount'))
+        pie_list.append(otherexpense['amount'])
+
         event_expense = EventExpense.objects.filter(expense_date__year=current_year, expense_date__month=current_month).aggregate(total_expense=Sum('total_expense'))
-            
-        print(event_expense['total_expense'])
+        pie_list.append(event_expense['total_expense'])
+
+        salaries = Salary.objects.filter(on_date__year=current_year, on_date__month=current_month).aggregate(amount=Sum('amount'))
+        pie_list.append(salaries['amount'])
+
+        print(construction['amount'],dailyexpense['amount'],otherexpense['amount'],salaries['amount'])
+
+        print(pie_list)
         
 
         context = {
             
             # sk
-            "month_event_expense" : event_expense['total_expense'],
+            'expense_heads' : pie_list,
             
             
             "expense": expense_list,

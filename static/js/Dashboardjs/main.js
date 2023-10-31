@@ -65,16 +65,27 @@ const salesChartMonthly = new Chart(salesChartMonthlyCtx, {
 
 // Expense heads Pie Chart
 
-var month_event_expense = document.getElementById("month_event_expense").getAttribute("data-my-variable");
+var expense_heads = document.getElementById("expense_heads").getAttribute("data-my-variable");
 
-const heads = ['Construction and repairs', 'Daily expensess' , 'Other expenses', 'Salaries', 'Event expense'];
+console.log(expense_heads)
+// Split the string into an array of substrings using a comma as the delimiter
+var expense_headsArray = expense_heads.split(",");
+
+// Use map() to convert the substrings to integers using parseInt()
+var expense_headsIntegers = expense_headsArray.map(function (str) {
+    return parseInt(str, 10) || 10000; // Use 10 for decimal base
+});
+
+console.log(expense_headsIntegers);
+
+// const heads = ['Construction and repairs', 'Daily expensess' , 'Other expenses', 'Salaries', 'Event expense'];
 const expenseHeads = new Chart(expenseHeadsCtx, {
     type: 'pie',
     data: {
         // labels: heads,
         datasets: [{
             // label: 'Monthly Sales',
-            data: [151484,150484,111184,month_event_expense,50844],
+            data: expense_headsIntegers,
             backgroundColor: [
 
                 '#99CCCC',
