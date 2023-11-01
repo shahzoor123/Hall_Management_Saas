@@ -8,12 +8,14 @@ from ecommerce.models import EventExpense
 from ecommerce.models import MyKitchenexpense
 from items.models import Deals
 import json
+from generalExpense.models import Salary, DailyExpenses, ConstructionAndRepair, OtherExpense
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 from django.urls import reverse
 from django.views import View
 from items.models import Deals , MyProducts,Brand, Unit, Inventory
 from rest_framework import viewsets
+
 from .models import Event
 from .serializers import EventSerializer
 from django.utils.decorators import method_decorator
@@ -242,6 +244,91 @@ class KitchenExpenseSummary(LoginRequiredMixin,TemplateView):
 
 class Summary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/summaries.html"
+
+    def get(self, request):
+
+        monthly_data = []
+
+        # Iterate through the 12 months
+        for month in range(1, 13):
+            # Event Sale total for the month
+            event_sale_total = (
+                EventSale.objects
+                .filter(event_date__month=month)
+                .aggregate(total=Sum('total_amount'))
+            )['total'] or 0
+
+            # Event Expense total for the month
+            event_expense_total = (
+                EventExpense.objects
+                .filter(expense_date__month=month)
+                .aggregate(total=Sum('total_expense'))
+            )['total'] or 0
+
+            # Kitchen Sale total for the month
+            kitchen_sale_total = (
+                MyKitchenexpense.objects
+                .filter(date__month=month)
+                .aggregate(total=Sum('total_bill'))
+            )['total'] or 0
+
+            # Kitchen Expense total for the month (calculate based on your Kitchen Expense model)
+            kitchen_expense_total = 0
+
+            # Calculate event_profit, kitchen_profit, gross_profit
+            event_profit = event_sale_total - event_expense_total
+            kitchen_profit = kitchen_sale_total - kitchen_expense_total
+            gross_profit = event_profit + kitchen_profit
+
+            # Calculate general_expense for the month
+            general_expense_total = (
+                Salary.objects
+                .filter(on_date__month=month)
+                .aggregate(total=Sum('amount'))
+            )['total'] or 0
+
+            general_expense_total += (
+                DailyExpenses.objects
+                .filter(on_date__month=month)
+                .aggregate(total=Sum('amount'))
+            )['total'] or 0
+
+            general_expense_total += (
+                ConstructionAndRepair.objects
+                .filter(on_date__month=month)
+                .aggregate(total=Sum('amount'))
+            )['total'] or 0
+
+            general_expense_total += (
+                OtherExpense.objects
+                .filter(on_date__month=month)
+                .aggregate(total=Sum('amount'))
+            )['total'] or 0
+
+            # Calculate net_profit
+            net_profit = gross_profit - general_expense_total
+
+            # Create a dictionary for the month's data
+            month_data = {
+                'month': month,
+                'event_total_sale': event_sale_total,
+                'event_total_expense': event_expense_total,
+                'event_profit': event_profit,
+                'kitchen_total_sale': kitchen_sale_total,
+                'kitchen_total_expense': kitchen_expense_total,
+                'kitchen_profit': kitchen_profit,
+                'gross_profit': gross_profit,
+                'net_profit': net_profit,
+            }
+
+            # Append the month's data to the list
+            monthly_data.append(month_data)
+
+        context = {
+            'monthly_data': monthly_data,
+        }
+        
+        return render(request, self.template_name, context)
     
           
 

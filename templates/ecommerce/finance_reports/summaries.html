@@ -73,157 +73,27 @@
                 </thead>
                 <tbody>
 
-                 
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
+                 {% for data in monthly_data %}
+                  <tr class="sale-row" style="font-weight: bold;">
+                    <td>{{data.month}}</td>
+                    <td>{{data.event_total_sale}}</td>
+                    <td>{{data.event_total_expense}}</td>
+                    <td>{{data.event_profit}}</td>
+                    <td>{{data.kitchen_total_sale}}</td>
+                    <td>{{data.kitchen_total_expense}}</td>
+                    <td>{{data.kitchen_profit}}</td>
+                    <td>{{data.gross_profit}}</td>
+                    <td>{{data.net_profit}}</td>
                    
                   </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                  
-                  </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                  
-                  </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                
-                  </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>\
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                 
-                  </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                
-                  </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                
-                  </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-            
-                  </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-              
-                  </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-              
-                  </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-             
-                  </tr>
-                  <tr class="sale-row">
-                    <td>{{i.bill}}</td>
-                    <td>{{i.payment_details}}</td>
-                    <td>{{i.mutton}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-                    <td>{{i.chicken}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.total_bill}}</td>
-             
-                  </tr>
+                  {% endfor %}
+
          
 
            
 
                 </tbody>
-                <tr id="grand-total-row">
+                <tr id="grand-total-row" style="background-color: cornflowerblue;">
                   <td><Strong>Grand Total -></Strong></td>
                   <td></td>
                   <td></td>
