@@ -305,6 +305,30 @@ class Summary(LoginRequiredMixin,TemplateView):
                 .aggregate(total=Sum('amount'))
             )['total'] or 0
 
+            if month == 1:
+                month = "Jan"
+            elif month == 2:
+                month = "Feb"
+            elif month == 3:
+                month = "Mar"
+            elif month == 4:
+                month = "April"
+            elif month == 5:
+                month = "May"
+            elif month == 6:
+                month = "June"
+            elif month == 7:
+                month = "July"
+            elif month == 8:
+                month = "Aug"
+            elif month == 9:
+                month = "Sep"
+            elif month == 10:
+                month = "Oct"
+            elif month == 11:
+                month = "Nov"
+            elif month == 12:
+                month = "Dec"
             # Calculate net_profit
             net_profit = gross_profit - general_expense_total
 
@@ -318,6 +342,7 @@ class Summary(LoginRequiredMixin,TemplateView):
                 'kitchen_total_expense': kitchen_expense_total,
                 'kitchen_profit': kitchen_profit,
                 'gross_profit': gross_profit,
+                'general_expense': general_expense_total,
                 'net_profit': net_profit,
             }
 

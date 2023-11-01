@@ -66,6 +66,7 @@
                     <th>Kitchen Expense</th>
                     <th>Kitchen Profit</th>
                     <th>Gross Profit</th>
+                    <th>General Expense</th>
                     <th>Net Profit</th>
 
                    
@@ -83,6 +84,7 @@
                     <td>{{data.kitchen_total_expense}}</td>
                     <td>{{data.kitchen_profit}}</td>
                     <td>{{data.gross_profit}}</td>
+                    <td>{{data.general_expense}}</td>
                     <td>{{data.net_profit}}</td>
                    
                   </tr>
@@ -93,7 +95,7 @@
            
 
                 </tbody>
-                <tr id="grand-total-row" style="background-color: cornflowerblue;">
+                <tr id="grand-total-row" style="background-color: cornflowerblue; color:white;">
                   <td><Strong>Grand Total -></Strong></td>
                   <td></td>
                   <td></td>
@@ -103,6 +105,8 @@
                   <td><strong></strong></td>
                   <td><strong></strong></td>
                   <td><strong></strong></td>
+                  <td><strong></strong></td>
+
              
                 </tr>
               </table>
@@ -124,8 +128,8 @@
 
           // Update the grand total row
           const grandTotalRow = document.getElementById("grand-total-row");
-          grandTotalRow.getElementsByTagName("td")[8].textContent = grandTotal;
-          grandTotalRow.getElementsByTagName("td")[8].style.fontWeight = "bold";
+          grandTotalRow.getElementsByTagName("td")[9].textContent = grandTotal;
+          grandTotalRow.getElementsByTagName("td")[9].style.fontWeight = "bold";
         }
 
         // Function to create a MutationObserver
