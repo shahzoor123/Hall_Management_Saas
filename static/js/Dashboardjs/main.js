@@ -73,7 +73,7 @@ var expense_headsArray = expense_heads.split(",");
 
 // Use map() to convert the substrings to integers using parseInt()
 var expense_headsIntegers = expense_headsArray.map(function (str) {
-    return parseInt(str, 10) || 10000; // Use 10 for decimal base
+    return parseInt(str, 10) || 0; // Use 10 for decimal base
 });
 
 console.log(expense_headsIntegers);
@@ -87,7 +87,7 @@ const expenseHeads = new Chart(expenseHeadsCtx, {
             // label: 'Monthly Sales',
             data: expense_headsIntegers,
             backgroundColor: [
-
+                '#ffffff',
                 '#99CCCC',
                 '#CC3333',
                 '#336699',

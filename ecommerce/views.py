@@ -8,12 +8,14 @@ from ecommerce.models import EventExpense
 from ecommerce.models import MyKitchenexpense
 from items.models import Deals
 import json
+from generalExpense.models import Salary, DailyExpenses, ConstructionAndRepair, OtherExpense
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
 from django.urls import reverse
 from django.views import View
 from items.models import Deals , MyProducts,Brand, Unit, Inventory
 from rest_framework import viewsets
+
 from .models import Event
 from .serializers import EventSerializer
 from django.utils.decorators import method_decorator
@@ -239,7 +241,119 @@ class KitchenExpenseSummary(LoginRequiredMixin,TemplateView):
         
         return render(request, self.template_name, context)
     
-  
+
+class Summary(LoginRequiredMixin,TemplateView):
+    template_name = "ecommerce/finance_reports/summaries.html"
+
+    def get(self, request):
+
+        monthly_data = []
+
+        # Iterate through the 12 months
+        for month in range(1, 13):
+            # Event Sale total for the month
+            event_sale_total = (
+                EventSale.objects
+                .filter(event_date__month=month)
+                .aggregate(total=Sum('total_amount'))
+            )['total'] or 0
+
+            # Event Expense total for the month
+            event_expense_total = (
+                EventExpense.objects
+                .filter(expense_date__month=month)
+                .aggregate(total=Sum('total_expense'))
+            )['total'] or 0
+
+            # Kitchen Sale total for the month
+            kitchen_sale_total = (
+                MyKitchenexpense.objects
+                .filter(date__month=month)
+                .aggregate(total=Sum('total_bill'))
+            )['total'] or 0
+
+            # Kitchen Expense total for the month (calculate based on your Kitchen Expense model)
+            kitchen_expense_total = 0
+
+            # Calculate event_profit, kitchen_profit, gross_profit
+            event_profit = event_sale_total - event_expense_total
+            kitchen_profit = kitchen_sale_total - kitchen_expense_total
+            gross_profit = event_profit + kitchen_profit
+
+            # Calculate general_expense for the month
+            general_expense_total = (
+                Salary.objects
+                .filter(on_date__month=month)
+                .aggregate(total=Sum('amount'))
+            )['total'] or 0
+
+            general_expense_total += (
+                DailyExpenses.objects
+                .filter(on_date__month=month)
+                .aggregate(total=Sum('amount'))
+            )['total'] or 0
+
+            general_expense_total += (
+                ConstructionAndRepair.objects
+                .filter(on_date__month=month)
+                .aggregate(total=Sum('amount'))
+            )['total'] or 0
+
+            general_expense_total += (
+                OtherExpense.objects
+                .filter(on_date__month=month)
+                .aggregate(total=Sum('amount'))
+            )['total'] or 0
+
+            if month == 1:
+                month = "Jan"
+            elif month == 2:
+                month = "Feb"
+            elif month == 3:
+                month = "Mar"
+            elif month == 4:
+                month = "April"
+            elif month == 5:
+                month = "May"
+            elif month == 6:
+                month = "June"
+            elif month == 7:
+                month = "July"
+            elif month == 8:
+                month = "Aug"
+            elif month == 9:
+                month = "Sep"
+            elif month == 10:
+                month = "Oct"
+            elif month == 11:
+                month = "Nov"
+            elif month == 12:
+                month = "Dec"
+            # Calculate net_profit
+            net_profit = gross_profit - general_expense_total
+
+            # Create a dictionary for the month's data
+            month_data = {
+                'month': month,
+                'event_total_sale': event_sale_total,
+                'event_total_expense': event_expense_total,
+                'event_profit': event_profit,
+                'kitchen_total_sale': kitchen_sale_total,
+                'kitchen_total_expense': kitchen_expense_total,
+                'kitchen_profit': kitchen_profit,
+                'gross_profit': gross_profit,
+                'general_expense': general_expense_total,
+                'net_profit': net_profit,
+            }
+
+            # Append the month's data to the list
+            monthly_data.append(month_data)
+
+        context = {
+            'monthly_data': monthly_data,
+        }
+        
+        return render(request, self.template_name, context)
     
           
 
@@ -378,6 +492,7 @@ class Kitchenexpense(LoginRequiredMixin, View):
                 total=int(mutton) + int(chicken) + int(beef) + int(rice) + int(rice) + int(dahi) + int(doodh) + int(sabzi) + int(fruits) + int(khoya_paneer) + int(oil) + int(other) + int(dry)
                 add_kitchen_expense = MyKitchenexpense.objects.create(
                     bill=event_sale,  # Use the EventSale object
+                    customer_name = event_sale.customer_name,
                     date=date,
                     payment_details=payment,
                     mutton=mutton,
@@ -396,7 +511,127 @@ class Kitchenexpense(LoginRequiredMixin, View):
                     total_bill= total
                 )
 
+        return redirect('kitchen-expense')
+
+class KitchenexpenseUpdate(LoginRequiredMixin, View):
+    template_name = "ecommerce/kitchen-expense.html"
+
+    def get(self, request):
+        sale = EventSale.objects.all()
+        deals = Deals.objects.all()
+        kitchen_expense = MyKitchenexpense.objects.all()
+        total_sales = EventSale.objects.aggregate(total_sales=Sum('total_amount'))['total_sales']
+        total_expenses = EventExpense.objects.aggregate(total_expenses=Sum('total_expense'))['total_expenses']
+
+        total_sales = total_sales or 0
+        total_expenses = total_expenses or 0
+
+       
+
+
+        context = {
+            "sales": sale,
+            
+            "deals": deals,
+
+            "kitchen_expense" : kitchen_expense
+        }
+        return render(request, self.template_name, context)
+    
+    def post(self, request,kitchen_expense_id):
+        if request.method == "POST":
+            requests = MyKitchenexpense.objects.get(id=kitchen_expense_id)
+
+            print("I am here")
+            bill_num = request.POST.get('bill')
+            payment = request.POST.get('payment-details')
+
+            date = request.POST.get('date')
+            mutton = request.POST.get('mutton')
+
+            chicken = request.POST.get('chicken')
+            beef = request.POST.get('beef')
+            rice = request.POST.get('rice')
+
+            dahi = request.POST.get('dahi')
+            doodh = request.POST.get('doodh')
+            sabzi = request.POST.get('sabzi')
+            fruits = request.POST.get('fruits')
+
+            khoya_paneer = request.POST.get('khoya-paneer')
+            dry = request.POST.get('dry-fruits')
+            oil = request.POST.get('oil')
+            other = request.POST.get('other-items-bill')
+            other_desc = request.POST.get('other-items-desc')
+
+            
+            # Fetch the EventSale object based on the provided bill_num
+            try:
+                event_sale = EventSale.objects.get(id=bill_num)
+            except EventSale.DoesNotExist:
+                # Handle the case where the EventSale with the given ID doesn't exist
+                # You can return an error message or redirect to an error page
+                pass
+            else:
+                # Create the Kitchenexpense object using the EventSale object
+                total=int(mutton) + int(chicken) + int(beef) + int(rice) + int(rice) + int(dahi) + int(doodh) + int(sabzi) + int(fruits) + int(khoya_paneer) + int(oil) + int(other) + int(dry)
+                
+                requests.bill=event_sale,  # Use the EventSale object
+                requests.customer_name = event_sale.customer_name,
+                requests.date=date,
+                requests.payment_details=payment,
+                requests.mutton=mutton,
+                requests.chicken=chicken,
+                requests.beef=beef,
+                requests.rice=rice,
+                requests.dahi=dahi,
+                requests.doodh=doodh,
+                requests.sabzi=sabzi,
+                requests.fruits=fruits,
+                requests.dry_fruits = dry,
+                requests.khoya_cream_paneer=khoya_paneer,
+                requests.oil=oil,
+                requests.other_items_bill=other,
+                requests.other_items_desc=other_desc,
+                requests.total_bill= total
+                requests.save()
+
+                return redirect('kitchen-expense')
+                
+
         return render(request, "ecommerce/kitchen-expense.html")
+
+def delete_kitchen_expense(request, kitchen_expense_id):
+    
+
+    expense = get_object_or_404(MyKitchenexpense, pk=kitchen_expense_id)
+    # print(event.id)
+    if expense is not None:
+        try:
+            expense.delete()
+            messages.success(request, "Deleted Successfully")
+            return redirect("kitchen-expense")
+
+
+        except IntegrityError as e:
+            error_message = str(e)
+            if "Cannot delete some instances of model 'EventSale'" in error_message:
+                messages.error(request, "Cannot delete due to related objects. Hint: Check for any expense relatd to sale you are deleting, Delete them first. ")
+    else:
+        return redirect("kitchen-expense")
+
+    sale = EventSale.objects.all()
+    deals = Deals.objects.all()
+    kitchen_expense = MyKitchenexpense.objects.all()
+    context = {
+            "sales": sale,
+            
+            "deals": deals,
+
+            "kitchen_expense" : kitchen_expense
+        }
+    
+    return render(request, 'ecommerce/kitchen-expense.html', context=context)
 
 def DeleteProducts(request, product_id):
         

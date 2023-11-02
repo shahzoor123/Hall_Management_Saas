@@ -11,6 +11,8 @@ urlpatterns = [
     path('kitchen-sale-report', views.KitchenSaleSummary.as_view(),name='kitchen-sale-report'),
     path('kitchen-expense-report', views.KitchenExpenseSummary.as_view(),name='kitchen-expense-report'),
     
+    path('summaries', views.Summary.as_view(),name='summaries'),
+    
     
     path('ecommerce_product', views.Products.as_view(),name='ecommerce_product'),
     path('ecommerce_product_detail', views.ProductsDetail.as_view(),name='ecommerce_product_detail'),
@@ -39,6 +41,10 @@ urlpatterns = [
     path('delete-sale/<int:sale_id>/', views.delete_sale, name='delete-sale'),
     path('kitchen-sale', views.Kitchensale.as_view(),name='kitchen-sale'),
     path('kitchen-expense', views.Kitchenexpense.as_view(),name='kitchen-expense'),
+    path('kitchen-expense-update/<int:kitchen_expense_id>/', views.KitchenexpenseUpdate.as_view(),name='kitchen-expense-update'),
+    path('kitchen-expense-delete/<int:kitchen_expense_id>/', views.delete_kitchen_expense,name='kitchen-expense-delete'),
+
+
     path('event-expense', views.Eventexpense.as_view(),name='event-expense'),
     path('ecommerce_add_category', views.ProductsAddCategory.as_view(),name='ecommerce_add_category'),
     path('ecommerce_checkout', views.ProductsCheckout.as_view(),name='ecommerce_checkout'),
