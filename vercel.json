@@ -9,5 +9,6 @@
             "src": "/(.*)",
             "dest": "morvin/wsgi.py"
         }
-    ]
+    ],
+    "excludeFlies" : "{*.chache,static,assets,src}/**"
 }
