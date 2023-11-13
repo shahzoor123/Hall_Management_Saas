@@ -13,3 +13,5 @@ DATABASES = {
         'NAME': 'sk_DB',
     }
 }
+
+

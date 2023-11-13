@@ -14,8 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from layouts import urls
-import components
-import e_mail
 import items
 from django.contrib import admin
 from django.urls import path,include
@@ -26,8 +24,15 @@ from .views import MyPasswordSetView ,MyPasswordChangeView
 from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
 from django.conf import settings
+from channels.routing import ProtocolTypeRouter, URLRouter
+from notifications.routing import websocket_urlpatterns
+
+
 
 urlpatterns = [
+    
+    path('ws/', URLRouter(websocket_urlpatterns)),
+    
     path('admin/', admin.site.urls),
     # Index
     path('', views.Index.as_view(),name='index'),
@@ -44,10 +49,7 @@ urlpatterns = [
     path('store/', include('store.urls')),
     #General Expenses
     path('expenses/', include('generalExpense.urls')),
-    # Email
-    path('email/',include('e_mail.urls')),
-    # Components
-    path('components/', include('components.urls')),
+ 
     # Layout
     path('layouts/', include('layouts.urls')),
     # Extras
@@ -61,6 +63,6 @@ urlpatterns = [
     #Custum set password done page redirect
     path('accounts/password/set/', login_required(MyPasswordSetView.as_view()), name="account_set_password"),
     
-   
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
