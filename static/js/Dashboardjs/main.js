@@ -87,7 +87,7 @@ const expenseHeads = new Chart(expenseHeadsCtx, {
             // label: 'Monthly Sales',
             data: expense_headsIntegers,
             backgroundColor: [
-
+                '#ffffff',
                 '#99CCCC',
                 '#CC3333',
                 '#336699',
