@@ -1,0 +1,512 @@
+[
+    {
+        "model": "items.myproducts",
+        "pk": 1,
+        "fields": {
+            "code": "MUTTON_ROSH",
+            "product_name": "Mutton_Rosh",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 2100.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Mutton_Rosh bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 2,
+        "fields": {
+            "code": "MUTTON_QURMA",
+            "product_name": "Mutton_Qurma",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 2550.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Mutton_Qurma bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 3,
+        "fields": {
+            "code": "MUTTON_KARAI",
+            "product_name": "Mutton_Karai",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 2600.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Mutton_Karai bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 4,
+        "fields": {
+            "code": "CHICKEN_STEAM",
+            "product_name": "Chicken_steam",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 165.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Chicken_steam bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 5,
+        "fields": {
+            "code": "CHICKEN_KARAI",
+            "product_name": "Chicken_Karai",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1500.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Chicken_Karai bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 6,
+        "fields": {
+            "code": "CHICKEN_QORMA",
+            "product_name": "Chicken_qorma",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1450.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Chicken_qorma bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 7,
+        "fields": {
+            "code": "CHICKEN_WHITE_HANDI(BONELESS)",
+            "product_name": "Chicken_white_Handi(boneless)",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1650.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Chicken_white_Handi(boneless) bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 8,
+        "fields": {
+            "code": "CHICKEN_JALFRIZI",
+            "product_name": "Chicken_Jalfrizi",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1600.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Chicken_Jalfrizi bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 9,
+        "fields": {
+            "code": "CHICKEN_MALAI_BOTI",
+            "product_name": "Chicken_Malai_boti",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1000.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Chicken_Malai_boti bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 10,
+        "fields": {
+            "code": "SIEKH_BEEF_KABAB",
+            "product_name": "Siekh_beef_kabab",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1000.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Siekh_beef_kabab bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 11,
+        "fields": {
+            "code": "CHICKEN_RISHMI_KABAB",
+            "product_name": "Chicken_Rishmi_kabab",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 900.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Chicken_Rishmi_kabab bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 12,
+        "fields": {
+            "code": "CHAMP",
+            "product_name": "Champ",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 2100.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Champ bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 13,
+        "fields": {
+            "code": "PALAK_PANEER",
+            "product_name": "Palak_Paneer",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 850.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Palak_Paneer bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 14,
+        "fields": {
+            "code": "BEEF_PALAK",
+            "product_name": "Beef_Palak",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1900.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Beef_Palak bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 15,
+        "fields": {
+            "code": "CHICKEN_PALAK",
+            "product_name": "Chicken_Palak",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1450.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Chicken_Palak bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 16,
+        "fields": {
+            "code": "BEEF_QORMA",
+            "product_name": "Beef_Qorma",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1850.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Beef_Qorma bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 17,
+        "fields": {
+            "code": "KOFTA",
+            "product_name": "Kofta",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1700.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Kofta bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 18,
+        "fields": {
+            "code": "MIX_SABZI",
+            "product_name": "Mix_Sabzi",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 900.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Mix_Sabzi bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 19,
+        "fields": {
+            "code": "VEGITABLE_RICE_VIP",
+            "product_name": "Vegitable_Rice_vip",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1160.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Vegitable_Rice_vip bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 20,
+        "fields": {
+            "code": "KABULI_PALAO",
+            "product_name": "Kabuli_Palao",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1160.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Kabuli_Palao bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 21,
+        "fields": {
+            "code": "BEEF_PULAO",
+            "product_name": "Beef_Pulao",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1850.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Beef_Pulao bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 22,
+        "fields": {
+            "code": "CHICKEN_BARYANI",
+            "product_name": "Chicken_Baryani",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1550.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Chicken_Baryani bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 23,
+        "fields": {
+            "code": "CHINES_FRIED_RICE",
+            "product_name": "Chines_Fried_rice",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1160.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Chines_Fried_rice bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 24,
+        "fields": {
+            "code": "FISH_FRIED(CROWN)",
+            "product_name": "Fish_Fried(Crown)",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1500.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Fish_Fried(Crown) bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 25,
+        "fields": {
+            "code": "ZARDA_VIP",
+            "product_name": "Zarda_VIP",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1300.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Zarda_VIP bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 26,
+        "fields": {
+            "code": "KHEER",
+            "product_name": "Kheer",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 650.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Kheer bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 27,
+        "fields": {
+            "code": "FRUIT_TRIFAL",
+            "product_name": "Fruit_trifal",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 780.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Fruit_trifal bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 28,
+        "fields": {
+            "code": "LABB_E_SHIRIN",
+            "product_name": "Labb_e_shirin",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 800.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Labb_e_shirin bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 29,
+        "fields": {
+            "code": "NAAN",
+            "product_name": "Naan",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 40.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Naan bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 30,
+        "fields": {
+            "code": "RAITA",
+            "product_name": "Raita",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 250.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Raita bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 31,
+        "fields": {
+            "code": "SALAD",
+            "product_name": "Salad",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 220.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Salad bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 32,
+        "fields": {
+            "code": "RUSSIAN_SALAD",
+            "product_name": "Russian_Salad",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 500.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Russian_Salad bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 33,
+        "fields": {
+            "code": "COLDRINKS",
+            "product_name": "Coldrinks",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 75.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Coldrinks bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 34,
+        "fields": {
+            "code": "MINERAL_WATER",
+            "product_name": "Mineral_water",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 75.0,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Mineral_water bread"
+        }
+    }
+]

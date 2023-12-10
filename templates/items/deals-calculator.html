@@ -93,14 +93,14 @@
                     </thead>
                     <tbody>
 
-                      {% for dish, price in combined_data %}
+                      {% for item in items %}
                       <tr>
                         <!-- <th class="py-1 px-2 text-center">{{ dish.id }}</th> -->
                         
-                        <th class="py-1 px-2 text-center">{{ dish.product_name }}</th>
-                        <th><input type="number" id="positive-integer-input" class="item-qty form-control center" data-price="{{ price.price }}" min="1" value="0" style="width: 100px; border-radius: 10px;"></th>
+                        <th class="py-1 px-2 text-center">{{ item.product_name }}</th>
+                        <th><input type="number" id="positive-integer-input" class="item-qty form-control center" data-price="{{ item.price }}" min="1" value="0" style="width: 100px; border-radius: 10px;"></th>
                         <span hidden class="subtotal">0.00</span>
-                        <th class="py-1 px-2 text-center">{{ price.price }}</th>
+                        <th class="py-1 px-2 text-center">{{ item.price }}</th>
                         <td class="py-1 px-2 text-center total-value">0.00</td> <!-- Add a new 'td' for the total value -->
                       </tr>
                     {% endfor %}

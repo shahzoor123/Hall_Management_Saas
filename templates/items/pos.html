@@ -34,11 +34,7 @@
                             </ol>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="float-end d-none d-sm-block">
-                        <a href="" class="btn btn-success">Add Widget</a>
-                    </div>
-                </div>
+                
             </div>
             </div>
         </div>
@@ -199,7 +195,7 @@
                                             <div class="input-group" id="datepicker3">
                                                 <input type="text" class="form-control" data-date-container='#datepicker3' data-date-format="dd M, yyyy"
                                                     data-date-multidate="true">
-                                                <span class="input-group-text" id="grand_total">0.00</span>
+                                                <span class="input-group-text" id="grand_totals">0.00</span>
                                             </div><!-- input-group -->
                                         </div>
                     
@@ -642,7 +638,7 @@
 
         $('#tax_amount').text(parseFloat(tax_amount2))
         $('[name="tax_amount"]').val(parseFloat(tax_amount2))
-        $('#grand_total').text(parseFloat(tax2 * perhead_charges).toLocaleString('en-US'))
+        $('#grand_totals').text(parseFloat(tax2 * perhead_charges).toLocaleString('en-US'))
         $('[name="grand_total"]').val(parseFloat(tax2 * perhead_charges ))
         $('#sub_total').text(parseFloat(sub_total).toLocaleString('en-US'))
         $('[name="sub_total"]').val(parseFloat(sub_total))
