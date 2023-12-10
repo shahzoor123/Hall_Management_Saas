@@ -62,7 +62,6 @@ def custom_menu(request):
                     menu_amount = request.POST.get('menu-amount')
                     menu_amount = float(menu_amount)
                     food_menu = request.POST.get('food-menu')
-                    print(food_menu)
 
                     gents = request.POST.get('gents')
                     ladies = request.POST.get('ladies')
@@ -115,7 +114,6 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
     
     def get(self, request, deal_id):
 
-            print('i am active get')
             food_list = []
             products = MyProducts.objects.all()
             deal = get_object_or_404(Deals, pk=deal_id)
