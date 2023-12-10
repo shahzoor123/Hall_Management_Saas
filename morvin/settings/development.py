@@ -10,7 +10,7 @@ ALLOWED_HOSTS = ['127.0.0.1','localhost']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db_data',
+        'NAME': 'sk_DB',
     }
 }
 
