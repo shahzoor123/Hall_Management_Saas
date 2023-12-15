@@ -199,7 +199,7 @@
                                             <div class="input-group" id="datepicker3">
                                                 <input type="text" class="form-control" data-date-container='#datepicker3' data-date-format="dd M, yyyy"
                                                     data-date-multidate="true">
-                                                <span class="input-group-text" id="grand_total">0.00</span>
+                                                <span class="input-group-text" id="grand-total">0.00</span>
                                             </div><!-- input-group -->
                                         </div>
                     
@@ -620,6 +620,8 @@
     }
 
     function calc() {
+      const hallChargesInput = document.getElementById("hall-charges");
+      const noOfPeopleInput = document.getElementById("no-of-people");
         var sub_total = 0;
         var grand_total = 0;
         $('#POS-field table tbody tr').each(function() {
@@ -637,13 +639,21 @@
         var hall = parseFloat(hall);
         var perhead_charges = (tax + hall);
         var total = tax2 * perhead_charges;
+
+        const hallCharges = parseFloat(hallChargesInput.value);
+        const noOfPeople = parseInt(noOfPeopleInput.value, 10);
        
         var tax_amount2 = parseFloat(tax);
 
+        console.log(hallCharges)
+
         $('#tax_amount').text(parseFloat(tax_amount2))
         $('[name="tax_amount"]').val(parseFloat(tax_amount2))
-        $('#grand_total').text(parseFloat(tax2 * perhead_charges).toLocaleString('en-US'))
-        $('[name="grand_total"]').val(parseFloat(tax2 * perhead_charges ))
+
+        $('#grand-total').text(parseFloat(sub_total + (hallCharges * noOfPeople)).toLocaleString('en-US'))
+        $('[name="grand-total"]').val(parseFloat(tax2 * perhead_charges ))
+
+
         $('#sub_total').text(parseFloat(sub_total).toLocaleString('en-US'))
         $('[name="sub_total"]').val(parseFloat(sub_total))
 
