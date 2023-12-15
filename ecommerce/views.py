@@ -765,13 +765,13 @@ class UpdateEventsale(LoginRequiredMixin, View):
 
             requests.save()
 
-            # Updating Events
-            e_requests = Event.objects.get(id=sale_id)
-            e_requests.event_title = customer_name
-            e_requests.start_date = event_date
-            e_requests.end_date = event_date
-            e_requests.event_time = event_time
-            e_requests.save()
+            # # Updating Events
+            # e_requests = Event.objects.get(id=sale_id)
+            # e_requests.event_title = customer_name
+            # e_requests.start_date = event_date
+            # e_requests.end_date = event_date
+            # e_requests.event_time = event_time
+            # e_requests.save()
 
             
         
