@@ -279,7 +279,6 @@ class Summary(LoginRequiredMixin,TemplateView):
                 .aggregate(total=Sum('total_menu'))
             )['total'] or 0
 
-            print(kitchen_sale_total)
             # Calculate event_profit, kitchen_profit, gross_profit
             event_profit = event_sale_total - event_expense_total
             kitchen_profit = kitchen_sale_total - kitchen_expense_total
