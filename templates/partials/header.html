@@ -1,3 +1,4 @@
+
 {% load static %}
 {% block header %}
 {% load i18n %}
@@ -107,15 +108,23 @@
                             <i class="mdi mdi-fullscreen"></i>
                         </button>
                     </div>
-                    <div class="dropdown d-inline-block">
+
+                    <style>
+                        
+                    .dropdown-menu-end[style] {
+                    right: 0!important;
+                    left: auto!important;
+                    }
+                    </style>
+                    
+                    <div class="dropdown d-inline-block" >
                         <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="mdi mdi-bell-outline bx-tada"></i>
                             <span class="badge bg-danger rounded-pill">3</span>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                            aria-labelledby="page-header-notifications-dropdown">
-                            <div class="p-3">
+                        <div  class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown" >
+                            <div class="p-3" >
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h6 class="m-0" key="t-notifications"> Notifications </h6>
@@ -125,7 +134,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-simplebar style="max-height: 230px;">
+                            <div data-simplebar style="max-height: 230px;" >
                                 <a href="" class="text-reset notification-item">
                                     <div class="media">
                                         <div class="avatar-xs me-3">
@@ -142,48 +151,8 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <img src="{% static 'images/users/avatar-3.jpg' %}"
-                                            class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">James Lemire</h6>
-                                            <div class="font-size-13 text-muted">
-                                                <p class="mb-1" key="t-simplified">It will seem like simplified English.</p>
-                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hour ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <div class="avatar-xs me-3">
-                                            <span class="avatar-title bg-success rounded-circle font-size-16">
-                                                <i class="mdi mdi-check text-white"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1" key="t-your-order">Your item is shipped</h6>
-                                            <div class="font-size-13 text-muted">
-                                                <p class="mb-1" key="t-grammer">If several languages coalesce the grammar</p>
-                                                <p class="mb-0" key="t-min-ago"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <img src="{% static 'images/users/avatar-4.jpg' %}"
-                                            class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">Salena Layfield</h6>
-                                            <div class="font-size-13 text-muted">
-                                                <p class="mb-1" key="t-occidental">As a skeptical Cambridge friend of mine occidental.</p>
-                                                <p class="mb-0" key="t-hours-ago"><i class="mdi mdi-clock-outline"></i> 1 hour ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
+                          
+                    
                             </div>
                             <div class="p-2 border-top">
                                 <a class="btn btn-sm btn-link font-size-14 w-100 text-center" href="javascript:void(0)" key="t-view-more">
@@ -192,6 +161,11 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -224,11 +198,11 @@
                         </button>
                     </div> -->
                     <div class="form-check form-switch mb-3" style="margin-top: 10px;">
-                        <input style="margin-top: 18px;" class="form-check-input theme-choice" type="checkbox" id="light-mode-switch" checked>
+                        <input style="margin-top: 18px;" class="form-check-input theme-choice" type="checkbox" id="light-mode-switch"  checked>
                     </div>
                     <div class="color-mode" id="color-mode">
                         <div class="form-check form-switch " style="margin-top: 10px;">
-                            <input style="margin-top: 18px;" class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch" id="light-mode-switch" data-bsStyle="{% static 'css/bootstrap-dark.min.css' %}" data-appStyle="{% static 'css/app-dark.min.css' %}" >
+                            <input style="margin-top: 18px;" class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch"  data-bsStyle="{% static 'css/bootstrap-dark.min.css' %}" data-appStyle="{% static 'css/app-dark.min.css' %}" >
                         </div>
                     </div>
                   

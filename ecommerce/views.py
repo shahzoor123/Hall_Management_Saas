@@ -382,13 +382,19 @@ class Eventsale(LoginRequiredMixin, View):
 
 def delete_sale(request, sale_id):
     
-    sales = get_object_or_404(EventSale, pk=sale_id)
-    event = get_object_or_404(Event, pk=sales.id)
+    sale = Event.objects.all()
+    
+    if sale_id == sale[0].id:
+        print("yes")
+
+    sales = get_object_or_404(EventSale, id=sale_id)
+    print(sale_id)
+    # event = get_object_or_404(Event, id=sales.id)
     # print(event.id)
     if sales is not None:
         try:
             sales.delete()
-            event.delete()
+            # event.delete()
         except IntegrityError as e:
             error_message = str(e)
             if "Cannot delete some instances of model 'EventSale'" in error_message:
@@ -759,13 +765,13 @@ class UpdateEventsale(LoginRequiredMixin, View):
 
             requests.save()
 
-            # Updating Events
-            e_requests = Event.objects.get(id=sale_id)
-            e_requests.event_title = customer_name
-            e_requests.start_date = event_date
-            e_requests.end_date = event_date
-            e_requests.event_time = event_time
-            e_requests.save()
+            # # Updating Events
+            # e_requests = Event.objects.get(id=sale_id)
+            # e_requests.event_title = customer_name
+            # e_requests.start_date = event_date
+            # e_requests.end_date = event_date
+            # e_requests.event_time = event_time
+            # e_requests.save()
 
             
         
@@ -1716,7 +1722,7 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
         # Convert the dictionary to JSON
         json_data = json.dumps(product_data)
 
-        print(json_data)
+        # print(json_data)
         
         # Parse the JSON data back to a Python dictionary
         product_data = json.loads(json_data)

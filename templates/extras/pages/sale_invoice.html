@@ -20,11 +20,7 @@
                             </ol>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="float-end d-none d-sm-block">
-                        <a href="" class="btn btn-success">Add Widget</a>
-                    </div>
-                </div>
+                
             </div>
             </div>
         </div>
@@ -165,7 +161,7 @@
                             {% for item in food_menu %}
                             <tr style="text-align: center;">
                                 
-                                <th scope="row">01</th>
+                                <th scope="row">{{forloop.counter}}</th>
                                 <td class="text-mid">
                                    {{item}}
                                 </td>

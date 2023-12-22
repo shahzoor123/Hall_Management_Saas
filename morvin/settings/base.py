@@ -45,14 +45,14 @@ INSTALLED_APPS = [
     'dbbackup',
     "django_apscheduler",
     'django_filters',
+    'notifications',
     'ecommerce',
-    'e_mail',
-    'components',
     'layouts',
     'items',
     'extras',
     'store',
     'generalExpense',
+   
     'crispy_forms',
     'crispy_bootstrap4',
     'django_seed',
@@ -77,6 +77,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'morvin.urls'
@@ -246,7 +247,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [('localhost', 6379)],
         },
     },
 }
