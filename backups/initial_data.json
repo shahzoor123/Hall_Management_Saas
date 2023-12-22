@@ -1,7 +1,4 @@
 [
-    {"model": "items.category", "pk": 1, "fields": {"name": "Meat", "description": "habib", "status": 1, "date_added": "2023-10-10T19:05:55.344Z", "date_updated": "2023-10-10T19:05:55.344Z"}}, 
-    {"model": "items.brand", "pk": 1, "fields": {"name": "Nestle", "desc": "skdfj", "date_added": "2023-10-10T19:13:45.992Z"}}, 
-    {"model": "items.unit", "pk": 1, "fields": {"name": "Killogram", "short_name": "kilo", "unit": "kg", "date_added": "2023-10-10T19:13:57.337Z"}},
 
     {
         "model": "items.myproducts",
