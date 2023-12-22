@@ -1,0 +1,183 @@
+[
+ 
+    {
+        "model": "items.myproducts",
+        "pk": 1,
+        "fields": {
+            "code": "NAAN",
+            "product_name": "Naan",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 30,
+            "cost": 0,
+            "qty": 100,
+            "product_desc": "Delicious Naan bread"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 2,
+        "fields": {
+            "code": "WATER",
+            "product_name": "Water_500ML",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 60,
+            "cost": 0,
+            "qty": 500,
+            "product_desc": "Refreshing bottled water"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 3,
+        "fields": {
+            "code": "WATER",
+            "product_name": "Water_300ML",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 40,
+            "cost": 0,
+            "qty": 500,
+            "product_desc": "Refreshing bottled water"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 4,
+        "fields": {
+            "code": "WATER",
+            "product_name": "Water_1.5L",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 100,
+            "cost": 0,
+            "qty": 500,
+            "product_desc": "Refreshing bottled water"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 5,
+        "fields": {
+            "code": "WAITERS",
+            "product_name": "Waiters",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 800,
+            "cost": 0,
+            "qty": 50,
+            "product_desc": "Hardworking waiters"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 6,
+        "fields": {
+            "code": "DRINKS",
+            "product_name": "Cold_Drinks_1.5L",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 160,
+            "cost": 0,
+            "qty": 50,
+            "product_desc": "Cold Drinks"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 7,
+        "fields": {
+            "code": "DRINKS",
+            "product_name": "Cold_Drinks_Tin",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 70,
+            "cost": 0,
+            "qty": 50,
+            "product_desc": "Cold Drinks"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 8,
+        "fields": {
+            "code": "DRINKS",
+            "product_name": "Cold_Drinks_2.5L",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 220,
+            "cost": 0,
+            "qty": 50,
+            "product_desc": "Cold Drinks"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 9,
+        "fields": {
+            "code": "BBQ",
+            "product_name": "Reshmi_Kabab",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 850,
+            "cost": 0,
+            "qty": 50,
+            "product_desc": "Tasty BBQ dishes"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 10,
+        "fields": {
+            "code": "BBQ",
+            "product_name": "Chicken_Achari_Boti",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 900,
+            "cost": 0,
+            "qty": 50,
+            "product_desc": "Tasty BBQ dishes"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 11,
+        "fields": {
+            "code": "BBQ",
+            "product_name": "Malai_Boti",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 900,
+            "cost": 0,
+            "qty": 50,
+            "product_desc": "Tasty BBQ dishes"
+        }
+    },
+    {
+        "model": "items.myproducts",
+        "pk": 12,
+        "fields": {
+            "code": "BBQ",
+            "product_name": "Seekh_Kabab",
+            "category_id": 1,
+            "brand": 1,
+            "unit": 1,
+            "price": 1000,
+            "cost": 0,
+            "qty": 50,
+            "product_desc": "Tasty BBQ dishes"
+        }
+    }
+]

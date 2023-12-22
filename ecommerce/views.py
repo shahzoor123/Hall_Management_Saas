@@ -939,6 +939,7 @@ class UpdateEventExpense(LoginRequiredMixin, View):
                 requests.other_expense_detals = expense_details
                 requests.setup_bill = setup
                 requests.decor = decor
+                requests.stuff_bill = stuff
                 requests.decor_bill = decor_bill
                 requests.total_expense = total
             
