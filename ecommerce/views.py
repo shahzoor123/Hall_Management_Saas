@@ -265,16 +265,21 @@ class Summary(LoginRequiredMixin,TemplateView):
                 .aggregate(total=Sum('total_expense'))
             )['total'] or 0
 
-            # Kitchen Sale total for the month
-            kitchen_sale_total = (
+            
+            kitchen_expense_total = (
                 MyKitchenexpense.objects
                 .filter(date__month=month)
                 .aggregate(total=Sum('total_bill'))
             )['total'] or 0
 
-            # Kitchen Expense total for the month (calculate based on your Kitchen Expense model)
-            kitchen_expense_total = 0
 
+            kitchen_sale_total = (
+                EventSale.objects
+                .filter(event_date__month=month)
+                .aggregate(total=Sum('total_menu'))
+            )['total'] or 0
+
+            print(kitchen_sale_total)
             # Calculate event_profit, kitchen_profit, gross_profit
             event_profit = event_sale_total - event_expense_total
             kitchen_profit = kitchen_sale_total - kitchen_expense_total

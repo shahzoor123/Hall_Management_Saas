@@ -320,9 +320,6 @@ class Index(LoginRequiredMixin,TemplateView):
         salaries = Salary.objects.filter(on_date__year=current_year, on_date__month=current_month).aggregate(amount=Sum('amount'))
         pie_list.append(salaries['amount'])
 
-        print(construction['amount'],dailyexpense['amount'],otherexpense['amount'],salaries['amount'])
-
-        print(pie_list)
         
 
         context = {
