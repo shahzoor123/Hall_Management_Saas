@@ -348,13 +348,12 @@ class Index(LoginRequiredMixin,TemplateView):
             
             
             #  hb
-            
             "total_sales": total_sale,
             "total_expense": total_expenses,
-            "fifty_sale": total_sales /2,
+            "fifty_sale": total_sale /2,
             "user": request.user,
-            "fifty_revenue": (total_sales - total_expenses)/2,
-            "revenue": total_sales - total_expenses,
+            "fifty_revenue": (total_sale - total_expenses)/2,
+            "revenue": total_sale - total_expenses,
             "events_this_month": events_count_this_month,
             "events_this_year":events_count_this_year,
             "vendors": vendors

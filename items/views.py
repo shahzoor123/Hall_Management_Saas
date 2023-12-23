@@ -62,7 +62,6 @@ def custom_menu(request):
                     menu_amount = request.POST.get('menu-amount')
                     menu_amount = float(menu_amount)
                     food_menu = request.POST.get('food-menu')
-                    print(food_menu)
 
                     gents = request.POST.get('gents')
                     ladies = request.POST.get('ladies')
@@ -72,7 +71,7 @@ def custom_menu(request):
 
                     request.session['deals'] = deal_number
                     total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) 
-                    add_event_sale = EventSale.objects.create(
+                    add_event_sale = EventSale(
                         
                         status=event_status,
                         event_timing=event_time,
@@ -97,8 +96,9 @@ def custom_menu(request):
                         recieved_amount=received_ammount, 
                         remaining_amount = total - int(received_ammount)
                     )
+                    add_event_sale.save()
 
-                    create_event = Event.objects.create(event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
+                    Event.objects.create(sale_id = add_event_sale, event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
                     messages.success(request, "Event added Successfully")
                     return redirect('event-sale')
         except:
@@ -114,7 +114,6 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
     
     def get(self, request, deal_id):
 
-            print('i am active get')
             food_list = []
             products = MyProducts.objects.all()
             deal = get_object_or_404(Deals, pk=deal_id)
@@ -130,6 +129,7 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
             deals = Deals.objects.all()
 
             combined_data = zip(items, products)
+            
             context = {
                         'combined_data': combined_data,
                         'items' : items,
@@ -146,8 +146,7 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
     
     def post(self, request, deal_id):
         
-            print(deal_id)
-            print('i am active post')
+            
         
             context = {}
             try:
@@ -185,7 +184,7 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
 
                 request.session['deals'] = deal_number
                 total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) 
-                add_event_sale = EventSale.objects.create(
+                add_event_sale = EventSale(
                     
                     status=event_status,
                     event_timing=event_time,
@@ -209,7 +208,8 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
                     recieved_amount=received_ammount, 
                     remaining_amount = total - int(received_ammount)
                 )
-                create_event = Event.objects.create(event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
+                add_event_sale.save()
+                Event.objects.create(sale_id=add_event_sale, event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
                 messages.success(request, "Event added Successfully")
                 return redirect('event-sale')
             except:

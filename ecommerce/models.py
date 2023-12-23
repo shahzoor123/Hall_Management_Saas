@@ -176,6 +176,7 @@ class MyKitchenexpense(models.Model):
 
 
 class Event(models.Model):
+    sale_id = models.ForeignKey(EventSale, on_delete=models.CASCADE, blank=True, null = True)
     event_title = models.CharField(max_length=200)
     start_date = models.DateField()
     end_date = models.DateField()

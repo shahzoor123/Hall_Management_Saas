@@ -13,3 +13,5 @@ DATABASES = {
         'NAME': 'db_data',
     }
 }
+
+
