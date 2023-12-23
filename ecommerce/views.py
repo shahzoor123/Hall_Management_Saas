@@ -395,6 +395,9 @@ def delete_sale(request, sale_id):
         try:
             sales.delete()
             # event.delete()
+            messages.success(request, "Event Deleted successfully")
+            return redirect("event-sale")
+
         except IntegrityError as e:
             error_message = str(e)
             if "Cannot delete some instances of model 'EventSale'" in error_message:
@@ -914,6 +917,12 @@ class UpdateEventExpense(LoginRequiredMixin, View):
                 setup = int(setup)
                 decor_bill = int(decor_bill)
                 # print(pakwan, naan_price, drink, bottles, bbq_price, diesel, waiters, stuff, dhobi, other_expenses, setup, decor_bill)
+
+                # print("New ")
+                # print(pakwan, electicity, naan_price, bottles, drink, bbq_price, diesel, waiters, stuff, dhobi, other_expenses, setup, decor_bill )
+
+                # print("OLD")
+                # print(requests.electicity, requests.electicity, requests.naan_bill, bottles, requests.cold_drink_bill, requests.bbq_price, requests.diesel_ltr, requests.waiters_bill, stuff, dhobi, other_expenses, setup, decor_bill )
 
 
                 total = pakwan + electicity + naan_price + bottles + drink + bbq_price + diesel + waiters + stuff + dhobi + other_expenses + setup + decor_bill
