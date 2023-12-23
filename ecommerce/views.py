@@ -424,6 +424,7 @@ class Kitchensale(LoginRequiredMixin, View):
         total_sales = total_sales or 0
         total_expenses = total_expenses or 0
 
+        
        
 
 
@@ -711,9 +712,7 @@ class UpdateEventsale(LoginRequiredMixin, View):
             details = request.POST.get('details')
             received_ammount = request.POST.get('received-amount')
 
-            print(number_of_people, per_head)
             total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charges)) 
-            print(total)
 
             payments_details = ''
             if not received_ammount == "0":
@@ -1024,7 +1023,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
     @transaction.atomic
     def post(self, request):
-        # try: 
+        try: 
             bill = request.POST.get('bill-no')
             bill_number = get_object_or_404(EventSale, pk=bill)
             customer_name = bill_number.customer_name
@@ -1182,9 +1181,9 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                 messages.success(request, "Expense Added Successfully")
                 return redirect('event-expense')
 
-        # except:
-        #     messages.error(request, "Invalid form! Please check form submission again.")
-        #     return redirect('event-expense')
+        except:
+            messages.error(request, "Invalid form! Please check form submission again.")
+            return redirect('event-expense')
             
             
             
