@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import MyProducts, Deals
-from ecommerce.models import EventSale, Event
+from ecommerce.models import EventSale, EventExpense
 import json
 from django.shortcuts import render , redirect,get_object_or_404
 from django.contrib import messages
@@ -98,7 +98,7 @@ def custom_menu(request):
                     )
                     add_event_sale.save()
 
-                    Event.objects.create(sale_id = add_event_sale, event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
+                    EventExpense.objects.create(bill = add_event_sale, customer_name=customer_name,pakwan_bill=int(menu_amount), total_expense=int(menu_amount))
                     messages.success(request, "Event added Successfully")
                     return redirect('event-sale')
         except:
@@ -209,7 +209,9 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
                     remaining_amount = total - int(received_ammount)
                 )
                 add_event_sale.save()
-                Event.objects.create(sale_id=add_event_sale, event_title=customer_name,start_date=event_date,end_date=event_date,event_time=event_time)
+
+                EventExpense.objects.create(bill = add_event_sale.id, customer=customer_name,pakwan_bill=int(menu_amount))
+            
                 messages.success(request, "Event added Successfully")
                 return redirect('event-sale')
             except:
