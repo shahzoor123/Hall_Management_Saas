@@ -388,11 +388,9 @@ def delete_sale(request, sale_id):
     
     sale = Event.objects.all()
     
-    if sale_id == sale[0].id:
-        print("yes")
+    
 
     sales = get_object_or_404(EventSale, id=sale_id)
-    print(sale_id)
     # event = get_object_or_404(Event, id=sales.id)
     # print(event.id)
     if sales is not None:
