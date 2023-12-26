@@ -75,7 +75,7 @@
                 <tbody>
 
                  {% for data in monthly_data %}
-                  <tr class="sale-row" style="font-weight: bold;">
+                  <tr class="sale-row">
                     <td>{{data.month}}</td>
                     <td>{{data.event_total_sale}}</td>
                     <td>{{data.event_total_expense}}</td>
@@ -95,7 +95,7 @@
            
 
                 </tbody>
-                <tr id="grand-total-row" style="background-color: cornflowerblue; color:white;">
+                <tr id="grand-total-row" style="background-color: cornflowerblue; color:black; font-weight: bold;">
                   <td><Strong>Grand Total -></Strong></td>
                   <td></td>
                   <td></td>

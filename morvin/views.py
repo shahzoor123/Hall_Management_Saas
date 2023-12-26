@@ -320,9 +320,7 @@ class Index(LoginRequiredMixin,TemplateView):
         salaries = Salary.objects.filter(on_date__year=current_year, on_date__month=current_month).aggregate(amount=Sum('amount'))
         pie_list.append(salaries['amount'])
 
-        # if total_sales is None:
-        #     total_sales = 0
-
+        
 
         context = {
             

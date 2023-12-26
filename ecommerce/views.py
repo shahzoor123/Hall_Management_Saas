@@ -265,15 +265,19 @@ class Summary(LoginRequiredMixin,TemplateView):
                 .aggregate(total=Sum('total_expense'))
             )['total'] or 0
 
-            # Kitchen Sale total for the month
-            kitchen_sale_total = (
+            
+            kitchen_expense_total = (
                 MyKitchenexpense.objects
                 .filter(date__month=month)
                 .aggregate(total=Sum('total_bill'))
             )['total'] or 0
 
-            # Kitchen Expense total for the month (calculate based on your Kitchen Expense model)
-            kitchen_expense_total = 0
+
+            kitchen_sale_total = (
+                EventSale.objects
+                .filter(event_date__month=month)
+                .aggregate(total=Sum('total_menu'))
+            )['total'] or 0
 
             # Calculate event_profit, kitchen_profit, gross_profit
             event_profit = event_sale_total - event_expense_total
@@ -384,17 +388,18 @@ def delete_sale(request, sale_id):
     
     sale = Event.objects.all()
     
-    if sale_id == sale[0].id:
-        print("yes")
+    
 
     sales = get_object_or_404(EventSale, id=sale_id)
-    print(sale_id)
     # event = get_object_or_404(Event, id=sales.id)
     # print(event.id)
     if sales is not None:
         try:
             sales.delete()
             # event.delete()
+            messages.success(request, "Event Deleted successfully")
+            return redirect("event-sale")
+
         except IntegrityError as e:
             error_message = str(e)
             if "Cannot delete some instances of model 'EventSale'" in error_message:
@@ -426,6 +431,7 @@ class Kitchensale(LoginRequiredMixin, View):
         total_sales = total_sales or 0
         total_expenses = total_expenses or 0
 
+        
        
 
 
@@ -713,9 +719,7 @@ class UpdateEventsale(LoginRequiredMixin, View):
             details = request.POST.get('details')
             received_ammount = request.POST.get('received-amount')
 
-            print(number_of_people, per_head)
             total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charges)) 
-            print(total)
 
             payments_details = ''
             if not received_ammount == "0":
@@ -1026,7 +1030,7 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
 
     @transaction.atomic
     def post(self, request):
-        # try: 
+        try: 
             bill = request.POST.get('bill-no')
             bill_number = get_object_or_404(EventSale, pk=bill)
             customer_name = bill_number.customer_name
@@ -1184,9 +1188,9 @@ class Eventexpense(LoginRequiredMixin,TemplateView):
                 messages.success(request, "Expense Added Successfully")
                 return redirect('event-expense')
 
-        # except:
-        #     messages.error(request, "Invalid form! Please check form submission again.")
-        #     return redirect('event-expense')
+        except:
+            messages.error(request, "Invalid form! Please check form submission again.")
+            return redirect('event-expense')
             
             
             
