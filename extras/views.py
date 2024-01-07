@@ -7,7 +7,7 @@ from ecommerce.models import EventSale
 class Timeline(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/pages-timeline.html"
 
-
+    LOGIN_URL = "account/login"  
 
 def order_slip(request, sale_id):
     sale = get_object_or_404(EventSale, pk = sale_id)
@@ -32,7 +32,7 @@ def order_slip(request, sale_id):
 
 class Invoice(LoginRequiredMixin,TemplateView):
     template_name = "extras/sale_invoice.html"
-
+    LOGIN_URL = "account/login"  
 def sale_invoice(request, sale_id):
     
     sale = get_object_or_404(EventSale, pk=sale_id)
@@ -71,7 +71,7 @@ def sale_invoice(request, sale_id):
 
 class Details(LoginRequiredMixin,TemplateView):
     template_name = "extras/pages/details.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
         no_of_people = request.POST.get('no_of_people')
         grand_total = request.POST.get('grand_total')

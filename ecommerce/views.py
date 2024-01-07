@@ -34,6 +34,7 @@ current_date = datetime.now()
 # Create your views here.
 class Products(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-products.html"
+    LOGIN_URL = "account/login"  
 
     def get(self, request):
         cat = Category.objects.all()
@@ -50,15 +51,17 @@ class Products(LoginRequiredMixin,TemplateView):
         return render(request, self.template_name, context)
 
 class ProductsDetail(LoginRequiredMixin,TemplateView):
+    
     template_name = "ecommerce/ecommerce-product-detail.html"
 
-
+    LOGIN_URL = "account/login"  
 
 
 
 class ProductList(LoginRequiredMixin,TemplateView):
-    template_name = "ecommerce/product_list.html"
+    LOGIN_URL = "account/login/"  
 
+    template_name = "ecommerce/product_list.html"
     def get(self, request):
         myproudcts = MyProducts.objects.all()
         category = Category.objects.all()
@@ -80,7 +83,7 @@ class ProductList(LoginRequiredMixin,TemplateView):
 
 class HallSaleSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/hall_sale.html"
-    
+    LOGIN_URL = "account/login"  
     def get(self, request):
 
         # Query the database to get total sales for every month in the current year
@@ -147,7 +150,7 @@ class HallSaleSummary(LoginRequiredMixin,TemplateView):
     
 class HallExpenseSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/hall_expense.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
 
        # montly expense
@@ -210,7 +213,7 @@ class HallExpenseSummary(LoginRequiredMixin,TemplateView):
 
 class KitchenSaleSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/kitchen_sale.html"
-    
+    LOGIN_URL = "account/login"  
     def get(self, request):
               
         all_kitchen_sale = MyKitchenexpense.objects.all()
@@ -228,7 +231,7 @@ class KitchenSaleSummary(LoginRequiredMixin,TemplateView):
     
 class KitchenExpenseSummary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/kitchen_expense.html"  
-    
+    LOGIN_URL = "account/login"  
     def get(self, request):
               
         all_kitchen_sale = MyKitchenexpense.objects.all()
@@ -244,7 +247,7 @@ class KitchenExpenseSummary(LoginRequiredMixin,TemplateView):
 
 class Summary(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/finance_reports/summaries.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
 
         monthly_data = []
@@ -362,7 +365,9 @@ class Summary(LoginRequiredMixin,TemplateView):
           
 
 class Eventsale(LoginRequiredMixin, View):
+
     template_name = "ecommerce/event-sale.html"
+    LOGIN_URL = "account/login"  
 
     def get(self, request):
         sale = EventSale.objects.all()
@@ -421,7 +426,7 @@ def delete_sale(request, sale_id):
 
 class Kitchensale(LoginRequiredMixin, View):
     template_name = "ecommerce/kitchen-sale.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
         sale = EventSale.objects.all()
         deals = Deals.objects.all()
@@ -445,7 +450,7 @@ class Kitchensale(LoginRequiredMixin, View):
   
 class Kitchenexpense(LoginRequiredMixin, View):
     template_name = "ecommerce/kitchen-expense.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
         sale = EventSale.objects.all()
         deals = Deals.objects.all()
@@ -527,7 +532,7 @@ class Kitchenexpense(LoginRequiredMixin, View):
 
 class KitchenexpenseUpdate(LoginRequiredMixin, View):
     template_name = "ecommerce/kitchen-expense.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
         sale = EventSale.objects.all()
         deals = Deals.objects.all()
@@ -669,7 +674,7 @@ def DeleteProducts(request, product_id):
 
 class UpdateEventsale(LoginRequiredMixin, View):
     template_name = "ecommerce/event-sale.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
         sale = EventSale.objects.all()
         deals = Deals.objects.all()
@@ -792,7 +797,7 @@ class UpdateEventsale(LoginRequiredMixin, View):
 class UpdateEventExpense(LoginRequiredMixin, View):
     template_name = "ecommerce/event-expense.html"
 
-    
+    LOGIN_URL = "account/login"  
     
     def post(self, request, expense_id):
         try:
@@ -968,7 +973,7 @@ class UpdateEventExpense(LoginRequiredMixin, View):
 
 class Eventexpense(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/event-expense.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
         expense = EventExpense.objects.all()
         
@@ -1218,7 +1223,7 @@ def DeleteExpense(request, expense_id):
 
 class ProductsAddCategory(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/category_list.html"
-    
+    LOGIN_URL = "account/login"  
     def get(self, request):
         category = Category.objects.all()
 
@@ -1252,7 +1257,7 @@ class ProductsAddCategory(LoginRequiredMixin,TemplateView):
 
 class UpdateCategory(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/category_list.html"
-
+    LOGIN_URL = "account/login"  
     def post(self, request, category_id):
         try:
             if request.method == "POST":
@@ -1294,11 +1299,13 @@ def DeleteCategory(request, category_id):
 
 class ProductsCheckout(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-checkout.html"
+    LOGIN_URL = "account/login"  
 class ProductsShops(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-shops.html"
-
+    LOGIN_URL = "account/login"  
 class ProductsAddUnit(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/units_list.html"
+    LOGIN_URL = "account/login"  
     def get(self, request):
         units = Unit.objects.all()
 
@@ -1333,7 +1340,7 @@ class ProductsAddUnit(LoginRequiredMixin,TemplateView):
 
 class UpdateUnit(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/units_list.html"
-
+    LOGIN_URL = "account/login"  
     def post(self, request, unit_id):
         try:
             if request.method == "POST":
@@ -1379,7 +1386,7 @@ def DeleteUnit(request, unit_id):
 
 class ProductsAddBrand(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/brands_list.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
         brand = Brand.objects.all()
 
@@ -1411,7 +1418,7 @@ class ProductsAddBrand(LoginRequiredMixin,TemplateView):
 
 class UpdateBrand(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/brands_list.html"
-
+    LOGIN_URL = "account/login"  
     def post(self, request, brand_id):
         if request.method == "POST":
             requests = Brand.objects.get(id=brand_id)
@@ -1447,7 +1454,7 @@ def DeleteBrand(request, brand_id):
 
 class ProductsAddInventory(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-add-inventory.html"
-
+    LOGIN_URL = "account/login"  
     def post(self, request):
         if request.method == "POST":
 
@@ -1474,7 +1481,7 @@ class ProductsAddInventory(LoginRequiredMixin,TemplateView):
 
 class ProductsAddProduct(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-add-product.html"
-
+    LOGIN_URL = "account/login"  
     def post(self, request):
         try:
             if request.method == "POST":
@@ -1538,7 +1545,7 @@ class ProductsAddProduct(LoginRequiredMixin,TemplateView):
 
 class UpdateProducts(LoginRequiredMixin,TemplateView):
     template_name = "ecommerce/ecommerce-add-product.html"
-
+    LOGIN_URL = "account/login"  
     def post(self, request,product_id):
         if request.method == "POST":
 
@@ -1597,7 +1604,7 @@ class UpdateProducts(LoginRequiredMixin,TemplateView):
 
 class Calculate(LoginRequiredMixin,TemplateView):
     template_name = "items/pos.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
 
         deal = request.GET.get('deals')
@@ -1634,11 +1641,11 @@ class Calculate(LoginRequiredMixin,TemplateView):
 class DealsCalulator(LoginRequiredMixin,TemplateView):
     template_name = "items/deals-calculator.html"
 
-
+    LOGIN_URL = "account/login"  
 
 class Calendar(LoginRequiredMixin,TemplateView):
     template_name = "calendar.html"
-    
+    LOGIN_URL = "account/login"  
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
@@ -1690,7 +1697,7 @@ class Calendar(LoginRequiredMixin,TemplateView):
 class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
     template_name = "items/update_deals.html"
     
-
+    LOGIN_URL = "account/login"  
     def get(self, request, pk):
 
         print('i am active get update deals')
@@ -1719,10 +1726,9 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
 
         # Iterate through the items and extract product name and quantity
         for item in items:
-            name, quantity = map(str.strip, item.split('('))
+            name, quantity = map(str.strip, item.split(' ('))
             quantity = int(quantity.rstrip(')'))
             product_data[name] = quantity
-
         # Convert the dictionary to JSON
         json_data = json.dumps(product_data)
 
@@ -1789,7 +1795,7 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
             # Process and store data as needed
             data = json.loads(request.body)
             
-            print(data)
+            # print(data)
             
             eventsale = EventSale.objects.get(id=pk) 
 
@@ -1802,22 +1808,24 @@ class UpdateFoodMenu(LoginRequiredMixin,TemplateView):
             numberOfPeople = data['values']["numberOfPeople"]
             hallCharges = data["values"]["hallCharges"]
             menuAmount = data["values"]["menuAmount"]
-            
-            # print(subTotal,numberOfPeople,hallCharges,menuAmount)
-            
+
 
             eventsale.food_menu = menu
+
+
             eventsale.no_of_people = numberOfPeople
             
-
+           
             per_head = int(hallCharges) + menuAmount
             eventsale.per_head = per_head
             eventsale.total_amount = (int(numberOfPeople) * int(per_head)) + (int(extra_charge) + int(stage_charges) + int(entry_charge)) 
             eventsale.hall_charges = hallCharges
+            eventsale.remaining_amount = eventsale.total_amount - eventsale.recieved_amount
+            
             eventsale.save()
             
-            print(menu)
-        
+            # print(menu)
+            messages.success(request, "Event Menu updated successfully")
             return redirect ("event-sale")
         except json.JSONDecodeError:
             # Handle JSON decoding errors

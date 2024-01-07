@@ -18,7 +18,7 @@ from django.utils import timezone
 
 class Index(LoginRequiredMixin,TemplateView):
     template_name = "index.html"
-
+    # LOGIN_URL = "account/login"  
     def get(self, request):
         
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ 
@@ -368,7 +368,7 @@ class Index(LoginRequiredMixin,TemplateView):
     
 class Calendar(LoginRequiredMixin,TemplateView):
     template_name = "calendar.html"
-
+    LOGIN_URL = "account/login"  
     def get(self, request):
         sale = EventSale.objects.all()
         context = {

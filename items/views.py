@@ -12,7 +12,7 @@ from django.contrib import messages
 class Calculate(LoginRequiredMixin,TemplateView):
     template_name = "items/pos.html"
     
-
+    LOGIN_URL = "account/login"  
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         products = MyProducts.objects.filter(status=1)
@@ -111,7 +111,7 @@ def custom_menu(request):
 
 class Pre_Deals(LoginRequiredMixin,TemplateView):
     template_name = "items/deals-calculator.html"
-    
+    LOGIN_URL = "account/login"  
     def get(self, request, deal_id):
 
             food_list = []

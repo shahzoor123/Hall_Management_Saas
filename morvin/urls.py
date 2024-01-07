@@ -42,7 +42,7 @@ urlpatterns = [
     # Chat
     path('chat/', views.Chat.as_view(),name='chat'),
     # Ecommerce
-    path('ecommerce/', include('ecommerce.urls')),
+    path('', include('ecommerce.urls')),
     #Items
     path('menu/', include('items.urls')),
     #Store
