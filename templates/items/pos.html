@@ -300,7 +300,7 @@
                   <div class="col-sm-9">
                     <!-- Input Group -->
                     <input type="number" class="js-toggle-password form-control" name="no-of-people"
-                      placeholder="Number of people" aria-label="">
+                      placeholder="Number of people" aria-label="" readonly>
                     <!-- End Input Group -->
                   </div>
                 </div>
@@ -372,7 +372,7 @@
                   <div class="col-sm-9">
                     <!-- Input Group -->
                     <input type="text" class="js-toggle-password form-control" name="customer-name" id=""
-                      placeholder="Customer name" aria-label="">
+                      placeholder="Customer name" aria-label="" value="Null">
                     <!-- End Input Group -->
                   </div>
                 </div>
@@ -387,7 +387,7 @@
                     <!-- Input Group -->
                     <div class="input-group input-group-merge">
                       <input type="number" class="js-toggle-password form-control" name="customer-number" id=""
-                        placeholder="Customer number" aria-label="">
+                        placeholder="Customer number" aria-label="" value="0">
 
                     </div>
                     <!-- End Input Group -->
@@ -417,7 +417,7 @@
                     <!-- Input Group -->
                     <div class="input-group input-group-merge">
                       <input type="number" class="js-toggle-password form-control" name="per-head" id=""
-                        placeholder="Per head" aria-label="">
+                        placeholder="Per head" aria-label="" readonly>
 
                     </div>
                     <!-- End Input Group -->
@@ -434,7 +434,7 @@
                     <!-- Input Group -->
                     <div class="input-group input-group-merge">
                       <input type="number" class="js-toggle-password form-control" name="hall" id="hall"
-                        placeholder="Hall Charges" aria-label="">
+                        placeholder="Hall Charges" aria-label="" readonly>
                     </div>
 
                     <!-- End Input Group -->
@@ -450,7 +450,7 @@
                     <!-- Input Group -->
                     <div class="input-group input-group-merge">
                       <input type="number" class="js-toggle-password form-control" name="extra-charges" id=""
-                        placeholder="Extra Charges" aria-label="">
+                        placeholder="Extra Charges" aria-label="" value="0">
                     </div>
 
                     <!-- End Input Group -->
@@ -549,6 +549,44 @@
                       <textarea class="form-select" name="details" id="" cols="90" rows="5"></textarea>
 
                     </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                 <!-- Form -->
+                 <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Discount Type</label>
+
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <select class="js-select form-select" autocomplete="off" name="discount">
+
+
+                        <option value="fix">Fix</option>
+                        <option value="percent">Percent</option>
+                        <option value="per-head">Discount on amount/Head</option>
+
+
+                      </select>
+
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- End Form -->
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="" class="col-sm-3 col-form-label form-label">Discount Amount</label>
+    
+                  <div class="col-sm-9">
+                    <!-- Input Group -->
+                    <div class="input-group input-group-merge">
+                      <input type="number" class="js-toggle-password form-control" name="discount-amount" id=""
+                        placeholder="Enter Discount Amount" aria-label="" value="0">
+                    </div>
+    
                     <!-- End Input Group -->
                   </div>
                 </div>

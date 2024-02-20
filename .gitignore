@@ -7,3 +7,5 @@ hall_db
 hall2
 your_database_name/
 .vercel
+db_data
+sqlite

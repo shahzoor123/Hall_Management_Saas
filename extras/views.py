@@ -60,6 +60,7 @@ def sale_invoice(request, sale_id):
 
     context = {
         'sale': sale,
+        'due': sale.total_amount - sale.discount_amount,
         'status': status,
         'food_menu': my_menu,
         'extra' : total_extra_charges,

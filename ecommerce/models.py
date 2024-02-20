@@ -58,6 +58,7 @@ class EventSale(models.Model):
     food_menu = models.CharField(max_length=200)
     detials = models.TextField()
     total_menu = models.IntegerField(default=0)
+    discount_amount = models.IntegerField(default=0, null=True, blank=True)
     payment_details = models.TextField()
     payment_count = models.IntegerField(default=0,editable=False)
     total_amount = models.IntegerField(editable=False, null=True)

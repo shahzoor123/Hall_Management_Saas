@@ -28,8 +28,8 @@ class Calculate(LoginRequiredMixin,TemplateView):
      
 
 def custom_menu(request):
-        context = {}
-        try:
+            context = {}
+        # try:
             if request.method == "POST":
                 
 
@@ -68,9 +68,36 @@ def custom_menu(request):
 
                     details = request.POST.get('details')
                     received_ammount = request.POST.get('received-amount')
+                    discount_amount = request.POST.get('discount-amount')
+                    discount_type = request.POST.get('discount')
 
                     request.session['deals'] = deal_number
                     total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) 
+
+                    
+                    discount = 0
+
+                    # Calculate by discount
+                    if discount_type == 'percent':
+                        print("I am percent")
+                        
+                        discount =  ((int(discount_amount) / 100) * total)
+
+                    # Calculate by fix price
+                    elif discount_type == "fix":
+                        print("I am fixed")
+                        discount = discount_amount
+                        print(discount)
+                        print(discount_amount)
+                        
+                    # Calculate by per head
+                    elif discount_type == "per-head":
+                        print("I am perh")
+
+                        discount = total - (int(number_of_people) * int(discount_amount))
+
+                    print(f"below discount:{discount}")
+
                     add_event_sale = EventSale(
                         
                         status=event_status,
@@ -94,17 +121,19 @@ def custom_menu(request):
                         detials=details,
                         total_amount= total ,
                         recieved_amount=received_ammount, 
-                        remaining_amount = total - int(received_ammount)
+                        discount_amount= discount,
+                        remaining_amount = total - (int(received_ammount) + int(discount)),
+
                     )
                     add_event_sale.save()
 
-                    EventExpense.objects.create(bill = add_event_sale, customer_name=customer_name,pakwan_bill=int(menu_amount), total_expense=int(menu_amount))
+                    # EventExpense.objects.create(bill = add_event_sale, customer_name=customer_name,pakwan_bill=int(menu_amount), total_expense=int(menu_amount))
                     messages.success(request, "Event added Successfully")
                     return redirect('event-sale')
-        except:
+        # except:
             
-            messages.error(request, "Invalid Form Submission,  Hint: Check for empty form fields, make sure to not add text in filed of number, remove for decimal number")
-            return redirect('calculate_menu')
+        #     messages.error(request, "Invalid Form Submission,  Hint: Check for empty form fields, make sure to not add text in filed of number, remove for decimal number")
+        #     return redirect('calculate_menu')
 
 
 
@@ -177,13 +206,33 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
                 food_menu = request.POST.get('food-menu')
                 gents = request.POST.get('gents')
                 ladies = request.POST.get('ladies')
-
+                
+                discount_amount = request.POST.get('discount-amount')
+                discount_type = request.POST.get('discount')
                 
                 details = request.POST.get('details')
                 received_ammount = request.POST.get('received-amount')
+                
+                    
 
                 request.session['deals'] = deal_number
                 total = (int(number_of_people) * int(per_head)) + (int(extra_charge) + int(stage_charge) + int(entry_charge)) 
+
+                discount = 0
+
+                # Calculate by discount
+                if discount_type == 'percent':
+
+                    discount =  ((int(discount_amount) / 100) * total)
+
+                # Calculate by fix price
+                if discount_type == "fix":
+                    discount = total - int(discount_amount)
+                    
+                # Calculate by per head
+                if discount_type == "per-head":
+                    discount = total - (int(number_of_people) * int(discount_amount))
+
                 add_event_sale = EventSale(
                     
                     status=event_status,
@@ -194,7 +243,7 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
                     deals=deal,
                     customer_name=customer_name,
                     customer_number=customer_number,
-                    per_head=per_head,
+                    per_head=int(per_head),
                     extra_charges=extra_charge,
                     total_menu = int(menu_amount),
                     hall_charges = int(hall),
@@ -206,17 +255,18 @@ class Pre_Deals(LoginRequiredMixin,TemplateView):
                     detials=details,
                     total_amount= total ,
                     recieved_amount=received_ammount, 
-                    remaining_amount = total - int(received_ammount)
+                    discount_amount=discount,
+                    remaining_amount = total - (int(received_ammount) - discount),
                 )
                 add_event_sale.save()
 
-                EventExpense.objects.create(bill = add_event_sale.id, customer=customer_name,pakwan_bill=int(menu_amount))
+                # EventExpense.objects.create(bill = add_event_sale.id, customer=customer_name,pakwan_bill=int(menu_amount))
             
                 messages.success(request, "Event added Successfully")
                 return redirect('event-sale')
             except:
                 messages.error(request, "Invalid Form Submission,  Hint: Check for empty form fields, make sure to not add text in filed of number, remove for decimal number")
-                return redirect('deals-calculator')
+                return redirect('event-sale')
             
             
         

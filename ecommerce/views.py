@@ -391,26 +391,29 @@ class Eventsale(LoginRequiredMixin, View):
 
 def delete_sale(request, sale_id):
     
-    sale = Event.objects.all()
+    # sale = Event.objects.all()
     
     
 
     sales = get_object_or_404(EventSale, id=sale_id)
-    # event = get_object_or_404(Event, id=sales.id)
-    # print(event.id)
+    # print(sales.bill_no)
+    # print()
+    # expense = get_object_or_404(EventExpense, bill=sales)
+
+    # expense.delete()
+    
     if sales is not None:
-        try:
+        # try:
             sales.delete()
-            # event.delete()
             messages.success(request, "Event Deleted successfully")
             return redirect("event-sale")
 
-        except IntegrityError as e:
-            error_message = str(e)
-            if "Cannot delete some instances of model 'EventSale'" in error_message:
-                messages.error(request, "Cannot delete due to related objects. Hint: Check for any expense relatd to sale you are deleting, Delete them first. ")
-    else:
-        return redirect("event-sale")
+    #     except IntegrityError as e:
+    #         error_message = str(e)
+    #         if "Cannot delete some instances of model 'EventSale'" in error_message:
+    #             messages.error(request, "Cannot delete due to related objects. Hint: Check for any expense relatd to sale you are deleting, Delete them first. ")
+    # else:
+    #     return redirect("event-sale")
 
     sale = EventSale.objects.all()
     deals = Deals.objects.all()

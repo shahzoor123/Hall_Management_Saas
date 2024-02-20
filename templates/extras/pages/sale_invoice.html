@@ -14,8 +14,8 @@
                     <div class="page-title">
                         <h4>Invoice</h4>
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Morvin</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Hall</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Sales</a></li>
                                 <li class="breadcrumb-item active">Invoice</li>
                             </ol>
                     </div>
@@ -97,7 +97,7 @@
                         </div>
                         <!--end col-->
                         <div class="col-lg col-6">
-                            <strong>Total Amount</strong><br><strong class="badge bg-success-subtle text-success fs-xxs badge badge-soft-success font-size-12">{{sale.total_amount}}</strong>
+                            <strong>Total Amount</strong><br><strong class="font-size-12">{{sale.total_amount}}</strong>
                       
                         </div>
                         <!--end col-->
@@ -177,24 +177,31 @@
                         <tbody>
                             <tr>
                                 <td>Sub Total</td>
-                                <td class="text-end">PKR {{sub_total}}</td>
+                                <td class="text-end">&#8360; {{sub_total}}</td>
                             </tr>
                             <tr>
                                 <td>Extra Charges</td>
-                                <td class="text-end">PKR {{extra}}</td>
+                                <td class="text-end">&#8360; {{extra}}</td>
                             </tr>
                             <tr>
                                 <td>Cash Received </td>
-                                <td class="text-end">PKR {{sale.recieved_amount}}</td>
+                                <td class="text-end">  {{sale.recieved_amount}}</td>
                             </tr>
+
+                            <tr>
+                                <td>Discount Amount</td>
+                                <td class="text-end">&#8360; <strike> {{sale.discount_amount}} </strike></td>
+                            </tr>
+
+
                             <tr class="border-top border-top-dashed fs-15">
                                 <th scope="row">Total Amount</th>
-                                <th class="text-end">PKR {{sale.total_amount}}</th>
+                                <th class="text-end">&#8360; {{sale.total_amount}}</th>
                             </tr>
 
                             <tr >
                                 <th>Balance Due  </th>
-                                <th class="text-end">PKR {{sale.remaining_amount}}</th>
+                                <th class="text-end">&#8360; {{sale.remaining_amount}}</th>
                             </tr>
                           
                            
